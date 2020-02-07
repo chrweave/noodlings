@@ -4,6 +4,9 @@
 }
 a:link { color:DeepSkyBlue; }
 a:visited { color:DeepPink; }
+.anchor{
+  color:Lime;
+}
 body{
   color:White;
   background-color:Black;
@@ -12,7 +15,7 @@ body{
   width: 75%; 
   font-size: 1.3em;
   font-family:LexendDeca;
-  line-height:1.6;
+  line-height:1.2;
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
