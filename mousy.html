@@ -69,10 +69,10 @@ function myprint(){
 		var bi = document.getElementById(i);
 		var ri = buff[i];
 		var si = (ri+tl)%lim;
-		var co = "rgb("+si+","+si+","+si+")";
-		var bq = "rgb("+ri+","+buff[j]+","+buff[k]+")";
+		//var co = "rgb("+si+","+si+","+si+")";
+		var bq = "rgb("+buff[j]+","+ri+","+buff[k]+")";
 		bi.style.backgroundColor=bq;
-		bi.style.color=co;
+		//bi.style.color=co;
 		bi.innerHTML=ri+"";
 	}
 }
