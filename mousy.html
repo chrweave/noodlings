@@ -63,12 +63,12 @@ function set(){
 function myprint(){
 	var i;
 	for(i=0;i<lim;i++){
-		var bi=document.getElementById(i);
-		var ri=buff[i];
-		var si=(ri+tl)%lim;
-		var co ="rgb("+si+","+si+","+si+")";
-		/*var bc="rgb("+ri+","+ri+","ri+")";
-		bi.style.backgroundColor=bc;*/
+		var bi = document.getElementById(i);
+		var ri = buff[i];
+		var si = (ri+tl)%lim;
+		var co = "rgb("+si+","+si+","+si+")";
+		var bq = "rgb("+ri+","+ri+","+ri+")";
+		bi.style.backgroundColor=bq;
 		bi.style.color=co;
 		bi.innerHTML=ri+"";
 	}
