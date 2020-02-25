@@ -65,12 +65,12 @@ function myprint(){
 	for(i=0;i<lim;i++){
 		var bi=document.getElementById(i);
 		var ri=buff[i];
-		//var si=(ri+tl)%lim;
-		//var co ="rgb("+si+","+si+","+si+")";
-		//var bc="rgb("+ri+","+ri+","ri+")";
-		//bi.style.backgroundColor=bc;
-		//bi.style.color=co;
-		bi.innerHTML=ri="";
+		var si=(ri+tl)%lim;
+		var co ="rgb("+si+","+si+","+si+")";
+		var bc="rgb("+ri+","+ri+","ri+")";
+		bi.style.backgroundColor=bc;
+		bi.style.color=co;
+		bi.innerHTML=ri+"";
 	}
 }
 </script>
