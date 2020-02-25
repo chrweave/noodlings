@@ -24,12 +24,6 @@ var lim=256;
 for(i=0;i<lim;i++){
     buff[i] = i;
 }
-
-function pad(num, size) {
-    var s = num+"";
-    while (s.length < size) s = "0" + s;
-    return s;
-}
     
 function gethash (num){
 	hash=hash^num;
@@ -68,7 +62,7 @@ function set(){
 function myprint(){
 	var i;
 	for(i=0;i<lim;i++){
-		document.getElementById(i).innerHTML=buff[i]+"";
+		document.getElementById(i).style.backgroundColor=rgb(buff[i],buff[i],buff[i]);
 	}
 }
 </script>
