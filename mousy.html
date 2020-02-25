@@ -64,11 +64,13 @@ function set(){
 function myprint(){
 	var i;
 	for(i=0;i<lim;i++){
+		var j=(i+(lim-1))%lim;
+		var k=(i+1)%lim;
 		var bi = document.getElementById(i);
 		var ri = buff[i];
 		var si = (ri+tl)%lim;
 		var co = "rgb("+si+","+si+","+si+")";
-		var bq = "rgb("+ri+","+ri+","+ri+")";
+		var bq = "rgb("+ri+","+buff[j]+","+buff[k]+")";
 		bi.style.backgroundColor=bq;
 		bi.style.color=co;
 		bi.innerHTML=ri+"";
