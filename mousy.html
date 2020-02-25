@@ -18,9 +18,10 @@ var prime = 1048837
 var myi = 0;
 var myj = 0;
 var temp;
+var lim=256;
+var tl= Math.floor(lim/3);
 var buff = new Array(lim);
 var mytxt="";
-var lim=256;
 for(i=0;i<lim;i++){
     buff[i] = i;
 }
@@ -62,7 +63,14 @@ function set(){
 function myprint(){
 	var i;
 	for(i=0;i<lim;i++){
-		document.getElementById(i).style.backgroundColor="rgb("+buff[i]+","+buff[i]+","+buff[i]+")";
+		var bi=document.getElementById(i);
+		var ri=buff[i];
+		var si=(ri+tl)%lim;
+		var co ="rgb("+si+","+si+","+si+")";
+		var bc="rgb("+ri+","+ri+","ri+")";
+		bi.style.backgroundColor=bc;
+		bi.style.color=co;
+		bi.innerHTML=ri="";
 	}
 }
 </script>
