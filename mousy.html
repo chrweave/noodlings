@@ -72,7 +72,7 @@ function myprint(){
 			var n=(i+j+(lim-2))%lim;
 			var o=(n+1)%lim;
 			var p=(o+1)%lim;
-			bq+=Math.floor((buff[n]+buff[o]+buff[p])/3)+cv[j];
+			bq+=Math.max(buff[n],buff[o],buff[p])+cv[j];
 		}
 		var bi = document.getElementById(i);
 		var ri = buff[i];
