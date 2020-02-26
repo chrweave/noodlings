@@ -22,6 +22,7 @@ var temp;
 var lim=256;
 var tl= Math.floor(lim/2);
 var buff = new Array(lim);
+var cv= [",",",",")"];
 var mytxt="";
 for(i=0;i<lim;i++){
     buff[i] = i;
@@ -65,15 +66,19 @@ function set(){
 function myprint(){
 	var i;
 	for(i=0;i<lim;i++){
-		var j=(i+(lim-1))%lim;
-		var k=(i+1)%lim;
+		var j;
+		var bq = "rgb("
+		for(j=0;j<3;j++){
+			var n=(j+(lim-2))%lim;
+			var o=(n+1)%lim;
+			var p=(o+1)%lim;
+			bq+=Math.floor((buff[n]+buff[o]+buff[p])/3)+cv[j];
+		}
 		var bi = document.getElementById(i);
 		var ri = buff[i];
 		var si = (ri+tl)%lim;
-		//var co = "rgb("+si+","+si+","+si+")";
-		var bq = "rgb("+buff[j]+","+ri+","+buff[k]+")";
+		+buff[j]+","+ri+","+buff[k]+")";
 		bi.style.backgroundColor=bq;
-		//bi.style.color=co;
 		bi.innerHTML=ri+"";
 	}
 }
