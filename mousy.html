@@ -69,7 +69,7 @@ function myprint(){
 		var j;
 		var bq = "rgb("
 		for(j=0;j<3;j++){
-			var n=(j+(lim-2))%lim;
+			var n=(i+j+(lim-2))%lim;
 			var o=(n+1)%lim;
 			var p=(o+1)%lim;
 			bq+=Math.floor((buff[n]+buff[o]+buff[p])/3)+cv[j];
