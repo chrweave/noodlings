@@ -69,14 +69,11 @@ function myprint(){
 		var j;
 		var bq = "rgb("
 		for(j=0;j<3;j++){
-			var n=(i+j+(lim-2))%lim;
-			var o=(n+1)%lim;
-			var p=(o+1)%lim;
-			bq+=Math.max(buff[n],buff[o],buff[p])+cv[j];
+			var n=(i+j+(lim-1))%lim;
+			bq+=buff[n]+cv[j];
 		}
 		var bi = document.getElementById(i);
 		var ri = buff[i];
-		var si = (ri+tl)%lim;
 		bi.style.backgroundColor=bq;
 		bi.innerHTML=ri+"";
 	}
