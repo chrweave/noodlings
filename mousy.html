@@ -68,13 +68,13 @@ function myprint(){
 	for(i=0;i<lim;i++){
 		var j;
 		var cr =([buff[(i+(lim-1))%lim],buff[i],buff[(i+1)%lim]]).sort();
-		var ct = cr[0]+cr[2];
+		var ct = lim-cr[2];
 		var bq = "rgb(";
 		var co = "rgb(";
 		for(j=0;j<3;j++){
 			var n  = (i+j+(lim-1))%lim;
 			bq+=buff[n]+cv[j];
-			co+=(ct-buff[n])+cv[j];
+			co+=Math.floor((ct*(lim-buff[n]))/lim)+cv[j];
 		}
 		var bi = document.getElementById(i);
 		var ri = buff[i];
