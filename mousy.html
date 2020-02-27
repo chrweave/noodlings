@@ -68,13 +68,16 @@ function myprint(){
 	for(i=0;i<lim;i++){
 		var j;
 		var bq = "rgb("
+		var co = "rgb("
 		for(j=0;j<3;j++){
 			var n=(i+j+(lim-1))%lim;
 			bq+=buff[n]+cv[j];
+			co+=(lim-buff[n])+cv[j];
 		}
 		var bi = document.getElementById(i);
 		var ri = buff[i];
 		bi.style.backgroundColor=bq;
+		bi.style.color=co;
 		bi.innerHTML=ri+"";
 	}
 }
