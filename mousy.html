@@ -67,17 +67,12 @@ function myprint(){
 	var i;
 	for(i=0;i<lim;i++){
 		var j;
-		var n  = (i+(lim-1))%lim;
-		var o  = (n+1)%lim;
-		var p  = (n+2)%lim;
-		var bn = buff[n];
-		var bo = buff[o];
-		var bp = buff[p];
-		var ct = min(bn,bo,bp)+max(bn,bo,bp);
+		var cr =([buff[(i+(lim-1))%lim],buff[i],buff[(i+1)%lim]]).sort();
+		var ct = cr[0]+cr[2];
 		var bq = "rgb(";
 		var co = "rgb(";
 		for(j=0;j<3;j++){
-			n  = (i+j+(lim-1))%lim;
+			var n  = (i+j+(lim-1))%lim;
 			bq+=buff[n]+cv[j];
 			co+=(ct-buff[n])+cv[j];
 		}
