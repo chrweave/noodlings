@@ -89,8 +89,9 @@ function getChapter() {
         },
         "id": 42
     }));
-    var obj = JSON.parse(Http.responseText);
-    window.location.href = chapters[obj.random.data];
+    var myTxt = Http.responseText;
+    console.log(myTxt);
+    //window.location.href = chapters[512];
 }
   
   
