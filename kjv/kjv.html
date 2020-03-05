@@ -78,8 +78,9 @@
   }
   const rpcUrl="https://api.random.org/json-rpc/2/invoke";
   const Http = new XMLHttpRequest();
-  Http.open("POST", rpcUrl);
-  Http.send({
+  Http.open("POST", rpcUrl, true);
+  Http.setRequestHeader('Content-Type', 'application/json');
+  Http.send(JSON.stringify({
     "jsonrpc": "2.0",
     "method": "generateIntegers",
     "params": {
@@ -90,7 +91,7 @@
         "replacement": true
     },
     "id": 42
-});
+  }));
 
   Http.onreadystatechange = (e) => {
     console.log(Http.responseText)
