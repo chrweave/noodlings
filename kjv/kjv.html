@@ -78,8 +78,8 @@
   }
   const rpcUrl="https://api.random.org/json-rpc/2/invoke";
   const Http = new XMLHttpRequest();
-  Http.open("GET", rpcUrl);
-  Http.send();
+  Http.open("POST", rpcUrl);
+  Http.send(myrpc);
 
   Http.onreadystatechange = (e) => {
     console.log(Http.responseText)
