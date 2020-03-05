@@ -76,7 +76,14 @@
   function getChapter(){
       window.location.href = chapters[x];
   }
-  var rpcUrl="https://api.random.org/json-rpc/2/invoke";
+  const rpcUrl="https://api.random.org/json-rpc/2/invoke";
+  const Http = new XMLHttpRequest();
+  Http.open("GET", rpcUrl);
+  Http.send();
+
+  Http.onreadystatechange = (e) => {
+    console.log(Http.responseText)
+  }
   var myrpc= {
     "jsonrpc": "2.0",
     "method": "generateIntegers",
