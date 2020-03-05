@@ -89,7 +89,18 @@ function getChapter() {
         },
         "id": 42
     }));
-    var myTxt = Http.responseText;
+    Http.onreadystatechange = function () {
+    if (this.readyState != 4) return;
+
+    if (this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        window.location.href = chapters[data.result.random.data[0]];
+
+        // we get the returned data
+    }
+
+    // end of state change: it can be after some time (async)
+};
     console.log(myTxt);
     //window.location.href = chapters[512];
 }
