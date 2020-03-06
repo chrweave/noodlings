@@ -1,0 +1,171 @@
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>New Mouse Toy</title><!-- <link rel="stylesheet" href="kjv/kjv.css"> -->
+<style>
+	.ronter { 
+		display:inline-block; 
+		/*width:12.5%;*/
+		font-size:.6em;
+	}
+</style>
+</head>
+<body  onmousemove="return recolor()" ontouchmove="return recolor()">
+<canvas class="ronter" id="myCanvas" ></canvas>
+<script>
+
+function sanitizeRGB(x){	
+	var p=Math.floor(x);
+	if(p<0){
+		p=0;
+	}
+	if(p>255){
+		p=255;
+	}
+	return p;
+}
+
+function getColorString(r,g,b){
+	var col="#";
+	var p = sanitizeRGB(r);
+	col+=((p>>4)&0xf).toString(16);
+	col+=(p&0xf).toString(16);
+	p = sanitizeRGB(g);
+	col+=((p>>4)&0xf).toString(16);
+	col+=(p&0xf).toString(16);
+	p = sanitizeRGB(b);
+	col+=((p>>4)&0xf).toString(16);
+	col+=(p&0xf).toString(16);
+	return col;
+}
+
+class mycircle {
+	constructor (centerX, centerY, radius, r, g, b){
+		this.centerX=centerX;
+		this.centerY=centerY;
+		this.radius=radius;
+		this.r=r;
+		this.g=g;
+		this.b=b;
+	}
+	copy(x){
+		this.centerX=x.centerX;
+	    this.centerY=x.centerY;
+	    this.radius=x.radius;
+	    this.r=x.r;
+	    this.g=x.g;
+	    this.b=x.b;
+	}
+}
+
+//canvas experiments
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.canvas.width  = window.innerWidth;
+ctx.canvas.height = window.innerHeight;
+//ctx.fillStyle = "#FF0000";
+//ctx.fillRect(0, 0, 150, 75);
+//end canvas experiments
+
+var hash = 11720509;
+var prime = 1048837 
+var myi = 0;
+var myj = 0;
+var myx = 0;
+var myy = 0;
+var temp;
+var radmod =0;
+var gmod= [0,0,0];
+var myRgb = [0,0,0];
+var ap=.005; 
+var omap =1-ap;
+var lim=256;
+var tl= Math.floor(lim/2);
+var buff = new Array(lim);
+var cv= [",",",",")"];
+var mytxt="";
+var oldcircle = new mycircle(0,0,0,0,0,0);
+for(i=0;i<lim;i++){
+    buff[i] = i;
+}
+
+var ss= [0,0,0,0,0,0,0,0,0,0,0];
+
+for(i=0;i<11;i++){
+    ss[i]=(Math.cos(Math.PI*i/10)+1)/2;
+}
+
+    
+function gethash (num){
+	hash=hash^num;
+	hash*=prime;
+	hash&=0xffffff;
+}
+function recolor(){
+	myx=event.clientX;
+	myy=event.clientY;
+	gethash(myx);
+	gethash(myy);	
+	set();
+	myprint();
+}
+function pump () {
+	myi++;
+	myi%=lim;
+	myj+=buff[myi];
+	myj%=lim;
+	temp=buff[myi];
+	buff[myi]=buff[myj];
+	buff[myj]=temp;
+	return buff[(buff[myi]+buff[myj])%256];
+}
+function set(){
+	var i;
+	for(i=0;i<lim;i++){
+		myj+=(hash>>16);
+		pump();
+		myj+=((hash >> 8)&0xff);
+		pump();
+		myj+=(hash&0xff);
+		pump();
+	}
+	for(i=0;i<lim;i++){
+		pump();
+	}
+}
+function myprint(){
+	var i;
+	
+	for (i=0;i<3;i++){
+		gmod[i]*=omap;
+		gmod[i]+=ap*(pump()-127);
+		myRgb[i]=gmod[i]*15+127;
+	}
+	radmod=radmod*omap+ap*(pump()-127);
+	var circ= new mycircle(myx, myy, 127+15*radmod, myRgb[0],myRgb[1],myRgb[2]);
+	/*var s = getColorString(circ.r,circ.g,circ.b);
+	ctx.fillStyle = s;
+	ctx.beginPath();
+	ctx.arc(circ.centerX,circ.centerY,circ.radius, 0, 2 * Math.PI, false);
+	ctx.fill();*/
+	circleInterp(oldcircle,circ);
+	oldcircle.copy(circ);
+}
+
+function circleInterp(x,y){
+	var i;
+	var s = 0;
+	var t = 1;
+	for (i=0;i<11;i++){
+		s=ss[i];
+		t=1-s;
+		var q = getColorString(x.r*s+y.r*t,x.g*s+y.g*t,x.b*s+y.b*t);
+		ctx.fillStyle = q;
+		ctx.beginPath();
+		ctx.arc(x.centerX*s+y.centerX*t,x.centerY*s+y.centerY*t,x.radius*s+y.radius*t, 0, 2 * Math.PI, false);
+		ctx.fill();
+	}
+}
+</script>
+</body>
+</html>
