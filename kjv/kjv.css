@@ -20,6 +20,12 @@ td{
   line-height:1.2;
   hyphens: auto;
 }
+button{
+  font-size: 1.5em;
+  font-family:LexendDeca;
+  line-height:1.2;
+  hyphens: auto;
+}
 body{
   color:White;
   background-color:Black;
