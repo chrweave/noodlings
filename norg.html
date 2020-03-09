@@ -143,13 +143,13 @@ function myprint(){
 	}
 	radmod=radmod*omap+ap*(pump()-127);
 	var circ= new mycircle(myx, myy, 127+8*radmod, myRgb[0],myRgb[1],myRgb[2]);
-	var s = getColorString(circ.r,circ.g,circ.b);
+	/*var s = getColorString(circ.r,circ.g,circ.b);
 	ctx.fillStyle = s;
 	ctx.beginPath();
 	ctx.arc(circ.centerX,circ.centerY,circ.radius, 0, 2 * Math.PI, false);
-	ctx.fill();
-	//circleInterp(oldcircle,circ);
-	//oldcircle.copy(circ);
+	ctx.fill();*/
+	circleInterp(oldcircle,circ);
+	oldcircle.copy(circ);
 }
 
 function circleInterp(x,y){
