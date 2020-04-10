@@ -3,5 +3,18 @@
 <head>
 </head>
 <body>
+  <div id="chooseYourName">
+    <form id="player1form" onSubmit="return pOneName()">
+      <input type="text">Player 1 Character name</input>
+      <input type="submit" />
+    </form>
+  </div>
+  <div id="battle">
+  </div>
+  <script>
+    function pOneName(){
+      alert(document.getElementByID("player1form").value);
+    }
+  </script>              
 </body>
 </html>
