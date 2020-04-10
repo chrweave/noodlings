@@ -5,36 +5,55 @@
   <title>Ultra Violent Battle of Phrases</title>
 </head>
 <body>
-  <div id="chooseYourNamePlayerOne" style="display:block">
-    <form id="player1form" onSubmit="return pOneName()">
+  <div id="chooseYourNamePlayerOne" >
+    <form id="player1form" onSubmit="return pOneName()" style="display:inline">
       <h2>
-        Player 1 Character name
+        Player 1 Character Name
       </h2>
       <input type="text" id="pone" style="width:100%"/>
       <input type="submit" />
     </form>
-  </div>
-  <div id="chooseYourNamePlayerTwo" style="display:block">
-    <form id="player2form" onSubmit="return pTwoName()">
+    <form id="player2form" onSubmit="return pTwoName()" style="display:none">
       <h2>
-        Player 2 Character name
+        Player 2 Character Name
       </h2>
-      <input type="text" id="ptwo"/>
+      <input type="text" id="ptwo" style="width:100%"/>
       <input type="submit" />
     </form>
   </div>
   <div id="battle">
+	<h2><span id="p1n" style="float:left"><span id="p1h"></span></span><span id="p2n" style="float:right"><span id="p2h"></span></span></h2>
   </div>
   <script>
+	var p1form=document.getElementById("player1form");
+	var p2form=document.getElementById("player2form");
+	var p1name;
+	var p2name;
+	var p1health;
+	var p2health;
+	var turnToggle = 0;
     function pOneName(){
-      alert(document.getElementById("pone").value);
-      document.getElementById("chooseYourNamePlayerOne").style.display = "none";
-      document.getElementById("chooseYourNamePlayerTwo").style.display = "block";
+	  p1name=document.getElementById("pone").value;
+	  document.getElementById("p1n").innerHTML=p1name;
+      p1form.style.display = "none";
+      p2form.style.display = "inline";
+	  return false;
     }
-    function pTwoName(){
-      alert(document.getElementById("ptwo").value);
-      document.getElementById("chooseYourNamePlayerTwo").style.display = "none";
+    function pTwoName(){	 
+	  p2name=document.getElementById("ptwo").value; 
+	  document.getElementById("p2n").innerHTML=p2name;
+      p2form.style.display = "none";
+	  return false;
     }
+	function turn(){
+	  p1health++;
+	  p2health++;
+	  turnToggle=1-turnToggle;
+	}
+	function resetGame(){
+	  p1health=p2health=100;
+	  document.getElementById("p2n").innerHTML=p2name;
+	}
   </script>              
 </body>
 </html>
