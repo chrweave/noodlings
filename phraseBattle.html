@@ -43,6 +43,7 @@
 	  p2name=document.getElementById("ptwo").value; 
 	  document.getElementById("p2n").innerHTML=p2name;
       p2form.style.display = "none";
+      resetGame();
 	  return false;
     }
 	function turn(){
@@ -52,7 +53,8 @@
 	}
 	function resetGame(){
 	  p1health=p2health=100;
-	  document.getElementById("p2n").innerHTML=p2name;
+          document.getElementById("p1h").innerHTML=p1health
+	  document.getElementById("p2h").innerHTML=p2health;
 	}
   </script>              
 </body>
