@@ -5,7 +5,10 @@
 <body>
   <div id="chooseYourNamePlayerOne">
     <form id="player1form" onSubmit="return pOneName()">
-      <input type="text">Player 1 Character name</input>
+      <h2>
+        Player 1 Character name
+      </h2>
+      <input type="text" id="pone"/>
       <input type="submit" />
     </form>
   </div>
@@ -13,7 +16,7 @@
   </div>
   <script>
     function pOneName(){
-      alert(document.getElementById("player1form").value);
+      alert(document.getElementById("pone").value);
       document.getElementById("chooseYourNamePlayerOne").style.display = "none";
     }
   </script>              
