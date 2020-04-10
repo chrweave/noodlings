@@ -22,7 +22,7 @@
     </form>
   </div>
   <div id="battle">
-	<h2><span id="p1n" style="float:left"><span id="p1h"></span></span><span id="p2n" style="float:right"><span id="p2h"></span></span></h2>
+	<h2><span style="float:left"> <span id="p1n"></span> <span id="p1h" style="color:Red"></span></span><span id="p2n" style="float:right"><span id="p2h"></span></span></h2>
   </div>
   <script>
 	var p1form=document.getElementById("player1form");
@@ -43,7 +43,7 @@
 	  p2name=document.getElementById("ptwo").value; 
 	  document.getElementById("p2n").innerHTML=p2name;
       p2form.style.display = "none";
-      //resetGame();
+      resetGame();
 	  return false;
     }
 	function turn(){
@@ -55,6 +55,7 @@
 	  p1health=p2health=100;
           document.getElementById("p1h").innerHTML=p1health
 	  document.getElementById("p2h").innerHTML=p2health;
+          return false;
 	}
   </script>              
 </body>
