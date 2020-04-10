@@ -3,7 +3,7 @@
 <head>
 </head>
 <body>
-  <div id="chooseYourName">
+  <div id="chooseYourNamePlayerOne">
     <form id="player1form" onSubmit="return pOneName()">
       <input type="text">Player 1 Character name</input>
       <input type="submit" />
@@ -14,7 +14,7 @@
   <script>
     function pOneName(){
       alert(document.getElementById("player1form").value);
-      document.getElementById("player1form").style.display = "none"
+      document.getElementById("chooseYourNamePlayerOne").style.display = "none";
     }
   </script>              
 </body>
