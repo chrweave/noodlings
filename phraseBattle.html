@@ -12,12 +12,26 @@
       <input type="submit" />
     </form>
   </div>
+  <div id="chooseYourNamePlayerTwo" style="display:none">
+    <form id="player1form" onSubmit="return pTwoName()">
+      <h2>
+        Player 2 Character name
+      </h2>
+      <input type="text" id="ptwo"/>
+      <input type="submit" />
+    </form>
+  </div>
   <div id="battle">
   </div>
   <script>
     function pOneName(){
       alert(document.getElementById("pone").value);
       document.getElementById("chooseYourNamePlayerOne").style.display = "none";
+      document.getElementById("chooseYourNamePlayerTwo").style.display = "inline";
+    }
+    function pTwoName(){
+      alert(document.getElementById("ptwo").value);
+      document.getElementById("chooseYourNamePlayerTwo").style.display = "none";
     }
   </script>              
 </body>
