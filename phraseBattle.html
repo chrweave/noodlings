@@ -50,10 +50,14 @@
       alert(p1name.split("").map(x => x.charCodeAt([0])).toString());
 	  return false;
     }
+    function numberize (e){
+      return e.split("").map(x => x.charCodeAt([0]));
+    }
     function pTwoName(){	 
 	  p2name=document.getElementById("ptwo").value; 
 	  document.getElementById("p2n").innerHTML=p2name;
       p2form.style.display = "none";
+      alert(numberize(p2name).toSteing());
       resetGame();
 	  return false;
     }
