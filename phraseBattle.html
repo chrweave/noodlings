@@ -34,47 +34,47 @@
     </h2>
   </div>
   <script>
-	var p1form=document.getElementById("player1form");
-	var p2form=document.getElementById("player2form");
-	var p1name;
-	var p2name;
-	var p1health;
-	var p2health;
-	var turnToggle = 0;
+    var p1form=document.getElementById("player1form");
+    var p2form=document.getElementById("player2form");
+    var p1name;
+    var p2name;
+    var p1health;
+    var p2health;
+    var turnToggle = 0;
     var xi=0;
     var xj=0;
     var lim=1000;
     function pOneName(){
-	  p1name=document.getElementById("pone").value;
-	  document.getElementById("p1n").innerHTML=p1name;
+      p1name=document.getElementById("pone").value;
+      document.getElementById("p1n").innerHTML=p1name;
       p1form.style.display = "none";
       p2form.style.display = "inline";
       alert(p1name.split("").toString()/*).map(charCodeAt(0)).toString()*/);
       alert(p1name.split("").map(x => x.charCodeAt([0])).toString());
-	  return false;
+      return false;
     }
     function numberize (e){
       return e.split("").map(x => x.charCodeAt([0]));
     }
-    function pTwoName(){	 
-	  p2name=document.getElementById("ptwo").value; 
-	  document.getElementById("p2n").innerHTML=p2name;
+    function pTwoName(){     
+      p2name=document.getElementById("ptwo").value; 
+      document.getElementById("p2n").innerHTML=p2name;
       p2form.style.display = "none";
       alert(numberize(p2name).toString());
       resetGame();
-	  return false;
+      return false;
     }
-	function turn(){
-	  p1health++;
-	  p2health++;
-	  turnToggle=1-turnToggle;
-	}
-	function resetGame(){
-	  p1health=p2health=100;
+    function turn(){
+      p1health++;
+      p2health++;
+      turnToggle=1-turnToggle;
+    }
+    function resetGame(){
+      p1health=p2health=100;
           document.getElementById("p1h").innerHTML=p1health
-	  document.getElementById("p2h").innerHTML=p2health;
+      document.getElementById("p2h").innerHTML=p2health;
           return false;
-	}
+    }
   </script>              
 </body>
 </html>
