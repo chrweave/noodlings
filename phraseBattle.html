@@ -49,9 +49,19 @@
       document.getElementById("p1n").innerHTML=p1name;
       p1form.style.display = "none";
       p2form.style.display = "inline";
-      alert(p1name.split("").toString()/*).map(charCodeAt(0)).toString()*/);
-      alert(p1name.split("").map(x => x.charCodeAt([0])).toString());
-      return false;
+      alert(gethash(p1name));
+    }
+    function gethash (word){
+      var hash = 11720509;
+      var prime = 1048837; 
+      var nums=numberize(word);
+      var  i = 0;
+      for(i=0;i<nums.length;i++){
+        hash=hash^num;
+        hash*=prime;
+        hash&=0xffffff;
+      }
+      return hash;
     }
     function numberize (e){
       return e.split("").map(x => x.charCodeAt([0]));
@@ -60,7 +70,7 @@
       p2name=document.getElementById("ptwo").value; 
       document.getElementById("p2n").innerHTML=p2name;
       p2form.style.display = "none";
-      alert(numberize(p2name).toString());
+      alert(gethash(p2name));
       resetGame();
       return false;
     }
