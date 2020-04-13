@@ -57,7 +57,7 @@
       var nums=numberize(word);
       var  i = 0;
       for(i=0;i<nums.length;i++){
-        hash=hash^num;
+        hash=hash^nums[i];
         hash*=prime;
         hash&=0xffffff;
       }
