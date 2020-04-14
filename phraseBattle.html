@@ -37,10 +37,7 @@
     var p1form=document.getElementById("player1form");
     var p2form=document.getElementById("player2form");
     var myNames=["",""];
-    var p1name;
-    var p2name;
-    var p1health;
-    var p2health;
+    var health=[0,0];
     var turnToggle = 0;
     var xi=0;
     var xj=0;
@@ -48,10 +45,8 @@
     function pOneName(){
       myNames[0]=document.getElementById("pone").value;
       document.getElementById("p1n").innerHTML=myNames[0];
-      alert("got here "+myNames[0]);
       p1form.style.display = "none";
       p2form.style.display = "inline";
-      alert(gethash(myNames[0]));
       return false;
     }
     function gethash (word){
@@ -73,7 +68,6 @@
       myNames[1]=document.getElementById("ptwo").value; 
       document.getElementById("p2n").innerHTML=myNames[1];
       p2form.style.display = "none";
-      alert(gethash(myNames[1]));
       resetGame();
       return false;
     }
@@ -83,9 +77,9 @@
       turnToggle=1-turnToggle;
     }
     function resetGame(){
-      p1health=p2health=100;
-      document.getElementById("p1h").innerHTML=p1health
-      document.getElementById("p2h").innerHTML=p2health;
+      health[0]= health[1] =100; 
+      document.getElementById("p1h").innerHTML= health[0];
+      document.getElementById("p2h").innerHTML= health[1];
       return false;
     }
   </script>              
