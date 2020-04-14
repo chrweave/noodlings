@@ -46,7 +46,7 @@
     var xj=0;
     var lim=1000;
     function pOneName(){
-      myNames[0]p1name=document.getElementById("pone").value;
+      myNames[0]=document.getElementById("pone").value;
       document.getElementById("p1n").innerHTML=myName[0];
       p1form.style.display = "none";
       p2form.style.display = "inline";
@@ -69,7 +69,7 @@
       return e.split("").map(x => x.charCodeAt([0]));
     }
     function pTwoName(){     
-      myNames[1]=p2name=document.getElementById("ptwo").value; 
+      myNames[1]=document.getElementById("ptwo").value; 
       document.getElementById("p2n").innerHTML=myNames[1];
       p2form.style.display = "none";
       alert(gethash(myNames[1]));
