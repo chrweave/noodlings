@@ -22,20 +22,24 @@
     </form>
   </div>
   <div id="battle">
-    <div style="display:block">
+    <div style="display:block overflow:auto">
       <h2>
         <div style="float:left">
-          <span id="p1n"></span><br/>
-          <span id="p1h" style="color:Red"></span><br/>
-          <span id="p1action" style="color:Green"></span>
+          <table>
+            <tr><td id="p1n"></td></tr>
+            <tr><td id="p1h" style="color:Red"></td></tr>
+            <tr><td id="p1action" style="color:Green"></td></tr>
+          </table>          
         </div>
         <div  style="float:right">
-          <span id="p2n"></span><br/>
-          <span id="p2h" style="color:Red"></span><br/>
-          <span id="p2action" style="color:Green"></span>
+          <table>
+            <tr><td id="p2n"></td></tr>
+            <tr><td id="p2h" style="color:Red"></td></tr>
+            <tr><td id="p2action" style="color:Green"></td></tr>
+          </table>
         </div>
       </h2>
-    </div>
+    </div><br/>
     <div style="display:block">
       <h1 id="actionBanner">
       </h1>
@@ -90,23 +94,27 @@
         health[1]++;
         if(attackToggle==0){
           document.getElementById("p1action").innerHTML=document.getElementById("myAction").value;
+          document.getElementById("myAction").value = "";
           document.getElementById("actionBanner").innerHTML=myNames[1]+" Defense:"
           document.getElementById("p1h").innerHTML= health[0];
           document.getElementById("p2h").innerHTML= health[1];
 	} else {
-          document.getElementById("p1action").innerHTML=document.getElementById("myAction").value;
+          document.getElementById("p2action").innerHTML=document.getElementById("myAction").value;
+          document.getElementById("myAction").value = "";
           document.getElementById("actionBanner").innerHTML=myNames[1]+" Attack:"
           document.getElementById("p1h").innerHTML= health[0];
           document.getElementById("p2h").innerHTML= health[1];
 	}
       } else {
         if(attackToggle==0){
-          document.getElementById("p1action").innerHTML=document.getElementById("myAction").value;
+          document.getElementById("p2action").innerHTML=document.getElementById("myAction").value;
+          document.getElementById("myAction").value = "";
           document.getElementById("actionBanner").innerHTML=myNames[0]+" Defense:"
           document.getElementById("p1h").innerHTML= health[0];
           document.getElementById("p2h").innerHTML= health[1];
 	} else {
           document.getElementById("p1action").innerHTML=document.getElementById("myAction").value;
+          document.getElementById("myAction").value = "";
           document.getElementById("actionBanner").innerHTML=myNames[0]+" Attack:"
           document.getElementById("p1h").innerHTML= health[0];
           document.getElementById("p2h").innerHTML= health[1];
@@ -121,7 +129,7 @@
     function resetGame(){
       health[0]= health[1] =100; 
       document.getElementById("actionForm").style.display="inline";
-      document.getElementById("actionBanner").innerHTML=myNames[1]+" Attack:"
+      document.getElementById("actionBanner").innerHTML=myNames[0]+" Attack:"
       document.getElementById("p1h").innerHTML= health[0];
       document.getElementById("p2h").innerHTML= health[1];
       return false;
