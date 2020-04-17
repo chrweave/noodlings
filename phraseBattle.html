@@ -53,6 +53,12 @@
         <input type="text" id="myAction" style="width:100%"/>
         <input type="submit" />
       </form>
+	  <form id="victoryForm" onSubmit="return handleVictory()" style="display:none">
+        <input type="submit" />
+      </form>
+	  <form id="totalVictoryForm" onSubmit="return resetGame()" style="display:none">
+        <input type="submit" />
+      </form>
     </div>
   </div>
   <script>
@@ -132,34 +138,46 @@
       attackToggle = 1-attackToggle;
       return false;
     }
-    function calculateVictor(attackNum,defenseNum){
+    function calculateVictor(attackNum,defenseNum, toggle){
       if (attackNum > defenseNum){
-        return 1;
+	    if(toggle == 0){
+		  
+		  document.getElementById("actionBanner").innerHTML=myNames[0]+" wins the battle!"
+		} else{
+		}
       }
       if(attackNum == defenseNum){
         return 0;
       }
       return -1;
     }
-    function calculateDamage(num,threshold){
+    function calculateDamage(health,num,threshold){
       num -= thresh;
       num /= 16777216;
       num *= 10;
-      return Math.round(num);
+      num = health+Math.round(num);
+	  if(num < 0){
+		num=0;
+	  }
+	  return num;
     }
     function calculateBattle(attacker, attack, defender, defence, toggle){
       var anum = gethash(attacker+attack);
       var dnum = gethash(defender+defense);
-      var thresh = gethash(attack+defense);
-      var victor = calculateVictor(anum,dnum,toggle);      
+      var thresh = gethash(attack+defense);      
       if(toggle == 0){
-        p1health+=calculateDamage(anum,thresh);
-        p1hea2th+=calculateDamage(dnum,thresh);
+        p1health+=calculateDamage(p1health,anum,thresh);
+        p2health+=calculateDamage(p2health,dnum,thresh);
       } else {
-        p1hea2th+=calculateDamage(anum,thresh);
-        p1hea1th+=calculateDamage(dnum,thresh);
-      }
+        p2health+=calculateDamage(p2health,anum,thresh);
+        p1hea1th+=calculateDamage(p1health,dnum,thresh);
+      }	  
+      var victor = calculateVictor(anum,dnum,toggle);
     }
+	function handleVictory(){
+		if(p2health == 0){
+		}
+	}
     function resetGame(){
       health[0]= health[1] =100; 
       document.getElementById("actionForm").style.display="inline";
