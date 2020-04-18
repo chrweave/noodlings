@@ -53,10 +53,14 @@
         <input type="text" id="myAction" style="width:100%"/>
         <input type="submit" />
       </form>
-	  <form id="victoryForm" onSubmit="return handleVictory()" style="display:none">
+      <form id="victoryForm" onSubmit="return handleVictory()" style="display:none">
         <input type="submit" />
       </form>
-	  <form id="totalVictoryForm" onSubmit="return resetGame()" style="display:none">
+      <form id="totalVictoryForm" onSubmit="return handleTotalVictory()" style="display:none">
+        <input type="radio" id="yes" name="continue" value="yes">
+        <label for="yes">Yes</label><br>
+        <input type="radio" id="no" name="continue" value="no">
+        <label for="no">No</label><br>
         <input type="submit" />
       </form>
     </div>
@@ -139,45 +143,69 @@
       return false;
     }
     function calculateVictor(attackNum,defenseNum, toggle){
+      document.getElementById("victoryForm").style.display="block";
+      document.getElementById("actionForm").style.display="none";
       if (attackNum > defenseNum){
-	    if(toggle == 0){
-		  
-		  document.getElementById("actionBanner").innerHTML=myNames[0]+" wins the battle!"
-		} else{
-		}
+        if(toggle == 0){          
+          document.getElementById("actionBanner").innerHTML=myNames[0]+" wins the battle!"
+        } else{
+          document.getElementById("actionBanner").innerHTML=myNames[1]+" wins the battle!"
+        }
+      } else {
+        if(attackNum == defenseNum){
+          document.getElementById("actionBanner").innerHTML="The battle was tied."
+        } else {
+          if(toggle == 0){          
+            document.getElementById("actionBanner").innerHTML=myNames[1]+" wins the battle!"
+          } else{
+            document.getElementById("actionBanner").innerHTML=myNames[0]+" wins the battle!"
+          }
+        }
       }
-      if(attackNum == defenseNum){
-        return 0;
-      }
-      return -1;
+      return false;
     }
     function calculateDamage(health,num,threshold){
       num -= thresh;
       num /= 16777216;
       num *= 10;
       num = health+Math.round(num);
-	  if(num < 0){
-		num=0;
-	  }
-	  return num;
+      if(num < 0){
+        num=0;
+      }
+      return num;
     }
     function calculateBattle(attacker, attack, defender, defence, toggle){
       var anum = gethash(attacker+attack);
       var dnum = gethash(defender+defense);
-      var thresh = gethash(attack+defense);      
+      var thresh = gethash(attack+defense);  
+      document.getElementById("actionForm").style.display="none";
+      document.getElementById("victoryForm").style.display="inline";      
       if(toggle == 0){
         p1health+=calculateDamage(p1health,anum,thresh);
         p2health+=calculateDamage(p2health,dnum,thresh);
       } else {
-        p2health+=calculateDamage(p2health,anum,thresh);
-        p1hea1th+=calculateDamage(p1health,dnum,thresh);
-      }	  
-      var victor = calculateVictor(anum,dnum,toggle);
+        p2health=calculateDamage(p2health,anum,thresh);
+        p1hea1th=calculateDamage(p1health,dnum,thresh);
+      }      
+      calculateVictor(anum,dnum,toggle);
+      return false;
     }
-	function handleVictory(){
-		if(p2health == 0){
-		}
-	}
+    function handleVictory(){
+    
+      if(p2health == 0){
+        document.getElementById("victoryForm").style.display="none";
+        if(p1health == 0){
+          document.getElementById("actionBanner").innerHTML="Both "+myNames[0]+" and "+myNames[1]+" have died. <br/> Play again?"
+        }
+        document.getElementById("actionBanner").innerHTML=myNames[0]+" is the winner and "+myNames[1]+" has died. <br/> Play again?"
+      } else {
+        if(p1health == 0){
+          document.getElementById("actionBanner").innerHTML=myNames[1]+" is the winner and "+myNames[0]+" has died. <br/> Play again?"        
+        } else {
+          
+        }
+      }
+    }
     function resetGame(){
       health[0]= health[1] =100; 
       document.getElementById("actionForm").style.display="inline";
