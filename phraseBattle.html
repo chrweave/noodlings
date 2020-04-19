@@ -137,8 +137,6 @@
       return false;
     }
     function calculateVictor(attackNum,defenseNum){
-      document.getElementById("victoryForm").style.display="inline";
-      document.getElementById("actionForm").style.display="none";
       if (attackNum > defenseNum){
         if(turnToggle == 0){          
           document.getElementById("actionBanner").innerHTML=myNames[0]+" wins the battle!"
@@ -158,33 +156,33 @@
       }
       return false;
     }
-    function calculateDamage(h,n,t){
+    function calculateDamage(n,t){
       var k=n;
       k -= t;
       k /= 16777216;
       k *= 10;
-      k = h+Math.round(k);
-      if(k < 0){
-        k=0;
-      }
+      k = Math.round(k);
+      k = Math.abs(k);
       return k;
+    }
+    function nonNeg(n){
     }
     function calculateBattle(){ 
       var anum = gethash(myNames[turnToggle]+attack); /*attacker is myNames[turnToggle]*/
       var dnum = gethash(myNames[turnToggle]+defense);
       var thresh = gethash(attack+defense);  
       document.getElementById("actionForm").style.display="none";
-      document.getElementById("victoryForm").style.display="inline"; 
-      health[0]++;
-      health[1]++;
-      health[turnToggle]=calculateDamage(health[turnToggle],anum,thresh);
-      health[1-turnToggle]=calculateDamage(health[1-turnToggle],dnum,thresh);
+      document.getElementById("victoryForm").style.display="inline";
+      anum = calculateDamage(anum,thresh);
+      dnum = calculateDamage(dnum,thresh);      
+      health[turnToggle]-=anum; 
+      health[1-turnToggle]-=dnum; 
       displayHealth();
-      calculateVictor(anum,dnum);
+      calculateVictor(-anum,-dnum);
       return false;
     }
     function handleVictory(){      
-      document.getElementById("victoryForm").style.dsiplay="none";
+      document.getElementById("victoryForm").style.display="none";
       if(health[1] == 0){
         if(health[0] == 0){
           document.getElementById("actionBanner").innerHTML="Both "+myNames[0]+" and "+myNames[1]+" have died. <br/> Play again?"
@@ -201,13 +199,16 @@
           return false;          
         } else {
           document.getElementById("p1action").innerHTML
-              = document.getElementById("p1action").innerHTML
+              = document.getElementById("p2action").innerHTML
               = attack
               = defense
               = "";
-          document.getElementById("actionForm").style.display="inline";		  
+          document.getElementById("actionForm").style.display="inline";          
           turnToggle=1-turnToggle;
-		  document.getElementById("actionBanner").innerHTML=myNames[turnToggle]+" Attack:"
+          document.getElementById("actionBanner").innerHTML=myNames[turnToggle]+" Attack:"
+          health[0]++;
+          health[1]++;
+          displayHealth();
           return false;
         }
       }
