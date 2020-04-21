@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> </meta>
+  <title>Ultra Violent Battle of Phrases</title>
+</head>
+<body>
+  <div id="chooseYourNamePlayerOne" >
+    <form id="player1form" onSubmit="return pOneName()" style="display:inline">
+      <h2>
+        Player 1 Character Name
+      </h2>
+      <input type="text" id="pone" style="width:100%"/>
+      <input type="submit" />
+    </form>
+    <form id="player2form" onSubmit="return pTwoName()" style="display:none">
+      <h2>
+        Player 2 Character Name
+      </h2>
+      <input type="text" id="ptwo" style="width:100%"/>
+      <input type="submit" />
+    </form>
+  </div>
+  <div id="battle">
+    <div>
+      <h2>
+        <table style="width:100%">
+          <tr>
+            <td style="float:left" id="p1n">
+            </td>
+            <td style="float:right" id="p2n">
+            </td>
+          </tr>
+          <tr style="color:Red">
+            <td style="float:left" id="p1h">
+            </td>
+            <td style="float:right" id="p2h">
+            </td>
+          </tr>
+          <tr >
+            <td style="float:left" id="p1action">
+            </td>
+            <td style="float:right" id="p2action">
+            </td>
+          </tr>
+        </table> 
+      </h2>
+    </div><br/>
+    <div style="display:block">
+      <h1 id="actionBanner">
+      </h1>
+      <form id="actionForm" onSubmit="return handleAction()" style="display:none">
+        <input type="text" id="myAction" style="width:100%"/>
+        <input type="submit" />
+      </form>
+      <form id="victoryForm" onSubmit="return handleVictory()" style="display:none">
+        <input type="submit" />
+      </form>
+      <form id="totalVictoryForm" onSubmit="return handleTotalVictory()" style="display:none">
+        <input type="radio" id="yes" name="continue" value="yes">
+        <label for="yes">Yes</label><br>
+        <input type="radio" id="no" name="continue" value="no">
+        <label for="no">No</label><br>
+        <input type="submit" />
+      </form>
+    </div>
+  </div>
+  <script>
+    var p1form=document.getElementById("player1form");
+    var p2form=document.getElementById("player2form");
+    var myNames=["",""];
+    var health=[0,0];
+    var prngScore=[0,0];
+    var attack;
+    var defense;
+    var turnToggle = 0;
+    var attackToggle = 0;
+    function handleTotalVictory(){
+      if(document.getElementById("yes").checked){
+        document.getElementById("totalVictoryForm").style.display="none";
+        resetGame();
+        return false;
+      } else {
+        return true;
+      }
+    }
+    function pOneName(){
+      myNames[0]=document.getElementById("pone").value;
+      document.getElementById("p1n").innerHTML=myNames[0];
+      p1form.style.display = "none";
+      p2form.style.display = "inline";
+      return false;
+    }
+    function gethash (word){
+      var hash = 11720509;
+      var prime = 1048837; 
+      var nums=numberize(word);
+      var  i = 0;
+      for(i=0;i<nums.length;i++){
+        hash=hash^nums[i];
+        hash*=prime;
+        hash&=0xffffff;
+      }
+      return hash;
+    }
+    function numberize (e){
+      return e.split("").map(x => x.charCodeAt([0]));
+    }
+    function pTwoName(){     
+      myNames[1]=document.getElementById("ptwo").value; 
+      document.getElementById("p2n").innerHTML=myNames[1];
+      p2form.style.display = "none";
+      resetGame();
+      return false;
+    }
+    function handleAction(){
+      if(turnToggle==0){
+        if(attackToggle==0){
+          document.getElementById("p1action").innerHTML=attack=document.getElementById("myAction").value;
+          document.getElementById("p1action").style.color="Blue";
+          document.getElementById("myAction").value = "";
+          document.getElementById("actionBanner").innerHTML=myNames[1]+" Defense:"
+        } else {
+          document.getElementById("p2action").innerHTML=defense=document.getElementById("myAction").value;
+          document.getElementById("p2action").style.color="Orange";
+          document.getElementById("myAction").value = "";
+          document.getElementById("actionBanner").innerHTML=myNames[1]+" Attack:"
+        }
+      } else {
+        if(attackToggle==0){
+          document.getElementById("p2action").innerHTML=attack=document.getElementById("myAction").value;
+          document.getElementById("p2action").style.color="Blue";
+          document.getElementById("myAction").value = "";
+          document.getElementById("actionBanner").innerHTML=myNames[0]+" Defense:"
+        } else {
+          document.getElementById("p1action").innerHTML=defense=document.getElementById("myAction").value;
+          document.getElementById("p1action").style.color="Orange";
+          document.getElementById("myAction").value = "";
+          document.getElementById("actionBanner").innerHTML=myNames[0]+" Attack:"
+        }
+      }
+      if(attackToggle==1){
+        calculateBattle();
+      }
+      attackToggle = 1-attackToggle;
+      return false;
+    }
+    function calculateVictor(attackNum,defenseNum){
+      if (attackNum > defenseNum){
+        if(turnToggle == 0){          
+          document.getElementById("actionBanner").innerHTML=myNames[0]+" wins the battle!"
+        } else{
+          document.getElementById("actionBanner").innerHTML=myNames[1]+" wins the battle!"
+        }
+      } else {
+        if(attackNum == defenseNum){
+          document.getElementById("actionBanner").innerHTML="The battle was tied."
+        } else {
+          if(turnToggle == 0){          
+            document.getElementById("actionBanner").innerHTML=myNames[1]+" wins the battle!"
+          } else{
+            document.getElementById("actionBanner").innerHTML=myNames[0]+" wins the battle!"
+          }
+        }
+      }
+      return false;
+    }
+    function calculateDamage(n,t){
+      var k=n;
+      k -= t;
+      k /= 16777216;
+      k *= 10;
+      k = Math.round(k);
+      k = Math.abs(k);
+      return k;
+    }
+    function nonNeg(n){
+      if (n<0){
+        n=0;
+      }
+      return n;
+    }
+    function calculateBattle(){ 
+      var anum = gethash(myNames[turnToggle]+attack); /*attacker is myNames[turnToggle]*/
+      var dnum = gethash(myNames[turnToggle]+defense);
+      var thresh = gethash(attack+defense);  
+      document.getElementById("actionForm").style.display="none";
+      document.getElementById("victoryForm").style.display="inline";
+      anum = calculateDamage(anum,thresh);
+      dnum = calculateDamage(dnum,thresh);      
+      health[turnToggle]-=anum; 
+      health[turnToggle]=nonNeg(health[turnToggle]); 
+      health[1-turnToggle]-=dnum; 
+      health[1-turnToggle]=nonNeg(health[1-turnToggle]); 
+      displayHealth();
+      calculateVictor(-anum,-dnum);
+      return false;
+    }
+    function handleVictory(){      
+      document.getElementById("victoryForm").style.display="none";
+      if(health[1] == 0){
+        if(health[0] == 0){
+          document.getElementById("actionBanner").innerHTML="Both "+myNames[0]+" and "+myNames[1]+" have died. <br/> Play again?"
+          document.getElementById("totalVictoryForm").style.display="inline";
+          return false;
+        }
+        document.getElementById("actionBanner").innerHTML=myNames[0]+" is the winner and "+myNames[1]+" has died. <br/> Play again?"
+        document.getElementById("totalVictoryForm").style.display="inline";
+        return false;
+      } else {
+        if(health[0] == 0){
+          document.getElementById("actionBanner").innerHTML = myNames[1]+" is the winner and "+myNames[0]+" has died. <br/> Play again?"           
+          document.getElementById("totalVictoryForm").style.display="inline";
+          return false;          
+        } else {
+          clearAttacks();
+          document.getElementById("actionForm").style.display="inline";          
+          turnToggle=1-turnToggle;
+          document.getElementById("actionBanner").innerHTML=myNames[turnToggle]+" Attack:"
+          health[0]++;
+          health[1]++;
+          displayHealth();
+          return false;
+        }
+      }
+    }
+    function clearAttacks(){
+      document.getElementById("p1action").innerHTML
+          = document.getElementById("p2action").innerHTML
+          = attack
+          = defense
+          = "";
+    }
+    function displayHealth(){
+      document.getElementById("p1h").innerHTML= health[0];
+      document.getElementById("p2h").innerHTML= health[1];
+      return false;
+    }
+    function resetGame(){
+      health[0] = health[1] = 20; 
+      clearAttacks();
+      document.getElementById("actionForm").style.display="inline";
+      document.getElementById("actionBanner").innerHTML=myNames[0]+" Attack:"
+      displayHealth();
+      return false;
+    }
+  </script>              
+</body>
+</html>
