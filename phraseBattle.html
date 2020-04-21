@@ -182,9 +182,9 @@
     }
     function calculateBattle(){ 
       var anum = gethash(myNames[turnToggle]+attack); /*attacker is myNames[turnToggle]*/
-      var dnum = gethash(myNames[turnToggle]+defense);
+      var dnum = gethash(myNames[1-turnToggle]+defense);
       var thresh = gethash(attack+defense); 
-      alert(myNames[turnToggle]+attack+" "+anum+"; "+myNames[turnToggle]+defense+" "+dnum+"; "+attack+defense+" "+thresh+".");
+      alert(myNames[turnToggle]+attack+" "+anum+"; "+myNames[1-turnToggle]+defense+" "+dnum+"; "+attack+defense+" "+thresh+".");
       document.getElementById("actionForm").style.display="none";
       document.getElementById("victoryForm").style.display="inline";
       anum = calculateDamage(anum,thresh);
