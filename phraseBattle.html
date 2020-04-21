@@ -166,12 +166,11 @@
       return false;
     }
     function calculateDamage(n,t){
-      var k=n;
-      k -= t;
+      var k = Math.abs(t-n);
+      k = Math.min(k,16777216-k);
       k /= 16777216;
       k *= 10;
       k = Math.round(k);
-      k = Math.abs(k);
       return k;
     }
     function nonNeg(n){
@@ -184,15 +183,12 @@
       var anum = gethash(myNames[turnToggle]+attack); /*attacker is myNames[turnToggle]*/
       var dnum = gethash(myNames[1-turnToggle]+defense);
       var thresh = gethash(attack+defense); 
-      alert(myNames[turnToggle]+attack+" "+anum+"; "+myNames[1-turnToggle]+defense+" "+dnum+"; "+attack+defense+" "+thresh+".");
       document.getElementById("actionForm").style.display="none";
       document.getElementById("victoryForm").style.display="inline";
       anum = calculateDamage(anum,thresh);
-      dnum = calculateDamage(dnum,thresh);      
-      health[turnToggle]-=anum; 
-      health[turnToggle]=nonNeg(health[turnToggle]); 
-      health[1-turnToggle]-=dnum; 
-      health[1-turnToggle]=nonNeg(health[1-turnToggle]); 
+      dnum = calculateDamage(dnum,thresh);  
+      health[turnToggle]=nonNeg(health[turnToggle]-anum); 
+      health[1-turnToggle]=nonNeg(health[1-turnToggle]-dnum); 
       displayHealth();
       calculateVictor(-anum,-dnum);
       return false;
