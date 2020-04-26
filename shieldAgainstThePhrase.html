@@ -51,47 +51,35 @@
       </h1>
       <form id="actionForm" onSubmit="return handleAction()" style="display:none">
         <input type="text" id="myAction" style="width:100%"/>
-        <label id="subMyAttack" for="myAttack" style="display:none">Enter your attack strength 1-10.</label>
+        <label id="subMyAttack" for="myAttack" style="display:none">Enter your attack strength 1-16.</label>
         <input type="text" id="myAttack" style="width:100%; display:none"/>
         <span id="defenseCheckBoxes" style="display:none">
-          Enter your defense:<br/>
           <table>
-            <tr>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-              <td class="dcbh"/>
-            </tr>
-            <tr>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-              <td><input type="checkbox" class="defenseCheckBox"/></td>
-            </tr>
+            <thead>
+              <tr>
+                <th colspan="16">Enter your defence:</th>
+              </tr>              
+            </thead>
+            <tbody>
+              <tr>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
+              </tr>
+            </tbody>            
           </table>
         </span>
         <input type="submit" />
@@ -109,6 +97,7 @@
     </div>
   </div>
   <script>
+    var colorScheme=["Violet","Indigo","Blue","Green","Yellow","Orange","Red"]
     var p1form=document.getElementById("player1form");
     var p2form=document.getElementById("player2form");
     var myNames=["",""];
@@ -189,14 +178,20 @@
       return e.split("").map(x => x.charCodeAt([0]));
     }
     function validateStrength(){
-      var test=parseInt(document.getElementById("myAttack").value);
-      if(test > 0){
-        if(test < 16){
-          hideAttackStrentgh();
-          return true;
+      var strengthString=document.getElementById("myAttack").value;      
+      var test=parseInt(strengthString);
+      if(test == test){
+        if(test > 0){
+          if(test < 17){
+            attackStrength=test;
+            hideAttackStrentgh();
+            return true;
+          }
         }
+        alert(test+" is not a number 1-16. Please enter a number in that range.");
+        return false;
       }
-      alert(test+" is not a number 1-16. Please enter a number in that range.");
+      alert(strengthString+" is not a valid number, 1-16. Please enter a number in that range.");
       return false;
     }
     function hideAttackStrentgh(){
@@ -207,8 +202,8 @@
     }
     function getHint(){ // convolve attack mod 7
       var convKernel=[6,4,1,0,0,0,0,0,0,0,0,0,0,0,1,4];
-      var hinky=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-      var myhints=document.getElementsByClassName("dcbh");
+      var hinky=["","","","","","","","","","","","","","","",""];
+      var myhints=document.getElementsByClassName("tdbh");
       var hint;
       var i;
       var j;
@@ -217,9 +212,10 @@
         for(j=0;j<16;j++){          
           hint+=attackVector[j]*convKernel[(j+16-i)%16];
         }
-        myhints[i].innerHTML=hinky[i]=hint%7;
-        alert(hinky);
-      }
+        hinky[i]=colorScheme[hint%7];
+        myhints[i].style.backgroundcolor=hinky[i];
+      }      
+      alert(hinky);
     }
     function pTwoName(){     
       myNames[1]=document.getElementById("ptwo").value; 
@@ -237,6 +233,7 @@
           document.getElementById("p1action").innerHTML=attack=document.getElementById("myAction").value;
           document.getElementById("p1action").style.color="Blue";
           document.getElementById("myAction").value = "";
+          hashAttack(myNames[turnToggle]+attack);
           document.getElementById("actionBanner").innerHTML=myNames[1]+" Defense:"
         } else {
           checkBoxesNumber();
@@ -253,6 +250,7 @@
           document.getElementById("p2action").innerHTML=attack=document.getElementById("myAction").value;
           document.getElementById("p2action").style.color="Blue";
           document.getElementById("myAction").value = "";
+          hashAttack(myNames[turnToggle]+attack);
           document.getElementById("actionBanner").innerHTML=myNames[0]+" Defense:"
         } else {
           checkBoxesNumber();
