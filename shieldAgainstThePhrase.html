@@ -32,15 +32,15 @@
             </td>
           </tr>
           <tr style="color:Red">
-            <td style="float:left" id="p1h">
+            <td class="playerhealth" style="float:left" id="p1h">
             </td>
-            <td style="float:right" id="p2h">
+            <td class="playerhealth" style="float:right" id="p2h">
             </td>
           </tr>
           <tr >
-            <td style="float:left" id="p1action">
+            <td class="playeraction" style="float:left" id="p1action">
             </td>
-            <td style="float:right" id="p2action">
+            <td class="playeraction" style="float:right" id="p2action">
             </td>
           </tr>
         </table> 
@@ -102,6 +102,8 @@
     var p2form=document.getElementById("player2form");
     var myNames=["",""];
     var health=[0,0];
+    var healthStrings=document.getElementsByClassName("playerhealth");
+    var actionStrings=document.getElementsByClassName("playeraction");
     var prngScore=[0,0];
     var attackVector=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     var defense;
@@ -224,6 +226,40 @@
       resetGame();
       return false;
     }
+    function processAttack(){
+      actionStrings[turnToggle].innerHTML=attack=document.getElementById("myAction").value;
+      actionStrings[turnToggle].style.color="Blue";
+      document.getElementById("myAction").value = "";
+      document.getElementById("myAction").style.display=none = "";
+      document.getElementById("subMyAttack").style.display="inline";
+      document.getElementById("myAttack").style.display="inline";
+	  attackToggle++;
+    }
+	function processStrength(){
+	  if(!validateStrength()){
+            return false;
+      }          
+      document.getElementById("p1action").innerHTML=attack=document.getElementById("myAction").value;
+      //document.getElementById("p1action").style.color="Blue";
+      document.getElementById("myAction").value = "";
+      hashAttack(myNames[turnToggle]+attack);
+      document.getElementById("actionBanner").innerHTML=myNames[1]+" Defense:";
+	  attackToggle++;
+	}
+    function handleAction(){
+      switch(attackToggle){
+        case 0:
+          processAttack();
+          break;
+        case 1:
+		  processStrength();
+          break;
+        default:
+          calculateBattle();		
+      }
+	  return false;
+    }
+    /*
     function handleAction(){
       if(turnToggle==0){
         if(attackToggle==0){
@@ -266,6 +302,7 @@
       attackToggle = 1-attackToggle;
       return false;
     }
+    */
     function calculateVictor(attackNum,defenseNum){
       if (attackNum > defenseNum){
         if(turnToggle == 0){          
@@ -336,8 +373,7 @@
           document.getElementById("actionForm").style.display="inline";          
           turnToggle=1-turnToggle;
           document.getElementById("actionBanner").innerHTML=myNames[turnToggle]+" Attack:"
-          document.getElementById("subMyAttack").style.display="inline";
-          document.getElementById("myAttack").style.display="inline";
+          
           health[0]++;
           health[1]++;
           displayHealth();
