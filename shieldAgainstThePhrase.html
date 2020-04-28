@@ -3,6 +3,35 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> </meta>
   <title>Ultra Violent Battle of Phrases</title>
+  <style>
+    .circle-container {
+      position: relative;
+      width: 16em;
+      height: 16em;
+      padding: 2.8em;
+         /*2.8em = 2em*1.4 (2em = half the width of a link with img, 1.4 = sqrt(2))*/
+      border: dashed 1px;
+      border-radius: 50%;
+      margin: 1.75em auto 0;
+    }
+    .circle-container div { display: block; padding:10px}
+    .hex0 { transform: translate(8em); } /* 8em = half the width of the wrapper */
+    .hex1 { transform: rotate(0.0625turn) translate(8em) rotate(-0.0625turn); }
+    .hex2 { transform: rotate(0.1250turn) translate(8em) rotate(-0.1250turn); }
+    .hex3 { transform: rotate(0.1875turn) translate(8em) rotate(-0.1875turn); }
+    .hex4 { transform: rotate(0.2500turn) translate(8em) rotate(-0.2500turn); }
+    .hex5 { transform: rotate(0.3125turn) translate(8em) rotate(-0.3125turn); }
+    .hex6 { transform: rotate(0.3750turn) translate(8em) rotate(-0.3750turn); }
+    .hex7 { transform: rotate(0.4375turn) translate(8em) rotate(-0.4375turn); }
+    .hex8 { transform: rotate(0.5000turn) translate(8em) rotate(-0.5000turn); }
+    .hex9 { transform: rotate(0.5625turn) translate(8em) rotate(-0.5625turn); }
+    .hexa { transform: rotate(0.6250turn) translate(8em) rotate(-0.6250turn); }
+    .hexb { transform: rotate(0.6875turn) translate(8em) rotate(-0.6875turn); }
+    .hexc { transform: rotate(0.7500turn) translate(8em) rotate(-0.7500turn); }
+    .hexd { transform: rotate(0.8125turn) translate(8em) rotate(-0.8125turn); }
+    .hexe { transform: rotate(0.8750turn) translate(8em) rotate(-0.8750turn); }
+    .hexf { transform: rotate(0.9375turn) translate(8em) rotate(-0.9375turn); }
+  </style>
 </head>
 <body>
   <div id="chooseYourNamePlayerOne" >
@@ -54,33 +83,25 @@
         <label id="subMyAttack" for="myAttack" style="display:none">Enter your attack strength 1-16.</label>
         <input type="text" id="myAttack" style="width:100%; display:none"/>
         <span id="defenseCheckBoxes" style="display:none">
-          <table>
-            <thead>
-              <tr>
-                <th colspan="16">Enter your defence:</th>
-              </tr>              
-            </thead>
-            <tbody>
-              <tr>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-                <td class="tdbh"><input type="checkbox" class="defenseCheckBox"/></td>
-              </tr>
-            </tbody>            
-          </table>
+		  <h3>Enter your defence:</h3>
+		  <div class="circle-container">
+			<div class="tdbh hex0"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hex1"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hex2"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hex3"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hex4"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hex5"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hex6"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hex7"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hex8"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hex9"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hexa"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hexb"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hexc"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hexd"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hexe"><input type="checkbox" class="defenseCheckBox"/></div>
+			<div class="tdbh hexf"><input type="checkbox" class="defenseCheckBox"/></div>
+		  </div>
         </span>
         <input type="submit" />
       </form>
@@ -104,7 +125,7 @@
     var health=[0,0];
     var healthStrings=document.getElementsByClassName("playerhealth");
     var actionStrings=document.getElementsByClassName("playeraction");
-    var prngScore=[0,0];
+	var theBoxes=document.getElementsByClassName("defenseCheckBox");
     var attackVector=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     var defense;
     var attack;
@@ -123,7 +144,6 @@
     function checkBoxesNumber(){
       var e;
       var k = 0;
-      var theBoxes=document.getElementsByClassName("defenseCheckBox");
       for(e=0;e<theBoxes.length;e++){
         k*=2;
         k+=theBoxes[e].checked?1:0;
@@ -215,7 +235,7 @@
           hint+=attackVector[j]*convKernel[(j+16-i)%16];
         }
         hinky[i]=colorScheme[hint%7];
-        myhints[i].style.backgroundcolor=hinky[i];
+        myhints[i].style.backgroundColor=hinky[i];
       }      
       alert(hinky);
     }
@@ -240,10 +260,9 @@
             return false;
       }          
       document.getElementById("p1action").innerHTML=attack=document.getElementById("myAction").value;
-      //document.getElementById("p1action").style.color="Blue";
       document.getElementById("myAction").value = "";
       hashAttack(myNames[turnToggle]+attack);
-      document.getElementById("actionBanner").innerHTML=myNames[1]+" Defense:";
+      document.getElementById("actionBanner").innerHTML=myNames[1-turnToggle]+" Defense:";
 	  attackToggle++;
 	}
     function handleAction(){
@@ -338,9 +357,7 @@
       return n;
     }
     function calculateBattle(){ 
-      var anum = gethash(myNames[turnToggle]+attack); /*attacker is myNames[turnToggle]*/
-      var dnum = gethash(myNames[1-turnToggle]+defense);
-      var thresh = gethash(attack+defense); 
+	  var i;
       document.getElementById("actionForm").style.display="none";
       document.getElementById("defenseCheckBoxes").style.display="none";
       document.getElementById("victoryForm").style.display="inline";
