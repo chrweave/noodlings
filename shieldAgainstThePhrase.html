@@ -8,29 +8,29 @@
       position: relative;
       width: 16em;
       height: 16em;
-      padding: 2.8em;
+      padding: 3em;
          /*2.8em = 2em*1.4 (2em = half the width of a link with img, 1.4 = sqrt(2))*/
       border: dashed 1px;
       border-radius: 50%;
       margin: 1.75em auto 0;
     }
-    .circle-container div { display: block; padding:10px}
+    .circle-container span { text:center; display: block; width:2em; height:2em}
     .hex0 { transform: translate(8em); } /* 8em = half the width of the wrapper */
-    .hex1 { transform: rotate(0.0625turn) translate(8em) rotate(-0.0625turn); }
-    .hex2 { transform: rotate(0.1250turn) translate(8em) rotate(-0.1250turn); }
-    .hex3 { transform: rotate(0.1875turn) translate(8em) rotate(-0.1875turn); }
-    .hex4 { transform: rotate(0.2500turn) translate(8em) rotate(-0.2500turn); }
-    .hex5 { transform: rotate(0.3125turn) translate(8em) rotate(-0.3125turn); }
-    .hex6 { transform: rotate(0.3750turn) translate(8em) rotate(-0.3750turn); }
-    .hex7 { transform: rotate(0.4375turn) translate(8em) rotate(-0.4375turn); }
-    .hex8 { transform: rotate(0.5000turn) translate(8em) rotate(-0.5000turn); }
-    .hex9 { transform: rotate(0.5625turn) translate(8em) rotate(-0.5625turn); }
-    .hexa { transform: rotate(0.6250turn) translate(8em) rotate(-0.6250turn); }
-    .hexb { transform: rotate(0.6875turn) translate(8em) rotate(-0.6875turn); }
-    .hexc { transform: rotate(0.7500turn) translate(8em) rotate(-0.7500turn); }
-    .hexd { transform: rotate(0.8125turn) translate(8em) rotate(-0.8125turn); }
-    .hexe { transform: rotate(0.8750turn) translate(8em) rotate(-0.8750turn); }
-    .hexf { transform: rotate(0.9375turn) translate(8em) rotate(-0.9375turn); }
+    .hex1 { transform: rotate(25grad) translate(8em) rotate(-25grad); }
+    .hex2 { transform: rotate(50grad) translate(8em) rotate(-50grad); }
+    .hex3 { transform: rotate(75grad) translate(8em) rotate(-75grad); }
+    .hex4 { transform: rotate(100grad) translate(8em) rotate(-100grad); }
+    .hex5 { transform: rotate(125grad) translate(8em) rotate(-125grad); }
+    .hex6 { transform: rotate(150grad) translate(8em) rotate(-150grad); }
+    .hex7 { transform: rotate(175grad) translate(8em) rotate(-175grad); }
+    .hex8 { transform: rotate(200grad) translate(8em) rotate(-200grad); }
+    .hex9 { transform: rotate(225grad) translate(8em) rotate(-225grad); }
+    .hexa { transform: rotate(250grad) translate(8em) rotate(-250grad); }
+    .hexb { transform: rotate(275grad) translate(8em) rotate(-275grad); }
+    .hexc { transform: rotate(300grad) translate(8em) rotate(-300grad); }
+    .hexd { transform: rotate(325grad) translate(8em) rotate(-325grad); }
+    .hexe { transform: rotate(350grad) translate(8em) rotate(-350grad); }
+    .hexf { transform: rotate(375grad) translate(8em) rotate(-375grad); }
   </style>
 </head>
 <body>
@@ -83,25 +83,25 @@
         <label id="subMyAttack" for="myAttack" style="display:none">Enter your attack strength 1-16.</label>
         <input type="text" id="myAttack" style="width:100%; display:none"/>
         <span id="defenseCheckBoxes" style="display:none">
-		  <h3>Enter your defence:</h3>
-		  <div class="circle-container">
-			<div class="tdbh hex0"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hex1"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hex2"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hex3"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hex4"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hex5"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hex6"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hex7"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hex8"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hex9"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hexa"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hexb"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hexc"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hexd"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hexe"><input type="checkbox" class="defenseCheckBox"/></div>
-			<div class="tdbh hexf"><input type="checkbox" class="defenseCheckBox"/></div>
-		  </div>
+          <h3>Enter your defence:</h3>
+          <div class="circle-container">
+            <span class="tdbh hex0"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hex1"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hex2"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hex3"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hex4"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hex5"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hex6"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hex7"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hex8"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hex9"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hexa"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hexb"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hexc"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hexd"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hexe"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hexf"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+          </div>
         </span>
         <input type="submit" />
       </form>
@@ -125,13 +125,26 @@
     var health=[0,0];
     var healthStrings=document.getElementsByClassName("playerhealth");
     var actionStrings=document.getElementsByClassName("playeraction");
-	var theBoxes=document.getElementsByClassName("defenseCheckBox");
+    var theBoxes=document.getElementsByClassName("defenseCheckBox");
     var attackVector=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     var defense;
     var attack;
     var turnToggle = 0;
     var attackToggle = 0;
     var attackStrength = 0;
+    var defenceStrength = 0;
+    function validateShield(e){
+      if (e.checked){
+        defenceStrength++;
+        if(defenceStrength > attackStrength){
+          e.checked=false;
+          defenceStrength--;
+          alert("Defence may only be as strong as attack. If you would like to check this location, please delete another location.");
+        }
+      } else {
+        defenceStrength--;
+      }
+    }
     function handleTotalVictory(){
       if(document.getElementById("yes").checked){
         document.getElementById("totalVictoryForm").style.display="none";
@@ -144,9 +157,10 @@
     function checkBoxesNumber(){
       var e;
       var k = 0;
+      var q = 0;
       for(e=0;e<theBoxes.length;e++){
-        k*=2;
-        k+=theBoxes[e].checked?1:0;
+        q=theBoxes[e].checked?1:0;
+        k+=q*attackVector[e];
         theBoxes[e].checked=false;
       }
       alert(k);
@@ -250,78 +264,34 @@
       actionStrings[turnToggle].innerHTML=attack=document.getElementById("myAction").value;
       actionStrings[turnToggle].style.color="Blue";
       document.getElementById("myAction").value = "";
-      document.getElementById("myAction").style.display=none = "";
+      document.getElementById("myAction").style.display="none";
       document.getElementById("subMyAttack").style.display="inline";
       document.getElementById("myAttack").style.display="inline";
-	  attackToggle++;
+      attackToggle++;
     }
-	function processStrength(){
-	  if(!validateStrength()){
+    function processStrength(){
+      if(!validateStrength()){
             return false;
       }          
       document.getElementById("p1action").innerHTML=attack=document.getElementById("myAction").value;
       document.getElementById("myAction").value = "";
       hashAttack(myNames[turnToggle]+attack);
       document.getElementById("actionBanner").innerHTML=myNames[1-turnToggle]+" Defense:";
-	  attackToggle++;
-	}
+      attackToggle++;
+    }
     function handleAction(){
       switch(attackToggle){
         case 0:
           processAttack();
           break;
         case 1:
-		  processStrength();
+          processStrength();
           break;
         default:
-          calculateBattle();		
+          calculateBattle();        
       }
-	  return false;
-    }
-    /*
-    function handleAction(){
-      if(turnToggle==0){
-        if(attackToggle==0){
-          if(!validateStrength()){
-            return false;
-          }          
-          document.getElementById("p1action").innerHTML=attack=document.getElementById("myAction").value;
-          document.getElementById("p1action").style.color="Blue";
-          document.getElementById("myAction").value = "";
-          hashAttack(myNames[turnToggle]+attack);
-          document.getElementById("actionBanner").innerHTML=myNames[1]+" Defense:"
-        } else {
-          checkBoxesNumber();
-          document.getElementById("p2action").innerHTML=defense=document.getElementById("myAction").value;
-          document.getElementById("p2action").style.color="Orange";
-          document.getElementById("myAction").value = "";
-          document.getElementById("actionBanner").innerHTML=myNames[1]+" Attack:"
-        }
-      } else {
-        if(attackToggle==0){          
-          if(!validateStrength()){
-            return false;
-          }
-          document.getElementById("p2action").innerHTML=attack=document.getElementById("myAction").value;
-          document.getElementById("p2action").style.color="Blue";
-          document.getElementById("myAction").value = "";
-          hashAttack(myNames[turnToggle]+attack);
-          document.getElementById("actionBanner").innerHTML=myNames[0]+" Defense:"
-        } else {
-          checkBoxesNumber();
-          document.getElementById("p1action").innerHTML=defense=document.getElementById("myAction").value;
-          document.getElementById("p1action").style.color="Orange";
-          document.getElementById("myAction").value = "";
-          document.getElementById("actionBanner").innerHTML=myNames[0]+" Attack:"
-        }
-      }
-      if(attackToggle==1){
-        calculateBattle();
-      }
-      attackToggle = 1-attackToggle;
       return false;
     }
-    */
     function calculateVictor(attackNum,defenseNum){
       if (attackNum > defenseNum){
         if(turnToggle == 0){          
@@ -357,7 +327,7 @@
       return n;
     }
     function calculateBattle(){ 
-	  var i;
+      var i;
       document.getElementById("actionForm").style.display="none";
       document.getElementById("defenseCheckBoxes").style.display="none";
       document.getElementById("victoryForm").style.display="inline";
@@ -415,8 +385,6 @@
       clearAttacks();
       document.getElementById("actionForm").style.display="inline";
       document.getElementById("actionBanner").innerHTML=myNames[0]+" Attack:"      
-      document.getElementById("subMyAttack").style.display="inline";
-      document.getElementById("myAttack").style.display="inline";
       displayHealth();
       return false;
     }
