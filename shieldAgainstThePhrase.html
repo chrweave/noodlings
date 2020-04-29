@@ -14,11 +14,11 @@
       border-radius: 50%;
       margin: 1.75em auto 0;
     }
-    .circle-container span { text:center; display: block; width:2em; height:2em}
+    .circle-container span { position:absolute; text:center; display: block; width:2em; height:2em}
     .hex0 { transform: translate(8em); } /* 8em = half the width of the wrapper */
-    .hex1 { transform: rotate(25grad) translate(8em) rotate(-25grad); }
-    .hex2 { transform: rotate(50grad) translate(8em) rotate(-50grad); }
-    .hex3 { transform: rotate(75grad) translate(8em) rotate(-75grad); }
+    .hex1 { transform: rotate(25grad)  translate(8em) rotate(-25grad); }
+    .hex2 { transform: rotate(50grad)  translate(8em) rotate(-50grad); }
+    .hex3 { transform: rotate(75grad)  translate(8em) rotate(-75grad); }
     .hex4 { transform: rotate(100grad) translate(8em) rotate(-100grad); }
     .hex5 { transform: rotate(125grad) translate(8em) rotate(-125grad); }
     .hex6 { transform: rotate(150grad) translate(8em) rotate(-150grad); }
@@ -83,24 +83,24 @@
         <label id="subMyAttack" for="myAttack" style="display:none">Enter your attack strength 1-16.</label>
         <input type="text" id="myAttack" style="width:100%; display:none"/>
         <span id="defenseCheckBoxes" style="display:none">
-          <h3>Enter your defence:</h3>
+          <h3>Enter your defense:</h3>
           <div class="circle-container">
-            <span class="tdbh hex0"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hex1"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hex2"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hex3"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hex4"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hex5"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hex6"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hex7"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hex8"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hex9"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hexa"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hexb"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hexc"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hexd"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hexe"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
-            <span class="tdbh hexf"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span>
+            <span class="tdbh hex0"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex0 -->
+            <span class="tdbh hex1"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex1 -->
+            <span class="tdbh hex2"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex2 -->
+            <span class="tdbh hex3"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex3 -->
+            <span class="tdbh hex4"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex4 -->
+            <span class="tdbh hex5"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex5 -->
+            <span class="tdbh hex6"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex6 -->
+            <span class="tdbh hex7"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex7 -->
+            <span class="tdbh hex8"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex8 -->
+            <span class="tdbh hex9"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex9 -->
+            <span class="tdbh hexa"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexa -->
+            <span class="tdbh hexb"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexb -->
+            <span class="tdbh hexc"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexc -->
+            <span class="tdbh hexd"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexd -->
+            <span class="tdbh hexe"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexe -->
+            <span class="tdbh hexf"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexf -->
           </div>
         </span>
         <input type="submit" />
@@ -132,17 +132,17 @@
     var turnToggle = 0;
     var attackToggle = 0;
     var attackStrength = 0;
-    var defenceStrength = 0;
+    var defenseStrength = 0;
     function validateShield(e){
       if (e.checked){
-        defenceStrength++;
-        if(defenceStrength > attackStrength){
+        defenseStrength++;
+        if(defenseStrength > attackStrength){
           e.checked=false;
-          defenceStrength--;
-          alert("Defence may only be as strong as attack. If you would like to check this location, please delete another location.");
+          defenseStrength--;
+          alert("defense may only be as strong as attack. If you would like to check this location, please delete another location.");
         }
       } else {
-        defenceStrength--;
+        defenseStrength--;
       }
     }
     function handleTotalVictory(){
@@ -163,7 +163,7 @@
         k+=q*attackVector[e];
         theBoxes[e].checked=false;
       }
-      alert(k);
+      return k;
     }
     function pOneName(){
       myNames[0]=document.getElementById("pone").value;
@@ -178,6 +178,7 @@
       var nums=numberize(word);
       var i = 0;
       var j = 0;
+      var k = 0;
       var temp;
       for(i=0;i<16;i++){
         attackVector[i]=i<attackStrength?1:0;
@@ -187,28 +188,18 @@
         hash*=prime;
         hash&=0xffffff;
       }
-      for(i=0;i<16;i++){
+      for(i=15;i>0;i--){
         hash=hash^nums[i%nums.length];
         hash*=prime;
         hash&=0xffffff;
-        j=hash&0xf;
+        k=hash*i;
+        k/=16777216;
+        k=Math.floor(k);
         temp=attackVector[i];
-        attackVector[i]=attackVector[j];
-        attackVector[j]=temp;
+        attackVector[i]=attackVector[k];
+        attackVector[k]=temp;
       }
       getHint();
-    }
-    function gethash (word){
-      var hash = 11720509;
-      var prime = 1048837; 
-      var nums=numberize(word);
-      var  i = 0;
-      for(i=0;i<nums.length;i++){
-        hash=hash^nums[i];
-        hash*=prime;
-        hash&=0xffffff;
-      }
-      return hash;
     }
     function numberize (e){
       return e.split("").map(x => x.charCodeAt([0]));
@@ -238,7 +229,6 @@
     }
     function getHint(){ // convolve attack mod 7
       var convKernel=[6,4,1,0,0,0,0,0,0,0,0,0,0,0,1,4];
-      var hinky=["","","","","","","","","","","","","","","",""];
       var myhints=document.getElementsByClassName("tdbh");
       var hint;
       var i;
@@ -248,10 +238,8 @@
         for(j=0;j<16;j++){          
           hint+=attackVector[j]*convKernel[(j+16-i)%16];
         }
-        hinky[i]=colorScheme[hint%7];
-        myhints[i].style.backgroundColor=hinky[i];
-      }      
-      alert(hinky);
+        myhints[i].style.backgroundColor=colorScheme[hint%7];
+      } 
     }
     function pTwoName(){     
       myNames[1]=document.getElementById("ptwo").value; 
@@ -272,9 +260,7 @@
     function processStrength(){
       if(!validateStrength()){
             return false;
-      }          
-      document.getElementById("p1action").innerHTML=attack=document.getElementById("myAction").value;
-      document.getElementById("myAction").value = "";
+      }
       hashAttack(myNames[turnToggle]+attack);
       document.getElementById("actionBanner").innerHTML=myNames[1-turnToggle]+" Defense:";
       attackToggle++;
