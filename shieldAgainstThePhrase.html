@@ -6,39 +6,44 @@
   <style>
     .circle-container {
       position: relative;
-      width: 16em;
-      height: 16em;
-      padding: 3em;
+      width: 18em;
+      height: 18em;
+      padding: 2em;
          /*2.8em = 2em*1.4 (2em = half the width of a link with img, 1.4 = sqrt(2))*/
       border: dashed 1px;
       border-radius: 50%;
       margin: 1.75em auto 0;
       background-color:#cccccc;
     }
-    .circle-container span { 
+    .circle-container div { 
       position:absolute; 
       top:50%; 
       left:50%; 
+      border-radius: 50%;
       display:block; 
-      width:2em;
-      height:2em;
+      width:3em;
+      height:3em;
+      text-align: center; 
+      vertical-align: middle;
+      margin: -1.5em;
     }
-    .hex0 { transform: translate(8em); } /* 8em = half the width of the wrapper */
-    .hex1 { transform: rotate(25grad)  translate(8em) rotate(-25grad); }
-    .hex2 { transform: rotate(50grad)  translate(8em) rotate(-50grad); }
-    .hex3 { transform: rotate(75grad)  translate(8em) rotate(-75grad); }
-    .hex4 { transform: rotate(100grad) translate(8em) rotate(-100grad); }
-    .hex5 { transform: rotate(125grad) translate(8em) rotate(-125grad); }
-    .hex6 { transform: rotate(150grad) translate(8em) rotate(-150grad); }
-    .hex7 { transform: rotate(175grad) translate(8em) rotate(-175grad); }
-    .hex8 { transform: rotate(200grad) translate(8em) rotate(-200grad); }
-    .hex9 { transform: rotate(225grad) translate(8em) rotate(-225grad); }
-    .hexa { transform: rotate(250grad) translate(8em) rotate(-250grad); }
-    .hexb { transform: rotate(275grad) translate(8em) rotate(-275grad); }
-    .hexc { transform: rotate(300grad) translate(8em) rotate(-300grad); }
-    .hexd { transform: rotate(325grad) translate(8em) rotate(-325grad); }
-    .hexe { transform: rotate(350grad) translate(8em) rotate(-350grad); }
-    .hexf { transform: rotate(375grad) translate(8em) rotate(-375grad); }
+    .hex0 { transform: translate(9em); } /* 9em = half the width of the wrapper */
+    .hex1 { transform: rotate(25grad)  translate(9em) rotate(-25grad); }
+    .hex2 { transform: rotate(50grad)  translate(9em) rotate(-50grad); }
+    .hex3 { transform: rotate(75grad)  translate(9em) rotate(-75grad); }
+    .hex4 { transform: rotate(100grad) translate(9em) rotate(-100grad); }
+    .hex5 { transform: rotate(125grad) translate(9em) rotate(-125grad); }
+    .hex6 { transform: rotate(150grad) translate(9em) rotate(-150grad); }
+    .hex7 { transform: rotate(175grad) translate(9em) rotate(-175grad); }
+    .hex8 { transform: rotate(200grad) translate(9em) rotate(-200grad); }
+    .hex9 { transform: rotate(225grad) translate(9em) rotate(-225grad); }
+    .hexa { transform: rotate(250grad) translate(9em) rotate(-250grad); }
+    .hexb { transform: rotate(275grad) translate(9em) rotate(-275grad); }
+    .hexc { transform: rotate(300grad) translate(9em) rotate(-300grad); }
+    .hexd { transform: rotate(325grad) translate(9em) rotate(-325grad); }
+    .hexe { transform: rotate(350grad) translate(9em) rotate(-350grad); }
+    .hexf { transform: rotate(375grad) translate(9em) rotate(-375grad); }
+    .defenseCheckBox {padding: 1em}
   </style>
 </head>
 <body>
@@ -93,22 +98,22 @@
         <span id="defenseCheckBoxes" style="display:none">
           <h3>Enter your defense:</h3>
           <div class="circle-container">
-            <span class="tdbh hex0"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex0 -->
-            <span class="tdbh hex1"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex1 -->
-            <span class="tdbh hex2"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex2 -->
-            <span class="tdbh hex3"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex3 -->
-            <span class="tdbh hex4"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex4 -->
-            <span class="tdbh hex5"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex5 -->
-            <span class="tdbh hex6"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex6 -->
-            <span class="tdbh hex7"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex7 -->
-            <span class="tdbh hex8"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex8 -->
-            <span class="tdbh hex9"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hex9 -->
-            <span class="tdbh hexa"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexa -->
-            <span class="tdbh hexb"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexb -->
-            <span class="tdbh hexc"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexc -->
-            <span class="tdbh hexd"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexd -->
-            <span class="tdbh hexe"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexe -->
-            <span class="tdbh hexf"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></span> <!-- hexf -->
+            <div class="tdbh hex0"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex0 -->
+            <div class="tdbh hex1"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex1 -->
+            <div class="tdbh hex2"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex2 -->
+            <div class="tdbh hex3"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex3 -->
+            <div class="tdbh hex4"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex4 -->
+            <div class="tdbh hex5"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex5 -->
+            <div class="tdbh hex6"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex6 -->
+            <div class="tdbh hex7"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex7 -->
+            <div class="tdbh hex8"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex8 -->
+            <div class="tdbh hex9"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex9 -->
+            <div class="tdbh hexa"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexa -->
+            <div class="tdbh hexb"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexb -->
+            <div class="tdbh hexc"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexc -->
+            <div class="tdbh hexd"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexd -->
+            <div class="tdbh hexe"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexe -->
+            <div class="tdbh hexf"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexf -->
           </div>
         </span>
         <input type="submit" />
