@@ -26,6 +26,9 @@ button{
   line-height:1.2;
   hyphens: auto;
 }
+p {
+  witdth:750px;
+}
 body{
   color:White;
   background-color:Black;
