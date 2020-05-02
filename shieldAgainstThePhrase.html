@@ -122,28 +122,25 @@
             <td><input type="radio" name="stradio" class="stradio" id="myAttackf" value="16"/><label for="myAttackf">16</label></td>
           </tr>
         </table>
-        <span id="defenseCheckBoxes" style="display:none">
-          <div class="circle-container">
-            <div class="tdbh hex0" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hex1" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hex2" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hex3" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hex4" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hex5" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hex6" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hex7" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hex8" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hex9" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hexa" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hexb" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hexc" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hexd" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hexe" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-            <div class="tdbh hexf" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
-          </div>
-        </span>
-        <input type="submit" />
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>
+		<input type="checkbox" class="defenseCheckBox"/>		
+        <input id="actionSubmit" type="submit" />
       </form>
+	  
       <form id="victoryForm" onSubmit="return handleVictory()" style="display:none">
         <input type="submit" />
       </form>
@@ -154,11 +151,31 @@
         <label for="no">No</label><br>
         <input type="submit" />
       </form>
+	  <span id="defenseCheckBoxes" style="display:none">
+      <div class="circle-container">
+        <div class="tdbh hex0" onClick="setButton(this)"></div>
+        <div class="tdbh hex1" onClick="setButton(this)"></div>
+        <div class="tdbh hex2" onClick="setButton(this)"></div>
+        <div class="tdbh hex3" onClick="setButton(this)"></div>
+        <div class="tdbh hex4" onClick="setButton(this)"></div>
+        <div class="tdbh hex5" onClick="setButton(this)"></div>
+        <div class="tdbh hex6" onClick="setButton(this)"></div>
+        <div class="tdbh hex7" onClick="setButton(this)"></div>
+        <div class="tdbh hex8" onClick="setButton(this)"></div>
+        <div class="tdbh hex9" onClick="setButton(this)"></div>
+        <div class="tdbh hexa" onClick="setButton(this)"></div>
+        <div class="tdbh hexb" onClick="setButton(this)"></div>
+        <div class="tdbh hexc" onClick="setButton(this)"></div>
+        <div class="tdbh hexd" onClick="setButton(this)"></div>
+        <div class="tdbh hexe" onClick="setButton(this)"></div>
+        <div class="tdbh hexf" onClick="setButton(this)"></div>
+      </div>
+    </span>
     </div>
   </div>
   <script>
     var checkmap=new Map();
-    var colorScheme=["BlueViolet","CornflowerBlue","DodgerBlue","Chartreuse","Gold","DarkOrange","Red"]
+    var colorScheme=["BlueViolet","DarkSlateBlue","DodgerBlue","Chartreuse","Gold","DarkOrange","Red"]
     var p1form=document.getElementById("player1form");
     var p2form=document.getElementById("player2form");
     var myNames=["",""];
@@ -185,7 +202,7 @@
       var e;
       for(e=0;e<shotCircles.length;e++){
         if(attackVector[e] == 1){
-         shotCircles[e].
+          shotCircles[e].backgroundColor="Cyan";
         }
       }
     }
@@ -229,8 +246,6 @@
       for(e=0;e<theBoxes.length;e++){
         q=theBoxes[e].checked?1:0;
         k+=q*attackVector[e];
-        //theBoxes[e].checked=false;
-        //resetBlocker(shotCircles[e]);
       }
       return k;
     }
@@ -293,7 +308,6 @@
     }
     function getHint(){ // convolve attack mod 7
       var convKernel=[6,4,1,0,0,0,0,0,0,0,0,0,0,0,1,4];
-      var myhints=document.getElementsByClassName("tdbh");
       var hint;
       var i;
       var j;
@@ -302,7 +316,7 @@
         for(j=0;j<16;j++){
           hint+=attackVector[j]*convKernel[(j+16-i)%16];
         }
-        myhints[i].style.backgroundColor=colorScheme[hint%7];
+        shotCircles[i].style.backgroundColor=colorScheme[hint%7];
       }
     }
     function pTwoName(){
@@ -365,7 +379,7 @@
     function calculateBattle(){
       var i;
       document.getElementById("actionForm").style.display="none";
-      document.getElementById("defenseCheckBoxes").style.display="none";
+	  revealShots();
       document.getElementById("victoryForm").style.display="inline";
       dnum = getNumberOfShotsBlocked();
       anum = attackStrength-dnum;
@@ -377,6 +391,8 @@
     }
     function handleVictory(){
       document.getElementById("victoryForm").style.display="none";
+      document.getElementById("victoryForm").style.display="none";
+	  document.getElementById("defenseCheckBoxes").style.display="none";
       if(health[1] == 0){
         if(health[0] == 0){
           document.getElementById("actionBanner").innerHTML="Both "+myNames[0]+" and "+myNames[1]+" have died. <br/> Play again?"
@@ -399,6 +415,11 @@
       }
     }
     function clearAttacks(){
+	  var e;
+	  for(e=0;e<theBoxes.length;e++){
+        theBoxes[e].checked=false;
+        resetBlocker(shotCircles[e]);
+      }
       document.getElementById("actionForm").style.display="inline";
       turnToggle=1-turnToggle;
       attackToggle=0;
