@@ -14,17 +14,17 @@
       margin: 1.75em auto 0;
       background-color:#cccccc;
     }
-    .circle-container div { 
-      position:absolute; 
-      top:50%; 
-      left:50%; 
+    .circle-container div {
+      position:absolute;
+      top:50%;
+      left:50%;
       border-radius: 50%;
       dorder-color: #000000;
       cursor:pointer;
-      display:block; 
+      display:block;
       width:3em;
       height:3em;
-      text-align: center; 
+      text-align: center;
       vertical-align: middle;
       margin: -1.5em;
     }
@@ -45,6 +45,7 @@
     .hexe { transform: rotate(350grad) translate(9em) rotate(-350grad); }
     .hexf { transform: rotate(375grad) translate(9em) rotate(-375grad); }
     .defenseCheckBox {display:none;}
+    .stradio {transform:scale(2);}
   </style>
 </head>
 <body onload="return setShield()">
@@ -86,7 +87,7 @@
             <td class="playeraction" style="float:right" id="p2action">
             </td>
           </tr>
-        </table> 
+        </table>
       </h2>
     </div><br/>
     <div style="display:block">
@@ -95,26 +96,26 @@
       <form id="actionForm" onSubmit="return handleAction()" style="display:none">
         <input type="text" id="myAction" style="width:100%"/>
         <h2 id="myAttack">Attack Strength:</h2>
-        <table id="subMyAttack">
+        <table id="subMyAttack" style="border-spacing:1em">
           <tr>
             <td><input type="radio" name="stradio" class="stradio" id="myAttack0" value="1" checked="checked"/> <label for="myAttack0">1 </label></td>
             <td><input type="radio" name="stradio" class="stradio" id="myAttack1" value="2"/> <label for="myAttack1">2 </label></td>
             <td><input type="radio" name="stradio" class="stradio" id="myAttack2" value="3"/> <label for="myAttack2">3 </label></td>
             <td><input type="radio" name="stradio" class="stradio" id="myAttack3" value="4"/> <label for="myAttack3">4 </label></td>
-          </tr>                                                   
-          <tr>                                                    
+          </tr>
+          <tr>
             <td><input type="radio" name="stradio" class="stradio" id="myAttack4" value="5"/> <label for="myAttack4">5 </label></td>
             <td><input type="radio" name="stradio" class="stradio" id="myAttack5" value="6"/> <label for="myAttack5">6 </label></td>
             <td><input type="radio" name="stradio" class="stradio" id="myAttack6" value="7"/> <label for="myAttack6">7 </label></td>
             <td><input type="radio" name="stradio" class="stradio" id="myAttack7" value="8"/> <label for="myAttack7">8 </label></td>
-          </tr>                                                   
-          <tr>                                                    
+          </tr>
+          <tr>
             <td><input type="radio" name="stradio" class="stradio" id="myAttack8" value="9"/> <label for="myAttack8">9 </label></td>
             <td><input type="radio" name="stradio" class="stradio" id="myAttack9" value="10"/><label for="myAttack9">10</label></td>
             <td><input type="radio" name="stradio" class="stradio" id="myAttacka" value="11"/><label for="myAttacka">11</label></td>
             <td><input type="radio" name="stradio" class="stradio" id="myAttackb" value="12"/><label for="myAttackb">12</label></td>
-          </tr>                                                   
-          <tr>                                                    
+          </tr>
+          <tr>
             <td><input type="radio" name="stradio" class="stradio" id="myAttackc" value="13"/><label for="myAttackc">13</label></td>
             <td><input type="radio" name="stradio" class="stradio" id="myAttackd" value="14"/><label for="myAttackd">14</label></td>
             <td><input type="radio" name="stradio" class="stradio" id="myAttacke" value="15"/><label for="myAttacke">15</label></td>
@@ -122,24 +123,23 @@
           </tr>
         </table>
         <span id="defenseCheckBoxes" style="display:none">
-          <h3>Enter your defense:</h3>
           <div class="circle-container">
-            <div class="tdbh hex0" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex0 -->
-            <div class="tdbh hex1" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex1 -->
-            <div class="tdbh hex2" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex2 -->
-            <div class="tdbh hex3" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex3 -->
-            <div class="tdbh hex4" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex4 -->
-            <div class="tdbh hex5" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex5 -->
-            <div class="tdbh hex6" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex6 -->
-            <div class="tdbh hex7" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex7 -->
-            <div class="tdbh hex8" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex8 -->
-            <div class="tdbh hex9" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex9 -->
-            <div class="tdbh hexa" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexa -->
-            <div class="tdbh hexb" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexb -->
-            <div class="tdbh hexc" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexc -->
-            <div class="tdbh hexd" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexd -->
-            <div class="tdbh hexe" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexe -->
-            <div class="tdbh hexf" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexf -->
+            <div class="tdbh hex0" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hex1" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hex2" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hex3" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hex4" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hex5" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hex6" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hex7" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hex8" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hex9" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hexa" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hexb" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hexc" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hexd" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hexe" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
+            <div class="tdbh hexf" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div>
           </div>
         </span>
         <input type="submit" />
@@ -169,14 +169,14 @@
     var attackVector=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     var defense;
     var attack;
-    var turnToggle = 0;
+    var turnToggle = 1;
     var attackToggle = 0;
     var attackStrength = 0;
     var defenseStrength = 0;
     var shotCircles=document.getElementsByClassName("tdbh");
     function setShield(){
       var checks=document.getElementsByClassName("defenseCheckBox");
-      var i = 0;      
+      var i = 0;
       for(i=0;i<checks.length;i++){
         checkmap.set(shotCircles[i],checks[i]);
       }
@@ -193,10 +193,10 @@
           e.style.height="2.4em";
           q.checked=true;
         }
-      } else {      
+      } else {
         resetBlocker(e);
-        defenseStrength--;    
-        q.checked=false;        
+        defenseStrength--;
+        q.checked=false;
       }
       document.getElementById("actionBanner").innerHTML=myNames[1-turnToggle]+" Defense &mdash; Available Blockers: "+(attackStrength-defenseStrength);
     }
@@ -235,7 +235,7 @@
     }
     function hashAttack (word){
       var hash = 11720509;
-      var prime = 1048837; 
+      var prime = 1048837;
       var nums=numberize(word);
       var i = 0;
       var j = 0;
@@ -291,20 +291,21 @@
       var j;
       for(i=0;i<16;i++){
         hint=0;
-        for(j=0;j<16;j++){          
+        for(j=0;j<16;j++){
           hint+=attackVector[j]*convKernel[(j+16-i)%16];
         }
         myhints[i].style.backgroundColor=colorScheme[hint%7];
-      } 
+      }
     }
-    function pTwoName(){     
-      myNames[1]=document.getElementById("ptwo").value; 
+    function pTwoName(){
+      myNames[1]=document.getElementById("ptwo").value;
       document.getElementById("p2n").innerHTML=myNames[1];
       p2form.style.display = "none";
       resetGame();
       return false;
     }
     function processAttack(){
+    alert(turnToggle);
       actionStrings[turnToggle].innerHTML=attack=document.getElementById("myAction").value;
       actionStrings[turnToggle].style.color="Blue";
       document.getElementById("myAction").value = "";
@@ -324,13 +325,13 @@
           processStrength();
           break;
         default:
-          calculateBattle();        
+          calculateBattle();
       }
       return false;
     }
     function calculateVictor(attackNum,defenseNum){
       if (attackNum > defenseNum){
-        if(turnToggle == 0){          
+        if(turnToggle == 0){
           document.getElementById("actionBanner").innerHTML=myNames[0]+" wins the battle!"
         } else{
           document.getElementById("actionBanner").innerHTML=myNames[1]+" wins the battle!"
@@ -339,7 +340,7 @@
         if(attackNum == defenseNum){
           document.getElementById("actionBanner").innerHTML="The battle was tied."
         } else {
-          if(turnToggle == 0){          
+          if(turnToggle == 0){
             document.getElementById("actionBanner").innerHTML=myNames[1]+" wins the battle!"
           } else{
             document.getElementById("actionBanner").innerHTML=myNames[0]+" wins the battle!"
@@ -354,20 +355,20 @@
       }
       return n;
     }
-    function calculateBattle(){ 
+    function calculateBattle(){
       var i;
       document.getElementById("actionForm").style.display="none";
       document.getElementById("defenseCheckBoxes").style.display="none";
       document.getElementById("victoryForm").style.display="inline";
-      dnum = getNumberOfShotsBlocked(); 
+      dnum = getNumberOfShotsBlocked();
       anum = attackStrength-dnum;
-      health[turnToggle]=nonNeg(health[turnToggle]-anum); 
-      health[1-turnToggle]=nonNeg(health[1-turnToggle]-dnum); 
+      health[turnToggle]=nonNeg(health[turnToggle]-anum);
+      health[1-turnToggle]=nonNeg(health[1-turnToggle]-dnum);
       displayHealth();
       calculateVictor(-anum,-dnum);
       return false;
     }
-    function handleVictory(){      
+    function handleVictory(){
       document.getElementById("victoryForm").style.display="none";
       if(health[1] == 0){
         if(health[0] == 0){
@@ -380,21 +381,22 @@
         return false;
       } else {
         if(health[0] == 0){
-          document.getElementById("actionBanner").innerHTML = myNames[1]+" is the winner and "+myNames[0]+" has died. <br/> Play again?"           
+          document.getElementById("actionBanner").innerHTML = myNames[1]+" is the winner and "+myNames[0]+" has died. <br/> Play again?"
           document.getElementById("totalVictoryForm").style.display="inline";
-          return false;          
+          return false;
         } else {
-          clearAttacks();          
+          clearAttacks();
           displayHealth();
           return false;
         }
       }
     }
     function clearAttacks(){
-      document.getElementById("actionForm").style.display="inline";          
+      document.getElementById("actionForm").style.display="inline";
       turnToggle=1-turnToggle;
       attackToggle=0;
-      document.getElementById("actionBanner").innerHTML=myNames[turnToggle]+" Attack:";      
+      defenseStrength=0;
+      document.getElementById("actionBanner").innerHTML=myNames[turnToggle]+" Attack:";
       health[0]++;
       health[1]++;
       document.getElementById("p1action").innerHTML
@@ -412,13 +414,13 @@
       return false;
     }
     function resetGame(){
-      health[0] = health[1] = 19; 
+      health[0] = health[1] = 19;
       clearAttacks();
       document.getElementById("actionForm").style.display="inline";
-      document.getElementById("actionBanner").innerHTML=myNames[0]+" Attack:"      
+      document.getElementById("actionBanner").innerHTML=myNames[0]+" Attack:"
       displayHealth();
       return false;
     }
-  </script>              
+  </script>
 </body>
 </html>
