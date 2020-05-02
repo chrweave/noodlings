@@ -9,7 +9,6 @@
       width: 18em;
       height: 18em;
       padding: 2em;
-         /*2.8em = 2em*1.4 (2em = half the width of a link with img, 1.4 = sqrt(2))*/
       border: dashed 1px;
       border-radius: 50%;
       margin: 1.75em auto 0;
@@ -125,23 +124,22 @@
         <span id="defenseCheckBoxes" style="display:none">
           <h3>Enter your defense:</h3>
           <div class="circle-container">
-            <div class="tdbh hex0" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex0 -->
-            <div class="tdbh hex1" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex1 -->
-            <div class="tdbh hex2" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex2 -->
-            <div class="tdbh hex3" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex3 -->
-            <div class="tdbh hex4" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex4 -->
-            <div class="tdbh hex5" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex5 -->
-            <div class="tdbh hex6" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex6 -->
-            <div class="tdbh hex7" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex7 -->
-            <div class="tdbh hex8" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex8 -->
-            <div class="tdbh hex9" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hex9 -->
-            <div class="tdbh hexa" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexa -->
-            <div class="tdbh hexb" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexb -->
-            <div class="tdbh hexc" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexc -->
-            <div class="tdbh hexd" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexd -->
-            <div class="tdbh hexe" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexe -->
-            <div class="tdbh hexf" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox" onchange="validateShield(this)"/></div> <!-- hexf -->
-            <!-- <div class="tdbh" id="blocksLeft" style="transform: translate(0,1em) scale(4,4)"/> -->
+            <div class="tdbh hex0" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex0 -->
+            <div class="tdbh hex1" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex1 -->
+            <div class="tdbh hex2" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex2 -->
+            <div class="tdbh hex3" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex3 -->
+            <div class="tdbh hex4" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex4 -->
+            <div class="tdbh hex5" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex5 -->
+            <div class="tdbh hex6" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex6 -->
+            <div class="tdbh hex7" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex7 -->
+            <div class="tdbh hex8" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex8 -->
+            <div class="tdbh hex9" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hex9 -->
+            <div class="tdbh hexa" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexa -->
+            <div class="tdbh hexb" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexb -->
+            <div class="tdbh hexc" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexc -->
+            <div class="tdbh hexd" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexd -->
+            <div class="tdbh hexe" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexe -->
+            <div class="tdbh hexf" onClick="setButton(this)"><input type="checkbox" class="defenseCheckBox"/></div> <!-- onchange="validateShield(this)" hexf -->
           </div>
         </span>
         <input type="submit" />
@@ -185,28 +183,22 @@
     }
     function setButton(e){
       var q=checkmap.get(e);
-      q.click();
-      if(q.checked){
-        e.style.width="2.4em";
-        e.style.border=".4em solid #000000";
-        e.style.height="2.4em";
+      if(q.checked == false){
+        defenseStrength++;
+        if(defenseStrength > attackStrength){
+          defenseStrength--;
+        } else {
+          e.style.width="2.4em";
+          e.style.border=".4em solid #000000";
+          e.style.height="2.4em";
+		  q.checked=true;
+        }
       } else {      
         e.style.width="3em";
         e.style.border="none";
-        e.style.height="3em";        
-      }
-      //alert(q.boxtoggle);
-    }
-    function validateShield(e){
-      if (e.checked){
-        defenseStrength++;
-        if(defenseStrength > attackStrength){
-          e.checked=false;
-          defenseStrength--;
-          alert("defense may only be as strong as attack. If you would like to check this location, please delete another location.");
-        }
-      } else {
-        defenseStrength--;
+        e.style.height="3em"; 
+        defenseStrength--;	
+        q.checked=false;		
       }
       document.getElementById("actionBanner").innerHTML=myNames[1-turnToggle]+" Defense &mdash; Available Blockers: "+(attackStrength-defenseStrength);
     }
@@ -219,7 +211,7 @@
         return true;
       }
     }
-    function checkBoxesNumber(){
+    function getNumberOfShotsBlocked(){
       var e;
       var k = 0;
       var q = 0;
@@ -352,14 +344,6 @@
       }
       return false;
     }
-    function calculateDamage(n,t){
-      var k = Math.abs(t-n);
-      k = Math.min(k,16777216-k);
-      k /= 16777216;
-      k *= 10;
-      k = Math.round(k);
-      return k;
-    }
     function nonNeg(n){
       if (n<0){
         n=0;
@@ -371,8 +355,8 @@
       document.getElementById("actionForm").style.display="none";
       document.getElementById("defenseCheckBoxes").style.display="none";
       document.getElementById("victoryForm").style.display="inline";
-      anum = calculateDamage(anum,thresh);
-      dnum = calculateDamage(dnum,thresh);  
+      dnum = getNumberOfShotsBlocked(); 
+      anum = attackStrength-dnum;
       health[turnToggle]=nonNeg(health[turnToggle]-anum); 
       health[1-turnToggle]=nonNeg(health[1-turnToggle]-dnum); 
       displayHealth();
@@ -405,6 +389,7 @@
     function clearAttacks(){
       document.getElementById("actionForm").style.display="inline";          
       turnToggle=1-turnToggle;
+	  attackToggle=0;
       document.getElementById("actionBanner").innerHTML=myNames[turnToggle]+" Attack:";      
       health[0]++;
       health[1]++;
