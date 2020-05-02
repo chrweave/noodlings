@@ -208,22 +208,24 @@
     }
     function setButton(e){
       var q=checkmap.get(e);
-      if(q.checked == false){
-        defenseStrength++;
-        if(defenseStrength > attackStrength){
-          defenseStrength--;
+      if(actionToggle>0){
+        if(q.checked == false){
+          defenseStrength++;
+          if(defenseStrength > attackStrength){
+            defenseStrength--;
+          } else {
+            e.style.width="2.4em";
+            e.style.border=".4em solid #000000";
+            e.style.height="2.4em";
+            q.checked=true;
+          }
         } else {
-          e.style.width="2.4em";
-          e.style.border=".4em solid #000000";
-          e.style.height="2.4em";
-          q.checked=true;
+          resetBlocker(e);
+          defenseStrength--;
+          q.checked=false;
         }
-      } else {
-        resetBlocker(e);
-        defenseStrength--;
-        q.checked=false;
+        document.getElementById("actionBanner").innerHTML=myNames[1-turnToggle]+" Defense &mdash; Available Blockers: "+(attackStrength-defenseStrength);
       }
-      document.getElementById("actionBanner").innerHTML=myNames[1-turnToggle]+" Defense &mdash; Available Blockers: "+(attackStrength-defenseStrength);
     }
     function resetBlocker(e){
       e.style.width="3em";
@@ -379,7 +381,8 @@
     function calculateBattle(){
       var i;
       document.getElementById("actionForm").style.display="none";
-	  revealShots();
+      attackToggle = 0;
+      revealShots();
       document.getElementById("victoryForm").style.display="inline";
       dnum = getNumberOfShotsBlocked();
       anum = attackStrength-dnum;
@@ -422,7 +425,6 @@
       }
       document.getElementById("actionForm").style.display="inline";
       turnToggle=1-turnToggle;
-      attackToggle=0;
       defenseStrength=0;
       document.getElementById("actionBanner").innerHTML=myNames[turnToggle]+" Attack:";
       health[0]++;
