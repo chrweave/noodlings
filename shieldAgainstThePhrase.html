@@ -45,7 +45,7 @@
     .hexe { transform: rotate(350grad) translate(9em) rotate(-350grad); }
     .hexf { transform: rotate(375grad) translate(9em) rotate(-375grad); }
     .defenseCheckBox {display:none;}
-    .stradio {transform:scale(2);}
+    .stradio {transform:scale(1.5);}
   </style>
 </head>
 <body onload="return setShield()">
@@ -305,7 +305,6 @@
       return false;
     }
     function processAttack(){
-    alert(turnToggle);
       actionStrings[turnToggle].innerHTML=attack=document.getElementById("myAction").value;
       actionStrings[turnToggle].style.color="Blue";
       document.getElementById("myAction").value = "";
