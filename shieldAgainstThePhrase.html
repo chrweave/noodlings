@@ -173,12 +173,12 @@
     var attackToggle = 0;
     var attackStrength = 0;
     var defenseStrength = 0;
+    var shotCircles=document.getElementsByClassName("tdbh");
     function setShield(){
-      var balances=document.getElementsByClassName("tdbh");
       var checks=document.getElementsByClassName("defenseCheckBox");
       var i = 0;      
       for(i=0;i<checks.length;i++){
-        checkmap.set(balances[i],checks[i]);
+        checkmap.set(shotCircles[i],checks[i]);
       }
     }
     function setButton(e){
@@ -194,14 +194,17 @@
 		  q.checked=true;
         }
       } else {      
-        e.style.width="3em";
-        e.style.border="none";
-        e.style.height="3em"; 
+        resetBlocker(e);
         defenseStrength--;	
         q.checked=false;		
       }
       document.getElementById("actionBanner").innerHTML=myNames[1-turnToggle]+" Defense &mdash; Available Blockers: "+(attackStrength-defenseStrength);
     }
+	function resetBlocker(e){
+	  e.style.width="3em";
+      e.style.border="none";
+      e.style.height="3em";
+	}
     function handleTotalVictory(){
       if(document.getElementById("yes").checked){
         document.getElementById("totalVictoryForm").style.display="none";
@@ -219,6 +222,7 @@
         q=theBoxes[e].checked?1:0;
         k+=q*attackVector[e];
         theBoxes[e].checked=false;
+		resetBlocker(shotCircles[e]);
       }
       return k;
     }
