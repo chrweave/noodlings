@@ -191,20 +191,20 @@
           e.style.width="2.4em";
           e.style.border=".4em solid #000000";
           e.style.height="2.4em";
-		  q.checked=true;
+          q.checked=true;
         }
       } else {      
         resetBlocker(e);
-        defenseStrength--;	
-        q.checked=false;		
+        defenseStrength--;    
+        q.checked=false;        
       }
       document.getElementById("actionBanner").innerHTML=myNames[1-turnToggle]+" Defense &mdash; Available Blockers: "+(attackStrength-defenseStrength);
     }
-	function resetBlocker(e){
-	  e.style.width="3em";
+    function resetBlocker(e){
+      e.style.width="3em";
       e.style.border="none";
       e.style.height="3em";
-	}
+    }
     function handleTotalVictory(){
       if(document.getElementById("yes").checked){
         document.getElementById("totalVictoryForm").style.display="none";
@@ -222,7 +222,7 @@
         q=theBoxes[e].checked?1:0;
         k+=q*attackVector[e];
         theBoxes[e].checked=false;
-		resetBlocker(shotCircles[e]);
+        resetBlocker(shotCircles[e]);
       }
       return k;
     }
@@ -275,10 +275,10 @@
         }
       }
       document.getElementById("actionBanner").innerHTML=myNames[1-turnToggle]+" Defense &mdash; Available Blockers: "+attackStrength;
-      hideAttackStrentgh();
+      hideAttackStrength();
       return true;
     }
-    function hideAttackStrentgh(){
+    function hideAttackStrength(){
       document.getElementById("myAttack").style.display="none";
       document.getElementById("subMyAttack").style.display="none";
       document.getElementById("defenseCheckBoxes").style.display="block";
@@ -393,7 +393,7 @@
     function clearAttacks(){
       document.getElementById("actionForm").style.display="inline";          
       turnToggle=1-turnToggle;
-	  attackToggle=0;
+      attackToggle=0;
       document.getElementById("actionBanner").innerHTML=myNames[turnToggle]+" Attack:";      
       health[0]++;
       health[1]++;
@@ -402,6 +402,7 @@
           = attack
           = defense
           = "";
+      document.getElementById("myAction").style.display="block";
       document.getElementById("myAttack").style.display="block";
       document.getElementById("subMyAttack").style.display="block";
     }
