@@ -122,25 +122,25 @@
             <td><input type="radio" name="stradio" class="stradio" id="myAttackf" value="16"/><label for="myAttackf">16</label></td>
           </tr>
         </table>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>
-		<input type="checkbox" class="defenseCheckBox"/>		
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>
+        <input type="checkbox" class="defenseCheckBox"/>        
         <input id="actionSubmit" type="submit" />
       </form>
-	  
+      
       <form id="victoryForm" onSubmit="return handleVictory()" style="display:none">
         <input type="submit" />
       </form>
@@ -151,7 +151,7 @@
         <label for="no">No</label><br>
         <input type="submit" />
       </form>
-	  <span id="defenseCheckBoxes" style="display:none">
+      <span id="defenseCheckBoxes" style="display:none">
       <div class="circle-container">
         <div class="tdbh hex0" onClick="setButton(this)"></div>
         <div class="tdbh hex1" onClick="setButton(this)"></div>
@@ -183,7 +183,7 @@
     var healthStrings=document.getElementsByClassName("playerhealth");
     var actionStrings=document.getElementsByClassName("playeraction");
     var theBoxes=document.getElementsByClassName("defenseCheckBox");
-    var attackVector=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var attackVector=[0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0];
     var defense;
     var attack;
     var turnToggle = 1;
@@ -202,14 +202,14 @@
       var e;
       for(e=0;e<shotCircles.length;e++){
         if(attackVector[e] == 1){
-          shotCircles[e].backgroundColor="Cyan";
+          shotCircles[e].style.backgroundColor="Cyan";
         }
       }
+      return false;
     }
     function setButton(e){
       var q=checkmap.get(e);
-      alert(actionToggle);
-      if(actionToggle>0){
+      if(attackToggle>0){
         if(q.checked == false){
           defenseStrength++;
           if(defenseStrength > attackStrength){
@@ -385,8 +385,8 @@
       attackToggle = 0;
       revealShots();
       document.getElementById("victoryForm").style.display="inline";
-      dnum = getNumberOfShotsBlocked();
-      anum = attackStrength-dnum;
+      anum = getNumberOfShotsBlocked();
+      dnum = attackStrength-anum;
       health[turnToggle]=nonNeg(health[turnToggle]-anum);
       health[1-turnToggle]=nonNeg(health[1-turnToggle]-dnum);
       displayHealth();
@@ -396,7 +396,7 @@
     function handleVictory(){
       document.getElementById("victoryForm").style.display="none";
       document.getElementById("victoryForm").style.display="none";
-	  document.getElementById("defenseCheckBoxes").style.display="none";
+      document.getElementById("defenseCheckBoxes").style.display="none";
       if(health[1] == 0){
         if(health[0] == 0){
           document.getElementById("actionBanner").innerHTML="Both "+myNames[0]+" and "+myNames[1]+" have died. <br/> Play again?"
@@ -419,8 +419,8 @@
       }
     }
     function clearAttacks(){
-	  var e;
-	  for(e=0;e<theBoxes.length;e++){
+      var e;
+      for(e=0;e<theBoxes.length;e++){
         theBoxes[e].checked=false;
         resetBlocker(shotCircles[e]);
       }
