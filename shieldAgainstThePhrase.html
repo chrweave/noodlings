@@ -298,8 +298,10 @@
       for(i=0;i<stradios.length;i++){
         if(stradios[i].checked){
           attackStrength=parseInt(stradios[i].value);
+		  stradios[i].checked=false;
         }
       }
+	  stradios[0].checked=true;
       document.getElementById("actionBanner").innerHTML=myNames[1-turnToggle]+" Defense &mdash; Available Blockers: "+attackStrength;
       hideAttackStrength();
       return true;
@@ -331,7 +333,7 @@
     }
     function processAttack(){
       actionStrings[turnToggle].innerHTML=attack=document.getElementById("myAction").value;
-      actionStrings[turnToggle].style.color="Blue";
+      actionStrings[turnToggle].style.color="Green";
       document.getElementById("myAction").value = "";
       document.getElementById("myAction").style.display="none";
     }
