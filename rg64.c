@@ -51,7 +51,8 @@ int main(int argc, char ** argv){
 		b+=c;
 		q=b^(b>>37);
 		o=(Uint64)q;
-		j=59u-(Uint)(b&31u);
+		j=59u-(Uint)(b>>123));
+		printf("%u\n",j);
 		o=LROT64(o,j);
 		s[k]=o;
 		printf("%016llX\n",o);
