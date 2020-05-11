@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define LROT64(x,y) (x<<y)|(x>>(63-y))
+#define LROT64(x,y) (x<<y)|(x>>(64-y))
 
 typedef unsigned __int128 Uint128;
 typedef unsigned long Uint64;
