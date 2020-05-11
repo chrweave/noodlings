@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 #define LROT64(x,y) (x<<y)|(x>>(63-y))
 
@@ -32,25 +33,30 @@ void loadUint128(Uint * px, Uint128* x){
 		*x=*x<<8|px[i];
 	}
 }
-int main(void){
-	int i,j;
+int main(int argc, char ** argv){
+	int i,j,k;
 	Uint128 q;
-	Uint64 o;
+	Uint64 o,*s;
+	if(argc > 1){
+		k=atoi(argv[1]);
+	} else {
+		k=1000;
+	}
 	loadUint128(pa,&a);
 	loadUint128(pb,&b);
 	loadUint128(pc,&c);
-	db(a);
-	db(b);
-	db(c);
-	printf("\n\n");
-	for(i=0;i<1000;i++){
+	s=(Uint64*)malloc(k*64);
+	for(i=0;i<k;i++){
 		b*=a;
 		b+=c;
 		q=b^(b>>37);
 		o=(Uint64)q;
-		j=59-(Uint)(b&31u);
+		j=59u-(Uint)(b&31u);
 		o=LROT64(o,j);
-		db64(o);
+		s[k]=o;
+		printf("%016llX\n",o);
 	}
+	db64(o);
+	free(s);
 	return 0;
 }
