@@ -7,9 +7,11 @@ typedef unsigned __int128 Uint128;
 typedef unsigned long Uint64;
 typedef unsigned int Uint;
 
-Uint pa[]={191,132,149,149,5,13,129,0,77,46,71,130,147,60,221,181};
-Uint pb[]={194,47,232,23,93,176,14,23,68,214,163,112,177,0,177,83};
-Uint pc[]={66,49,156,139,44,96,160,160,64,2,129,170,205,224,26,107};
+Uint64
+pb[]={0xf8177e08,0x9100d65e,0x02fb4a94,0xe5dcc50a},
+pc[]={0xf1e441c0,0x7efb5761,0xf9fc76df,0x29c75871},
+pa[]={0xba6a677d,0x85e295d2,0x0d152a5f,0xe1d281bd};
+
 Uint128 a=0u,b=0u,c=0u;
 
 void db(Uint128 x){
@@ -26,12 +28,21 @@ void db64(Uint64 x){
 	}
 	printf("\n");
 }
-void loadUint128(Uint * px, Uint128* x){
+void loadUint128(Uint64 * px, Uint128* x){
 	int i;
 	*x=0u;
-	for(i=0;i<16;i++){
-		*x=*x<<8|px[i];
+	for(i=0;i<4;i++){
+		*x=*x<<32|px[i];
 	}
+}
+void seed (char * x){
+	Uint128 i,k = 0u;
+	while((i=(Uint128)*x++)){
+		k^=i;
+		k*=a;
+		k+=c;
+	}
+	b^=k;
 }
 int main(int argc, char ** argv){
 	int i,j,k;
