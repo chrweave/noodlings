@@ -15,7 +15,9 @@ U128 a=0u,b=0u,c=0u;
 void seed (char * x){
     U128 i,k = 0u;
     while((i=(U128)*x++)){
-        k=c+a(k^i);
+        k^=i;
+        k*=a;
+        k+=c;
     }
     b^=k;
 }
@@ -34,7 +36,8 @@ void process(int k){
     U64 o;
     
     for(i=0;i<k;i++){
-        b*=a*b+c
+        b*=a;
+        b+=c;
         q=b^(b>>37);
         o=(U64)q;
         j=59u-(U)(b>>123);
