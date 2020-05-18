@@ -10,8 +10,6 @@ void p(void){
     t=b[x];
     b[x]=b[y];
     b[y]=t;
-    //printf("%d ",q++);
-    //fflush(NULL);
 }
 void d(void){
     p();
@@ -28,7 +26,6 @@ void s(char *k){
         y+=(unsigned short)k[i%kl];
         p();
     }
-    //printf("here!");
     for(i=0;i<3*l;i++){
         p();
     }
