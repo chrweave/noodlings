@@ -1,25 +1,32 @@
 <html lang="utf-8">
     <body>
         <form>
-        <h2>
             <table>
                 <tr>
                     <th>
-                        Problem:
+                        <h2>
+                            Problem:
+                        </h2>
                     </th>
                     <th>
-                        Score:
+                        <h2>
+                            Score:
+                        </h2>
                     </th>
                 </tr>
                 <tr>
-                    <td id="problem">
+                    <td>
+                        <h2 id="problem">
+                        </h2>
                     </td>
-                    <td id="score">
-                        0
+                    <td>
+                        <h2 id="score">
+                            0
+                        </h2>
                     </td>
                 </tr>
             </table>
-        </h2>
+            <input type="text" id=
         </form>
         <script>
             var m=(1 << 30);
@@ -27,6 +34,12 @@
             var s=d.getTime()%m;
             var a=29;
             var c=12344*12348+1;
+            var i;
+            for(i=0;i<1024;i++){
+                s=s*a+c;
+                s%=m;
+            }
+            var myscore=0;
         </script>
     </body>
 </html>
