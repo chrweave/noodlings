@@ -1,6 +1,6 @@
 <html lang="utf-8">
     <body>
-        <form>
+        <form onsubmit="return checkAnswer()">
             <table>
                 <tr>
                     <th>
@@ -26,7 +26,8 @@
                     </td>
                 </tr>
             </table>
-            <input type="text" id=
+            <input type="text" id="answer">
+            <input type="submit">
         </form>
         <script>
             var m=(1 << 30);
@@ -34,12 +35,25 @@
             var s=d.getTime()%m;
             var a=29;
             var c=12344*12348+1;
+            var x=0;
+            var y=0;
+            var p=0;
             var i;
             for(i=0;i<1024;i++){
                 s=s*a+c;
                 s%=m;
             }
+            s=s*a+c;
+            s%=m;
+            x=(s>>27)+2;
+            s=s*a+c;
+            s%=m;
+            y=(s>>27)=2;
+            p=x*y;
+            document.getElementById("problem").innerHTML=x+"X"+y"=?";
             var myscore=0;
+            function checkAnswer(){
+            }
         </script>
     </body>
 </html>
