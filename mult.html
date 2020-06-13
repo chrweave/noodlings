@@ -43,16 +43,27 @@
                 s=s*a+c;
                 s%=m;
             }
-            s=s*a+c;
-            s%=m;
-            x=(s>>27)+2;
-            s=s*a+c;
-            s%=m;
-            y=(s>>27)=2;
-            p=x*y;
+            function getProb(){
+                s=s*a+c;
+                s%=m;
+                x=(s>>27)+2;
+                s=s*a+c;
+                s%=m;
+                y=(s>>27)=2;
+                p=x*y;
+            }
+            getProb();
             document.getElementById("problem").innerHTML=x+"X"+y"=?";
             var myscore=0;
             function checkAnswer(){
+               var q=parseInt(document.getElementById("answer").value);
+               if(q==p){
+                   myscore++;
+                   document.gretElementById("score").innerHTML=myscore;
+                   getProb();
+               } else {
+                   document.gretElementById("answer").innerHTML="";
+               }
             }
         </script>
     </body>
