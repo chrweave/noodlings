@@ -1,18 +1,20 @@
 <html lang="utf-8">
     <body>
+        <h1 id="reward" style="color:Red;">
+        </h1>
         <form onsubmit="return checkAnswer()">
             <table>
                 <tr>
-                    <th>
+                    <td>
                         <h2>
                             Problem:
                         </h2>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <h2>
                             Score:
                         </h2>
-                    </th>
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -25,9 +27,15 @@
                         </h2>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="answer"/>
+                    </td>
+                    <td>
+                        <input type="submit"/>
+                    </td>
+                </tr>
             </table>
-            <input type="text" id="answer">
-            <input type="submit">
         </form>
         <script>
             var m=(1 << 30);
@@ -39,6 +47,8 @@
             var y=0;
             var p=0;
             var i;
+            var attempts = 4;
+            var guesses = [0,0,0,0,0];
             for(i=0;i<1024;i++){
                 s=s*a+c;
                 s%=m;
@@ -49,21 +59,37 @@
                 x=(s>>27)+2;
                 s=s*a+c;
                 s%=m;
-                y=(s>>27)=2;
+                y=(s>>27)+2;
                 p=x*y;
+                document.getElementById("problem").innerHTML=x+" &times; "+y+" = ?";
+                document.getElementById("answer").value="";
             }
             getProb();
-            document.getElementById("problem").innerHTML=x+"X"+y"=?";
             var myscore=0;
             function checkAnswer(){
-               var q=parseInt(document.getElementById("answer").value);
-               if(q==p){
-                   myscore++;
-                   document.gretElementById("score").innerHTML=myscore;
-                   getProb();
-               } else {
-                   document.gretElementById("answer").innerHTML="";
-               }
+                var q=parseInt(document.getElementById("answer").value);
+                if(q==p){
+                    myscore++;
+                    document.getElementById("score").innerHTML=myscore;
+                    if(myscore %10 == 0){
+                        alert("Good Job!!!");
+                        if(myscore % 100 == 0){
+                            document.getElementById("reward").innerHTML="Show this to your parents; you have earned a reward.";
+                        }
+                    }
+                    getProb();
+                    attempts=4;
+                } else {
+                    
+                    guesses[4-attempts]=q;
+                    if( attempts==0){
+                        alert("You answered: "+guesses+"\nThe correct product is: "+p);
+                        attempts=5;
+                    }
+                    attempts--;
+                    document.getElementById("answer").value="";
+                }
+                return false;
             }
         </script>
     </body>
