@@ -9,6 +9,7 @@ struct dll{
 };
 
 typedef struct dll Dll;
+typedef unsigned int Uint;
 
 struct ll {
     void* data;
@@ -20,6 +21,22 @@ typedef struct ll Ll;
 char repo[4096];
 Dll* table[65536];
 Dll* alphaTree;
+
+void insertStringDll(Dll* root, Dll* tbi){
+}
+
+Dll* createDll(void* inData){
+}
+
+Uint fnv(char* p){
+    Uint ret=2166136261u;
+    Uint c;
+    while(c=(Uint)*p++){
+        ret^=c;
+        ret*=16777619u;
+    }
+    return ret;
+}
 
 void initTable(void){
     int i = 0;
@@ -45,6 +62,6 @@ void parseArgs(int argc, char ** argv){
 
 
 int main (int argc, char ** argv){
-
+    printf("%x\n",fnv(argv[1]));
     return 0;
 }
