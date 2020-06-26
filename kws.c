@@ -2,13 +2,15 @@
 #include<stdlib.h>
 #include<string.h>
 
-struct dll{
+#define ATLINE {printf("here %d\n",__LINE__); fflush(NULL);}
+
+struct btn{
     void* data;
-    struct dll * l;
-    struct dll * r;
+    struct btn * l;
+    struct btn * r;
 };
 
-typedef struct dll Dll;
+typedef struct btn Btn;
 typedef unsigned int Uint;
 
 struct ll {
@@ -20,16 +22,29 @@ typedef struct ll Ll;
 
 typedef struct {
     char * text;
-    int hash;
     int docArraySize;
     int numDocs;
     int * docArray;
 } Term;
 
-char repo[4096];
-Dll* table[65536];
-Dll* alphaTree;
-int allowed[256];
+static char repo[4096];
+static Btn* table[65536];
+static Btn* docTable[65536];
+static Btn* alphaTree;
+static Btn* btnStack[65536]; /*watch for unbalanced trees ...*/
+static Btn docFilterPool[16777216];
+static int docFilterPoolIndex = 0;
+static int allowed[256];
+
+Btn* getNextDocFilterPoolBtn(void){
+    Btn* d=&(docFilterPool[docFilterPoolIndex++]);
+    d->l=NULL;
+    d->r=NULL;
+    return d;
+}
+
+
+
 
 void setAllowed(void){
     int i = 0;
@@ -45,40 +60,125 @@ void setAllowed(void){
     allowed[95]=1;
 }
 
-void insertStringDll(Dll* root, Dll* tbi){
+void setAllocatedBtnSide(Btn* old, Btn* newBtn, int side){
+    if(side>0){
+        old->r=newBtn;
+    } else {
+        old->l=newBtn;
+    }
 }
 
-Dll* createDll(void* inData){
-    Dll * d=(Dll*)malloc(sizeof(Dll));
+
+void insertTerm(char* interm, Btn* root){
+    Btn * temp = root;
+    Btn * old =temp;
+    int side=0;
+    Term * t;
+    while(temp!=NULL){
+        t=(Term*)temp->data;
+        side=strcmp(interm,t->text);
+    }
+}
+
+void insertStringBtn(Btn* root, Btn* tbi){
+}
+
+Btn* createBtn(void* inData){
+    Btn * d=(Btn*)malloc(sizeof(Btn));
     d->l=NULL;
     d->r=NULL;
     d->data=inData;
     return d;
 }
 
-Uint fnv(char* p){
+int fnv(char* p){
     Uint ret=2166136261u;
     Uint c;
-    while(c=(Uint)*p++){
+    while((c=(Uint)*p++)){
         ret^=c;
         ret*=16777619u;
     }
-    return ret;
+    return (int)(ret^(ret>>16))&65535;
+}
+
+void docUnik(char* inTerm){
+    int h=fnv(inTerm);
+    Btn * t;
+    Btn * o;
+    int side = 0;
+    int nequal =1;
+    if(docTable[h] == NULL){
+        docTable[h]=getNextDocFilterPoolBtn();
+    }
+    t=docTable[h];
+    while(t->data!=NULL){
+        side=strcmp(inTerm,(char*)t->data);
+        if(side ==0){
+            nequal=0;
+            break;
+        }
+        if(side<0){
+            if(t->l==NULL){
+                t->l=getNextDocFilterPoolBtn();
+            }
+            t=t->l;
+        } else {
+            if(t->r==NULL){
+                t->r=getNextDocFilterPoolBtn();
+            }
+            t=t->r;
+        }
+    }
+    if(nequal){
+        t->data=malloc(strlen(inTerm)+1);
+        strcpy((char*)t->data,inTerm);
+    }
 }
 
 void initTable(void){
     int i = 0;
     for(i=0;i<65536;i++){
         table[i] = NULL;
+        docTable[i] = NULL;
     }
 }
 
-void setString(Term* t, char * in){
+void setTerm(Term *t, char * in){
     t->text=malloc(strlen(in)+1);
-    strcpy((char*)t->text,in);
+    strcpy(t->text,in);
     t->docArray=(int*)malloc(sizeof(int)*128);
     t->docArraySize=128;
     t->numDocs=0;
+}
+
+void pushTermInAllTerms(char * inTerm, int hashIndex){
+    printf("%08x %s\n", hashIndex,inTerm);fflush(NULL);
+}
+
+void flushDocTermTree(Btn * b, int hashIndex){
+    Btn *t =b;
+    int searchIndex = 0;
+    while(searchIndex >-1){
+        while(t!=NULL){
+
+            printf("%d@@\n", searchIndex); fflush(NULL);
+            btnStack[searchIndex++]=t;
+            pushTermInAllTerms((char*)t->data,hashIndex);
+            free(t->data);
+            t=t->l;
+        }
+        printf("%d@@\n", searchIndex); fflush(NULL);
+        searchIndex--;
+        t=btnStack[searchIndex]->r;
+    }
+
+}
+
+void flushDocTerms(void){
+    int i;
+    for(i=0;i<65536;i++){
+        flushDocTermTree(docTable[i],i);
+    }
 }
 
 void chewFile(char * fname){
@@ -88,6 +188,7 @@ void chewFile(char * fname){
     int l = 0;
     FILE * f=fopen(fname,"r");
     if(f !=NULL){
+        docFilterPoolIndex=0;
         do{
             c=fgetc(f);
             if(feof(f)){
@@ -97,18 +198,28 @@ void chewFile(char * fname){
                 buff[i++]=(char)c;
             } else {
                 buff[i]=0;
-                if(i>0){
-                    printf("%08x %s",fnv(buff),buff);
+                if(i>1){
+                    docUnik(buff);
                 }
                 i=0;
             }
         }while(1);
         fclose(f);
     }
+    flushDocTerms();
+}
+
+void initDocFilterPool(void){
+    int i = 0;
+    for (i=0;i<16777216;i++){
+        docFilterPool[i].data=NULL;
+    }
 }
 
 void init(void){
     setAllowed();
+    initDocFilterPool();
+    initTable();
 }
 void parseArgs(int argc, char ** argv){
     int i = 0;
