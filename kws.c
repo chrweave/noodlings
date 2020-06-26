@@ -158,19 +158,19 @@ void pushTermInAllTerms(char * inTerm, int hashIndex){
 void flushDocTermTree(Btn * b, int hashIndex){
     Btn *t =b;
     int searchIndex = 0;
-    while(searchIndex >-1){
+    do{
         while(t!=NULL){
-
-            printf("%d@@\n", searchIndex); fflush(NULL);
             btnStack[searchIndex++]=t;
             pushTermInAllTerms((char*)t->data,hashIndex);
             free(t->data);
             t=t->l;
         }
-        printf("%d@@\n", searchIndex); fflush(NULL);
         searchIndex--;
+        if(searchIndex<0){
+            break;
+        }
         t=btnStack[searchIndex]->r;
-    }
+    }while(1);
 
 }
 
