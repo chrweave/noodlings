@@ -1,3 +1,9 @@
 #!/bin/bash
 
-wall mookey
+cd ~/noodlings
+git pull
+cd ~/caw
+find ~/linux -print0|xargs -0 -n1 bash gut.sh >~/noodlings/drelmout
+cd ~/noodlings
+git commit -m test$(dk) drelmout
+git push
