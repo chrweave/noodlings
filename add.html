@@ -1,0 +1,98 @@
+<html lang="utf-8">
+    <body>
+        <h1 id="reward" style="color:Red;">
+        </h1>
+        <form onsubmit="return checkAnswer()">
+            <table>
+                <tr>
+                    <td>
+                        <h2>
+                            Problem:
+                        </h2>
+                    </td>
+                    <td>
+                        <h2>
+                            Score:
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h2 id="problem">
+                        </h2>
+                    </td>
+                    <td>
+                        <h2 id="score">
+                            0
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="answer"/>
+                    </td>
+                    <td>
+                        <input type="submit"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <script>
+            var m=(1 << 30);
+            var d=new Date();
+            var s=d.getTime()%m;
+            var a=29;
+            var c=12344*12348+1;
+            var x=0;
+            var y=0;
+            var p=0;
+            var i;
+            var attempts = 4;
+            var guesses = [0,0,0,0,0];
+            for(i=0;i<1024;i++){
+                s=s*a+c;
+                s%=m;
+            }
+            function getProb(){
+                s=s*a+c;
+                s%=m;
+                x=(s>>27)+2;
+                s=s*a+c;
+                s%=m;
+                y=(s>>27)+2;
+                p=x+y;
+                document.getElementById("problem").innerHTML=x+" + "+y+" = ?";
+                document.getElementById("answer").value="";
+            }
+            getProb();
+            var myscore=0;
+            function checkAnswer(){
+                var q=parseInt(document.getElementById("answer").value);
+                if(q==p){
+                    myscore++;
+                    document.getElementById("score").innerHTML=myscore;
+                    if(myscore %10 == 0){
+                        alert("Good Job!!!");
+                        if(myscore % 100 == 0){
+                            document.getElementById("reward").innerHTML="Show this to your parents; you have earned a reward.";
+                        }
+                    }
+                    getProb();
+                    attempts=4;
+                } else {
+                    
+                    guesses[4-attempts]=q;
+                    if( attempts==0){
+                        alert("You answered: "+guesses+"\nThe correct sum is: "+p);
+                        attempts=5;
+                        myscore--;
+                        document.getElementById("score").innerHTML=myscore;
+                    }
+                    attempts--;
+                    document.getElementById("answer").value="";
+                }
+                return false;
+            }
+        </script>
+    </body>
+</html>
