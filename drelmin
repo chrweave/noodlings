@@ -1,8 +1,8 @@
 #!/bin/bash
 
-cd ~/noodlings
+cd /home/cweaver/noodlings
 git fetch master
 git merge -X theirs
-find ~/linux -type f |wc -l> drelmout
+echo 'Eat my ever loving shorts.' > drelmout
 git commit -m test$(dk) drelmout
 git push
