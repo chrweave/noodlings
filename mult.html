@@ -84,6 +84,8 @@
                     guesses[4-attempts]=q;
                     if( attempts==0){
                         alert("You answered: "+guesses+"\nThe correct product is: "+p);
+                        myscore--;                        
+                        document.getElementById("score").innerHTML=myscore;
                         attempts=5;
                     }
                     attempts--;
