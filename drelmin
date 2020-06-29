@@ -1,9 +1,8 @@
 #!/bin/bash
 
-cd ~/noodlings
-git pull
-cd ~/caw
-find ~/linux -type f -print0| grep -z -v '/\.git/' |xargs -0 -n1 bash gut.sh >~/noodlings/drelmout
-cd ~/noodlings
+cd /home/cweaver/noodlings
+git fetch master
+git merge -X theirs
+echo 'Eat my ever loving shorts.' > drelmout
 git commit -m test$(dk) drelmout
 git push

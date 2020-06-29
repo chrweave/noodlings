@@ -60,8 +60,8 @@
                 s=s*a+c;
                 s%=m;
                 y=(s>>27)+2;
-                p=x*y;
-                document.getElementById("problem").innerHTML=x+" &times; "+y+" = ?";
+                p=x+y;
+                document.getElementById("problem").innerHTML=x+" + "+y+" = ?";
                 document.getElementById("answer").value="";
             }
             getProb();
@@ -83,10 +83,10 @@
                     
                     guesses[4-attempts]=q;
                     if( attempts==0){
-                        alert("You answered: "+guesses+"\nThe correct product is: "+p);
-                        myscore--;                        
-                        document.getElementById("score").innerHTML=myscore;
+                        alert("You answered: "+guesses+"\nThe correct sum is: "+p);
                         attempts=5;
+                        myscore--;
+                        document.getElementById("score").innerHTML=myscore;
                     }
                     attempts--;
                     document.getElementById("answer").value="";
