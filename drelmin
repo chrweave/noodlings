@@ -1,9 +1,9 @@
 #!/bin/bash
 
-wall goingle
+wall gobonk
 cd /home/cweaver/noodlings
 git fetch master
 git merge -X theirs
-echo 'Eat my ever lypping shorts.' > drelmout
+echo 'Eat my ever snurfing shorts.' > drelmout
 git commit -m gonk$(date+ %Y%m%d%H%M) drelmout
 git push
