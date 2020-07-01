@@ -59,16 +59,16 @@
             var i;
             var attempts = 4;
             var guesses = [0,0,0,0,0];
-			var mySeconds=0;
-			var myClock=setInterval(updateSeconds,1000);
+            var mySeconds=0;
+            var myClock=setInterval(updateSeconds,1000);
             for(i=0;i<1024;i++){
                 s=s*a+c;
                 s%=m;
             }
-			function updateSeconds(){
-				mySeconds++;
-				document.getElementById("seconds").innerHTML=mySeconds;
-			}
+            function updateSeconds(){
+                mySeconds++;
+                document.getElementById("seconds").innerHTML=mySeconds;
+            }
             function getProb(){
                 s=s*a+c;
                 s%=m;
@@ -90,7 +90,7 @@
                     if(myscore %10 == 0){
                         alert("Good Job!!!");
                         if(myscore == 100){
-							clearInterval(myClock);
+                            clearInterval(myClock);
                             document.getElementById("reward").innerHTML="Your Final Time Is:"+mySeconds;
                         }
                     }
