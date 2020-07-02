@@ -44,9 +44,6 @@ Btn* getNextDocFilterPoolBtn(void){
     return d;
 }
 
-
-
-
 void setAllowed(void){
     int i = 0;
     for(i=0;i<256;i++){
@@ -85,10 +82,13 @@ void concatenateDocArrays(Btn * target, Btn * source){
     Term * t = (Term*)target->data;
     Term * s = (Term*)source->data;
     int l=t->numDocs+s->numDocs;
+    int i = 0;
     if (l>t->docArraySize){
-        t->docArraySize*=2;
+        t->docArraySize=l+1024;
         t->docArray=realloc(t->docArray,t->docArraySize);
     }
+    memcpy(&(t->docArray[t->numDocs]),s->numDocs,s->numDocs*(sizeof(int)));
+    t->numDocs=l;
 }
 
 void insertBtn(Btn* root, Btn* tbi){
@@ -100,16 +100,19 @@ void insertBtn(Btn* root, Btn* tbi){
         side=strcmp((char*)tbi->data,(char*)t->data);
         if(side ==0){
             nequal=0;
+            concatenateDocArrays(t,tbi);
             break;
         }
         if(side<0){
             if(t->l==NULL){
-                t->l=getNextDocFilterPoolBtn();
+                t->l=tbi;
+                break;
             }
             t=t->l;
         } else {
             if(t->r==NULL){
-                t->r=getNextDocFilterPoolBtn();
+                t->r=tbi;
+                break;
             }
             t=t->r;
         }
