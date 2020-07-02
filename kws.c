@@ -36,6 +36,7 @@ static Btn* btnStack[65536]; /*watch for unbalanced trees ...*/
 static Btn docFilterPool[16777216];
 static int docFilterPoolIndex = 0;
 static int allowed[256];
+static int docNum=0;
 
 Term * setTerm(char * in){
     Term * t= (Term*)malloc(sizeof(Term));
@@ -83,7 +84,7 @@ void concatenateDocArrays(Btn * target, Btn * source){
     Term * s = (Term*)source->data;
     int l=t->numDocs+s->numDocs;
     if (l>t->docArraySize){
-        t->docArraySize=l+1024;
+        t->docArraySize=l+128;
         t->docArray=realloc(t->docArray,t->docArraySize);
     }
     memcpy(&(t->docArray[t->numDocs]),s->docArray,s->numDocs*(sizeof(int)));
@@ -139,6 +140,7 @@ int fnv(char* p){
 void docUnik(char* inTerm){
     int h=fnv(inTerm);
     Btn * t;
+    Term* testTerm;
     int side = 0;
     int nequal =1;
     if(docTable[h] == NULL){
@@ -146,7 +148,8 @@ void docUnik(char* inTerm){
     }
     t=docTable[h];
     while(t->data!=NULL){
-        side=strcmp(inTerm,(char*)t->data);
+        testTerm=(Term*)t->data;
+        side=strcmp(inTerm,testTerm->text);
         if(side ==0){
             nequal=0;
             break;
@@ -176,37 +179,53 @@ void initTable(void){
     }
 }
 
+void addDocToTerm(Term* t){
+    if(t->numDocs>t->docArraySize-2){
+        t->docArraySize+=128;
+        t->docArray=(int *)realloc((void*)t->docArray,t->docArraySize);
+    }
+    t->docArray[t->numDocs++]=docNum;
+}
+
 void pushTermInAllTerms(char * inTerm, int hashIndex){
     printf("%08x %s\n", hashIndex,inTerm);fflush(NULL);
     Btn * t;
     int side = 0;
     int nequal =1;
-    if(docTable[hashIndex] == NULL){
-        Term* term=setTerm(inTerm);
-        docTable[hashIndex]=createBtn((void*)term);
-    }
-    t=docTable[hashIndex];
-    while(t->data!=NULL){
-        side=strcmp(inTerm,(char*)t->data);
-        if(side ==0){
-            nequal=0;
-            break;
-        }
-        if(side<0){
-            if(t->l==NULL){
-                t->l=getNextDocFilterPoolBtn();
+    Term* newTerm;
+    Term* testTerm;
+    if(table[hashIndex] == NULL){
+        newTerm=setTerm(inTerm);
+        table[hashIndex]=createBtn((void*)newTerm);
+    } else {
+        t=docTable[hashIndex];
+        while(t->data!=NULL){
+            testTerm=(Term*)t->data;
+            side=strcmp(inTerm,testTerm->text);
+            if(side ==0){
+                addDocToTerm(testTerm);
+                break;
             }
-            t=t->l;
-        } else {
-            if(t->r==NULL){
-                t->r=getNextDocFilterPoolBtn();
+            if(side<0){
+                if(t->l==NULL){
+                    newTerm=setTerm(inTerm);
+                    t->l=createBtn((void*)newTerm);
+                    break;
+                }
+                t=t->l;
+            } else {
+                if(t->r==NULL){
+                    newTerm=setTerm(inTerm);
+                    t->r=createBtn((void*)newTerm);
+                    break;
+                }
+                t=t->r;
             }
-            t=t->r;
         }
-    }
-    if(nequal){
-        t->data=malloc(strlen(inTerm)+1);
-        strcpy((char*)t->data,inTerm);
+        if(nequal){
+            t->data=malloc(strlen(inTerm)+1);
+            strcpy((char*)t->data,inTerm);
+        }
     }
 }
 
