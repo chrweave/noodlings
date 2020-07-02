@@ -37,12 +37,24 @@ static Btn docFilterPool[16777216];
 static int docFilterPoolIndex = 0;
 static int allowed[256];
 
+Term * setTerm(char * in){
+    Term * t= (Term*)malloc(sizeof(Term));
+    int l=strlen(in)+1;
+    t->text=malloc(l);
+    memcpy(t->text,in,l);
+    t->docArray=(int*)malloc(sizeof(int)*128);
+    t->docArraySize=128;
+    t->numDocs=0;
+    return t;
+}
+
 Btn* getNextDocFilterPoolBtn(void){
     Btn* d=&(docFilterPool[docFilterPoolIndex++]);
     d->l=NULL;
     d->r=NULL;
     return d;
 }
+
 
 void setAllowed(void){
     int i = 0;
@@ -66,28 +78,15 @@ void setAllocatedBtnSide(Btn* old, Btn* newBtn, int side){
     }
 }
 
-
-void insertTerm(char* interm, Btn* root){
-    Btn * temp = root;
-    Btn * old =temp;
-    int side=0;
-    Term * t;
-    while(temp!=NULL){
-        t=(Term*)temp->data;
-        side=strcmp(interm,t->text);
-    }
-}
-
 void concatenateDocArrays(Btn * target, Btn * source){
     Term * t = (Term*)target->data;
     Term * s = (Term*)source->data;
     int l=t->numDocs+s->numDocs;
-    int i = 0;
     if (l>t->docArraySize){
         t->docArraySize=l+1024;
         t->docArray=realloc(t->docArray,t->docArraySize);
     }
-    memcpy(&(t->docArray[t->numDocs]),s->numDocs,s->numDocs*(sizeof(int)));
+    memcpy(&(t->docArray[t->numDocs]),s->docArray,s->numDocs*(sizeof(int)));
     t->numDocs=l;
 }
 
@@ -140,7 +139,6 @@ int fnv(char* p){
 void docUnik(char* inTerm){
     int h=fnv(inTerm);
     Btn * t;
-    Btn * o;
     int side = 0;
     int nequal =1;
     if(docTable[h] == NULL){
@@ -166,8 +164,7 @@ void docUnik(char* inTerm){
         }
     }
     if(nequal){
-        t->data=malloc(strlen(inTerm)+1);
-        strcpy((char*)t->data,inTerm);
+        t->data=(void*) setTerm(inTerm);
     }
 }
 
@@ -179,16 +176,38 @@ void initTable(void){
     }
 }
 
-void setTerm(Term *t, char * in){
-    t->text=malloc(strlen(in)+1);
-    strcpy(t->text,in);
-    t->docArray=(int*)malloc(sizeof(int)*128);
-    t->docArraySize=128;
-    t->numDocs=0;
-}
-
 void pushTermInAllTerms(char * inTerm, int hashIndex){
     printf("%08x %s\n", hashIndex,inTerm);fflush(NULL);
+    Btn * t;
+    int side = 0;
+    int nequal =1;
+    if(docTable[hashIndex] == NULL){
+        Term* term=setTerm(inTerm);
+        docTable[hashIndex]=createBtn((void*)term);
+    }
+    t=docTable[hashIndex];
+    while(t->data!=NULL){
+        side=strcmp(inTerm,(char*)t->data);
+        if(side ==0){
+            nequal=0;
+            break;
+        }
+        if(side<0){
+            if(t->l==NULL){
+                t->l=getNextDocFilterPoolBtn();
+            }
+            t=t->l;
+        } else {
+            if(t->r==NULL){
+                t->r=getNextDocFilterPoolBtn();
+            }
+            t=t->r;
+        }
+    }
+    if(nequal){
+        t->data=malloc(strlen(inTerm)+1);
+        strcpy((char*)t->data,inTerm);
+    }
 }
 
 void flushDocTermTree(Btn * b, int hashIndex){
@@ -221,7 +240,6 @@ void chewFile(char * fname){
     int c;
     char buff[4096];
     int i = 0;
-    int l = 0;
     FILE * f=fopen(fname,"r");
     if(f !=NULL){
         docFilterPoolIndex=0;
@@ -266,7 +284,6 @@ void parseArgs(int argc, char ** argv){
         }
     }
 }
-
 
 int main (int argc, char ** argv){
     parseArgs(argc, argv);
