@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<memory.h>
 
 #define ATLINE {printf("here %d\n",__LINE__); fflush(NULL);}
 
@@ -80,7 +81,39 @@ void insertTerm(char* interm, Btn* root){
     }
 }
 
-void insertStringBtn(Btn* root, Btn* tbi){
+void concatenateDocArrays(Btn * target, Btn * source){
+    Term * t = (Term*)target->data;
+    Term * s = (Term*)source->data;
+    int l=t->numDocs+s->numDocs;
+    if (l>t->docArraySize){
+        t->docArraySize*=2;
+        t->docArray=realloc(t->docArray,t->docArraySize);
+    }
+}
+
+void insertBtn(Btn* root, Btn* tbi){
+    Btn * t=root;
+    int side = 0;
+    int nequal =1;
+
+    while(t->data!=NULL){
+        side=strcmp((char*)tbi->data,(char*)t->data);
+        if(side ==0){
+            nequal=0;
+            break;
+        }
+        if(side<0){
+            if(t->l==NULL){
+                t->l=getNextDocFilterPoolBtn();
+            }
+            t=t->l;
+        } else {
+            if(t->r==NULL){
+                t->r=getNextDocFilterPoolBtn();
+            }
+            t=t->r;
+        }
+    }
 }
 
 Btn* createBtn(void* inData){
