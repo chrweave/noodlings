@@ -4,6 +4,7 @@ wall gobonk
 cd /home/cweaver/noodlings
 git fetch master
 git merge -X theirs
+echo $USER
 echo 'Eat my ever snurfing shorts.' > drelmout
 git commit -m gonk$(date+ %Y%m%d%H%M) drelmout
 git push
