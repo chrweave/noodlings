@@ -4,7 +4,7 @@ cd /home/cweaver/noodlings
 git fetch master
 git merge -X theirs
 echo $USER
-echo 'Eat my ever vaping shorts.' > drelmout
+echo -e 'Eat my ever Leberton shorts.\n vorpal' > drelmout
 git stage drelmout
 git commit -m gonk$(date+ %Y%m%d%H%M) drelmout
 git push
