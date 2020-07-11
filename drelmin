@@ -4,8 +4,8 @@ cd /home/cweaver/noodlings
 git fetch origin
 git merge -X theirs
 echo $USER
-echo -e 'Eat my ever vortnik shorts.\nvorpal' > drelmout
+echo -e 'Eat my ever debble ebble shorts.\nvorpal' > drelmout
 a=$(date+ %Y%m%d%H%M)
 git stage drelmout
 git commit -m gonk$a drelmout -e
-git push origin
+git push
