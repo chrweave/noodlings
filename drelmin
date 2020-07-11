@@ -1,10 +1,11 @@
 #!/bin/bash
 
 cd /home/cweaver/noodlings
-git fetch master
+git fetch origin
 git merge -X theirs
 echo $USER
-echo -e 'Eat my ever Leberton shorts.\n vorpal' > drelmout
+echo -e 'Eat my ever vortnik shorts.\nvorpal' > drelmout
+a=$(date+ %Y%m%d%H%M)
 git stage drelmout
-git commit -m gonk$(date+ %Y%m%d%H%M) drelmout
-git push
+git commit -m gonk$a drelmout -e
+git push origin
