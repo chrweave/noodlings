@@ -5,7 +5,7 @@ git fetch origin
 git merge -X theirs
 echo $USER
 mv /home/cweaver/caw/minlog drelmout
-a=$(date+ %Y%m%d%H%M)
+echo drog$(date+ %Y%m%d%H%M) > ../caw/blep
 git stage drelmout
-git commit -m gonk${a} drelmout
+git commit -F../caw/blep drelmout
 git push
