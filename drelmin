@@ -4,7 +4,7 @@ cd /home/cweaver/noodlings
 git fetch origin
 git merge -X theirs
 echo $USER
-mv /home/cwraver/caw/minlog drelmout
+mv /home/cweaver/caw/minlog drelmout
 a=$(date+ %Y%m%d%H%M)
 git stage drelmout
 git commit -m gonk${a} drelmout
