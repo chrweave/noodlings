@@ -7,5 +7,5 @@ echo $USER
 mv /home/cweaver/caw/minlog drelmout
 echo drog$(date+ %Y%m%d%H%M) > ../caw/blep
 git stage drelmout
-git commit -F../caw/blep drelmout
+git commit -F ../caw/blep drelmout
 git push
