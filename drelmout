@@ -1,10 +1,10 @@
-202007181048
-202007181049
-202007181050
-202007181051
-202007181052
-Updating 9f57aaf..a298de9
-Fast-forward
- drelmin | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-cweaver
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 6 insertions(+), 19 deletions(-)
