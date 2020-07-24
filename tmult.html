@@ -39,7 +39,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" id="answer"/>
+                        <input type="text" autocomplete="off" id="answer"/>
                     </td>
                     <td>
                         <input type="submit"/>
@@ -60,13 +60,17 @@
             var attempts = 4;
             var guesses = [0,0,0,0,0];
             var mySeconds=0;
+            var mydate= new Date();
+            var abTime=mydate.getTime();
             var myClock=setInterval(updateSeconds,1000);
             for(i=0;i<1024;i++){
                 s=s*a+c;
                 s%=m;
             }
             function updateSeconds(){
-                mySeconds++;
+                var locdate=new Date();
+                var locTime=locdate.getTime();
+                mySeconds=Math.round((locTime-abTime)/1000);
                 document.getElementById("seconds").innerHTML=mySeconds;
             }
             function getProb(){
@@ -88,7 +92,6 @@
                     myscore++;
                     document.getElementById("score").innerHTML=myscore;
                     if(myscore %10 == 0){
-                        //alert("Good Job!!!");
                         if(myscore == 100){
                             clearInterval(myClock);
                             document.getElementById("reward").innerHTML="Your Final Time Is:"+mySeconds;
@@ -101,6 +104,8 @@
                     guesses[4-attempts]=q;
                     if( attempts==0){
                         alert("You answered: "+guesses+"\nThe correct product is: "+p);
+                        myscore--;
+                        document.getElementById("score").innerHTML=myscore;
                         attempts=5;
                     }
                     attempts--;
