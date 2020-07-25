@@ -14,13 +14,33 @@ typedef struct {
     Bintree * target;
     void * indata;
     int (*compare)(void* a, void* b);
-    Bintree*(*handleMatch)(Bintree * matchPoint, void * neededData);
+    Bintree* (*allocator)(void *);
+    void (*handleMatch)(Bintree * matchPoint);
 }InsertArgs;
+
+Bintree * followDown(Bintree * bt, InsertArgs*ia, int childSelector){
+    if(bt->child[childSelector]==NULL){
+        bt->child[childSelector]=ia->allocator(ia->indata);
+    }
+    return bt->child[childSelector];
+}
 
 void insert(InsertArgs * ia){
     Bintree * t = ia->target;
     while(t != NULL){
         int s= ia->compare(t->data,ia->indata);
+        if (s==0){
+            if(ia->handleMatch!=NULL){
+                ia->handleMatch(t);
+            }
+            break;
+        } else {
+            if(s<0){
+                t=followDown(t,ia,0);
+            } else {
+                t=followDown(t,ia,1);
+            }
+        }
     }
 }
 
