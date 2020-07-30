@@ -32,6 +32,10 @@ void initAllowed(void){
     }
 }
 
+void init(void){
+    initAllowed();
+}
+
 Bintree * followDown(Bintree * bt, InsertArgs*ia, int childSelector){
     if(bt->child[childSelector]==NULL){
         bt->child[childSelector]=ia->allocator(ia->indata);
@@ -84,8 +88,7 @@ void keyWordChomp(char * fname){
                 wordBuffer[i++]=(char)c;
             } else{
                 if(i > 1){
-                    PL
-                            wordBuffer[i]=0;
+                    wordBuffer[i]=0;
                     h=fnv(wordBuffer);
                     printf("%08X %s\n",h,wordBuffer);
                 }
@@ -104,8 +107,8 @@ void keyWordChomp(char * fname){
 
 int main(int argc, char ** argv){
     if(argc >1){
+        init();
         keyWordChomp(argv[1]);
     }
-    printf("Hello World!\n");
     return 0;
 }
