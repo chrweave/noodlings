@@ -17,6 +17,13 @@ typedef struct {
     Bintree* (*allocator)(void *);
     void (*handleMatch)(Bintree * matchPoint);
 }InsertArgs;
+typedef struct{
+    char * word;
+    int hash;
+    int numDocs;
+    int docArraySize;
+    int * docs;
+} Term;
 typedef unsigned int Uint;
 
 int allowed[256];
@@ -35,7 +42,9 @@ void initAllowed(void){
 void init(void){
     initAllowed();
 }
-
+int termComp(void* a, void*b){
+   return strcmp(((Term*)a)->word,((Term*)b)->word) ;
+}
 Bintree * followDown(Bintree * bt, InsertArgs*ia, int childSelector){
     if(bt->child[childSelector]==NULL){
         bt->child[childSelector]=ia->allocator(ia->indata);
