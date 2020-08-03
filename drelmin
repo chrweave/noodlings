@@ -3,7 +3,7 @@
 cd /home/cweaver/noodlings
 git fetch origin
 git merge -X theirs
-cp ../caw/linuxplusnotes > drelmout
+cp ../caw/linuxplusnotes drelmout
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
 git commit -F ../caw/blep drelmout
