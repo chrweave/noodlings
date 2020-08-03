@@ -3,8 +3,8 @@
 cd /home/cweaver/noodlings
 git fetch origin
 git merge -X theirs
-echo $USER
-tail ../caw/minlog >drelmout
+echo $USER >drelmout
+echo "Everybody loves the baby! " >> drelmout
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
 git commit -F ../caw/blep drelmout
