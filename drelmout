@@ -1,0 +1,459 @@
+if you learn vi it works on every shell out there.
+    you can edit anywhere.
+    you can use vi for coding python.
+    java ide.
+    limited commands.
+    vim -p /etc/shadow /etc/passwd
+    -p causes tabs
+    -o causes windows.
+    -O makes vertical windows.
+    view open files in read only
+    Tildes indicate that it is an empty line
+    VI works inside a line buffer
+    esc puts you in normal mode or command line mode.
+    esc: puts you in dommand document mode.
+    i insert
+    I insert at the beginning of the line.
+    Actually this is line 17
+    This is line 18
+    I am inserting test head of lien insert
+    A append ... I just used it.
+    a moves you one character to the right.
+    O opens the line above.
+    o open a line bleow.
+    o is cool.
+    search with :/
+    move a word at a time
+    w moves forward a word b moves back a word.
+    insertign a number repeats command n times.
+    w recognnnized metacharacters as a word
+    W treats metacharacters as literal characters
+    upper case X and lowercase character
+    delete me
+    u undoes last edit 
+    U undoes last edit on curent line   
+    D deletes to the end of the line.
+    yy yanks lines 
+    p puts them.
+    wugga wugga wugga wugga wugga wugga wugga wugga 
+    wugga wugga wugga wugga wugga wugga wugga wugga 
+    wugga wugga wugga wugga wugga wugga wugga wugga 
+    wugga wugga wugga wugga wugga wugga wugga wugga 
+    wugga wugga wugga wugga wugga wugga wugga wugga 
+    wugga wugga wugga wugga wugga wugga wugga wugga 
+    wugga wugga wugga wugga wugga wugga wugga wugga 
+    wugga wugga wugga wugga wugga wugga wugga wugga 
+    wugga wugga wugga wugga wugga wugga wugga wugga 
+    :w writes the file to the current directory.
+    zz writes and exits the file ???
+Shell
+    the shell is an interface.
+    On top of the shell we have our users and aplications.
+    The shell is the go between the kernel and the user space.
+    the kernel sends the inforamtion back to the slell.
+    ps lists processes
+    each of these precesses exist in their own environment.
+    parent and child process
+    shell is parent of command process.
+    kernel executes fork(); creates new pid for child.
+    Kernel manages the operating system.
+    user mode is for user commands and has no adccess to 
+    kernel commands.
+    when a parent starts a child the parent
+    goes to sleep.
+    orphan  proccess allows parent to keep running 
+    concurrently.
+    an environmental vairable is shared between 
+    child and parent proceses.
+    Bash functions and varibles are treated in
+    the same way as far as access is concerned.
+    local varible is called an identifier.
+    $ prefix expands the content of a variable
+    delcare rose=flower
+    local varibles only exist in the shell in 
+    which they are created.
+    export makes variable available to children
+    unset unsets variables.
+    echo $fred
+    set|grep fred
+    pwd is builtin and external
+    alias added functionality by adding specific options to the command.
+    alias ll='ls -ah --color=auto'
+    type -a pwd gives you the commands in order of precedence.
+    unset unsets variables first then functions with the same name
+    unset -f unsets only the function.
+    declare -f gives you the function by its name.
+    in order of precedence:
+        aliaes
+        functions
+        builtins
+        externals
+    access builtins by prefixing builtin
+    use absolute path for builtins in scripts.
+    .bashrc is read every time a new shell process is opened.
+    .bashrc allow settings to be inherited between shells.
+    ASCII 7 7 bit characters
+    ASCII extended 8 256 characters
+    EBSIDIC ...
+    Unicode 16 bits ... up to 32 bits
+    encoding formats can change by machine and user
+    set a format fora specific user
+    locale -k lists locale formats
+    localectl list-locles
+    loclectl set-locale LANG=en.CA.UTF-8
+        sets the language to Canadian English Eh?
+Setting time 
+    The real time clock has a battery backup ... on the motherboard
+    system clock is set to realtime clock on boot
+    ntp can reset system lock.
+    date +%Y%m%d%H%M 202007201331
+    date -s changes the system clock
+    TZ=/usr/share/America/Chicago
+    hwclock --show
+    hwclock --set --date "8/11/2013 23:10:45"
+    timedatectl set-timezone="America/Chicago"
+    timedatectl set-time "2020-07-21"
+Bash History
+    HISTSIZE
+    HISTFILE
+    HISTFILESIZE
+    make scripts not executble but run them with Bash
+    Bash executes scripts with commands as arguments.
+REDIRECTION
+    tty
+    /dev/pts1
+    linux has 63 tty devices
+    in CentOS7 /dev/tty1 is the gui
+    in RH8 and Debbian is the display manager. tty2 is the gui
+    to get from cosole devices to gui you need to do CTRL+ALT+F6
+    chvt +num changes the terminal
+    name inode
+    entries in the file table
+    kernel does not care about a file name.
+    process gives the file a file descriptor number
+    cd /proc/pid
+    ls the fd file to get a list of the open gile descriptors.
+    /dev/null is the black hole for output.
+    << is a heredoc redirect
+    cat >ook <<AAk
+        eat
+        my
+        ever
+        loving shorts
+        AAk
+    gives
+        eat
+        my
+        ever
+        loving shorts
+    when you enter "cat ook"
+    grep '^root' /etc/passwd
+    this diplays the user record for the user root in /etc/paswd
+    /bin/bash looks at /etc/profile ->
+    /etc/profile.d/*.sh ->
+    /root/.bash_profile ... in that it checks for ~/.bashrc
+    this sources /etc/bashrc
+    then it executed the user configuratoin commands such as the insitution 
+        of aliases.
+    ~/.bashlogout is only used for user logout. this is where cleanup is 
+        run
+    any of the C shells run .bash_login
+    ~/.profile is used of ~/.bash_profile does not exist.
+    << = "Heredoc" second instance is herestring.
+    Three sets of user ids. 0-99 201-999 1000-60000.
+        0-99 system saministrators with logins. eg. root
+            These can only be created by the operating system.
+            full control.
+        201-999 are software accounts
+            They do not login.
+            They are created by a user.
+        1000-60000
+            regular user logins.
+    Never login as root if possible.
+    vi /etc/passwd
+    change student1 from 1 to 0 makes student1 root
+    vlock -a locks all consoles. caution!!
+    cat /etc/securetty
+    The system will never tell you why a login failed. when
+        you are trying to log in.
+    /etc/passwd was one of the original UNIX files
+    delimiter is color
+    everyone can read it.
+    you should not find a password in /etc/passwd
+    uname:UID:PGID:Comment Section:userHomeDirectory:logonCommand
+    /sbin/nologin ssya that the user does not log in.
+    logonCommand = default shell is not an accurate representation.
+    if someone tries to login to a user with /sbin/nologin
+        as the logonCommand get dumped out.
+    /etc/passwd used to conain actual passwords.
+    /etc/shadow has a salted password hash.
+    /etc/shadow ...
+    uname:$HashAlg$salt$hashValue::lastChangeDatemindays:expiry:attempts.
+    uname:*: needs a vi /etc/shadow reset.
+    /etc/login.defs sets default for passwrd aging for new accounts
+password rules
+    handled through pam
+    /etc/pam.d/passwd
+    passwd -l locks the account
+    passwd -u(f) unlocks the pasword (forces)
+    usermod can be used to lock an account
+    usermod -L
+    passwd -e uname forces uname to change their password
+    chage -d 0 forces a password change
+    use passwd -e for cleaner behavior
+    chage ookster brings up menu for password settings.
+    passwd -x allows us to reset the password expiry
+    chage -W changes the warn days.
+    passwd -f 7 changes the inactive field.
+    chage -I sets the inactive time.
+    pwconv pwunconv
+    real and effective user ids.
+    the number for the user in /etc/passwd is the REAL user id
+    the effective user id is the ide obtained by commnd (su)
+    su ookster switches user to ookster
+    su - ookster logs in as ookster 
+        runs logins scripts
+        does not change read id.
+    umask is and "and not"amsk for permissions.
+    ls -ld /home/student1
+    useradd -g primary group name or id.
+    or fix the setting in /etc/login.defs
+    useradd -G adds secondary groups
+    useradd -c  ??
+    useradd -d specifies the location of users home directory.
+        -m creates the home directory.
+        -k changes the skel
+        -s changes the default shell.
+        -r creates a system account.
+    deleting user will not delete files that are not in the 
+        user's home directory
+    userdel
+        -r removes home mail cronjobs
+Groups
+    defined in /etc/group
+    groupadd -a adds a member to the group
+    gpasswd -A gname uname add uname as an administrtor of the
+        group
+    change agroub name no issue
+    change a group id invalidates many connections
+    also be careful removing a group
+Filesytem Hierarchy Standard
+    Where you put certain types of files 
+    Standandardizes across linux versions
+    partitioning drive into segments
+    one data 
+    another third party apps
+    another user commands
+    so if one fails, it doesn't take everything down.
+    The idea of partitioning is to just divid data and 
+        applications inton different logical groups.
+    logical directory structure does not reflect 
+        physical storage
+    pwdx pig gives you the working directory for pid
+    cd directory navigation
+    type -a pwd
+        gives the absolute path to the pwd command.
+    mkdir creates direcotry
+    cd enters directory 
+        can work with absolute path.
+    relative path is relative to present working directory
+    ls -l lists the directory at the top level.
+    find dives in.
+    ls -a shows hidden files.
+    64 is the root inode for this xfs
+    touch creates a new file
+    touch also updates the acces time
+    creation time 
+    modification time
+    access time
+    change time is when the metadata changes (permissions)
+    filename -> inode -> data block
+    a file is unreferenced filename without an inode 
+    or an inode without a filename
+    touch -r used a file for refernce for time
+    hard link 
+    ln fileone filetwo
+    fileone and filetwo point to the same inode.
+    ls -lL file3 look for the real access permissions 
+        for a file that is a symbolic link
+    ls -lR is recursive
+    head
+    tail -num -f
+    rm deletes a file
+        -f force (DANGER)
+        -i interactive
+        -r recursive
+        -v verbose
+    cp src target
+    mv src target src is not delted until target is complete
+    mv also works as rename
+        unless you are moving to a differnt file system
+    find ... I love find
+    find from multiple root directories.
+    mindepth maxdepth
+        -type f files
+        -type d directories
+        -type l symlinks
+        -type block devices
+        -type c character devices
+        -size +5M greater than 5mb
+        -size -5M less than 5Mib
+        -exec command {result placeholder} \;
+    find looks for files based on the directory
+    locate works off a binary database.
+    whereis -b will give you the location of binaries.
+    make locate re-populate with updatedb
+<sidebar>
+    unset -f unsets functions
+    enable -n alias disable alias
+    enable -a alias enables alias
+    enable -f enables functions
+    linux will not look for executables in the current directory
+        use ./
+    which won't show you functions and it won't show builtins.
+    which -a shows more
+    type -a is more informative
+    which is good for getting the absolue path for cron jobs.
+</sidebar>
+    git a grep
+    ^ beginning
+    $ end
+    know your regular expressions
+    use \{num\} quantifiers
+Ownership and permissions
+    chown test
+    chown owner
+    chown owner:group
+    u--g--w-- 770 eg.
+    rwx 4 2 1
+    x needed to descend into directory
+    chmod ug+x etc
+    default permissions are 666 file 777 directory
+    umask filters it.
+    root can do anything.
+    -rwsr-xr-x /usr/bin/passwd suid is set any user executes as owner
+Partitions
+    fdisk device
+    walk through menu
+    must update with partprobe or reboot
+    blkid  gives you id information for a block
+    mount
+    mount makes stuff about quotas easier
+    mount -o remount,ro -o remount,rw etc
+    Use UUIDs in /etc/fstab if possible.
+    blkid tells me everything I need to know about a block device
+At jobs and Cron
+    at now + 5 minutes
+    > commands
+    >^Z
+    job runs in five minutes once.
+RPM
+    rpm works based on modes
+    rpm -i (--install) rpm packge
+    rpm -q query
+    rpm -U upgrade
+    rpm -e uninstall
+    rpm -l list
+    --nodeps (don't do it!)
+    -K check signature
+    --prefix change package directorry
+    --root assign new base directory
+    rpm -U (note capital) Upgrade
+    -qi production information
+    rpm --rebuilddb use this in case the database gets corrupt.
+    rpm -Va verify
+    rpm2cpio reveals the cpio archive nature of rpms.
+YUM
+    /etc/yum.conf
+    yum -y install xxx  installs without questions
+    yum groupinstall "xxx yyy ..." installs a group.
+    yum minstalls the package that corresponts to rpm -qf
+    yum --enablerepo=<new reisitory> install gcc ...
+    yum update updats old packages
+        yum upgrade additionally removes old packages.
+    dnf is yumish
+ZYPPER for SUSE
+    zypper list-patches
+    zypper if <packageNme>
+    zypper lr for list repositories
+    zypper repos -e works like yum --enablerepo=epel ...
+dpkg rpm for debian
+    dpkg -i --recursive gnome*
+    dpkg -r remove
+        dpkg -rB invalidate packages that also depend on reomved packges.
+    dpkg -r does notremove configuration files
+    dpgk -p purges tthe configuration  in addtiion to removing the package.
+apt-get is a front end like yum or dnf
+    apt-get update updates the resource list
+    apt-upgrade
+    apt-get check =rpm -v
+MAKE
+    tar -xvf will decompress the tarball into the current directory
+    read the README
+    .configure sets up the files that need to becompiled for your 
+        architecture
+    you need to have compiler dependencies in place
+    make reads he makefile to guide compilation
+    make install  installs it.
+    make uninstall unistalls it (make a tarball of the dev directory)
+Shared Libraries
+    /etc/ld.so.conf
+    /etc/ld.so.conf.d 
+    <sidebar> uname -r gives current kernel version </sidebar>
+Booting and bios
+    initrd = ram disk
+    /etc/grub.d
+    /etc/default/grub
+    grub2-mkconfig -o
+    telinit changes runlevel
+    Continuing with systemd after break
+SYSTEMD
+    systemd comes from sloaris system 10
+    soalris called targets milesotones
+    if a target fials we will degrade the things tht depend on it.
+    runs in parallel
+    targets can be a combintion of units and targets.
+    there are two places where the targets live.
+    keep admin mitts off original files
+    /usr/lib/sytemd/system all unit files don't touch them
+    anything that you modify is in /etc/systemd/system
+    systemctl +subcomand
+    systemctl --list-types mount
+    systemctl -t help lists types
+    vsftp.service lists prereqs requires wants and units that depend
+        on in.
+    exect stop post indicates what needs ton execute after stopping 
+        a service.
+    list wanted by and required by.
+    also
+    systemctl list-dependencies  cups (--reverse) shows depedencies
+    active runnin
+    active excited (waiting for a ccall)
+    active waiting (waiting on output from something else)
+    active static 
+    systemctl --now enable cups enables and starts cups
+    engines convert /etc/fstab into units
+    systemctl daemon-reload
+    systemctl set-default changes the symlnk to another default.
+    systool -pc block lists block devices.
+    lspci
+    udev used to access system devices
+    one the kernerl finished enumerating a device it creates a uevent
+    udev does its thing basd on udev rules.
+    udevadm info -a /dev/sda
+    create udev rules
+    you need the properties of the device
+    iwlist wlan0 essid
+    iwconfig wlan0 commit for change to take effect
+    ide is disk controller
+    lpadmin -e (enable) -p (printername) -v file:///dev/tty3 -m raw
+    lpstat -p tty3printer
+    cupsenable tty3printer
+    cupsdisable tty2printer
+    job wwill stick incue
+    lp -d fred /etc/passwd
+    lpstat -o
+    accept tty3printer
+    cupsdisabe tty3printer
+    lp -d tty3printer /etc/group
+
