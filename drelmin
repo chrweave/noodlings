@@ -3,8 +3,11 @@
 cd /home/cweaver/noodlings
 git fetch origin
 git merge -X theirs
-echo $USER >drelmout
-echo "Everybody loves the baby! " >> drelmout
+cd ../caw/
+gcc -O3 -o kwd ../noodlings/keyWordDB/main.c &> ../noodlings/drelmout
+cd ../noodlings
+echo $USER >>drelmout
+echo "Everybody loves the kwd! " >> drelmout
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
 git commit -F ../caw/blep drelmout
