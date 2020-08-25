@@ -3,7 +3,8 @@
 cd /home/cweaver/noodlings
 git fetch origin
 git merge -X theirs
-../caw/lch engwurds.txt |cut -c 15-16|sort |uniq -c|sort -n > drelmout
+../caw/rg64 256000 dastardly > ../caw/aak
+../caw/lch ../caw/aak |cut -c 15-16|sort |uniq -c|sort -n > drelmout
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
 git commit -F ../caw/blep drelmout
