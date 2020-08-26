@@ -2,10 +2,13 @@
 
 cd /home/cweaver/noodlings
 git fetch origin
-git merge -X theirs
-gcc -O3 -o ../caw/rg64 rg64.c
-../caw/rg64 256000 dastardly > ../caw/aak
-../caw/lch ../caw/aak |cut -c 15-16|sort |uniq -c|sort -n > drelmout
+#git stash
+git merge '@{u}'
+#git stash pop
+#../caw/rg64 409600 lorque > ../caw/aak
+#../caw/lch ../caw/aak |cut -c 14-16|sort |uniq -c|sort -n > drelmout
+../caw/rg64 10 ok > drelmout
+echo oil> drelmout
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
 git commit -F ../caw/blep drelmout
