@@ -1,6 +1,7 @@
 #!/bin/bash
-#boo
 cd /home/cweaver/noodlings
+
+
 git fetch origin
 #git stash
 git merge '@{u}'
