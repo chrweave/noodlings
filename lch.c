@@ -29,6 +29,7 @@ int main (int argc, char ** argv){
     char buff [1024];
     char * r;
     if(argc>1 && (f=fopen(argv[1],"r"))!=NULL){
+        init();
         do{
             i=fscanf(f,"%s",buff);
             if(feof(f)){
