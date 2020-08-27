@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#hashbreak
+
 cd /home/cweaver/noodlings
 git fetch origin
 #git stash
