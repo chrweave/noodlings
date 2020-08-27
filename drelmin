@@ -5,10 +5,10 @@ git fetch origin
 #git stash
 git merge '@{u}'
 #git stash pop
-#../caw/rg64 409600 lorque > ../caw/aak
-#../caw/lch ../caw/aak |cut -c 14-16|sort |uniq -c|sort -n > drelmout
-../caw/rg64 10 ok > drelmout
-echo oil> drelmout
+../caw/rg64 409600 lorque > ../caw/aak
+../caw/lch ../caw/aak |cut -c 14-16|sort |uniq -c|sort -n > drelmout
+#../caw/rg64 10 ok > drelmout
+#echo oil> drelmout
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
 git commit -F ../caw/blep drelmout
