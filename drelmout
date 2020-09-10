@@ -3,11 +3,10 @@
    Active: active (running) since Wed 2020-08-26 17:11:21 CDT; 2 weeks 0 days ago
  Main PID: 2336 (crond)
     Tasks: 1 (limit: 49099)
-   Memory: 7.1M
+   Memory: 7.9M
    CGroup: /system.slice/crond.service
            └─2336 /usr/sbin/crond -n
 
-Sep 10 03:01:01 drelm.knology.net CROND[1950502]: (root) CMD (run-parts /etc/cron.hourly)
 Sep 10 03:01:01 drelm.knology.net anacron[1950513]: Anacron started on 2020-09-10
 Sep 10 03:01:01 drelm.knology.net anacron[1950513]: Will run job `cron.daily' in 44 min.
 Sep 10 03:01:01 drelm.knology.net anacron[1950513]: Jobs will be executed sequentially
@@ -17,3 +16,4 @@ Sep 10 04:01:01 drelm.knology.net CROND[1955943]: (root) CMD (run-parts /etc/cro
 Sep 10 05:01:01 drelm.knology.net CROND[1961446]: (root) CMD (run-parts /etc/cron.hourly)
 Sep 10 06:01:01 drelm.knology.net CROND[1966788]: (root) CMD (run-parts /etc/cron.hourly)
 Sep 10 07:01:01 drelm.knology.net CROND[1972435]: (root) CMD (run-parts /etc/cron.hourly)
+Sep 10 08:01:01 drelm.knology.net CROND[1978037]: (root) CMD (run-parts /etc/cron.hourly)
