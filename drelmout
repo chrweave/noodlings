@@ -1,13 +1,19 @@
 ● crond.service - Command Scheduler
    Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
-   Active: active (running) since Sun 2020-09-20 06:55:47 CDT; 1min 17s ago
+   Active: active (running) since Sun 2020-09-20 06:55:47 CDT; 4 days ago
  Main PID: 2193 (crond)
     Tasks: 1 (limit: 49099)
-   Memory: 4.5M
+   Memory: 8.9M
    CGroup: /system.slice/crond.service
            └─2193 /usr/sbin/crond -n
 
-Sep 20 06:55:47 drelm.knology.net systemd[1]: Started Command Scheduler.
-Sep 20 06:55:47 drelm.knology.net crond[2193]: (CRON) STARTUP (1.5.2)
-Sep 20 06:55:48 drelm.knology.net crond[2193]: (CRON) INFO (RANDOM_DELAY will be scaled with factor 90% if used.)
-Sep 20 06:55:49 drelm.knology.net crond[2193]: (CRON) INFO (running with inotify support)
+Sep 24 05:01:01 drelm.knology.net CROND[706535]: (root) CMD (run-parts /etc/cron.hourly)
+Sep 24 06:01:01 drelm.knology.net CROND[713551]: (root) CMD (run-parts /etc/cron.hourly)
+Sep 24 07:01:01 drelm.knology.net CROND[720462]: (root) CMD (run-parts /etc/cron.hourly)
+Sep 24 08:01:01 drelm.knology.net CROND[727346]: (root) CMD (run-parts /etc/cron.hourly)
+Sep 24 09:01:01 drelm.knology.net CROND[734333]: (root) CMD (run-parts /etc/cron.hourly)
+Sep 24 10:01:01 drelm.knology.net CROND[741244]: (root) CMD (run-parts /etc/cron.hourly)
+Sep 24 11:01:01 drelm.knology.net CROND[748166]: (root) CMD (run-parts /etc/cron.hourly)
+Sep 24 12:01:01 drelm.knology.net CROND[755153]: (root) CMD (run-parts /etc/cron.hourly)
+Sep 24 13:01:01 drelm.knology.net CROND[762003]: (root) CMD (run-parts /etc/cron.hourly)
+Sep 24 14:01:01 drelm.knology.net CROND[768926]: (root) CMD (run-parts /etc/cron.hourly)
