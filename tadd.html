@@ -76,10 +76,10 @@
             function getProb(){
                 s=s*a+c;
                 s%=m;
-                x=(s>>27)+2;
+                x=Math.floor(s/m*10);
                 s=s*a+c;
                 s%=m;
-                y=(s>>27)+2;
+                y=Math.floor(s/m*10);
                 p=x+y;
                 document.getElementById("problem").innerHTML=x+" + "+y+" = ?";
                 document.getElementById("answer").value="";
