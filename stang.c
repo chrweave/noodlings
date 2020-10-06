@@ -9,6 +9,13 @@ double * momentums;
 double bridge;
 int bridgeSize;
 
+void cleanup(void){
+    if(positions && deltas && momentums){
+        free(positions);
+        free(deltas);
+        free(momentums);
+    }
+}
 void parseArguments(char ** argv){
     numSamples=atoi(argv[1]);
     numNodes=atoi(argv[2]);
