@@ -1,19 +1,19 @@
 ● crond.service - Command Scheduler
    Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
-   Active: active (running) since Sun 2020-09-27 09:00:06 CDT; 1 weeks 1 days ago
+   Active: active (running) since Sun 2020-09-27 09:00:06 CDT; 1 weeks 2 days ago
  Main PID: 2247 (crond)
     Tasks: 1 (limit: 49099)
-   Memory: 7.0M
+   Memory: 8.2M
    CGroup: /system.slice/crond.service
            └─2247 /usr/sbin/crond -n
 
-Oct 05 17:01:01 drelm.knology.net CROND[1392211]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 05 18:01:01 drelm.knology.net CROND[1399087]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 05 19:01:01 drelm.knology.net CROND[1405996]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 05 20:01:01 drelm.knology.net CROND[1413003]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 05 21:01:01 drelm.knology.net CROND[1420029]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 05 22:01:01 drelm.knology.net CROND[1426955]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 05 23:01:01 drelm.knology.net CROND[1433865]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 06 00:01:01 drelm.knology.net CROND[1440883]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 06 00:01:01 drelm.knology.net anacron[1440899]: Anacron started on 2020-10-06
-Oct 06 00:01:01 drelm.knology.net anacron[1440899]: Normal exit (0 jobs run)
+Oct 06 21:01:01 drelm.knology.net CROND[1586853]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 06 22:01:01 drelm.knology.net CROND[1593819]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 06 23:01:01 drelm.knology.net CROND[1600728]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 00:01:01 drelm.knology.net CROND[1607641]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 00:01:01 drelm.knology.net anacron[1607655]: Anacron started on 2020-10-07
+Oct 07 00:01:01 drelm.knology.net anacron[1607655]: Normal exit (0 jobs run)
+Oct 07 01:01:01 drelm.knology.net CROND[1614608]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 02:01:01 drelm.knology.net CROND[1621583]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 02:01:01 drelm.knology.net anacron[1621599]: Anacron started on 2020-10-07
+Oct 07 02:01:01 drelm.knology.net anacron[1621599]: Normal exit (0 jobs run)
