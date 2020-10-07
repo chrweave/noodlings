@@ -1,13 +1,12 @@
 function y=psx(windowSize,stretchFactor,sourceVector)
 %function y=psx(windowSize,stretchFactor,sourceVector)
 
-w=zeros(windowSize,1);
-ww=floor(windowSize/2);
-if mod(w,2)==0,
-    w(1:ww)=(0:ww-1)'/(ww-1);
-else
-    %w(1:ww)=(0:ww-1)'/(ww); 
-    %w(ww+1)=1/2;
-end
-w+=flipud(w);
+%w=zeros(windowSize,1);
+ww=windowSize/2;
+
+w=ivize(abs(ww-.5-(0:windowSize-1)'));
+
+w.*=w;
+w=1-w;
+w=w.^1.25;
 y=w;
