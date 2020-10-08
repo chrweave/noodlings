@@ -1,19 +1,19 @@
 ● crond.service - Command Scheduler
    Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
-   Active: active (running) since Sun 2020-09-27 09:00:06 CDT; 1 weeks 2 days ago
+   Active: active (running) since Sun 2020-09-27 09:00:06 CDT; 1 weeks 3 days ago
  Main PID: 2247 (crond)
     Tasks: 1 (limit: 49099)
-   Memory: 8.2M
+   Memory: 8.1M
    CGroup: /system.slice/crond.service
            └─2247 /usr/sbin/crond -n
 
-Oct 06 21:01:01 drelm.knology.net CROND[1586853]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 06 22:01:01 drelm.knology.net CROND[1593819]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 06 23:01:01 drelm.knology.net CROND[1600728]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 07 00:01:01 drelm.knology.net CROND[1607641]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 07 00:01:01 drelm.knology.net anacron[1607655]: Anacron started on 2020-10-07
-Oct 07 00:01:01 drelm.knology.net anacron[1607655]: Normal exit (0 jobs run)
-Oct 07 01:01:01 drelm.knology.net CROND[1614608]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 07 02:01:01 drelm.knology.net CROND[1621583]: (root) CMD (run-parts /etc/cron.hourly)
-Oct 07 02:01:01 drelm.knology.net anacron[1621599]: Anacron started on 2020-10-07
-Oct 07 02:01:01 drelm.knology.net anacron[1621599]: Normal exit (0 jobs run)
+Oct 07 14:01:01 drelm.knology.net CROND[1705102]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 15:01:01 drelm.knology.net CROND[1712017]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 16:01:01 drelm.knology.net CROND[1719007]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 17:01:01 drelm.knology.net CROND[1725945]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 18:01:01 drelm.knology.net CROND[1732852]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 19:01:01 drelm.knology.net CROND[1739768]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 20:01:01 drelm.knology.net CROND[1746753]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 21:01:01 drelm.knology.net CROND[1753719]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 22:01:01 drelm.knology.net CROND[1760698]: (root) CMD (run-parts /etc/cron.hourly)
+Oct 07 23:01:01 drelm.knology.net CROND[1767643]: (root) CMD (run-parts /etc/cron.hourly)
