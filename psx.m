@@ -1,41 +1,35 @@
-function y=psx(windowSize,stretchFactor,sourceVector)
-%function y=psx(windowSize,stretchFactor,sourceVector)
+function y=psx(stepSize,stretchFactor,sourceVector)
+%function y=psx(stepSize,stretchFactor,sourceVector)
 
 %w=zeros(windowSize,1);
-ww=windowSize/2;
-www=[floor(ww),windowSize-floor(ww)];
+bigStep=stretchFactor*stepSize;
+windowSize=bigStep*2;
 
-w=ivize(abs(ww-.5-(0:windowSize-1)'));
+w=ivize(abs(bigStep-.5-(0:windowSize-1)'));
 
 w.*=w;
 w=1-w;
 w=w.^1.25;
-n=floor(length(sourceVector)/windowSize);
-l=n*windowSize;
+n=floor((length(sourceVector)-windowSize)/stepSize);
+l=n*bigStep+windowSize;
 
-z=zeros(l*stretchFactor,1);
+z=zeros(l,1);
 pa=0;
 ta=0;
-ki=0;
-kj=0;
 q=zeros(windowSize,1);
-for cont=1:(2*n-1),
+for cont=1:n,
     q=w.*sourceVector(pa+1:pa+windowSize);
-    pa+=www(ki+1);
-    ki+=1;
-    ki=mod(ki,2);
+    pa+=stepSize;
     r=fft(q);
     sa=rand(windowSize,1);
     sb=2*pi*i*sa;
     sc=exp(sb);
     sd=sc.*r;
     se=ifft(sd);
-    s=real(se);
+    s=real(se).*w;
     for j=1:stretchFactor,
         z(ta+1:ta+windowSize)+=s;
-        ta+=www(kj+1);
-        kj+=1;
-        kj=mod(kj,2);
+        ta+=stepSize;
     end;
 end
 y=rnorm(z);
