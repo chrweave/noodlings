@@ -4,8 +4,8 @@ function y=psx(stepSize,stretchFactor,sourceVector)
 %w=zeros(windowSize,1);
 bigStep=stretchFactor*stepSize;
 windowSize=bigStep*2;
-
 w=ivize(abs(bigStep-.5-(0:windowSize-1)'));
+
 
 w.*=w;
 w=1-w;
