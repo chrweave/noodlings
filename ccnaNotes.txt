@@ -1,0 +1,25 @@
+Boot Camp day 1
+    Videos
+    ip sla 1
+    sla shcedule life forever
+    ip rpoute 1.1.1.1 255.255.2555 10.2.3.2 10
+    ping 1.1.1.1
+    FTP and TFPT
+    update firmware
+    ios updates
+    FTP opens 21 for control mesages
+    TCP 20 for data
+    fully interactive with 2-way file transfer.
+    Boot Camp day 1
+        Videos
+        ip sla 1
+        sla shcedule life forever
+        ip rpoute 1.1.1.1 255.255.2555 10.2.3.2 10
+        ping 1.1.1.1
+        FTP and TFPT
+        update firmware
+        ios updates
+        FTP opens 21 for control mesages
+        TCP 20 for data
+        fully interactive with 2-way file transfer.
+    
