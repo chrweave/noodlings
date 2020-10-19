@@ -343,4 +343,64 @@ Some times understanding why the wrong answers are wrong is as valuable as why t
     on-premises cloud 
     cloud in shop
     private cloud and public cloud.
+    cloud computing solves an numbr of computing problems
+    internet 
+    wan
+    phone company
+    fabric of network
+    now it means virtual machines working on somebody else's network.
+    Saves you buying all systems and support switches to rental model.
+    provatge cloud means you host your own machines. 
+    On demand self service.
+    Resource pooling
+    my virtual machine does not get its own host.
+    10000-20000 running servers
+    rapid elasticity
+    add more hosts to your cluster
+    measured, metered service.
+    I like private clouds
+    Hybrid public/private
+    trade offs for performance versus privacy.
+    ... as a service in the cloud
+    XaaS
+    office 365 is software as a service
+    1.3 Physical interface and cabling types.
+    PBQs
+    
+    Cable types
+    Single mode laser cable longer cable
+    Multi-mode 2 cores
+    shorter cables
+    shorter distances
+    bounce is allowed.
+    Copper Unshielded twisted pair
+    Shielded Twisted pair
+    Coaxial???
+    Copper has lower bandwidth generally
+    Cat 5e or better 
+    40GBPS for top copper
+    10BaseT full duplex
+    100BaseT
+    1000BaseT Gigabit speed
+    T or tX is copper
+    fiber is the other 3
+    add GBICs or SFP
+    Straight through or crossover
+    two pairs of wires for 10 & 100 BASE
+    1000Base needs all 4 wires
+    1-3 2-6 crossed for crossover
+    crossover same to same
+    pc to router crossover
+    Voip pulls power over internet
+    power enabled switch
+    show ip interface brief
+    sh ip in br
+    sh int eth 0
+    TCP SYN-SYN ACK-SYN
+    UDP sends datagrams
+    TCP is connection oriented
+    Layer 4 transport layer
+    Layer 3 IP
+    Layer 2 Ethernet
+    netstat -ano
     
