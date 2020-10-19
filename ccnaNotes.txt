@@ -55,7 +55,7 @@ Boot Camp day 1
     sendsing many many SYNs
     aCKS shut you down.
     atttackers are looking for vulnerabilities
-    uhndreds and thousands f attacks are not publicized
+    uhndreds and thousands of attacks are not publicized
     
     
     
@@ -75,5 +75,138 @@ MATT BRUSSELL credentials ...
     config t(erminal)
     Switch native IOS
     noshut enables the change.
-
-
+    
+Some times understanding why the wrong answers are wrong is as valuable as why the right answer is right.
+    Know your Show commands.
+    Troubleshooting is very important.
+    Know your show commands.
+    Slides go in the order of objectives.
+    
+    Nowaday cloud means something up on the public network
+    Rack space is hosting your infrastructure
+    1.3 cabling types
+    1.3a compaere singel mode to multi mode fiber
+    1.3b ethernet connections.
+    ethernet is a broadcast -mulit access network.
+    concepts of PoE
+    Power over Ethernet see the voip phone
+    802.3ax?
+    1.4 identifyb interface cable issues
+    mismatch duplex or speed ... collisons
+    1.5 TCP and UDP
+    TCP 3 way handshake
+    UDP is "connectionless"
+    1.6 configure and verify IPV4 addressing and subnetting
+    1.7Private addresses 10.xx.x.xx
+    private network calsses.
+    like on the lan
+    Running NAT
+    1.8 configure IPV6 adderssing and prefix.
+    1.9 compare IPv6 address types
+        - Global Unicast
+        - Uniques Local
+        - Link Local
+        - Anycast
+        - Multicast
+        - Modified EUI 64
+    1.10 Verify basic network paramaters.
+    Client OS
+    1.11 Describe wireless networks
+    1.11a Nonoverlapping wireless principles
+    1.11b SSID
+    1.11.c RF
+    1.11.d Encryption WEP WPA WPA2 WPA3 rc4????
+    1.12 Explain virtualization fundamentals
+    1.13 Switching concepts
+    1.13.a MAC learning and aging.
+    1.13.b Frame switching
+    1.13.c Frame flooding.
+    MAC address table
+    2.0 Network access
+    2.1 configure and verify vlans spanning multiple switches
+    2.1.a access ports (data and voice).
+    2.1.b Defualt Vlan
+    2.1.c Connectivity
+    turn access ports into trunk ports.
+    trunk ports connect switches
+    2.2 Configure and verify interswitch connectivity.
+    2.2.a Trunk Ports
+    2.2.b 802.1Q frame tag
+    2.2.c Native Vlan
+    2.3 Configure Discovery Protocols
+    CDP and LLDP
+    2.4 Configure and verify (Layer2/Layer3)
+    EtherChannel (LACP)
+    2.5 Basic operation of Rapid PVST+ Spannig Tree Protocol and identify basic operations
+    2.5.a Root port root bridge (primary/secondary) and other port names
+    2.5.b Port states (forwarding/blocking)
+    PortFast benefits
+    2.6 Compare Cicso Wireless Architecture and AP modes.
+    Thin access points join a controller and the controller pushes out the settings.
+    2.7 Describe physical infrastructure connections of WLAN components
+    2.8 Describe AP WLC management access
+        TACACS+ RADIUS
+    2.9
+    25% 3.0 IP connectivity
+    conf t = configure terminal
+    Device# cdp neighbors
+    3.1 Interpret the commadns of routing table
+    3.1.a Routing Protocol code
+    3.1.b Prefix CIDR
+    show ip route shows routing table.
+    3.1.c Network mask
+    3.2.d Next hop
+    3.1.e Administrative Distance
+    3.1.f Metric
+    3.1.g Gateway of lasgt resort.
+    3.2 Determine how a router makes a forwarding decision
+    3.2.a Longest match
+    3.2.b Administrative distance
+    3.2.c Routing Protocol Metric
+    3.3 Configure and verify IPv4 and IPv6 static routing
+    3.3.a Default route
+    3.3.b Network route
+    3.3.c host route
+    3.3.d flating static change adminisgtarative distacne to make it  a backup.
+    3.4 Configure and verify singel area OSPFv2
+    3.4.a Neighbor adjacencies
+    3.4.b Point to Point 
+    3.4.c Broadcast (DR/BDR seelction)
+    3.4.d Router ID
+    3.5 DEscribe first hop redundancy protocol
+    FHRP
+    Two node cluster
+    10% 4.0 IP services
+    4.1 Configure and verufy inside source NAT using static and pools
+    4.2 Configure NTP operations in client and server mode
+    4.3 Explain the role of DHCP and DNS
+    4.4 SNMP legacy Simple Network Management Protocol
+    4.5 DEscribe the use of syslog features including facilities and levels
+    4.6 Configure DHCP
+    4.7 Explain  the forwarding per-hop behavior for QoS
+    4.8 Configure network devices for remote access using ssh
+    4.9 FTP TFTP
+    15% 5.0 SECURITY
+    5.1 define key security concepts
+    5.2 describe security program elements
+    5.3 local passwords
+    5.4 password policies
+    5.5 VPNs
+    5.6 ACLs
+    5.7 Configure Layer 2 security.
+    ARP poisoning ...
+    Port security
+    5.8 know A A A and differnentiate
+    5.9 Describe wireless security protocols
+    5.10 configure WLAN using WPA2 PSK
+    10% 6 Automation
+    6.1 Explain how automation impacts network amangement
+    6.2 Compare traditional networks with controlleer based networking.
+    6.3 DEscribe controller -based software defined architectures
+    6.3.a Separation of control plane and data plane
+    6.3.b North-bound and south-bound APIs
+    6.4 Compare traditional campus device management with Cisco DNA center
+    6.5 Describe characeristics of REST-based APIs (CRUD HTTP verbs and data encoding)
+    6.6 Recognize the capabilities of configurations management tools Puppet Chef Ansible
+    6.7 Interpret JSON encoded data
+    
