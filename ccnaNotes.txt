@@ -56,4 +56,24 @@ Boot Camp day 1
     aCKS shut you down.
     atttackers are looking for vulnerabilities
     uhndreds and thousands f attacks are not publicized
+    
+    
+    
+MATT BRUSSELL credentials ...
+    Yes, we believe you
+    Do the practice tests
+    Do the exercises
+    pick 2 and drag/drop
+    The format has been  changes so that all the interactive porttions are dropped
+    practice lots of show commands
+    OSPF simlet
+    Broken EGERP network
+    Broken RIP netweork
+    Brand new router
+    setup dialog
+    Router#
+    config t(erminal)
+    Switch native IOS
+    noshut enables the change.
+
 
