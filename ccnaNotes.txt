@@ -311,4 +311,36 @@ Some times understanding why the wrong answers are wrong is as valuable as why t
     BYOD are dangerous
     Don't let it on your network
     If you have to let BYODs on make sure their security is curent.
+    App server runnign SQL
+    Every server runs on TCP or UDP
+    DNS UDP 53
+    POP 110
+    Know your ports
+    SMB 139/445 for controlling firewall traffic
+    VM is running any OS ...
+    1.2a two tier
+    1.2b three tier core distribution access ...
+    redundancy in layer 1 and 2
+    spannig tree allows you to avoid broadcast storms
+    3 tier - 2 tier core and distribution combined
+    don't trust the edge.
+    access layer
+    CDA = Core Distribution Access
+    Distribution layer
+    vlans routing
+    Core is backbone
+    Spine leaf Kmn graphs no redundancy between spine nodes
+    WAN all ethernet switches and routers.
+    the topologies can be physical or logical
+    WAN serial links
+    Point to Point (SERIAL)
+    every /30 network is PPP
+    Hub and spoke ecntral location for switching or routing.
+    Not necessarily an Ethernet hub.
+    full mesh Kn graph ltsa links.
+    DM-VPN dynamic multipoint VPN
+    redundancy is good but you need a treeing technique
+    on-premises cloud 
+    cloud in shop
+    private cloud and public cloud.
     
