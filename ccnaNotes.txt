@@ -10,16 +10,50 @@ Boot Camp day 1
     FTP opens 21 for control mesages
     TCP 20 for data
     fully interactive with 2-way file transfer.
-    Boot Camp day 1
-        Videos
-        ip sla 1
-        sla shcedule life forever
-        ip rpoute 1.1.1.1 255.255.2555 10.2.3.2 10
-        ping 1.1.1.1
-        FTP and TFPT
-        update firmware
-        ios updates
-        FTP opens 21 for control mesages
-        TCP 20 for data
-        fully interactive with 2-way file transfer.
-    
+    TFTP uses tCP port 69 
+    "connectionless"
+    Tranlation source NAT
+    SNAT
+    DNAT
+    NAT is network address table
+    10.1.2.0/24
+    1.1.1..0/24
+    1.1.1.2
+    inbound acces to certain device.
+    Source NAT]
+    stteless and stateful
+    no need for a stte table.
+    we don't really want to specify address
+    10.1.1. address may ba Natted
+    NAT overload
+    Source port and source ip address
+    inside and outside pool
+    R1#
+    config t
+    ip nat inside source static
+    10.1.1.2 1.1.1.2
+    f0/f0
+    ip nat inside
+    f0/1
+    ip nat outside
+    undo with the prefix no
+    permit 10.1.1.0 
+    nat pool nat-pool 1.1.2.2 1.1.2.5 netmas 255 255.255.248
+    nat inside sourfe list inside-hosts nat-pool
+    SECURITY CONCEPTS
+    threat 
+    vulnerability
+    threat 
+    powersuurge malware
+    atack
+    threat scan be employees
+    ransoamware
+    insiders threat
+    huge damamge
+    remove tracks
+    DoS attacks
+    sendsing many many SYNs
+    aCKS shut you down.
+    atttackers are looking for vulnerabilities
+    uhndreds and thousands f attacks are not publicized
+
