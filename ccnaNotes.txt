@@ -210,3 +210,105 @@ Some times understanding why the wrong answers are wrong is as valuable as why t
     6.6 Recognize the capabilities of configurations management tools Puppet Chef Ansible
     6.7 Interpret JSON encoded data
     
+    
+    Basic Commands and helps
+    ? tells you what you can type
+    command  ? telle you what is available next
+    Tab works like linux
+    command param 1 ?
+    > en (enable)
+    # user sean secret sean
+    #(privilege level 15)
+    #config t
+    Router(congfig)# (Global configuration mode)
+    Router(cofig)# if
+    Router(config-if)# sub
+    Router(config-subif)# ...
+    exit
+    Whole bunch of prompts 
+    Whole bunch of of commands
+    OSI seven layers
+    TCP 4 layers
+    Layer 4 is ports
+    UDP 69
+    Layer 1 bit
+    layer 2 frame
+    layer 3 packet
+    layer 4 segment or datagram
+    Layer 1 devices hubs and repeaters
+    Layer 2 switches
+    Layer 3 routers
+    Router icon each interface is on its own subnet.
+    routers connect different networks together. routing table if not defualt route ...
+    localadmin via console
+    after ssh is configures use ssh
+    SDN
+    Layer 2 vs layer 3 switches
+    Layer 2 looks only at Mac Addresses.
+    Layer 3 switches can also route.
+    Switches have switchports  rj54 or small form factor plauggable for fiber optics.
+    SFP ports require SFP trancievers
+    All ports start out as access ports but we can turn them into trunk ports
+    all ports live in vlan 1
+    1002-1005 are reserved
+    show version
+    Layer 2 switches only let you talk to people in you vlan.
+    Layer 2 switches do no touting.
+    default gateway must be an address on your subnet.
+    management address so you can ssh into the switches
+    SVI ip address
+    Layer 3 switches can do some routing 
+    multi-layer switch.
+    source mac and destination mac are in the same  vlan
+    vlan to vlan has to cross layer 3
+    forward packets based on IP address.
+    inter-VLAN routing
+    arp to find the gateway they find the router.
+    Firewall and IPS stuff
+    DMZ
+    WWW->DMZ->internal
+    WWW/DNS/SMTP
+    Firewalls filter packest 
+    Next-gen firewalls filter packets based on content.
+    ACLs on routers interfaces.
+    match nothing means you get denied
+    stateful ...
+    Static firewall is just and ACL and a list of rules.
+    Stateful firewalls like windows firewall let you establish an outgoing connections inspects traffic and allwos response
+    context based access control 
+    Next Generation Firewalls.
+    Intrusion prevention  systems
+    Intrusion detection systems monitor and alert
+    Intrusion prevention can modify ACLs based on behavior.
+    HIPS vs HIDS
+    IPS
+    signature based
+    anomlay based
+    Fire Power
+    Application Visibility and Control
+    AVC
+    next gen stuff can quarantine based on AVC
+    Diversify device vendors
+    802.11a 5G
+    802.11b 2.4
+    802.11g 2.4
+    802.11n 2.4/5
+    802.11ac 5 ghz
+    Multi input multi output MIMO
+    Wireless cotroller
+    load balancing
+    overlap in coverage
+    Cisco DNA enter APIC-EM controller
+    central pane of glass to manage all network devices.
+    join a controller.
+    Discovery inventory topology
+    lifesysle management
+    application visibility
+    converged networks  wired and wirelessplug and play (Autodiscover)
+    Endpoint is the thing that we need to play into the switch or access point.
+    Stay off the wireless unless you can authenticate.
+    endpoints are typically the most vulnerable of components.
+    BYOD are dangerous
+    Don't let it on your network
+    If you have to let BYODs on make sure their security is curent.
+    
