@@ -507,6 +507,22 @@ Talking about casting
     Get newtork from router and EUI-64 your MAC on it.
     Device that answered becomes your default gateway.
     link local address is good for multicasting.
+    IPv6 does not facilitate broadcast; only multicast.
+    2000::/3 Through 3fff::/3 Global unicast 
+    fc00::/7 - fdff::/7
+    link locals fe8::/10 - febf::/10
+    ff00::/8 frough ffff::/8 Multicast
+    Anycast is like a multicast.
+    Connect to the "closest"
+    Multicast means to a group.
+    ff02::9 RIP
+    FF02::5 OSPv3
+    EIGRPv6 uses FF02::A
+    Modified EUI-64
+    MAC 00:0C:29:0C:47:D5
+    EUI 020C:29FF:FE0C:47D5 (flip bit 7).
+    2001:0:dead:beef:4dad::1
+    
     
     
     
