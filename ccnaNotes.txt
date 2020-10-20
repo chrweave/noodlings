@@ -456,4 +456,33 @@ Tuesday Subnetting
     240
     "Classless" Means A B or C are irrelevant.
     USE THE CHART THAN HE PROPOSED
+    Smaller /subnets are eevile.
+Talking about casting
+    Unicast one to one
+    Broadcast to every host on subnet
+    multicast to some hosts.
+    224.x.x.x - 239.x.x.x is a multicast
+    Some multicasts are proprietary.
+    rfc 1918 give private address since we are running out of public addresses.
+    Get blocked at the edge 
+    A 10.x.x.x is private
+    172.16.0.0-172.321.255.255 private class b
+    192.168.x.x is privage class c.
+    IANA reserved for private addresses.
+    10/8 A 172.16/12 B 192.168/16 C.
+    NAT router
+    NAT servers track the privage addresses and ports.
+    Configure the web server to use a proxy or NAT.
+    NAT Router
+    IPv6
+    Routing sesnds frame to router.
+    router strips layer 2 info and repacks with headers for next hop according to table.
+    BACK TO V6 ...
+    128 bits
+    32 hex charcters
+    8 blocks of 16 bits.
+    prefix or prefix mask are CIDR notation.
+    Leading zeros can be dropped; trailing zeros cannot for IPv6 addresses.
+    DNS resolves names to addresses.
+    
     
