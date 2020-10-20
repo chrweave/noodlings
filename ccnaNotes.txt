@@ -522,6 +522,94 @@ Talking about casting
     MAC 00:0C:29:0C:47:D5
     EUI 020C:29FF:FE0C:47D5 (flip bit 7).
     2001:0:dead:beef:4dad::1
+WIRELESS
+    RF
+    not connected by wires
+    IEEE 802.11
+    Wireless access point
+    Wireless access point uses dual radios.
+    Personal Area Network = Bluetooth.
+    Wireless LAN
+    BLuetooth Low Energy IOT
+    Wimax ... gone
+    Cellular Broadband
+    GSM
+    CDMA
+    Code Divisioin Multiple Access
+    Satellite Broadband
+    6400 satellites cluttering the sky.
+    802.11 generations ...
+    Internatioan Telecommunications Union own the spec.
+    Wi-Fi Alliance  ... device uses standards
+    You neeed a Wireless NIC
+    Could be a USB dongle.
+    Access point provides access to wired network
+    switch interconnect devices
+    Wireless router ...
+    SSID and Pass phrase
+    after authentication you get access.
+    Autonomous Aps
+    Standalone device. Pluggend wired ethernet cable and it runs.
+    Controller based apps for multiple access points LWAPP
+    Omnidirectional antennae make signal in all directions
+    Directional radios a specific directions.
+    Yagi and parabolic dish
+    MultiplInput Multiple Output MIMO uses multiple antennas to increase bandwidth.
+    Ad hoc mode. Used to connect clienst in peer-to-peer without anAP
+    Infrastructure mode connects clients to AP.
+    Tethering share connection off of phone.
+    802.11 frame structure (sort of like an ethernet frame).
+    CSMA/CA Carrier sense multiple access collision detections
+    WLANS are half duplex.
+    everybody takes a turn.
+    Wireless client and Access Point.
+        Discover wireless ap
+        authenticate with the AP AppAssociate with the AP
+        (DE-Associateion attack breaks this associations
+        DoS attack).
+    SSID The client needs to kn ow the name of the network to connect.
+    Password
+    Netwrok mode 802.11
+    Security 
+        WEP rc4
+        WPA rc4 shared key TKIP
+        WPA2 AES-128-CCMP key keeps changing.
+        WPA3 AES-256-GCMP
+        (Galois counter mode)
+    Channels settings 1,6,11 non overlapping chanels.
+    Where is the SSID advertised? The beacon frame.
+    Active clients must know the SSID.
+    Hidden APs ...
+    Direct Sequence Spread Spectrum
+    Frequency Hopping Spread Spectrum
+    Orthogonal Frequency Spread Spectrum
+    How many channels are there in America ... we use 11 of the 14 in 2.4 gig.
+    Nonoverlapping wifi in gig range ...
+    each channel is 20 mhz wide.
+    buid a network use a coverage overlap but not a chanel overlap.
+    1,6,11
+    SSID Service Side ID
+    Name for wireless LAN
+    beacon frame announces SSID MAC address frequency channel etc.
+    Spoofing copies all of these.
+    Evil Twin is in beacon frames.
+    SSIDs are case sensitive.
+    Hide the SSID ...
+    in EBSS multiple APs can have the same SSID working on differnt channels.
+    received signal streng index
+    closer signal give you better
+    reception.
+    RF wave mechanics.
+    Enryption
+    not rc4
+    don't use WEP
+    WPA only uses pre-shared key as the initial key
+    CCMP (counter / CBC)
+    WPA3 AES-256-GCMP
+    
+    
+        
+    
     
     
     
