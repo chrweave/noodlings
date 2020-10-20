@@ -606,6 +606,30 @@ WIRELESS
     WPA only uses pre-shared key as the initial key
     CCMP (counter / CBC)
     WPA3 AES-256-GCMP
+    Cloud computing virtualization
+    Software as a service
+    XaaS
+    virtual switch
+    every virtual machine has a vritual nic.
+    802.1q vlan id.
+    virtual switching works like physical switching
+    containers ...
+    Abstraction layers
+    4 vms sharing the hardware.
+    Hypervisor carves up physical resources  for use by VMs.
+    Virtual CPUs
+    Hyperthread them ...
+    Physical ram is partitioned.
+    Type 1 bare metal
+    Type 2 factors through OS.
+    ESXI is type 1
+    
+    
+    CDP=Cisco Discovery Protocol
+    Layer 2 multicast
+    show cdp
+    show cdp neighbor
+    proprietary LLDP
     
     
         
