@@ -484,5 +484,31 @@ Talking about casting
     prefix or prefix mask are CIDR notation.
     Leading zeros can be dropped; trailing zeros cannot for IPv6 addresses.
     DNS resolves names to addresses.
+    double colons mean all zeros sparsed.
+    Every interface has two v6 addresses one like fe80::9971:4fc1:d208:585a/64 isn LINK LOCAL.
+    router(config)# ipv6 unicast-routing
+    makes a v4 router forward v6 traffic.
+    all of your major devices should have a static address.
+    router(config)# interface gigabitethernet0/0
+    router(config)# ipv6 address 2001:D88:1111:1::1/64
+    eui-64 make your mac address the client.
+    cuts your MAC address in half and puts fffe in the middle.
+    router(config-if)#ipvy6 address dhcp (don't do this to a router or a switch).
+    Link Local address TTL=1;
+    it can't get off its subnet.
+    used for mulitcast discovery.
+    give it a static ip or make it a dhcp client.
+    SLAAC address mask and gateway.
+    StateLess Address AutoConfig.
+    Hey! I'm looking for a router.
+    take network address and slap on your mac and you have an auto configured ipv6.
+    You also need to DNS server address.
+    router(config-if):ipv6 address autoconfig
+    Get newtork from router and EUI-64 your MAC on it.
+    Device that answered becomes your default gateway.
+    link local address is good for multicasting.
+    
+    
+    
     
     
