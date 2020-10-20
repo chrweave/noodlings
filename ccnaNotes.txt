@@ -403,4 +403,28 @@ Some times understanding why the wrong answers are wrong is as valuable as why t
     Layer 3 IP
     Layer 2 Ethernet
     netstat -ano
-    
+    syn/syn-ack/ack
+    TCP has a segment window size field
+    sliding window
+    SVI switch virtual interface.
+    Routers get an address on every interface.
+    address mask no shut
+    the switch only needs a singel address.
+    default gateway is usually the first address. broadcast is usually the last in the subnet.
+    (config-if)# interface e0/0
+    (config-if) ip (address) mask
+    (config-if) no shut
+    Classes
+    0-127 Class A (1-126)
+    128-191 B
+    192-223 C
+    224-239 D multicast
+    240+ reserved for research
+    A ... /8
+    B ... /16
+    C ... /24
+    Quad 4
+    See RFC 1918
+    Customer's get address from ISP 
+    ISPs get addresses from regional
+    ARIN is us regional.
