@@ -428,3 +428,32 @@ Some times understanding why the wrong answers are wrong is as valuable as why t
     Customer's get address from ISP 
     ISPs get addresses from regional
     ARIN is us regional.
+Tuesday Subnetting
+    practice using the scratch pad.
+    make sure you know binary.
+    CIDR notation
+    Classless Inter Domain Routing.
+    por ejemplo ...
+    10.10.10.99/28
+    10.10.10.(01100011)
+    10.10.10.96 gateway
+    10.10.10.111 broadcast
+    0
+    16
+    32
+    48
+    64
+    80
+    96  X 
+    112 X
+    128
+    144
+    160
+    176
+    192
+    208
+    224
+    240
+    "Classless" Means A B or C are irrelevant.
+    USE THE CHART THAN HE PROPOSED
+    
