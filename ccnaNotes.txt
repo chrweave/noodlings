@@ -826,12 +826,113 @@ SWITCHING CONCEPTS
     interface port-chanel 1
     switchport mode trunk
     switchport trunk allowed vlan 1, 2, 20
-    static etehr channel means you are using syntax
+    static ether channel means you are using syntax
     both sides on on
     Port Arrgegation Protocol
     Link Aggregation Control Protocol
     PAGP is Cisco proprietaary LACP
     auto or desireable vs active/passive
+    speed and duplex must match
+    operational access or trunking state must match.
+    access ports live in a vlan
+    show interface status |include Po|14|15
+    layer three etherchannel needs to have an address for portchannel
+    Spanning Tree Protocol
+    gets rid of loops at layer two
+    don't thrash broadcast loops
+    802.1d is spanning tree (Per vlan)
+    Rapid PVST+ (proprietary)
+    incorrect native vlan settings kill  spanning tree
+    bridge id 32768.MAC
+    low mac wins
+    all ports on root stay open.
+    bpdus bridigin protocol data units
+    discard discard learn forward
+    blocking and discarding both drop the frame.
+    spanning tree watches trunk states.
+    if the state changes, the bridging protocol is re-invoked.
+    make sure switches are all running the same version of spanning tree.
+    it all sort fo runs fine by default, but we can set some parameters.
+    Bridge ID is given to every switch
+    lowest priority wins
+    if priorities are tied defualts to MAC address.
+    Bridge priiority is a multiple of 4096
+    Port cost 
+    bpdu ports advertise costs
+    high speed makes low costs 
+    find lowest path cost back to root.
+    (Smells like Dijkstra)
+    Different vlans can have different spanning trrees based on networking needs.
+    (config)#spanning-tree mode (rapid-)pvst
+    legacy switch that 802.1d slows us down.
+    everybody advertises bridge id
+    lowest id becomes the root
+    find lowest cost path back to root.
+    blocking/doscarding learn forward.
+    this is converged.
+    everything is converged 
+    blocking forwarding 802.1d
+    discarding forwarding pvst
+    tune the tree by setting priority.
+    pvst 
+    spannig-tree vlan 1 priority 4096
+    set bridge priority per vlan
+    default BID priority 32768
+    BPDU guard error disables Portfast access ports from receiving BPDUs
+    guard agains attack
+    Portfast immediately transition to forwarding 
+    DO NOT USE PORTFAST ON TRUNKS
+    Do not let things sent BPDUs into access ports
+    BPDU guard must be enabled.
+MORE WIRELESS
+    Autonomonus access ... Thick
+    Cloud based Cisco Meraki
+        splits into control plane and the data plane.
+    Protocols where devices negotiate with each other is the control plane.
+    Split MAC acrhitecture
+    AP management functions
+    QOS MAC management etc
+    Lightweight access points 
+    LAP WLS communicate through a CAPWAP tunnel communication between the access points and a controller.
+    desktops are going to bein vlan byut domain controllers are not.
+    DTLS datagram transport layer security.
+    Wireless CDA
+    AP is the connefctor between the wireless user an the wired network.
+    local default light weight mode
+    monitoring mode packet sniffign
+    sniffer mode is also sniffing
+    flexConnect can flip between SSIDs and a vlan if the CAPWAP tunnel is broken.
+    Rogue detector looks for devices that don't belong
+    Bridge is a point to point APs talking to eachn other 
+    Flex+Bridge FlexConnect opperation is enabled on a mesh
+    SE-Connect AP dedicates its radios to spectral analysis.
+    CAPWAP
+        control and provisionaing of wireless access pints through a tunnel
+        open standard
+        based on LWAPP ads DTLS
+        tunels over UDP (layer 4)
+        operates ipv4 or 6
+        uses protocol 17
+    Split MAC
+        AP MAC functions
+        WLC MAC functions
+    DTLS encrypts CAPWAP tunnel
+    Flex connect allos control over WAN
+    TACACS+ is cisco proprietary
+    RADIUS uses domain credentials
+    both AAA servers
+    local database of unames and passwords
+    GUI CLI and console port
+    Use SSH cs telnet
+    vty in with names and passwords
+    WLC management over wireless.
+    Two pieces of required information 
+    profiell and ssid
+    needed for beacon frame
+    radio policy
+    AAA servers on AAA tab
+    point it at a RADIUS that lives in an active directory.
+IP CONNECTIVITY
     
     
     
