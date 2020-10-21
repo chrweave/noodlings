@@ -933,6 +933,55 @@ MORE WIRELESS
     AAA servers on AAA tab
     point it at a RADIUS that lives in an active directory.
 IP CONNECTIVITY
-    
-    
+    If you don't know how to get thre you can't deliver the frame.
+    Use gateway of last resort.
+        A)Code (S static route)
+        B)Prefix
+        C)network mask (CIDR)
+        D)Admin distance
+        E)Metric
+        F)Next Hop
+    Administrative distance
+    Best way has the lowest Admin distance
+    Connected interface 0
+    static route 1 
+    EIGRP 5
+    BGP 20
+    I-EIGRP 90
+    OSPF 90
+    isis 115
+    Routing Informaiton Protocol RIP 120
+    EGP 140
+    External EIGPRP 170
+    Internal BGP 200
+    Unknown 255
+    RIP hop count Bellman-ford
+    EIGRP uses bandwidth delay reliability and load. (DUAL)
+    OSPF shortest path first Dijkstra
+    these are interior gateway portocols.
+    Bledrum k1-5
+    lightining bolt means serial ppp
+    connected 
+    static (spelled out in config)
+    dynamic means I learned it through a routing protocol
+    Defualt route 0.0.0.0 (Defualt gateway or drop).
+    Local routing is not routing
+    on the same subnet we will be in the same vlan.
+    MAC addresses change on each links
+    Remote routing
+    hop hop hop
+    Router Logic
+    receive a frame if not corrupted ... process
+    de-encapsulate
+    check destination
+    look at routing table.
+    if I have a route send to exit interface
+    else defualt
+    else drop.
+    encap with appropriate MAC
+    ICMP desitnation unreachable back to source IP.
+    Longest match amkes the best route
+    else pick lowest lowest Ad
+    else pick best metric
+    if there is still a choice ... load balance.
     
