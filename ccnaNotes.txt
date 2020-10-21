@@ -993,4 +993,92 @@ IP CONNECTIVITY
     Host route v4/32 v6/128
     Floating static set AD
     more likely to use default gateway.
+Configure and verify OSPFv2
+    Network statement
+    partition into router areas
+    add static routes ... but ...
+    flip on a routing protocol advertise your networks via things you are connected to.
+    advertise routing info to neighboring routers.
+    find pathways with the lowest cost
+    advertise change
+    everybody else updates
+    topology changes causes updates.
+    once the routing tables are stable, the network has converged.
+    Neighbors ... neighbor up 
+    adjacencies are up up
+    Link State Database LSDB
+    224.0.0.5
+    LSA Link State Advertisement
+    multicast on 224.0.0.6
+    Adding the best route using Dijkstra lowest cost path.
+    Router ID is a 32bit ID can be configure with syntax.
+    highest ip amongst loopback interfaces
+    OSPF pid 1-65536
+    loopbacks give you stability
+    address mask and no shut
+    advertise address of loopback if you want others to ping it.
+    timers have to match
+    HELLO messages are sent out to each link
+    a link state router
+    OSPF is good for hierarchical routing topologies
+    Area 0 is the backbone
+    invert mask!!!!!!
+    (config)#router ospf 1
+    (config-router)# network 192.168.10.0 0.0.0.255 area 0
+    (config-router)# network 192.168.11.0 0.0.0.255 area 1
+    Interior gateway protocol
+    default-information originate
+    passive-interface don't send or process HELLOs
+    Cost is 10^8/bandwitdh
+    can be set manually
+    EIGRP changing the "variance"
+    Hello and Dead timers must match
+    interfaces must be up up
+    interfaces must not be passive
+    areas must match
+    timers must match
+    same subnet
+    MTU mismatch may cause problems
+    Maximum Transmission Unit (MTU) 
+    Point to Point versus broadcast  for a serial lease lines
+    (config-if)# ip ospf network point-to-point
+    By default OSPF will set the network type based on neighbors
+    #show ip ospf neighbor
+    Broadcast DR/BDR selection
+    on vlan
+    all neighbored up 
+    best router id becomes the DR
+    next best becomes the BDR
+    topology change is multicast 
+        DR and BDR get notified
+    (config)# router ospf 1 (pid)
+    (config-router)# router-id 223.255.255.254
+    make it pick the loopback
+    (config)# interface loopback 0
+    (config-if)#ip address 223.255.255.254 255.255.255.255
+    sets teh loopback interface that is used for DR selection for OSPF
+    troubleshooting ospf
+    #sh ip protocols
+    #sh ip ospf neigh
+    EXTART means MTU issues
+    show ip ospf database
+    FHRP first hop redundancy protocol
+    group of routers can act as a virtual default gateway.
+    layer 3 redundancy is multiple physical routers.
+    HSRP Hot Standby Routing Protocol
+    Routers are clustered to a virtual address.
+    VRRP same but not proprietary
+    GLBP proprietary ... has active active to respond to arps.
+    HSRP 00:00:0C .... (virtual MAC address)
+    GLBP 00:07:B4
+    VRRP 00:00:5E
+    AVG active virtual gateway
+    Premption
+    HSRP 1 was used for ip4
+    multicast conflict
+    version 2 changed multicast address
+    enable specifically on legacy hardware.
+    
+    
+    
     
