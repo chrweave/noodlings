@@ -1105,6 +1105,38 @@ NATs
     access-list 1 permit 10.10.10.0 0.0.0.255
     ipnat inside source list 1 pool mypool
     add keyword overload
+    #show ip nat statistics 
+    for issues
+    #show ip nat translations
+NTP
+    operating in a client and server mode
+    we need accurate time for everything e.g. kerberos
+    timestamp for court
+    (config)# ntpserver 172.16.2.2
+    device can also hand out time
+    (config)#ntp master
+    best practice two ntp servers with authentication
+    #show clock detail
+    * means time is not authoritative
+    . Time is authoratative but not synchronized.
+    DHCP role 
+    you can use a cisco router as dhcp for voice 
+    handout address and subnet mask defualt gateway etc.
+    TFTP 150 is for ip phones
+    also has out give out default gateway.
+    lease duration is one day
+    86400 seconds
+    1440 minutes
+    lease length cannot be set.
+    specify lease duration days hours minutes
+    most clients attempt to renew lease at half the lease duration.
+    DNS gives you anme resolution
+    50 domains will cause a list.
+    who is my dns server
+    domain controller running dns
+    #no ip domain-lookup
+    DHCP and DNS in network
+    
     
     
     
