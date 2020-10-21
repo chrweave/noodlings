@@ -1136,6 +1136,86 @@ NTP
     domain controller running dns
     #no ip domain-lookup
     DHCP and DNS in network
+SNMP
+    Simple Network Management Protocol
+    SNMP agent
+    splunk
+    solar winds
+    SNMP can be used to monitor and configure devices
+    agents on the machines the you are monitoring
+    Management information database
+    MIB
+    OID tree
+    Manager is the server.
+    Sents get and set
+    over UDP
+    poll agents for details
+    SNMP traps are agent errors sent back to mananger.
+    syslog is better
+    SNMPv2 added inform.
+    no encryption.
+    ACLs
+    trap manage could be Cicso works
+    HP openwiew
+    Solarwinds
+    Syslog has more details
+    SNMP3 is properly authenticated and encrypted.
+    noauthnopriv Noauth
+    authnopriv Auth
+    atuhpriv priv
+    Syslog server
+    catches syslog messages
+    port 514
+    8 levels of syslog informations
+    (config)# no service timestamps
+    (config)# service sequence-numbers
+    The facility on the router generated the message %LINEPROTO
+    security is level 5 
+    warning
+    admin down means that it is administratively disabled.
+    some devices defualt to level 4 
+    some to level 6
+    4 warning
+    6 informational
+    
+    0 emergency
+    1 alert
+    2 critical
+    3 error
+    4 warning
+    5 notification
+    6 informational
+    7 debugging
+    
+    everyone attends class each week not if dead
+    
+    Ernie asserts certified eel was not in demand
+    
+    Syslog needs acurate time
+    syslog uses a push protocol
+    port 514
+    remote monitoring available
+    Configure and verify DHCP client and realy
+    A router can be configured to forward a dhcp request
+    this must be done on a per interface basis.
+    member server running dhcp
+    interface is a relay with a helper service
+    you are not going to have a dhcp server on every subnet.
+    native clustering built in to Micorsoft DHCP server
+    build a pool of addresses in 172.16.2.0 and 172.16.1.0
+    change lease duration to never expires
+    reservation for ip addresses from dhcp server.
+    ip dhcp pool subnet rightdns-server 172.16.1.12
+    default router 172.16.2.1
+    lease 1 2 3
+    exclude first
+    name pool
+    gateway
+    dns 
+    domain name
+    
+    
+    
     
     
     
