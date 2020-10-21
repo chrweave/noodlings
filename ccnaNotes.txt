@@ -735,12 +735,103 @@ WIRELESS
     show cdp neighbor
     proprietary LLDP
     
-    
-        
-    
-    
-    
-    
+SWITCHING CONCEPTS
+    L2 Switches pass traffic between hosts on the same networking.
+    Learn MAC addresses
+    Read source MAC from port.
+    Fortward frame to destination MAC if known
+    Flood otherwise.
+    ARP for you ... now I know your MAC.
+    show MAC address table
+    Computer addressable memory  CAM table
+    learns addresses across a trunk
+    Default aging is 5 minutes
+    after a MAC ages out switch floods
+    After receipt, frame ttl is reset.
+    if I know the destination MAC I send it there.
+    else, I flood the vlan.
+    except for the source port.
+    Switch#sho vlan brief
+    each vlan acts as a differnet network
+    add a little bit of security
+    vlan to vlan has to cross layer three.
+    vlan is a broadcast domain.
+    every vlan is a differnet vroadcast domain.
+    when you make more vlans, you make more broadcast domains.
+    every vlan has its own subnet address.
+    layer 3 switches support vlan to vlan traffic
+    switchport mode access
+    configure vlans and troubleshoot
+    SW1(config)#vlan 2
+    SW1(config-vlan)#name eekster
+    SW1(config-vlan)# ex
+    SW1(config)#interface range f0/13-14
+    SW1(config-if)#switchport access vlan 2
+    SW1(config-if)#switchport mode access 
+    trsffic on access ports does not have a vlan tag
+    Protocal called VTP thatn can replicate VLAN database
+    switchport voice vlan 10
+    80q.1 frame tag trunk frame
+    use crossover cable betwen switches
+    trunk ports gig ports
+    switchport mode trunk
+    subinterfaces use 802.1q
+    allows differnt default gteways for different vlans.
+    this allows inter vlan traffic.
+    ROAS router on a stick
+    .1q changes the frame so that target switch knows what vlan the frame originated from.
+    DA SA (802.1q tag) type/len data FCS
+    native vlan is vlan 1
+    it is where the untagged frames go.
+    you can change that.
+    switchport trunk native vlan 99
+    switchport trunk native vlan 55
+    spanning tree runs in native vlan
+    native vlans better match over trunk cable.
+    Double tagging 
+    don't use vlan 1
+    match native vlans.
+    Spanning tree stops layer two loops.
+    if native vlans do not match, it kills spanning tree.
+    CDP layer two proprietary
+    Access ports ARPA frames(ethernet)
+    Trunk ports use 802.1q frames
+    encapsulation dot1q 5 (10.10.5.0 sub interface)
+    serial interfaces default to HDLC
+    PPP frames on dedicated lease lines
+    (vonfig)#interface serial 0/0
+    (config-if)#encapsulation PPP
+    make sure the other side is using the same encapsulation.
+    Cisco Discovery Protocol CDP
+    Lets you discover directly connected up up devices.
+    #show cdp neighbors
+    #show cdp neighbors detail
+    CDP multicast 01-00-0c-cc-cc-cc
+    CDP every 60 seconds
+    Default hold time is 180 seconds.
+    CDPv2 gets vlan info
+    LLDP is then non-proprietary CDP ....
+    LLDP is vendor neutral
+    Cisco run CDP
+    LLDP-MED like CDPv2
+    sh cdp for general info
+    sh cdp neigh for available neighbors
+    sh cdp neigh deatil gives abusive detail
+    LACP link aggregation channel protocol
+    comnbines ports to work as a single logical port.
+    portchannel
+    channel group
+    good for failover.
+    chanel-group 1 mode on
+    interface port-chanel 1
+    switchport mode trunk
+    switchport trunk allowed vlan 1, 2, 20
+    static etehr channel means you are using syntax
+    both sides on on
+    Port Arrgegation Protocol
+    Link Aggregation Control Protocol
+    PAGP is Cisco proprietaary LACP
+    auto or desireable vs active/passive
     
     
     
