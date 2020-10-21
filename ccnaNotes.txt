@@ -976,12 +976,21 @@ IP CONNECTIVITY
     check destination
     look at routing table.
     if I have a route send to exit interface
-    else defualt
+    else default
     else drop.
     encap with appropriate MAC
     ICMP desitnation unreachable back to source IP.
-    Longest match amkes the best route
+    Longest match makes the best route
     else pick lowest lowest Ad
     else pick best metric
     if there is still a choice ... load balance.
+    Configure and verify static routes
+    (config)# ipv6 route 2001:DB8:9:3::/64 2001:DB8:9:2::2
+    (config)# ip route 192.168.3.57 255.255.0.0 192.168.1.1
+    (config)# ip route 0.0.0.0 0.0.0.0 172.16.5.1 (defualt gatgeway).
+    always the next hop is gateway
+    (config)# ipv6 route ::/0 2001:DB8:9:3::2
+    Host route v4/32 v6/128
+    Floating static set AD
+    more likely to use default gateway.
     
