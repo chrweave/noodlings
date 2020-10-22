@@ -1336,4 +1336,129 @@ Explain Per Hop Behavior
     Set myself up as your DNS
     Don't let rogue devices hand out ip addresses
     user awareness involves training.
+    People are the weakest link.
+    User installing stuff as a local admin is a serious insider threat.
+    unwitting local admins are very bad
+    AUPs
+    clean desk
+    lock drawers.
+    Password guidelines
+    Video training.
+    Phishing simulation
+    Physical contorls 
+    Mantrap
+    locks
+    bollards
+    guard gates
+    wavy roads
+    security cameras???
+    guards
+    carry and display badges
+    make sure locks are locked.
+    prevent tailgatinig.
+    lock machines
+    configure devices using local passwords
+    Routers and switches
+    line con 0 vty0 or vty 15 need local passwords
+    login local 
+    Cisco ACS database TACACS+
+    Accounting tracks who logged on.
+    pass authentication off to AAA server.
+    usesrname bob secret bob
+    service password encryption
+    enable secret (password)
+    Good password policy
+    password age ...
+    chage in linux
+    multi factor
+    smart card.
+    Identified Authentication
+    logged Authorization
+    Accounting is actually the logging.
+    RADIUS server
+    Remote Authentication Dial In User Service
+    VPN ...
+    uses Internet as lease line
+    WAN is a dedicated lease lines
+    VPN is cehap and scalable
+    AH ESP
+    Signing email
+    GRE Generic Route Encapsulation
+    MultiProtocol Label Switching
+    IPSec
+    start run mmc
+    running any ipsec?
+    ipsec runs on endpoints
+    Remote access vpn
+    SSL -> TLS
+    secure socket vpn on 443
+    VPNs give us confidentiality
+    signed for integrity
+    Authentication comes from hmac
+    or point to point authentication.
+    Digitial certificates
+    pre-shared keys
+    User authentication
+    anti-replay protection
+5.6 Configure and verify ACLs
+    inbound or outbound packet filter
+    a list of permit and deny statements 
+    read from top down.
+    default deny
+    must include one permit.
+    ACL is applied to each interface.
+    if not permitted explicitly it is denied.
+    ACLs can have numbers or names
+    Standard ACLS have 1-99 1300-1999
+    Match source ip address.
+    these look at layer 2
+    Extended ACLs 100-199 2000-2999
+    looks at layer 3 or 4
+    (config)# access-list 1 permit 10.1.1.1 
+    (config)# access-list 1 deny 10.1.1.0 0.0.0.255 (inverted mask)
+    default deny any any
+    order matters
+    Named ACL NACL
+    (config)# ip access-list standard barney
+    (config-std-nacl)# permit 10.1.2.2
+    (config-std-nacl)# deny 10.1.2.0 0.0.0.255 ...
+    direction matters
+    linked must be correfct
+    Extended ... layer 3 filter not only on layer 3 source but also destination
+    Nacls must include keyword 
+    show access-list
+    Applying ACL
+    Build them at global
+    go to interface
+    (config-if)#ip access-group 10 in
+    apply acls to vty lines
+    use access class.
+    (config-if)# access class 1 in
+    Standards go nearer to destination
+    extendeds go nearer to source becuase they are moe specific.
+    #sh access-lists
+    can't edit list must paste in
+    additiona get added to the bottom.
+    named acls can be edited inline with vi ...
+    show run shows everything.
+    Layer 2 securithy
+    DHCP snooping
+    dynamic ARP inspection
+    port security
+    DHCP snooping knows the port, MAC address, and IP address, of the trusted DHCP server.
+    Dynamic ARP Inspection
+    DHCP binding database
+    use the same database to filter invalid arps
+    stops arp poisoning MIM attacks.
+    Port security is a MAC address filter for each port.
+    disables ports if two mac addresses are learned.
+    Protect 
+    Restrict
+    Shutdown
+    Portfast access ports are transitioned to forwarding
+    BPDU guard must be in place.
+    DTP shoule be disabled.
+    change access port mode to administrative access.
+    stitchport nonnegotiate
+    no DTP ever would be a good command but it does not exist.
     
