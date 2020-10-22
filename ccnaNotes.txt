@@ -1676,4 +1676,37 @@ Automation
     Ansible puppet chef
     CM tools
     controller does automation and orchestration.
+    Cisco is pushing people to become dev-ops
+    Ansible 
+        agentless
+        playbook
+        ssh
+        yaml
+    Puppet 
+        8140 (whole buncha other ports)
+        ruby
+        manifest
+    Chef
+        cookbook
+        10002
+        pull model
+        Ruby
+    JSON
+        serialization language.
+        key:value pairs
+        eg:
+        {
+            "jsonrpc": "2.0",
+            "method": "generateIntegers",
+            "params": {
+                "apiKey": "b1bf1192-8e1d-40e0-b9de-f3282e232a8a",
+                "n": 1,
+                "min": 0,
+                "max": 1188,
+                "replacement": true
+            },
+            "id": 42
+        }
+    Almost as if you are pasitng it into the command line.
+    
     
