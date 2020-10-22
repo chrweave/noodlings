@@ -1569,4 +1569,111 @@ Explain Per Hop Behavior
     Microsoft supported every known AAA except TACACS+
     802.1X authenticate to switch
     802.11i is WPA2 enetrprise and 802.1x
+Automation
+    Control of systems with scripting.
+    Automation is programminng out routine jobs.
+    controller integrates program code to APIS for the automatic execution of network jobs.
+    API requests fetch code to do something.
+    show ip ospf neighbors needs CL access.
+    Northbound and Southbound
+    Cisco Configuration Professional
+    Interface to the controller is called northbound
+    controller sending instructions to the devices is southbound.
+    CM
+    scripts help get syntax right.
+    single pane of glass for all devices.
+    good monitoring rapid detection ...
+    Vrealize ops manager
+    automated update management for IOS files
+    network programmability Software defined network management (SDN)
+    Cisco has boat loads of tools.
+    Aplication Policy Infrastructure Controller APIC
+    APIC-EM gives you enterprise models
+    path trace ACL analysis
+    moving everything into a "DNA" center.
+    Controller based software defined architecture.
+    whole layer 1,2,3 is working
+    manangement from one desk
+    overlay
+    fabric is layer 3 and 2
+    Software defined networking
+    controller manages everything with southbound APIs
+    turn on ability for devices to respond to controller.
+    Management plane
+    northbound
+    control plane
+    southbound
+    devices 
+    underlay is your network
+    overlay is what the SDN does
+    Fabric integrate overlay and underlay.
+    underlay is a whole bunch of switches
+    overlay is the controllers that manage them.
+    VXlan???
+    management plane became the application plane.
+    What are some southbound apis
+    ansible
+    openflow
+    snmp
+    REST Java UserApp are northbound
+    OnePK uses openflow to manage devices.
+    APIC-EM
+    Device Based SDN
+    deviced programmed by applications running onteh device itself.
+    Policy based SDN is another layer of abstraction.
+    policies settings etc ...
+    RESTful APIs are northbound
+    OPFlex Openflow are southbound
+    Representational state transfer (REST) 
+    Intent Based Networking
+    IBN
+    new terminology pitch deck
+    Whaddaya want?
+    Business objectives
+    Translation Activation Assurance
+    Use case encapsulation.
+    Network Infrastructure as fabric???
+    IPSec and CAPWAP???
+    Network as Fabric
+    physical underlay
+    software defined or cli.
+    DNA uses AI??
+    Digital Network Architecture
+    DNA (center)
+    New Technology Appliance
+    Full automation
+    EG boot VM off of its NIC
+    completely automatic provisioning of new hardware.
+    Cisco Prime infrastructure
+    Candidate to be rolled into DNA
+    Identity Service Engine
+    SSO TACACS++
+    DNA lets you design and define!
+    DNA is more exclusive.
+    SD-Access
+    SD-WAN
+    DNA assurance
+    wizard driven security
+    API concept
+    Open, Internal and Partner APIs
+    Vcenter to talk to a host
+    VAAI Vsphere api ...
+    API data formatting
+    SOAP 
+    REST JSON XML YAML
+    XML-RPC
+    JSON
+    CRUD
+    Create Read Update Delete
+    HTTP uses principles similar to REST
+    JSON YAML are data formatting for applications.
+    store router configurations in database.
+    data format rules like code
+    JSON code rules
+    URI URN URL
+    Search String RESTful API request
+    Move away from command line to automating network management tasks.
+    Ansible puppet chef
+    CM tools
+    controller does automation and orchestration.
     
