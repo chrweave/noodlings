@@ -769,7 +769,7 @@ SWITCHING CONCEPTS
     SW1(config-if)#switchport access vlan 2
     SW1(config-if)#switchport mode access 
     trsffic on access ports does not have a vlan tag
-    Protocal called VTP thatn can replicate VLAN database
+    Protocol called VTP thatn can replicate VLAN database
     switchport voice vlan 10
     80q.1 frame tag trunk frame
     use crossover cable betwen switches
@@ -1514,13 +1514,59 @@ Explain Per Hop Behavior
     statically assign mac address
     switchport port-security mac-address (MAC)
     easy to beat a MAC filter 
-    make them authemticate 802.1X
-    
-    
-    
-    
-    
-    
-    
-    
+    make them authenticate 802.1X
+    Use teh MAC address of the Kiosk
+    Spoof the MAC
+    Make them authenticate 802.1x
+    Port Security sticky MAC address
+    Alternative to statically added MACs
+    enable sticky 
+    the MACs end up in your configuration.
+    They do not get forgotten after not talk.
+    this will be the only MAC address allowed in the port.
+    (config)#switchport port-security mac-address sticky
+    (config-if)#switchport port-security maximum 2
+    Protect drop it
+    Restrict drop it and log it
+    Shutdown drop it log it disale the port. (default)
+    err-diable recovery feature
+    (config)#errdisable cause psecure-violation
+    (config)#errdisable recovery 300
+5.8 differnentiate AAA concepts
+    Authentication who aer you
+    Authoriztions We'll allow you to do what?
+    Accounting We watch what you do.
+    (config)#aaa new-model
+    (config)#tacacs-server host 50.50.4.101
+    (config)#tacacs-server key gobbledygobbledy
+    (config)#aaa authentication login defualt local enable
+    (config)#aaa authentication login defualt MY-List-1 tacacs local enable
+    (config)#aaa authorization commands 1 TAC1 group tacacs+ local
+    (config)#aaa authorization commands 15 TAC1 group tacacs+ local
+    (config)#aaa accounting commands 1 TAC-act1
+    (config)#aaa accounting commands 15 TAC-act15
+    Authorize stuff for levels 2-14.
+    #debug aaa authentication
+    Compare TACACS+ and RADIUS
+    RADIUS uses UDP open standard
+    port 1812 &1813 
+    SSID cloaking
+    If you don't adverstise your ssid people can't see it.
+    allow the beacon frame to be hidden.
+    MAC filter is a MAC filter.
+    Do not WEP
+    rc4 
+    symmetric
+    WPA used rc4 +tkip
+    WPA2 AES-128-CCMP 
+    WPA3 AES-256-GCMP
+    Extended Authentication Protocol
+    Opportunistic wireless encryption
+    Diffie Hellman ephemeral key exchange
+    Device Provisiioning Protocol for IOT
+    use certificate called enterprise 
+    WPA2 passes certificate off to RADIUS server
+    Microsoft supported every known AAA except TACACS+
+    802.1X authenticate to switch
+    802.11i is WPA2 enetrprise and 802.1x
     
