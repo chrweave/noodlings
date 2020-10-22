@@ -1213,14 +1213,127 @@ SNMP
     gateway
     dns 
     domain name
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+Explain Per Hop Behavior
+    classification ACL
+    marking ACL makerd as voice traffic e.g.
+        Class maps
+    queuing
+    congestion by queueing
+    policing gets rid of low priority traffic
+    shaping buffers traffic
+    ACL identifier in ip headers
+    Differentiated Service Contorl Point
+    DSCP
+    Class of Service in 802.1q/p header
+    prioritization gives precedece to certain classes 
+    Round robin queue access
+    Low latency queue priority queue
+    call admission control
+    shaping delaying outbound traffic by buffering
+    policing gets rid of traffic before it gets into a queue 
+        enabled typically on ingress
+        discard eligible 
+    avoid congestion if possible
+    dynamically modify TCP sliding window.
+    Weighted random early detection
+    WED
+    keeps low priority traffic out of queue.
+    4.8 remote access ssh.
+    configure vty lines to use usernames.
+    configure usernames and passwords
+    make sure device has new name  and fq domain name
+    (config)# line vty 0 15
+    (config-line)# login local
+    (config-line)# ex
+    (config)#username john secret John
+    (config)#crypto key gen rsa mod 2048
+    lock down telnet
+    FTP connection oriented
+    TFTP connectionless
+    use scp if available
+    Flush flash before tftp copying IOS files.
+    #copy src destination
+    #copy run start
+    #reload
+    rom monitor mode
+    (half boot)
+    2102->2042 power cycle again
+    this bypasses startup config
+    startup config and IOS already running in RAM
+    copy run start
+    copy start run only after half boot.
+    also have flash memory.
+    Security
+    Threats
+    Vulnerabilites 
+    Expolits
+    and Mitigation techniques
+    can't aviod all risk
+    mitigate with controls
+    get rack space or wix to host my website
+    risk transferrence
+    Microsoft Baseline Security Assessment
+    MBSA
+    risk acceptance what is the level of loss that we can sustain?
+    eat the $1000 rather than $50,000
+    Quantitative Risk Assessment
+    IT assetts
+    Exposure how much loss?
+    Risk assessments are horribly boring.
+    Controls are the things that you put in placce to mitigate a vulnerability.
+    Instead of local unames and passwords use SSO solution.
+    TACACS+ RADIUS
+    defense in depth.
+    train people on phishing admisittrative control
+    Physical control ... locks
+    mantraps
+    piggy backing.
+    avoid risk ... unplug the server
+    Transfer risk .. WIX with insurance.
+    Accept residual risk
+        owned by senior management.
+    Threat types
+        Address Spoofing
+        Denial of Service 
+            TCP syn flood
+        Refelction and amplification attacks
+            spoofed address for apearing  legitimate.
+            amplification of traffic for DDoS.
+                UDP attack.
+        Man in the middle attack.
+            MAC attack arp poisoning.
+    authentication and encryption helps.
+    Reconnaissance attacks
+        ping sweep
+        port scan
+        DNS searches
+        doesn't cause damage but may be the precursor of an attack
+    Buffer overflow
+        allow execution of uploaded code
+    Malware
+        worm
+        virus
+        ransomeware
+        trojan
+    Human vulnerabilities
+        Phishing
+        Piggybacking
+    Password vulnerabilities
+        ease of brute force attacks
+    Denial of Service
+        Wireless DoS
+            improperly configure devicces
+            malicious user interferes with wireless.
+            Accidental interference
+            harden devices ...
+    Rogue access points Man in the wireless middle.
+    a personal network hotspot could also be used as a rogue.
+    WLCs need to be configures with Rogue policies.
+    Amplifying signal on 1
+    Evil twin AP
+    putting a machine between two other machines.
+    Alice send a message to Bob, but Mal ...
+    Set myself up as your DNS
+    Don't let rogue devices hand out ip addresses
+    user awareness involves training.
     
