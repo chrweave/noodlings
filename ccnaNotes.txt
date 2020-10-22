@@ -1461,4 +1461,66 @@ Explain Per Hop Behavior
     change access port mode to administrative access.
     stitchport nonnegotiate
     no DTP ever would be a good command but it does not exist.
+    802.1x port based security.
+    not port security
+    means you need to authenticate to the switch in order to use the port.
+    gimme your certificate.
+    EAP massage with certificate to RADIUS server which is a member of your domain.
+    not all switches are 802.1x compliant.
+    hot wall jack cannot be used by eevile laptops.
+    active directory integrated hierarchy 
+    do it with domain machines.
+    enterprise WPA2
+    RADIUS mserver is member server in your domain.
+    DHCP snooping
+    Im on a switch listening
+    Discover Offer Request Acknowledge
+    DHCP DORA
+         BUBU
+    DHCP snooping 
+    untrusted ports cannot be used for Offer Unicast.
+    one port for DHCP server can be made trusted.
+    no rogue dhcp servers handing out addresses.
+    Dynammic Arp Inspection
+    bindings database of trusted DHCP and MAC addresses.
+    IP-Source Guard
+    make sure that ip address do not oddly hop ports.
+    must have DHCP server integrated.
+    enalbe snooping on at least one vlan
+    make sure that the DHCP server's port is strusted.
+    all ports are untrusted unless designated as truted.
+    (config)# ip dhcp snooping ! Eanble DHCP snooping
+    (config)# ip dhcp snooping vlan 10
+    (config)# interface F1/0/24
+    (config-if)# ip dhcp snooping trust
+    (config-if)# ip dhcp snooping database tftp://10.1.1.1/direfcotry/file
+    (config-if)# ex
+    (config)# sh ip dhcp snooping binding
+    default lease duration is one day.
+    Stop MIM attack through arpn piosoning using DAI.
+    use the bindings database
+    (config)# ip arp inspection vlan 10
+    (config)# interface F1/0/24
+    (config-if)# arp inspection trust
+    (config-if)# ex
+5.7 Port Security
+    MAC filter.
+    limits number of macs learned.
+    stops multiple plugging.
+    it also prevents a learned MAC address fromm being learned on another port.
+    (config-if)# switchport port-security
+    default mode is to shutn the port down.
+    Protect Restrict Shutdown
+    statically assign mac address
+    switchport port-security mac-address (MAC)
+    easy to beat a MAC filter 
+    make them authemticate 802.1X
+    
+    
+    
+    
+    
+    
+    
+    
     
