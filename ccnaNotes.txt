@@ -1712,4 +1712,15 @@ STUDY SESSION
     switchport native vlan 5???
     why does applying ACL on vty 0 15 affect all interfaces?
     Layer 3 ether channel?
+    CONNECTED  - 0
+    STATIC     - 1
+    EX.BGP     - 20
+    IN.EIGRP   - 90
+    OSPF       - 110
+    ISIS       - 115
+    RIP        - 120
+    EX.EIGRP   - 170
+    IN.BGP     - 200
+    
+    
     
