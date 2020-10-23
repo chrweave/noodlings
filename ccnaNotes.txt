@@ -1708,5 +1708,8 @@ Automation
             "id": 42
         }
     Almost as if you are pasitng it into the command line.
-    
+STUDY SESSION
+    switchport native vlan 5???
+    why does applying ACL on vty 0 15 affect all interfaces?
+    Layer 3 ether channel?
     
