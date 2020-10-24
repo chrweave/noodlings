@@ -188,5 +188,173 @@ CCNA Cyber Ops
         5.9.d Int P
     5.10 classify intrusion events
     5.11 Describe relation of SOC metrics to scope analysis
-    
+1.0 Security concepts
+    1.1 CIA triad
+        Confidentiality
+            Encrypt
+        Integrity 
+            Hash
+        Availability
+            Prevent DoS
+    1.2.a Network Endpoint Aplicaiton Sec.
+        Network Sec Sys. Firewall IPD/IDS, VLAN
+        Application sec. Web app sec.
+        Load Balancing
+        ACLs
+        Endpoint Firewall Device Encryption Least privilege
+    1.2.b Agent Based benefits for protection
+        REgistry Cleanup
+        Sopt malware processes
+        Take aciton against malware
+        Agentless menas you are not doing it with locally installed softwaree.
+    1.2.c Legacy Antivirus and antimalware
+        Basic ACLs
+        Firewalls
+        AVC application visibility and control
+        IDS/IPS
+        DMZ
+        Antivirus MaAffee
+        Antimalware
+    1.2.d SIEM SOAR Lpog management
+        Security Incident Event Monitoring
+        How to manage high volume logs?
+        SIM long term audit
+        SEM event tools
+        SIEM similar product to IPS/IDS
+        SOAR Security Orchestration Automation of Responses.
+    1.3 Threat Intelligence
+        1.3.b threat hunter
+        analyzing traffic
+        ping sweeps port scans
+        you have to protect web server
+    1.3.c malware analysis definition and goals
+        BIOS malware ???
+        how it work 
+        how to identify it
+    1.3.d threat actor
+    1.3.e Runbook Automation
+        MTTR
+        MBTF 
+        Mean discovery time
+        Automating
+    1.3.f Reverse engineering
+        reverse engineering attacks
+        Malware authhors do not explain their code.
+    1.3.g TCP sliding window anomaly detection
+    1.3.h Principle of least privilege.
+    en does not go to no 15s
+    1.3.i 0 trust.
+    assume that everybody is potentially bad.
+    1.3.j Threat intelligence
+    1.4.a risk scoring grading reduction
+    likelihood of realization of threat risk =vuln*threat
+    1.4.b threat
+    1.4.c vulnerability
+    1.4.a risk reduciton reduce the attack surface passwords good patches
+    Acceptance 
+    Avoidance 
+    Mitigation
+    Transferrence (WIX)
+    TEchnical vs operational controls
+    management controls like AUP
+    port security is a technical control
+    operations controls are technical controls as policies
+    1.4.b threat
+    take advantage of a weakness
+    natural disaters 
+    cyber attacks
+    malware
+    disclosure of confidential data
+    1.4.c Vulnerabiltiy
+    the weakness
+    1.4.d exploit is the way vulnerabilities are used to take advantage of vulnerabilities.
+    1.5 defense in depth
+    layers of security
+    16. compare access control
+    1.6.a DAC permissions chmod 770 exploit.sh
+    decentralized is bad
+    separation of duties
+    Mandatory Access controls SELinnux
+        security clearance of subject classification of object.
+        security label
+        sensitivity label
+        access is decides by admin
+        NTK
+    1.6.d AAA
+    1.6.e Rule Based AC
+    ACLs
+    geolocation
+    time based
+    1.6.g Role Based 
+        What you do grants you rights to do it.
+    1.7 CVSS
+    1.7.a Attack Vector
+    1.7.b attack complexity
+    How much User interaction is required?
+    privileges required.
+    scope?
+        goals rules of engagement
+        become an admin
+        rootkit ...
+    1.8 challenges of data visibility in detection
+    public/private
+    network topology
+    1.9 data loss given traffic
+    FIREPOWER Cisco nextgen
+    baselining with new systems
+    Bad profiles
+    5 tuple
+        SRC address
+        src port
+        protocol
+        dest address
+        dest port
+    Anomaly detection
+    2.1 Attack surface monitoring
+    reduce attack surface
+    IOT CLOUD IT
+    this is the goal of cybersecurity
+    tcpdump
+    cli sniffer
+    NetFLow Cisco proprietary
+    caches traffic 
+    captures metadata to Netflow collector
+    soalrwinds
+    kiwi
+    2.2.c Next-gen firewall
+    one vendor is a single point of failure
+    2.2.d stateful firewall
+    2.2.e Application visibility and control
+    2.2.f web content filtering (G6 nono)
+    your email is being read by micorsoft.
+    ABC is cisco's application visibility 
+    2.2.g Software as a service Cisco
+    2.3.a ACL list of rules permit deny permit deny ... stateless
+    2.3.b NAT and PAT
+    2.3.c Tunneling VPN tunnel
+    HTTP tunneling
+    DNSsec
+    DNS tunneling is a vector cor confidentiality compromise.
+    2.3.d TOR deep dark web
+    2.3.e Encryption
+        Beware as a vector.
+    2.3.f P2P
+    2.3.g net traffic encapsulation
+    2.3.h load balancer
+        round robin
+        least connection methos
+        least response time methods
+        least bandwidth methods
+        Hashing methods
+        custom load method
+    2.4 Monitoring
+    2.4.a full packet capture
+    session data
+    transaction data
+        payments?
+    2.4.d Statistical data ...
+    2.4.e Metadata
+    2.5 Describe network attacks
+        Recon nmap port scan ping sweeps
+        
     
