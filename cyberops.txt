@@ -393,4 +393,126 @@ CCNA Cyber Ops
         Baiting
         Pharming DNS redirect
         Malvertising (scare ware)
+        Phishing obtain sensitive information by asking for it
+        Spear fishing personalized phishing for a targeted group 
+        whaling C level
+        user traingin is the best defence
+        Clearly defined security policies
+        outlien repercussiona of no-compliance
+        explain consequences
+        clean desk policy
+        internal phishing campaigns
+        2.8 endpoint attacks
+        Buffer overflows
+        Stack overflows
+        Heap overflows
+        DEP
+        Integer attacks
+        Kernel overflows
+        format string bugs
+        Plus many more
+        stuff too much data into a container
+        exe in no exe space
+        DoS or pwn the machine
+        C2 uses phishing or bufferoverflow
+        installs zombies
+        elevated privileges
+        victim infrastructure
+        2.9 describe evasion and obfuscation techniques
+        Tunneling DNS
+        encrypt my virus
+        mask requests with the identy of a proxy
+        inspect all the way up to layer 7 with a proxy
+        digital certificates
+        CA OCSP
+        Online Certificate Status Protocol
+        Cert revocation list.
+        update the revocatioin list
+        OCSPs track know web sites.
+        Eliptical Curve Digital Signing Algorith ECDSA
+        Public/Private Crypto
+        IKE is Diffie-Hellman key exchange.
+        we encrypt secret with your public key ...
+        X.509 is a PK cert standard
+        SSL is upgraded to TLS 1.2
+        Cipher suite ...
+        HMAC
+        Digital signing ...
+    2.11.c Key exchange
+        share symmetric keys using public keys
+    2.11d Protocol version
+        Protocol versions like TLS 1.2
+    2.11.e PKCS standards
+        PKCS 1 RSA
+        3 Diffie Hellman
+        7 format for CA response to PKCS 10 requests
+    3.1a Host based Intrusion Detection
+        Active inline IDS is an IPS.
+        Monitoring logging and alerting
+        HIDS/HIPS works like NIDS/NIPS
+    3.1.b AV personal firewall
+    3.1.c Host based firewall
+        Windows firewall
+        IP Tables
+        Whitelist/Backlist
+    3.1.e Systems based sandboxing
+    3.2 OSs Linux Windows ...
+    3.3 DEscribe role of attribution in an investigation
+    3.3.a assets
+        anything of value leak corrupt etc.
+    3.3.b Threat actor
+        Insider
+        Hacker
+        anyone who wants to exploit
+        Nation state 
+        Advanced Persisten Threat
+    3.3.c indicators of compromise
+        Weird behavior
+        you've been pwned
+        What is happening and why?
+        detect attack method
+    3.3.d indicators of attack
+    3.3.e chain of custody
+        what is the evidence and who controlled it.
+        evidence life cycle
+        best evidence is physical
+        hash matches ...
+        corroborative evidence
+        hash matchaes ...
+        indirect evidence
+        cam footage??
+    3.5 compared tampered vs untampered disk image.
+        bit stream image
+        clone
+        taking hashes of disks
+        disk blok hashes
+        file hashes
+        md5 is broken.
+        use SHA512 (especially for passwords).
+        Don't use DES
+        100 machines running ipsec can be done with DES and md5
+        Yikes ... but the volume of encrypted material makes attack very hard.
+        Packet sniffer to Nation state actor.
+    3.6 interpret log files
+        syslog
+        windows security
+        SELinux
+        Apache logs
+        IIS logs
+        event viewer
+        see /var/log/audit for Linux logs
+        privilege changes 
+        object changespolicy changes
+        process tracking
+        IIS access logs
+        CRUD invocations
+        send log files to SIEM tool or SOAR tool.
+    Digicert ... $$$ extended validation
+    Simple Certificat Enrollment Protocol
+    Microsoft network device enrollment service
+    3.7 Interpret output report of malware analysis tools.
+    Detonation chambers dynammic execution envorinments
+    launch suspicious code in machine that is isolated. Watch the worm
+    report on its behavior and then find it out on our net.
+    Honeynet
     
