@@ -1,1 +1,122 @@
 CCNA Cyber Ops
+    1.1 Describe the CIA triad
+    1.2 Compare security deployments
+        1.2.a Network, endpoint, and application security systems
+        1.2.b agentless?
+        1.2.c Legacy
+        1.2.d SIEM SOAR
+    1.3 Describe Security Terms
+        1.3.a Threat Intel.
+        1.3.b Threat hunting.
+        1.3.c Malware Analysis
+        1.3.d Threat Actor
+        1.3.e Run Book Automation
+        1.3.f reverse engineering.
+        1.3.g sliding window anomlay detection.
+        1.3.h Principle of least privilege.
+        1.3.i zero trust
+        1.3.j Threat intel Platform
+    1.4 Compare Security Concepts
+        1.4.a Risk
+        1.4.b threat
+        1.4.c Vulnerability
+        1.4.d Exploit
+    1.5 Defense in depth
+    1.6 Compare access controll methods
+        1.6.a DAC
+        1.6.b MAC
+        1.6.c Non-DAC
+        1.6.d AAA
+        1.6.e Rule Based AC
+        1.6.f Time based AC
+        1.6.g Role based AC
+    1.7 Describe terms devined in CVSS
+        1.7.a Attack Vector
+        1.7.b Attack Complexity
+        1.7.c Privileges Required
+        1.7.d User Interaction
+        1.7.e Scope
+    1.8 Identify the challenges of Data Visibility in Dectetions
+    1.9 Identify Potential data loss from provided traffic profiles
+    1.10 Interpret the 5-tule approach to isolate a compromised  host in a grouped set of logs.
+    1.11 Compare Rule Based / Behavior based / statistical detection
+    2.1 Compare attack surface and vulnerability
+    2.2 identify types of data provided by these technologies
+        2.2.a TCP dump
+        2.2.b Netflow
+        2.2.c nextgen firewall
+        2.2.d Traditional stateful firewall
+        2.2.e application visibility controll
+        2.2.f Web content filtering
+        2.2.g Email content filtering.
+    2.3 Describe the impact of these technologies on data visibility
+        2.3.a ACLs
+        2.3.b NAT/PAT
+        2.3.c Tunneling
+        2.3.d TOR
+        2.3.e Encryption
+        2.3.f Encapsulation
+        2.3.g Load Balancing
+    2.4 Describe security monitoring
+        2.4.a full packet capture
+        2.4.b session data
+        2.4.c Transaction data
+        2.4.d statistical data
+        2.4.e Metadata
+        2.4.f ALerts
+    2.5 describe network attacks
+        protocol based
+        denial of service
+        mim
+    2.6 network attacks    
+        sql injection
+        command injection
+        XSS
+    2.7 Social engineering
+    2.8 endpoint attacks C2 buffer overflow ransomeware ...
+    2.9 describe evasion and obfuscation
+    2.10 impact of certificates
+        PKI etc
+    2.11 identify certificate components
+        2.11.a Cipher suite
+        2.11.b X.509 certs
+        2.11.c key exchange
+        2.11.d Protocol version
+        2.11.e PKCS
+    3.1 describe endpoint tecnologies
+        3.1.a Host base Identify
+        3.1.b Antimalware
+        3.1.c Host based firewall
+        3.1.d Application level whitelisting
+        3.1.e Systems based sandboxing
+    3.2 I dentify components of OSes
+    3.3 Describe the role of attribution
+        3.3.a assetts
+        3.3.b threat actor
+        3.3.c indicators of compromise
+        3.3.d indicators of attack 
+        3.3.e Chain of custody
+    3.4 identify tyes of evidence
+        3.4.a best evidence
+        3.4.b Corroborative evidence
+        3.4.c indirect evidence
+    3.5 compare tampered vs untampered disks
+    3.6 Interpret os app command line logs to identify an event
+    3.7 interpres the output report of a malware analysis tool
+        3.7.a hashes
+        3.7.b URLS
+        3.7.c systems events netowrking
+    4.1 map the provided events to source technologies
+        4.1.a IDS/IPS
+        4.1.b firewall
+        4.1.c Netowrk application controll
+        4.1.d Proxy logs
+        4.1.e antivirus
+        4.1.f Transaction data Netflow
+    4.2 Compare impact no impact for thes items
+        4.2.a false positive
+        4.2.b flase negative
+        4.2.c true positive
+        4.2.d true negative
+        4.2.e benign
+    
