@@ -356,5 +356,41 @@ CCNA Cyber Ops
     2.4.e Metadata
     2.5 Describe network attacks
         Recon nmap port scan ping sweeps
-        
+    DoS
+    DDoS bot net
+    resource exhaustion attacks
+    use up your bandwidth
+    DDoS bot net attack
+    MIM attack
+    ARP poisoning
+    DHCP snooping 
+    Dynamic ARP inspection 
+    802.1X
+    ipsec is good.
+    prevent MIM with signed encryption.
+    2.6 web attacks
+        SQL injection snaitize your inputs
+        injections
+        authorizations
+        XSS
+        request forgery
+        click jacking
+            CSS invisible buttons
+        Security Misconfig
+        File inclusion
+        Unsecure coding practices
+        Bobby Tables
+        Command injection
+        XSS sends you to another website via javascript.
+        www.evilhackers.russia.com
+        Secure passwords
+        TLS 1.2
+        Secure web apps
+        ...
+        2.7 social engineering attacks
+        Phishing
+        Pretexting
+        Baiting
+        Pharming DNS redirect
+        Malvertising (scare ware)
     
