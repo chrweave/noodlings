@@ -515,4 +515,133 @@ CCNA Cyber Ops
     launch suspicious code in machine that is isolated. Watch the worm
     report on its behavior and then find it out on our net.
     Honeynet
+    4.0 Network intrusion analysis
+    4.1 Network intrusion analysis
+        4.1.a IDS/IPS
+        4.1.b Firewall Reconaissance Scans
+        4.1.c Network application control
+        4.1.d Proxy logs
+        4.1.e AV program analysis
+        4.1.f Transaction data NetFLow anomaly detection
+    4.2 Type 1 vs type 2 errors
+        false negatives for AV are the worst false positives are annoying
+        For authentication, False positives are deadly; flase negatives are annoying.
+        Benign looks bad butit is not actually a threat
+    4.3 Deep packet inspection ... level 7
+    not going to happen on a router without somethign ese watching.
+    netstat
+    stateful firewall.
+    Zone based firewalls like IP Tables
+    Stateful Access Control 
+    Entries 
+    4.4 Traffice interrogation tap into traffic sniff it and send it off the analyzer. ASA appears in transparent bridge mode.
+    Netflow is Cisco's proprietary sniffer
+    Wireshark looks in packets.    
+    4.5 taps ASA, e.g.
+    4.6 extract data from taps
+    4.7 PCAP packet capture
+    4.7 a-f bits of packet
+    Source IP source port protocols dest port dest IP
+    4.8 Interpret the fields in portoclo headers
+    4.8.a ethernet frame
+    preamble
+    sfd
+    dest mac
+    src mac
+    type
+    data 
+    fcs
+    interframe gap
+    TCP and UPD ports
+    V6 has not broaddcasting so uses multicast instead.
+    DNS gives you address for anmes
+    SMTP/POP3 SMTP port 25 (465 secured)
+    IMAP 143 clear 993 sec
+    4.8.1 HTTP/https/http2
+    http2 streams connection mutiplexing
+    ARP find macs
+    4.9 interpret artifacts from and event to identify an alert
+    6667 traffic is irc
+    registry audit object access
+    The file system hash file system
+    something is modifying your dlls  ... you have a root kit.
+    5.1 Assett management
+    inventory
+    CM
+    know your system and have requests for change submitted.
+    no shut 
+    shut 
+    on bad port
+    Mobile device management
+    Blackberries ... now everybody has their own mobile phone.
+    agent on devices to register them with a domain.
+    PAtchn management means keep your stuff updated
+    vulenrability 
+    do scan
+    credentialed vulnerability scanner.
+    nexus scanner
+    Incident Response Team
+    Map the elements of analysis for NIST SP800-61
+    preparation
+    detection
+    containment
+    document for lessons learned
+    be locked down and be prepared to identify badness anomalies.
+    Detection and analysis
+    know how to see what you need to see.
+    Table top exercises for possible incidents.
+    Get pen tested.
+    Containment
+    let the attack continue in order to cath the perperator, or shut it down to mitigate damage.
+    Lessons learned.
+    CERT
+    Computer Emergency Response Team
+    CVSS Common Vulnerabilities Scoring system.
+    CVEs
+    owasp
+    Open Web Application Security Project 
+    CMMC self assessment
+    Cybersecurity Maturity model Certification
+    CMMI for cyber
+    Integrate forensic techniques
+    collect preserve analyze present
+    collect examine analyze report
+    order of volatility
+    snap the registers
+    then caches
+    then ram
+    then virtual memory
+    then permanent storage
+    then offsite storage
+    network profiling
+        throughput
+        session duratoin
+        ports used
+        critical asset address space.
+        DCs are on the wrong vlan
+        session is open 20 days??
+        disable ports that are not used.
+        critical asset address space
+        netstat
+        ps -axu
+    5.9 PII
+        name 
+        socsec
+        PHI health information
+        Program Specific Information
+    5.10 kill chain
+    recon
+    weaponize
+    deliver
+    exploit
+    install
+    C2
+    Actions on objectives
+    USB keydrop attack
+    Diamond model of intrusion ...
+    SOC metrics
+        time to detect
+        time to contain
+        time to respond
+        time to control
     
