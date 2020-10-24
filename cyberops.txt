@@ -119,4 +119,25 @@ CCNA Cyber Ops
         4.2.c true positive
         4.2.d true negative
         4.2.e benign
-    
+    4.3    Deep packet inspection techniques for stateful firewall
+    4.4 compare inline traffic interrogation and taps or traffic monitoring
+    4.5 compare characteristics of data obtianed from taps or traffic monitoring and transactional data netflow in the analysis of network traffic.
+    4.6 extract files from tcp stream  given a PCAP file in wireshark
+    4.7 Identify key elements of intrusion given PCAP data
+        4.7.a source address
+        4.7.b destination address
+        4.7.c source port
+        4.7.d destination port 
+        4.7.e protocols
+        4.7.f payloads
+    4.8 Interpret the fields in protocol headers as related to intrusiona analysis
+        4.8.a Ethernet frame
+        4.8.b ipv4
+        4.8.c ipv6
+        4.8.d TCP
+        4.8.e UDP
+        4.8.f ICMP
+        4.8.g DNS
+        4.8.h SMTP POP3 IMAP
+        4.8.j ARP
+        
