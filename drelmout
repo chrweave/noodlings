@@ -3,7 +3,7 @@
    Active: active (running) since Sun 2020-09-27 09:00:06 CDT; 2 months 6 days ago
  Main PID: 2247 (crond)
     Tasks: 1 (limit: 49099)
-   Memory: 16.0M
+   Memory: 13.9M
    CGroup: /system.slice/crond.service
            └─2247 /usr/sbin/crond -n
 
