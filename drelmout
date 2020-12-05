@@ -3,12 +3,10 @@
    Active: active (running) since Sun 2020-09-27 09:00:06 CDT; 2 months 7 days ago
  Main PID: 2247 (crond)
     Tasks: 1 (limit: 49099)
-   Memory: 13.0M
+   Memory: 13.1M
    CGroup: /system.slice/crond.service
            └─2247 /usr/sbin/crond -n
 
-Dec 04 11:01:01 drelm.knology.net CROND[1417910]: (root) CMD (run-parts /etc/cron.hourly)
-Dec 04 12:01:01 drelm.knology.net CROND[1423345]: (root) CMD (run-parts /etc/cron.hourly)
 Dec 04 13:01:01 drelm.knology.net CROND[1428715]: (root) CMD (run-parts /etc/cron.hourly)
 Dec 04 14:01:01 drelm.knology.net CROND[1434037]: (root) CMD (run-parts /etc/cron.hourly)
 Dec 04 15:01:01 drelm.knology.net CROND[1439502]: (root) CMD (run-parts /etc/cron.hourly)
@@ -17,3 +15,5 @@ Dec 04 17:01:01 drelm.knology.net CROND[1450453]: (root) CMD (run-parts /etc/cro
 Dec 04 18:01:01 drelm.knology.net CROND[1455900]: (root) CMD (run-parts /etc/cron.hourly)
 Dec 04 19:01:01 drelm.knology.net CROND[1461327]: (root) CMD (run-parts /etc/cron.hourly)
 Dec 04 20:01:01 drelm.knology.net CROND[1466759]: (root) CMD (run-parts /etc/cron.hourly)
+Dec 04 21:01:01 drelm.knology.net CROND[1472415]: (root) CMD (run-parts /etc/cron.hourly)
+Dec 04 22:01:01 drelm.knology.net CROND[1477771]: (root) CMD (run-parts /etc/cron.hourly)
