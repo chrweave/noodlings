@@ -1,19 +1,19 @@
 ● crond.service - Command Scheduler
    Loaded: loaded (/usr/lib/systemd/system/crond.service; enabled; vendor preset: enabled)
-   Active: active (running) since Sun 2020-09-27 09:00:06 CDT; 2 months 28 days ago
+   Active: active (running) since Sun 2020-09-27 09:00:06 CDT; 2 months 30 days ago
  Main PID: 2247 (crond)
     Tasks: 1 (limit: 49099)
    Memory: 14.3M
    CGroup: /system.slice/crond.service
            └─2247 /usr/sbin/crond -n
 
-Dec 26 01:01:01 drelm.knology.net CROND[63456]: (root) CMD (run-parts /etc/cron.hourly)
-Dec 26 02:01:01 drelm.knology.net CROND[68950]: (root) CMD (run-parts /etc/cron.hourly)
-Dec 26 02:01:01 drelm.knology.net anacron[68961]: Anacron started on 2020-12-26
-Dec 26 02:01:01 drelm.knology.net anacron[68961]: Normal exit (0 jobs run)
-Dec 26 03:01:01 drelm.knology.net CROND[74403]: (root) CMD (run-parts /etc/cron.hourly)
-Dec 26 03:01:01 drelm.knology.net anacron[74415]: Anacron started on 2020-12-26
-Dec 26 03:01:01 drelm.knology.net anacron[74415]: Will run job `cron.daily' in 34 min.
-Dec 26 03:01:01 drelm.knology.net anacron[74415]: Jobs will be executed sequentially
-Dec 26 03:35:01 drelm.knology.net anacron[74415]: Job `cron.daily' started
-Dec 26 03:35:01 drelm.knology.net rhsmd[77689]: In order for Subscription Manager to provide your system with updates, your system must be registered with the Customer Portal. Please enter your Red Hat login to ensure your system is up-to-date.
+Dec 27 03:01:01 drelm.knology.net anacron[206757]: Jobs will be executed sequentially
+Dec 27 03:39:01 drelm.knology.net anacron[206757]: Job `cron.daily' started
+Dec 27 03:39:01 drelm.knology.net rhsmd[210400]: In order for Subscription Manager to provide your system with updates, your system must be registered with the Customer Portal. Please enter your Red Hat login to ensure your system is up-to-date.
+Dec 27 04:01:01 drelm.knology.net CROND[212489]: (root) CMD (run-parts /etc/cron.hourly)
+Dec 27 05:01:01 drelm.knology.net CROND[217937]: (root) CMD (run-parts /etc/cron.hourly)
+Dec 27 06:01:01 drelm.knology.net CROND[223328]: (root) CMD (run-parts /etc/cron.hourly)
+Dec 27 07:01:01 drelm.knology.net CROND[228930]: (root) CMD (run-parts /etc/cron.hourly)
+Dec 27 08:01:01 drelm.knology.net CROND[234319]: (root) CMD (run-parts /etc/cron.hourly)
+Dec 27 09:01:01 drelm.knology.net CROND[239746]: (root) CMD (run-parts /etc/cron.hourly)
+Dec 27 10:01:01 drelm.knology.net CROND[245294]: (root) CMD (run-parts /etc/cron.hourly)
