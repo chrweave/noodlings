@@ -8,7 +8,7 @@ git merge '@{u}'
 #git stash pop
 #gcc -O3 -o ../caw/lch lch.c
 #../caw/rg64 409600 lorque > ../caw/aak
-netstat > drelmout
+ls ~/caw/*.log &> drelmout
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
 git commit -F ../caw/blep drelmout
