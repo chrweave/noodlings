@@ -22,7 +22,8 @@ double * getDoubleArray(int size){
 
 void setString(void){
     int i = 0;
-    for(i=0;i<numNodes/2;i++){
+    int j=numNodes/2+numnodes%2;
+    for(i=0;i<j;i++){
         positions[i]=(double)i;
         positions[numNodes-1-i]=(double)i;
     }
