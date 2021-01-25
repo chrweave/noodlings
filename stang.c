@@ -56,5 +56,6 @@ int main(int argc, char ** argv){
     if(argc > 3 ){
         parseArguments(argv);
     }
+	printf("%d\n", argc);
     return 0;
 }
