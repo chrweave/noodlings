@@ -1,2 +1,8 @@
+stang.c: In function ‘setString’:
+stang.c:25:22: error: ‘numnodes’ undeclared (first use in this function); did you mean ‘numNodes’?
+     int j=numNodes/2+numnodes%2;
+                      ^~~~~~~~
+                      numNodes
+stang.c:25:22: note: each undeclared identifier is reported only once for each function it appears in
 0 1 2 3 4 5 5 4 3 2 1 0 
 0 1 2 3 4 5 0 5 4 3 2 1 0 
