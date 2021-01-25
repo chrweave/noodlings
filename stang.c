@@ -23,11 +23,11 @@ double * getDoubleArray(int size){
 void setString(void){
     int i = 0;
     for(i=0;i<=numNodes/2;i++){
-        positions[i]=i;
-        positions[numNodes-1-i]=i;
+        positions[i]=(double)i;
+        positions[numNodes-1-i]=(double)i;
     }
     for(i=0;i<numNodes;i++){
-        printf("%d ",positions[i]);
+        printf("%g ",positions[i]);
     }
     printf("\n");
 }
@@ -56,6 +56,7 @@ int main(int argc, char ** argv){
     if(argc > 3 ){
         parseArguments(argv);
         setInitialConditions();
+		cleanup();
     }
     return 0;
 }
