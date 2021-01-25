@@ -1,4 +1,0 @@
-stang.c:1:9: fatal error: stsio.h: No such file or directory
- #include<stsio.h>
-         ^~~~~~~~~
-compilation terminated.
