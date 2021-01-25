@@ -27,7 +27,7 @@ void setString(void){
         positions[numNodes-1-i]=i;
     }
     for(i=0;i<numNodes;i++){
-        printf("%d ",i);
+        printf("%d ",positions[i]);
     }
     printf("\n");
 }
