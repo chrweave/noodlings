@@ -43,7 +43,7 @@ void parseArguments(char ** argv){
     numNodes=atoi(argv[2]);
     bridgeSize=atoi(argv[3]);   
 }
-void setInitialConditions(){
+void setInitialConditions(void){
     int i;
     
     positions=getDoubleArray(numNodes);
@@ -55,7 +55,7 @@ void setInitialConditions(){
 int main(int argc, char ** argv){
     if(argc > 3 ){
         parseArguments(argv);
+        setInitialConditions();
     }
-	printf("%d\n", argc);
     return 0;
 }
