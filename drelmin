@@ -6,9 +6,9 @@ git fetch origin
 #git stash
 git merge '@{u}'
 #git stash pop
-#gcc -O3 -o ../caw/lch lch.c
+gcc -O3 -o ../caw/stang stang.c
 #../caw/rg64 409600 lorque > ../caw/aak
-dd if=/dev/urandom bs=256 count=3 |base64 -w 64 > drelmout
+../caw/stang 100 12 0 > drelmout
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
 git commit -F ../caw/blep drelmout
