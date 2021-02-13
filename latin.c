@@ -146,11 +146,13 @@ void parseArgs(char ** argv){
         testArray=(int*)malloc(sizeof(int)*biglim);
         testList=(xlist*)malloc(sizeof(xlist)*biglim);
         for(i=0;i<lim;i++){
-            testArray[i]=i;
             square[i]=(int*)malloc(sizeof(int)*lim);
             for(j=0;j<lim;j++){
                 square[i][j]=-2;
             }
+        }
+        for(i=0;i<biglim;i++){
+            testArray[i]=i;
         }
         setSqaure(argv[2]);
         printSquare();
