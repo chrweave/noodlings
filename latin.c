@@ -77,7 +77,7 @@ void initTestList(void){
     int l=0;
 
     for(i=0;i<lim;i++){
-        for(j=0;j<lim;j+=){
+        for(j=0;j<lim;j++){
             for(k=0;k<lim;k++){
                 initTestListElement(i,j,k,l++);
             }
@@ -97,7 +97,7 @@ void setSqaure (char* pass){
     while(xRoot->next != xRoot){
         square[xRoot->r][xRoot->c]=xRoot->s;
         temp=xRoot->next;
-        while(temp!=xroot){
+        while(temp!=xRoot){
             if(deletionCandidate(temp)){
                 deleteListElement(temp);
                 temp=temp->next;
@@ -117,7 +117,7 @@ void clearSingleVolatile(void* v){
 
 void clearVolatiles(void){
     int i;
-    for (i=0;i<limi++){
+    for (i=0;i<lim;i++){
         clearSingleVolatile((void*)square[i]);
     }
     clearSingleVolatile((void*)square);
