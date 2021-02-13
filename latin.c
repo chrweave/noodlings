@@ -144,6 +144,7 @@ void parseArgs(char ** argv){
         biglim=lim*lim*lim;
         square=(int**)malloc(sizeof(int*)*lim);
         testArray=(int*)malloc(sizeof(int)*biglim);
+        testList=(xlist*)malloc(sizeof(xlist)*biglim);
         for(i=0;i<lim;i++){
             testArray[i]=i;
             square[i]=(int*)malloc(sizeof(int)*lim);
