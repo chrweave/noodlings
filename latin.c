@@ -51,6 +51,21 @@ void setSqaure (char* pass){
     initTestArray(pass);
 }
 
+void clearSingleVolatile(void* v){
+    if(v!=NULL){
+        free(v);
+        v=NULL;
+    }
+}
+
+void clearVolatiles(){
+    int i;
+    for (i=0;i<limi++){
+        clearSingleVolatile((void*)square[i]);
+    }
+    clearSingleVolatile((void*)square);
+}
+
 void parseArgs(char ** argv){
     int i;
     lim = atoi(argv[1]);
@@ -59,7 +74,9 @@ void parseArgs(char ** argv){
         testArray=(int*)malloc(sizeof(int)*lim);
         for(i=0;i<lim;i++){
             testArray[i]=i;
+            square[i]=(int*)malloc(sizeof(int)*lim);
         }
+        setSqaure(argv[2]);
     }
 }
 
