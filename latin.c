@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
+void printSquare(void);
 typedef struct _xl xlist;
 
 struct _xl{
@@ -100,11 +100,11 @@ void setSqaure (char* pass){
         while(temp!=xRoot){
             if(deletionCandidate(temp)){
                 deleteListElement(temp);
-                temp=temp->next;
             }
-            deleteListElement(xRoot);
-            xRoot=xRoot->next;
+            temp=temp->next;
         }
+        deleteListElement(xRoot);
+        xRoot=xRoot->next;
     }
 }
 
