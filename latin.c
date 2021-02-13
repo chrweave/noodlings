@@ -35,10 +35,14 @@ void initTestArray(char* pass){
     int l=strlen(pass);
 
     for(i=0;i<lim;i++){
-        rcy+=(int)pass+512;
+        rcy+=(int)pass[i%l]+512;
         pump();
     }
     churnTestArray();
+    for(i=0;i<lim;i++){
+        printf("%d ",testArray[i]);
+    }
+    printf("\n");
 
 }
 
