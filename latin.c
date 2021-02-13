@@ -22,7 +22,7 @@ int rowNumber;
 int rcx=0;
 int rcy=0;
 
-void pump(){
+void pump(void){
     int temp;
 
     temp=testArray[rcx];
@@ -85,9 +85,27 @@ void initTestList(void){
     }
 }
 
+void deleteListElement(xlist * a){
+    a->next->prev=a->prev;
+    a->prev->next=a->next;
+}
 
 void setSqaure (char* pass){
+    xlist* temp;
     initTestArray(pass);
+    initTestList();
+    while(xRoot->next != xRoot){
+        square[xRoot->r][xRoot->c]=xRoot->s;
+        temp=xRoot->next;
+        while(temp!=xroot){
+            if(deletionCandidate(temp)){
+                deleteListElement(temp);
+                temp=temp->next;
+            }
+            deleteListElement(xRoot);
+            xRoot=xRoot->next;
+        }
+    }
 }
 
 void clearSingleVolatile(void* v){
@@ -97,12 +115,25 @@ void clearSingleVolatile(void* v){
     }
 }
 
-void clearVolatiles(){
+void clearVolatiles(void){
     int i;
     for (i=0;i<limi++){
         clearSingleVolatile((void*)square[i]);
     }
     clearSingleVolatile((void*)square);
+    clearSingleVolatile((void*)testList);
+    clearSingleVolatile((void*)testArray);
+}
+
+void printSquare(void){
+    int i = 0;
+    int j = 0;
+    for(i=0;i<lim;i++){
+        for(j=0;j<lim;j++){
+            printf("%3d ",square[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 void parseArgs(char ** argv){
@@ -121,6 +152,8 @@ void parseArgs(char ** argv){
             }
         }
         setSqaure(argv[2]);
+        printSquare();
+        clearVolatiles();
     }
 }
 
