@@ -86,11 +86,26 @@ void deleteListElement(xlist * a){
     a->prev->next=a->next;
 }
 
+void dumpTriples(void){
+    xlist * t=xRoot;
+    do {
+        if(deletionCandidate(t)){
+            printf("(%d%d%d) ",t->r,t->c,t->s);
+        } else {
+            printf(" %d%d%d  ",t->r,t->c,t->s);
+        }
+        t=t->next;
+    }while (t!=xRoot);
+    printf("\n");
+}
+
 void setSqaure (char* pass){
     xlist* temp;
     initTestArray(pass);
     initTestList();
+    xRoot=testList;
     while(xRoot->next != xRoot){
+        dumpTriples();
         square[xRoot->r][xRoot->c]=xRoot->s;
         temp=xRoot->next;
         while(temp!=xRoot){
