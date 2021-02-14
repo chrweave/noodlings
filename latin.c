@@ -36,11 +36,11 @@ void pump(void){
 }
 
 void initTestListElement(int i, int j, int k, int l){
-    xlist * mine=&(testList[l]);
-    mine->r=i;
-    mine->c=j;
-    mine->s=k;
-    mine->id=;
+    //xlist * mine=&(testList[l]);
+    testList[l].r=i;
+    testList[l].c=j;
+    testList[l].s=k;
+    testList[l].id=l;
 }
 
 int deletionCandidate(xlist * a){
