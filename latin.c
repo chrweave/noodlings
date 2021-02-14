@@ -8,6 +8,7 @@ struct _xl{
     int r;
     int c;
     int s;
+    int id;
     xlist* prev;
     xlist* next;
 };
@@ -36,13 +37,20 @@ void pump(void){
 
 void initTestListElement(int i, int j, int k, int l){
     xlist * mine=&(testList[l]);
-    int t=testArray[l];
+    int t;
     mine->r=i;
     mine->c=j;
     mine->s=k;
-    mine->prev=&(testList[(l+1)%biglim]);
-    mine->next=&(testList[(l-1+biglim)%biglim]);
-    if(t==0){
+    t=l+1;
+    t%=biglim;
+    t=testArray[t];
+    mine->next=&(testList[t]);
+    t=l-1;
+    t+=biglim;
+    t%=biglim;
+    t=testArray[t];
+    mine->prev=&(testList[t]);
+    if(testArray[l]==0){
         xRoot=mine;
     }
 }
@@ -105,6 +113,7 @@ void setSqaure (char* pass){
         }
         deleteListElement(xRoot);
         xRoot=xRoot->next;
+        printSquare(); getchar();
     }
 }
 
