@@ -75,7 +75,7 @@ void initTestList(void){
     for(i=0;i<lim;i++){
         for(j=0;j<lim;j++){
             for(k=0;k<lim;k++){
-                initTestListElement(i,j,k,l++);
+                initTestListElement(i,j,k,testArray[l++]);
             }
         }
     }
@@ -156,7 +156,9 @@ void parseArgs(char ** argv){
         testArray[biglim-1]=biglim-1;
         testArray[0]=0;
         testList[0].next=&(testList[1]);
-        testList[0].prev=
+        testList[0].prev=&(testList[biglim-1]);
+        testList[biglim-1].next=&(testList[0]);
+        testList[biglim-1].prev=&(testList[biglim-2]);
         setSqaure(argv[2]);
         printSquare();
         clearVolatiles();
