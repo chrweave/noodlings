@@ -36,24 +36,11 @@ void pump(void){
 }
 
 void initTestListElement(int i, int j, int k, int l){
-    xlist * mine=&(testList[testArray[l]]);
-    int t;
+    xlist * mine=&(testList[l]);
     mine->r=i;
     mine->c=j;
     mine->s=k;
-    mine->id=testArray[l];
-    t=l+1;
-    t%=biglim;
-    t=testArray[t];
-    mine->next=&(testList[t]);
-    t=l-1;
-    t+=biglim;
-    t%=biglim;
-    t=testArray[t];
-    mine->prev=&(testList[t]);
-    if(testArray[l]==0){
-        xRoot=mine;
-    }
+    mine->id=;
 }
 
 int deletionCandidate(xlist * a){
@@ -161,9 +148,15 @@ void parseArgs(char ** argv){
                 square[i][j]=-2;
             }
         }
-        for(i=0;i<biglim;i++){
+        for(i=1;i<biglim-1;i++){
             testArray[i]=i;
+            testList[i].next=&(testList[i+1]);
+            testList[i].prev=&(testList[i-1]);
         }
+        testArray[biglim-1]=biglim-1;
+        testArray[0]=0;
+        testList[0].next=&(testList[1]);
+        testList[0].prev=
         setSqaure(argv[2]);
         printSquare();
         clearVolatiles();
