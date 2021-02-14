@@ -36,11 +36,12 @@ void pump(void){
 }
 
 void initTestListElement(int i, int j, int k, int l){
-    xlist * mine=&(testList[l]);
+    xlist * mine=&(testList[testArray[l]]);
     int t;
     mine->r=i;
     mine->c=j;
     mine->s=k;
+    mine->id=testArray[l];
     t=l+1;
     t%=biglim;
     t=testArray[t];
