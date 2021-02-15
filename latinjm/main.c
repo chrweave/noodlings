@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
+#include <stddef.h>
 
 int rc4ArrarySize = 0;
 int * rc4Array;
 int cubeDim;
 char *** cube;
 
-makeMultiDimBlock(size_t chunkSize, int numDims, int *dimSizes){
+void* makeMultiDimBlock(size_t chunkSize, int numDims, int *dimSizes){
     int numElements[200];
     int i = 0;
     int j = 0;
@@ -47,7 +48,8 @@ makeMultiDimBlock(size_t chunkSize, int numDims, int *dimSizes){
 
 void parseArgs(char ** argv){
     cubeDim=atoi(argv[1]);
-    cube=(char***) makeMultiDimBlock(sizeof(char),3,[cubeDim,cubeDim,cubeDim]);
+    int cubedims[]={cubeDim,cubeDim,cubeDim};
+    cube=(char***) makeMultiDimBlock(sizeof(char),3,cubedims);
 }
 
 int main(int argc, char ** argv){
