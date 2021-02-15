@@ -4,12 +4,18 @@
 #include <stddef.h>
 #include <string.h>
 
+typedef struct {
+    int x;
+    int y;
+    int z;
+} CubePoint;
+
 int rc4ArrarySize = 0;
-int * rc4Array;
+int * rc4Array = NULL;
 int rc4x;
 int rc4y;
 int cubeDim;
-char *** cube;
+char *** cube = NULL;
 
 void* makeMultiDimBlock(size_t chunkSize, int numDims, int *dimSizes){
     int numElements[200];
@@ -112,11 +118,103 @@ void initRc4Array(char * p){
     }
 }
 
+int getXp(int y,int z){
+    int ret = -2;
+    int i = 0;
+    int c = 1;
+    for(i=0;c && i<cubeDim;i++){
+        if(cube[i][y][z]){
+            ret=i;
+            c=0;
+        }
+    }
+    return ret;
+}
+
+int getYp(int x,int z){
+    int ret = -2;
+    int i = 0;
+    int c = 1;
+    for(i=0;c && i<cubeDim;i++){
+        if(cube[x][i][z]){
+            ret=i;
+            c=0;
+        }
+    }
+    return ret;
+}
+
+int getZp(int x,int y){
+    int ret = -2;
+    int i = 0;
+    int c = 1;
+    for(i=0;c && i<cubeDim;i++){
+        if(cube[x][y][i]){
+            ret=i;
+            c=0;
+        }
+    }
+    return ret;
+}
+
+void clearSingleVolatile(void* v){
+    if(v!=NULL){
+        free(v);
+        v=NULL;
+    }
+}
+
+void clearVolatiles(void){
+    clearSingleVolatile((void*)cube);
+    clearSingleVolatile((void*)rc4Array);
+}
+
+void getPrimes(CubePoint * a, CubePoint * b){
+    int c;
+    b->x=getXp(a->y,a->z);
+    b->y=getYp(a->x,a->z);
+    b->z=getZp(a->x,a->y);
+    c= (b->x>=0)&&(b->y>=0)&&(b->z>=0);
+    if(!c){
+        printf("%d %d %d were found as primes.\n",b->x,b->y,b->z);
+        clearVolatiles();
+        exit(EXIT_FAILURE);
+    }
+}
+
+void randomPoint(CubePoint * a){
+    a->x=pump();
+    a->y=pump();
+    a->z=pump();
+}
+
+void warpCube(void){
+    int i =0;
+    int l=cubeDim*cubeDim;
+    CubePoint rando;
+    CubePoint prime;
+    CubePoint neg;
+    int perfect = 1;
+
+    randomPoint(&rando);
+    for(i=0;i<l;i++){
+        if(perfect){
+            while(cube[rando.x][rando.y][rando.z]==1){
+                randomPoint(&rando);
+            }
+            getPrimes(&rando,&prime);
+        } else {
+            getPrimes(&neg,&prime);
+        }
+    }
+}
+
 void parseArgs(char ** argv){
     cubeDim=atoi(argv[1]);
     initRc4Array(argv[2]);
     initCube();
     readCube();
+    clearVolatiles();
 }
 
 int main(int argc, char ** argv){
