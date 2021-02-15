@@ -105,7 +105,7 @@ void setSqaure (char* pass){
     initTestList();
     xRoot=testList;
     while(xRoot->next != xRoot){
-        dumpTriples();
+        //dumpTriples();
         square[xRoot->r][xRoot->c]=xRoot->s;
         temp=xRoot->next;
         while(temp!=xRoot){
@@ -116,7 +116,7 @@ void setSqaure (char* pass){
         }
         deleteListElement(xRoot);
         xRoot=xRoot->next;
-        printSquare(); getchar();
+        //printSquare(); getchar();
     }
 }
 
