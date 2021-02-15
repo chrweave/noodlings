@@ -2,12 +2,14 @@
 #include <stdlib.h>
 #include <memory.h>
 #include <stddef.h>
+#include <string.h>
 
 int rc4ArrarySize = 0;
 int * rc4Array;
+int rc4x;
+int rc4y;
 int cubeDim;
 char *** cube;
-int ** square;
 
 void* makeMultiDimBlock(size_t chunkSize, int numDims, int *dimSizes){
     int numElements[200];
@@ -75,14 +77,46 @@ void readCube(void){
     }
 }
 
+int pump(void){
+    int temp=rc4Array[rc4x];
+    rc4y+=temp;
+    rc4y%=rc4ArrarySize;
+    rc4Array[rc4x]=rc4Array[rc4y];
+    rc4Array[rc4y]=temp;
+    temp+=rc4Array[rc4x];
+    temp%=rc4ArrarySize;
+    temp=rc4Array[temp];
+    temp%=cubeDim;
+    rc4x++;
+    rc4x%=rc4ArrarySize;
+    return temp;
+}
+
+void initRc4Array(char * p){
+    int i;
+    int l=strlen(p);
+
+    rc4ArrarySize=cubeDim*100;
+    rc4x = 0;
+    rc4y = 0;
+    rc4Array=(int*)malloc(sizeof(int)*rc4ArrarySize);
+    for(i=0;i<rc4ArrarySize;i++){
+        rc4Array[i]=i;
+    }
+    for(i=0;i<rc4ArrarySize;i++){
+        rc4y+=(int)p[i%l]+256;
+        pump();
+    }
+    for(i=0;i<rc4ArrarySize;i++){
+        pump();
+    }
+}
+
 void parseArgs(char ** argv){
     cubeDim=atoi(argv[1]);
+    initRc4Array(argv[2]);
     initCube();
     readCube();
-    //int cubedims[]={cubeDim,cubeDim,cubeDim};
-    //int squaredims[]={cubeDim,cubeDim};
-    //cube=(char***) makeMultiDimBlock(sizeof(char),3,cubedims);
-    //square=(int**) makeMultiDimBlock(sizeof (int),2,squaredims);
 }
 
 int main(int argc, char ** argv){
