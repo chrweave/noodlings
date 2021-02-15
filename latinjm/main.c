@@ -7,6 +7,7 @@ int rc4ArrarySize = 0;
 int * rc4Array;
 int cubeDim;
 char *** cube;
+int ** square;
 
 void* makeMultiDimBlock(size_t chunkSize, int numDims, int *dimSizes){
     int numElements[200];
@@ -46,10 +47,42 @@ void* makeMultiDimBlock(size_t chunkSize, int numDims, int *dimSizes){
     return bloc;
 }
 
+void initCube(void){
+    int cubedims[]={cubeDim,cubeDim,cubeDim};
+    int i = 0;
+    int j = 0;
+    cube=(char***) makeMultiDimBlock(sizeof(char),3,cubedims);
+    for(i=0;i<cubeDim;i++){
+        for(j=0;j<cubeDim;j++){
+            cube[i][j][(i+j)%cubeDim] = 1;
+        }
+    }
+}
+
+void readCube(void){
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    for(i=0;i<cubeDim;i++){
+        for(j=0;j<cubeDim;j++){
+            for(k=0;k<cubeDim;k++){
+                if(cube[i][j][k]==1){
+                    printf("%4d ",k);
+                }
+            }
+        }
+        printf("\n");
+    }
+}
+
 void parseArgs(char ** argv){
     cubeDim=atoi(argv[1]);
-    int cubedims[]={cubeDim,cubeDim,cubeDim};
-    cube=(char***) makeMultiDimBlock(sizeof(char),3,cubedims);
+    initCube();
+    readCube();
+    //int cubedims[]={cubeDim,cubeDim,cubeDim};
+    //int squaredims[]={cubeDim,cubeDim};
+    //cube=(char***) makeMultiDimBlock(sizeof(char),3,cubedims);
+    //square=(int**) makeMultiDimBlock(sizeof (int),2,squaredims);
 }
 
 int main(int argc, char ** argv){
