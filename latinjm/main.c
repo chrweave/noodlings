@@ -1,3 +1,4 @@
+/* C version of Pual Hankin's implementation of Jacobson and Matthews random latin square using an rc4 generator */
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
@@ -16,6 +17,9 @@ int rc4x;
 int rc4y;
 int cubeDim;
 char *** cube = NULL;
+int ** xy = NULL;
+int ** yz = NULL;
+int ** xz = NULL;
 
 void* makeMultiDimBlock(size_t chunkSize, int numDims, int *dimSizes){
     int numElements[200];
@@ -209,10 +213,28 @@ void warpCube(void){
     }
 }
 
+void initMarginals(void){
+    int q[]={cubeDim,cubeDim},i,j,k;
+
+    xy = (int**)makeMultiDimBlock(sizeof(int),2,q);
+    yz = (int**)makeMultiDimBlock(sizeof(int),2,q);
+    xz = (int**)makeMultiDimBlock(sizeof(int),2,q);
+    for(i=0;i<cubeDim;i++){
+        for(j=0;j<cubeDim;j++){
+            k=i+j;
+            k%=cubeDim;
+            xy[i][j]=k;
+            yz[j][k]=i;
+            xz[i][k]=j;
+        }
+    }
+}
+
 void parseArgs(char ** argv){
     cubeDim=atoi(argv[1]);
     initRc4Array(argv[2]);
     initCube();
+    initMarginals();
     readCube();
     clearVolatiles();
 }
