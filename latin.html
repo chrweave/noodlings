@@ -14,13 +14,15 @@
 			<input id="rKey" type ="text"/><br/>				
 			<button id="rButton">Generate it!</button>
 		</form>
+		<div id ="target">
+		</div>
 		<script type="text/javascript">
-			var q;
+			var cubeDim;
 			var rc4ArrarySize = 0;
 			var rc4Array = [];
 			var rc4x;
 			var rc4y;
-			var cubeDim;
+			var q;
 			var xy = [];
 			var yz = [];
 			var xz = [];
@@ -34,22 +36,47 @@
 						s[i][j]=0;
 					}
 				}
-				return s
+				return s;
 			}
 			
 			function readCube(){
 				var i = 0;
 				var j = 0;
+				var t=document.createElement("TABLE");
+				var thead=t.createTHead();
+				var tbody=t.createTBody();
+				var thr=thead.insertRow();
+				var tbr=tbody.insertRow();
+				var targ=document.getElementById("target");
+				let td = document.createElement("td");
+				t.style="font-size: 1.2em; line-height: .9em; border-collapse: collapse;";
+				thr.appendChild(td);
+				targ.innerHTML="";
+				targ.appendChild(t);
 				for(i=0;i<cubeDim;i++){
+					let myst=i.toString();
+					let th = document.createElement("th");
+					let text = document.createTextNode(myst);
+					th.appendChild(text);
+					thr.appendChild(th);
+					let tr=tbody.insertRow();
+					th = document.createElement("th");
+					text = document.createTextNode(myst);
+					th.appendChild(text);
+					tr.appendChild(th);
 					for(j=0;j<cubeDim;j++){
-						printf("%3d ",xy[i][j]);
+						let zc=xy[i][j].toString();
+						let td = tr.insertCell();
+						let thtext = document.createTextNode(zc);
+						td.appendChild(thtext);
+						tr.appendChild(td);
+						//printf("%3d ",xy[i][j]);
 					}
-					printf("\n");
+					//printf("\n");
 				}
 			}
-			
-			function pump(void){
-				int temp=rc4Array[rc4x];
+			function pump(){
+				var temp=rc4Array[rc4x];
 				rc4y+=temp;
 				rc4y%=rc4ArrarySize;
 				rc4Array[rc4x]=rc4Array[rc4y];
@@ -60,49 +87,31 @@
 				rc4x++;
 				rc4x%=rc4ArrarySize;
 				return temp;
-			}
+			} 
 			function getNumValue(x) {
 				return parseInt(document.getElementById(x).value);
 			}
 			function initRc4Array(p){
 				var i;
 				var pp=p.split('').map(y => y.charCodeAt(0));
-				int l=pp.length;
+				var l=pp.length;
 			
 				rc4ArrarySize=cubeDim*100;
 				rc4x = 0;
 				rc4y = 0;
-				rc4Array=(int*)malloc(sizeof(int)*rc4ArrarySize);
+				rc4Array=[];
 				for(i=0;i<rc4ArrarySize;i++){
 					rc4Array[i]=i;
 				}
 				for(i=0;i<rc4ArrarySize;i++){
-					rc4y+=(int)pp[i%l]+256;
+					rc4y+=pp[i%l]+256;
 					pump();
 				}
 				for(i=0;i<rc4ArrarySize;i++){
 					pump();
 				}
 			}
-			
-			
-			
-			void clearSingleVolatile(void* v){
-				if(v!=NULL){
-					free(v);
-					v=NULL;
-				}
-			}
-			
-			void clearVolatiles(void){
-				clearSingleVolatile((void*)xy);
-				clearSingleVolatile((void*)yz);
-				clearSingleVolatile((void*)xz);
-				clearSingleVolatile((void*)rc4Array);
-			}
-			
-			
-			void initMarginals(void){
+			function initMarginals(){
 				var i,j,k;
 			
 				xy = makeSquare(cubeDim);
@@ -118,8 +127,7 @@
 					}
 				}
 			}
-			
-			function latin(void) { /* Ported directly from Paul Hankin's source */
+			function latin() { /* Ported directly from Paul Hankin's source */
 				var mxy, mxz, myz;
 				var m = [0,0,0];
 				var proper = true;
@@ -203,12 +211,12 @@
 			}
 			
 			
-			void parseArgs(char ** argv){
+			function parseArgs(){
 				cubeDim=getNumValue("squareSize");
 				initRc4Array(document.getElementById("rKey").value);
 				latin();
 				readCube();
-				clearVolatiles();
+				return false;
 			}
 		</script>
 	</body>
