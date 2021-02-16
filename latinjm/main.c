@@ -75,14 +75,9 @@ void initCube(void){
 void readCube(void){
     int i = 0;
     int j = 0;
-    int k = 0;
     for(i=0;i<cubeDim;i++){
         for(j=0;j<cubeDim;j++){
-            for(k=0;k<cubeDim;k++){
-                if(cube[i][j][k]==1){
-                    printf("%4d ",k);
-                }
-            }
+            printf("%3d ",xy[i][j]);
         }
         printf("\n");
     }
@@ -132,17 +127,12 @@ void clearSingleVolatile(void* v){
 }
 
 void clearVolatiles(void){
-    clearSingleVolatile((void*)cube);
+    clearSingleVolatile((void*)xy);
+    clearSingleVolatile((void*)yz);
+    clearSingleVolatile((void*)xz);
     clearSingleVolatile((void*)rc4Array);
 }
 
-
-
-void randomPoint(CubePoint * a){
-    a->x=pump()%cubeDim;
-    a->y=pump()%cubeDim;
-    a->z=pump()%cubeDim;
-}
 
 void initMarginals(void){
     int q[]={cubeDim,cubeDim},i,j,k;
@@ -171,7 +161,7 @@ void rand2(int a, int b, int * c, int *d ) {
     }
 }
 
-void latin(void) {
+void latin(void) { /* Ported directly from Paul Hankin's source */
     int mxy, mxz, myz;
     int m [3];
     int proper = 1;
@@ -234,13 +224,13 @@ void latin(void) {
         xz[i2][k] = j2;
         xz[i2][k2] = j;
     }
-    return xy;
 }
 
 
 void parseArgs(char ** argv){
     cubeDim=atoi(argv[1]);
     initRc4Array(argv[2]);
+    latin();
     //initCube();
     //initMarginals();
     readCube();
