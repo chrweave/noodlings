@@ -6,18 +6,12 @@
 #include <stddef.h>
 #include <string.h>
 
-typedef struct {
-    int x;
-    int y;
-    int z;
-} CubePoint;
 
 int rc4ArrarySize = 0;
 int * rc4Array = NULL;
 int rc4x;
 int rc4y;
 int cubeDim;
-char *** cube = NULL;
 int ** xy = NULL;
 int ** yz = NULL;
 int ** xz = NULL;
@@ -63,10 +57,28 @@ void* makeMultiDimBlock(size_t chunkSize, int numDims, int *dimSizes){
 void readAB(void){
     int i = 0;
     int j = 0;
-    for(i=0;i<cubeDim;i++){
+    for(i=0;i<3;i++){
+        printf("  ");
         for(j=0;j<cubeDim;j++){
-            printf("%c",xy[i][j]+65);
+            printf("%c ",j+65);
         }
+        printf(" ");
+    }
+    printf("\n");
+    for(i=0;i<cubeDim;i++){
+        printf("%c ",i+65);
+        for(j=0;j<cubeDim;j++){
+            printf("%c ",xy[i][j]+65);
+        }
+        printf(" %c ",i+65);
+        for(j=0;j<cubeDim;j++){
+            printf("%c ",yz[i][j]+65);
+        }
+        printf(" %c ",i+65);
+        for(j=0;j<cubeDim;j++){
+            printf("%c ",xz[i][j]+65);
+        }
+
         printf("\n");
     }
 }
