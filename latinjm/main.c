@@ -60,15 +60,14 @@ void* makeMultiDimBlock(size_t chunkSize, int numDims, int *dimSizes){
     return bloc;
 }
 
-void initCube(void){
-    int cubedims[]={cubeDim,cubeDim,cubeDim};
+void readAB(void){
     int i = 0;
     int j = 0;
-    cube=(char***) makeMultiDimBlock(sizeof(char),3,cubedims);
     for(i=0;i<cubeDim;i++){
         for(j=0;j<cubeDim;j++){
-            cube[i][j][(i+j)%cubeDim] = 1;
+            printf("%c",xy[i][j]+65);
         }
+        printf("\n");
     }
 }
 
@@ -234,6 +233,9 @@ void parseArgs(char ** argv){
     //initCube();
     //initMarginals();
     readCube();
+    if(cubeDim<27){
+        readAB();
+    }
     clearVolatiles();
 }
 
