@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xml:lang="en-us">
+	<head>
+		<title>
+			Latin Square Explorer
+		</title>
+	</head>
+	<body>
+		<h1>Latin Square Explorer</h1>
+		<form onSubmit="return parseArgs()">
+			Latin Square Size<br/>
+			<input id="squareSize" type ="number"/><br/>
+			Randomizing Key (text): <br/>
+			<input id="rKey" type ="text"/><br/>				
+			<button id="rButton">Generate it!</button>
+		</form>
+		<script type="text/javascript">
+			var q;
+			var rc4ArrarySize = 0;
+			var rc4Array = [];
+			var rc4x;
+			var rc4y;
+			var cubeDim;
+			var xy = [];
+			var yz = [];
+			var xz = [];
+			
+			function makeSquare(x){
+				var s=[];
+				var i,j;
+				for(i=0;i<x;i++){
+				s[i]=[];
+					for(j=0;j<x;j++){
+						s[i][j]=0;
+					}
+				}
+				return s
+			}
+			
+			function readCube(){
+				var i = 0;
+				var j = 0;
+				for(i=0;i<cubeDim;i++){
+					for(j=0;j<cubeDim;j++){
+						printf("%3d ",xy[i][j]);
+					}
+					printf("\n");
+				}
+			}
+			
+			function pump(void){
+				int temp=rc4Array[rc4x];
+				rc4y+=temp;
+				rc4y%=rc4ArrarySize;
+				rc4Array[rc4x]=rc4Array[rc4y];
+				rc4Array[rc4y]=temp;
+				temp+=rc4Array[rc4x];
+				temp%=rc4ArrarySize;
+				temp=rc4Array[temp];
+				rc4x++;
+				rc4x%=rc4ArrarySize;
+				return temp;
+			}
+			function getNumValue(x) {
+				return parseInt(document.getElementById(x).value);
+			}
+			function initRc4Array(p){
+				var i;
+				var pp=p.split('').map(y => y.charCodeAt(0));
+				int l=pp.length;
+			
+				rc4ArrarySize=cubeDim*100;
+				rc4x = 0;
+				rc4y = 0;
+				rc4Array=(int*)malloc(sizeof(int)*rc4ArrarySize);
+				for(i=0;i<rc4ArrarySize;i++){
+					rc4Array[i]=i;
+				}
+				for(i=0;i<rc4ArrarySize;i++){
+					rc4y+=(int)pp[i%l]+256;
+					pump();
+				}
+				for(i=0;i<rc4ArrarySize;i++){
+					pump();
+				}
+			}
+			
+			
+			
+			void clearSingleVolatile(void* v){
+				if(v!=NULL){
+					free(v);
+					v=NULL;
+				}
+			}
+			
+			void clearVolatiles(void){
+				clearSingleVolatile((void*)xy);
+				clearSingleVolatile((void*)yz);
+				clearSingleVolatile((void*)xz);
+				clearSingleVolatile((void*)rc4Array);
+			}
+			
+			
+			void initMarginals(void){
+				var i,j,k;
+			
+				xy = makeSquare(cubeDim);
+				yz = makeSquare(cubeDim);
+				xz = makeSquare(cubeDim);
+				for(i=0;i<cubeDim;i++){
+					for(j=0;j<cubeDim;j++){
+						k=i+j;
+						k%=cubeDim;
+						xy[i][j]=k;
+						yz[j][k]=i;
+						xz[i][k]=j;
+					}
+				}
+			}
+			
+			function latin(void) { /* Ported directly from Paul Hankin's source */
+				var mxy, mxz, myz;
+				var m = [0,0,0];
+				var proper = true;
+				var minIter = cubeDim*cubeDim*cubeDim;
+				var iter;
+			
+				initMarginals();
+				for(iter=0;iter<minIter||!proper; iter++){
+					var i, j, k, i2, j2, k2, i2_, j2_, k2_;
+			
+					if (proper) {
+						// Pick a random 0 in the array
+						do{
+							i = pump()%cubeDim;
+							j = pump()%cubeDim;
+							k = pump()%cubeDim;
+						}while( xy[i][j] == k);
+						// find i2 such that [i2, j, k] is 1. same for j2, k2
+						i2 = yz[j][k];
+						j2 = xz[i][k];
+						k2 = xy[i][j];
+						i2_=i;
+						j2_=j;
+						k2_=k;
+					} else {
+						i = m[0];
+						j = m[1];
+						k = m[2];
+						// find one such that [i2, j, k] is 1, same for j2, k2.
+						// each is either the value stored in the corresponding
+						// slice, or one of our three temporary "extra" 1s.
+						// That's because (i, j, k) is -1.
+						if(pump()%2==0){
+							i2  = yz[j][k];
+							i2_ = myz;
+						} else {						
+							i2_ = yz[j][k];
+							i2  = myz;
+						}
+						if(pump()%2==0){
+							j2  = xz[i][k];
+							j2_ = mxz
+						} else {
+							j2_ = xz[i][k];
+							j2  = mxz
+						}
+						if(pump()%2==0){
+							k2  = xy[i][j];
+							k2_ = mxy
+						} else {
+							k2_ = xy[i][j];
+							k2  = mxy
+						}
+					}
+			
+					proper = (xy[i2][j2] == k2);
+					if (!proper) {
+						m[0]=i2;
+						m[1]=j2;
+						m[2]=k2;
+						mxy = xy[i2][j2];
+						myz = yz[j2][k2];
+						mxz = xz[i2][k2];
+					}
+			
+					xy[i][j] = k2_;
+					xy[i][j2] = k2;
+					xy[i2][j] = k2;
+					xy[i2][j2] = k;
+			
+					yz[j][k] = i2_;
+					yz[j][k2] = i2;
+					yz[j2][k] = i2;
+					yz[j2][k2] = i;
+			
+					xz[i][k] = j2_;
+					xz[i][k2] = j2;
+					xz[i2][k] = j2;
+					xz[i2][k2] = j;
+				}
+			}
+			
+			
+			void parseArgs(char ** argv){
+				cubeDim=getNumValue("squareSize");
+				initRc4Array(document.getElementById("rKey").value);
+				latin();
+				readCube();
+				clearVolatiles();
+			}
+		</script>
+	</body>
+</html>
