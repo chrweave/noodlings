@@ -4,18 +4,10 @@
 	<head>
 		<title>
 			Latin Square Explorer
-		</title>
-		<!--<style>
-		th:nth-child(even) {
-			background: LightPink;
-		}
-		td:nth-child(even) {
-			background: LightPink;
-		}
-		</style>-->
+		</title>		
 	</head>
 	<body>
-		<h1>Latin Square Explorer</h1>
+		<h1>Latin Square Explorer (See <a href="https://blog.paulhankin.net/latinsquares/">Paul Hankin's Blog</a> for the original Go code.)</h1>
 		<form onSubmit="return parseArgs()">
 			Latin Square Size<br/>
 			<input id="squareSize" type ="number"/><br/>
@@ -35,6 +27,9 @@
 			var xy = [];
 			var yz = [];
 			var xz = [];
+			var lu = [];
+			var rlu = [];
+			var clu = [];
 			
 			function makeSquare(x){
 				var s=[];
@@ -48,14 +43,61 @@
 				return s;
 			}
 			
+			function parseTid(x,y){
+				var k=x.id.split('_').map(z => parseInt(z)).map( w => isNaN(w)?-2:w);
+				y[0]=k[0];
+				y[1]=k[1];
+				if(k.length==3){
+					y[1]=k[2];
+				}
+			}
+			
+			function clearHighlight(x){
+				var y=[0,0];
+				var i;
+				parseTid(x,y);
+				if(y[0] > -1 && y[1] > -1){
+					rlu[y[0]].style.background="";
+					clu[y[1]].style.background="";
+					lu[y[0]][y[1]].style.background="";
+					for(i=0;i<y[1];i++){
+						lu[y[0]][i].style.background="";
+					}
+					for(i=0;i<y[0];i++){
+						lu[i][y[1]].style.background="";
+					}
+				} else {
+					x.style.background="";
+				}				
+			}
+			
+			function highlight(x){
+				var y=[0,0];
+				var i;
+				parseTid(x,y);
+				if((y[0] > -1) && y[1] > -1){
+					rlu[y[0]].style.background="Lime";
+					clu[y[1]].style.background="Lime";
+					lu[y[0]][y[1]].style.background="DeepPink";
+					for(i=0;i<y[1];i++){
+						lu[y[0]][i].style.background="Lime";
+					}
+					for(i=0;i<y[0];i++){
+						lu[i][y[1]].style.background="Lime";
+					}
+				} else {
+					x.style.background="DeepPink";
+				}
+				
+			}
+			
 			function setBorderBottom(x){
-				//x.style.borderBottomStyle = "solid";
-				//x.style.borderBottomWidth = "thin";
+				x.style.textAlign = "right";
 				x.addEventListener('mouseenter', e => {
-					x.style.background = 'LimeGreen';
+					highlight(x);
 				});				
 				x.addEventListener('mouseleave', e => {
-					x.style.background="White";
+					clearHighlight(x);
 				});
 			}
 			
@@ -80,11 +122,14 @@
 					let text = document.createTextNode(myst);
 					setBorderBottom(th);
 					th.appendChild(text);
-					th.id=i+"_";
+					th.id="_"+i;
+					clu[i]=th;
 					thr.appendChild(th);
 					let tr=tbody.insertRow();
 					th = document.createElement("th");
-					th.id="_"+i;
+					th.id=i+"_";
+					rlu[i]=th;
+					lu[i]=[]
 					setBorderBottom(th);
 					text = document.createTextNode(myst);
 					th.appendChild(text);
@@ -96,6 +141,7 @@
 						setBorderBottom(td);
 						td.appendChild(thtext);
 						td.id=i+"_"+j;
+						lu[i][j]=td;
 						tr.appendChild(td);
 					}
 				}
