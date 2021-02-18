@@ -1,9 +1,18 @@
+
 <!DOCTYPE html>
 <html xml:lang="en-us">
 	<head>
 		<title>
 			Latin Square Explorer
 		</title>
+		<!--<style>
+		th:nth-child(even) {
+			background: LightPink;
+		}
+		td:nth-child(even) {
+			background: LightPink;
+		}
+		</style>-->
 	</head>
 	<body>
 		<h1>Latin Square Explorer</h1>
@@ -39,6 +48,17 @@
 				return s;
 			}
 			
+			function setBorderBottom(x){
+				//x.style.borderBottomStyle = "solid";
+				//x.style.borderBottomWidth = "thin";
+				x.addEventListener('mouseenter', e => {
+					x.style.background = 'LimeGreen';
+				});				
+				x.addEventListener('mouseleave', e => {
+					x.style.background="White";
+				});
+			}
+			
 			function readCube(){
 				var i = 0;
 				var j = 0;
@@ -49,7 +69,8 @@
 				var tbr=tbody.insertRow();
 				var targ=document.getElementById("target");
 				let td = document.createElement("td");
-				t.style="font-size: 1.2em; line-height: .9em; border-collapse: collapse;";
+				t.style="font-size: 1.2em; line-height: .9em; border-collapse: collapse; cellpadding: 2px;";
+				setBorderBottom(td)
 				thr.appendChild(td);
 				targ.innerHTML="";
 				targ.appendChild(t);
@@ -57,10 +78,14 @@
 					let myst=i.toString();
 					let th = document.createElement("th");
 					let text = document.createTextNode(myst);
+					setBorderBottom(th);
 					th.appendChild(text);
+					th.id=i+"_";
 					thr.appendChild(th);
 					let tr=tbody.insertRow();
 					th = document.createElement("th");
+					th.id="_"+i;
+					setBorderBottom(th);
 					text = document.createTextNode(myst);
 					th.appendChild(text);
 					tr.appendChild(th);
@@ -68,11 +93,11 @@
 						let zc=xy[i][j].toString();
 						let td = tr.insertCell();
 						let thtext = document.createTextNode(zc);
+						setBorderBottom(td);
 						td.appendChild(thtext);
+						td.id=i+"_"+j;
 						tr.appendChild(td);
-						//printf("%3d ",xy[i][j]);
 					}
-					//printf("\n");
 				}
 			}
 			function pump(){
@@ -127,7 +152,14 @@
 					}
 				}
 			}
-			function latin() { /* Ported directly from Paul Hankin's source */
+			function randswap(x){
+				if(pump()%2==1){
+					var temp =x[0];
+					x[0]=x[1];
+					x[1]=temp;
+				}
+			}
+			function latin() { /* Ported Via C from Paul Hankin's source */
 				var mxy, mxz, myz;
 				var m = [0,0,0];
 				var proper = true;
@@ -136,7 +168,7 @@
 			
 				initMarginals();
 				for(iter=0;iter<minIter||!proper; iter++){
-					var i, j, k, i2, j2, k2, i2_, j2_, k2_;
+					var i, j, k, i2=[0,0], j2=[0,0], k2=[0,0];
 			
 					if (proper) {
 						// Pick a random 0 in the array
@@ -146,12 +178,12 @@
 							k = pump()%cubeDim;
 						}while( xy[i][j] == k);
 						// find i2 such that [i2, j, k] is 1. same for j2, k2
-						i2 = yz[j][k];
-						j2 = xz[i][k];
-						k2 = xy[i][j];
-						i2_=i;
-						j2_=j;
-						k2_=k;
+						i2[0] = yz[j][k];
+						j2[0] = xz[i][k];
+						k2[0] = xy[i][j];
+						i2[1]=i;
+						j2[1]=j;
+						k2[1]=k;
 					} else {
 						i = m[0];
 						j = m[1];
@@ -160,57 +192,38 @@
 						// each is either the value stored in the corresponding
 						// slice, or one of our three temporary "extra" 1s.
 						// That's because (i, j, k) is -1.
-						if(pump()%2==0){
-							i2  = yz[j][k];
-							i2_ = myz;
-						} else {						
-							i2_ = yz[j][k];
-							i2  = myz;
-						}
-						if(pump()%2==0){
-							j2  = xz[i][k];
-							j2_ = mxz
-						} else {
-							j2_ = xz[i][k];
-							j2  = mxz
-						}
-						if(pump()%2==0){
-							k2  = xy[i][j];
-							k2_ = mxy
-						} else {
-							k2_ = xy[i][j];
-							k2  = mxy
-						}
+						
+						randswap(i2=[yz[j][k],myz]);
+						randswap(j2=[xz[i][k],mxz]);
+						randswap(k2=[xy[i][j],mxy]);
 					}
 			
-					proper = (xy[i2][j2] == k2);
+					proper = (xy[i2[0]][j2[0]] == k2[0]);
 					if (!proper) {
-						m[0]=i2;
-						m[1]=j2;
-						m[2]=k2;
-						mxy = xy[i2][j2];
-						myz = yz[j2][k2];
-						mxz = xz[i2][k2];
+						m[0]=i2[0];
+						m[1]=j2[0];
+						m[2]=k2[0];
+						mxy = xy[i2[0]][j2[0]];
+						myz = yz[j2[0]][k2[0]];
+						mxz = xz[i2[0]][k2[0]];
 					}
 			
-					xy[i][j] = k2_;
-					xy[i][j2] = k2;
-					xy[i2][j] = k2;
-					xy[i2][j2] = k;
+					xy[i][j]         = k2[1];
+					xy[i][j2[0]]     = k2[0];
+					xy[i2[0]][j]     = k2[0];
+					xy[i2[0]][j2[0]] = k;
 			
-					yz[j][k] = i2_;
-					yz[j][k2] = i2;
-					yz[j2][k] = i2;
-					yz[j2][k2] = i;
+					yz[j][k]      	 = i2[1];
+					yz[j][k2[0]]  	 = i2[0];
+					yz[j2[0]][k]     = i2[0];
+					yz[j2[0]][k2[0]] = i;
 			
-					xz[i][k] = j2_;
-					xz[i][k2] = j2;
-					xz[i2][k] = j2;
-					xz[i2][k2] = j;
+					xz[i][k]         = j2[1];
+					xz[i][k2[0]]     = j2[0];
+					xz[i2[0]][k]     = j2[0];
+					xz[i2[0]][k2[0]] = j;
 				}
-			}
-			
-			
+			}	
 			function parseArgs(){
 				cubeDim=getNumValue("squareSize");
 				initRc4Array(document.getElementById("rKey").value);
