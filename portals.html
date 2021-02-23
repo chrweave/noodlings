@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html xml:lang="en-us">
+	<head>
+		<title>
+			Portal RPG
+		</title>		
+	</head>
+	<body>
+		<h1>Portal RPG</h1>
+		<form onSubmit="return parseArgs()">
+			Latin Square Size<br/>
+			<input id="squareSize" type ="number"/><br/>
+			Randomizing Key (text): <br/>
+			<input id="rKey" type ="text"/><br/>				
+			<button id="rButton">Generate it!</button>
+		</form>
+		<div id ="target">
+		</div>
+		<script type="text/javascript">
+			class rc4Gen{
+				x=0;
+				y=0;
+				Array=[];
+				ArraySize = 0;
+				constructor(q){
+					var i;
+					this.ArraySize=q;
+					for(i=0;i<this.ArraySize;i++){
+						this.Array[i]=i;
+					}
+				}
+				pump(){
+					var temp=this.Array[this.x];
+					this.y+=temp;
+					this.y%=this.ArrarySize;
+					this.Array[this.x]=this.Array[this.y];
+					this.Array[this.y]=temp;
+					temp+=this.Array[this.x];
+					temp%=this.ArrarySize;
+					temp=this.Array[temp];
+					this.x++;
+					this.x%=this.ArrarySize;
+					return temp;
+				} 
+				
+				initArray(p){
+					var i;
+					var pp=p.split('').map(y => y.charCodeAt(0));
+					var l=pp.length;
+					this.x = 0;
+					this.y = 0;
+					this.Array=[];
+					for(i=0;i<this.ArrarySize;i++){
+						this.Array[i]=i;
+					}
+					for(i=0;i<this.ArrarySize;i++){
+						this.y+=pp[i%l]+256;
+						pump();
+					}
+					for(i=0;i<this.ArrarySize;i++){
+						pump();
+					}
+				}
+			}
+			var cubeDim;
+			var rc4;
+			var q;
+			var xy = [];
+			var yz = [];
+			var xz = [];
+			var lu = [];
+			var rlu = [];
+			var clu = [];
+			
+			function makeSquare(x){
+				var s=[];
+				var i,j;
+				for(i=0;i<x;i++){
+				s[i]=[];
+					for(j=0;j<x;j++){
+						s[i][j]=0;
+					}
+				}
+				return s;
+			}
+			
+			function parseTid(x,y){
+				var k=x.id.split('_').map(z => parseInt(z)).map( w => isNaN(w)?-2:w);
+				y[0]=k[0];
+				y[1]=k[1];
+				if(k.length==3){
+					y[1]=k[2];
+				}
+			}
+			
+			function clearHighlight(x){
+				var y=[0,0];
+				var i;
+				parseTid(x,y);
+				if(y[0] > -1 && y[1] > -1){
+					rlu[y[0]].style.background="";
+					clu[y[1]].style.background="";
+					lu[y[0]][y[1]].style.background="";
+					for(i=0;i<y[1];i++){
+						lu[y[0]][i].style.background="";
+					}
+					for(i=0;i<y[0];i++){
+						lu[i][y[1]].style.background="";
+					}
+				} else {
+					x.style.background="";
+				}				
+			}
+			
+			function highlight(x){
+				var y=[0,0];
+				var i;
+				parseTid(x,y);
+				if((y[0] > -1) && y[1] > -1){
+					rlu[y[0]].style.background="Lime";
+					clu[y[1]].style.background="Lime";
+					lu[y[0]][y[1]].style.background="DeepPink";
+					for(i=0;i<y[1];i++){
+						lu[y[0]][i].style.background="Lime";
+					}
+					for(i=0;i<y[0];i++){
+						lu[i][y[1]].style.background="Lime";
+					}
+				} else {
+					x.style.background="DeepPink";
+				}
+				
+			}
+			
+			function setBorderBottom(x){
+				x.style.textAlign = "right";
+				x.addEventListener('mouseenter', e => {
+					highlight(x);
+				});				
+				x.addEventListener('mouseleave', e => {
+					clearHighlight(x);
+				});
+			}
+			
+			function readCube(){
+				var i = 0;
+				var j = 0;
+				var t=document.createElement("TABLE");
+				var thead=t.createTHead();
+				var tbody=t.createTBody();
+				var thr=thead.insertRow();
+				var tbr=tbody.insertRow();
+				var targ=document.getElementById("target");
+				let td = document.createElement("td");
+				t.style="font-size: 1.2em; line-height: .9em; border-collapse: collapse; cellpadding: 2px;";
+				setBorderBottom(td)
+				thr.appendChild(td);
+				targ.innerHTML="";
+				targ.appendChild(t);
+				for(i=0;i<cubeDim;i++){
+					let myst=i.toString();
+					let th = document.createElement("th");
+					let text = document.createTextNode(myst);
+					setBorderBottom(th);
+					th.appendChild(text);
+					th.id="_"+i;
+					clu[i]=th;
+					thr.appendChild(th);
+					let tr=tbody.insertRow();
+					th = document.createElement("th");
+					th.id=i+"_";
+					rlu[i]=th;
+					lu[i]=[]
+					setBorderBottom(th);
+					text = document.createTextNode(myst);
+					th.appendChild(text);
+					tr.appendChild(th);
+					for(j=0;j<cubeDim;j++){
+						let zc=xy[i][j].toString();
+						let td = tr.insertCell();
+						let thtext = document.createTextNode(zc);
+						setBorderBottom(td);
+						td.appendChild(thtext);
+						td.id=i+"_"+j;
+						lu[i][j]=td;
+						tr.appendChild(td);
+					}
+				}
+			}
+			function getNumValue(x) {
+				return parseInt(document.getElementById(x).value);
+			}
+			function initMarginals(){
+				var i,j,k;
+			
+				xy = makeSquare(cubeDim);
+				yz = makeSquare(cubeDim);
+				xz = makeSquare(cubeDim);
+				for(i=0;i<cubeDim;i++){
+					for(j=0;j<cubeDim;j++){
+						k=i+j;
+						k%=cubeDim;
+						xy[i][j]=k;
+						yz[j][k]=i;
+						xz[i][k]=j;
+					}
+				}
+			}
+			function randswap(x){
+				if(rc4.pump()%2==1){
+					var temp =x[0];
+					x[0]=x[1];
+					x[1]=temp;
+				}
+			}
+			function latin() { /* Ported Via C from Paul Hankin's source */
+				var mxy, mxz, myz;
+				var m = [0,0,0];
+				var proper = true;
+				var minIter = cubeDim*cubeDim*cubeDim;
+				var iter;
+			
+				initMarginals();
+				for(iter=0;iter<minIter||!proper; iter++){
+					var i, j, k, i2=[0,0], j2=[0,0], k2=[0,0];
+			
+					if (proper) {
+						// Pick a random 0 in the array
+						do{
+							i = rc4.pump()%cubeDim;
+							j = rc4.pump()%cubeDim;
+							k = rc4.pump()%cubeDim;
+						}while( xy[i][j] == k);
+						// find i2 such that [i2, j, k] is 1. same for j2, k2
+						i2[0] = yz[j][k];
+						j2[0] = xz[i][k];
+						k2[0] = xy[i][j];
+						i2[1]=i;
+						j2[1]=j;
+						k2[1]=k;
+					} else {
+						i = m[0];
+						j = m[1];
+						k = m[2];
+						// find one such that [i2, j, k] is 1, same for j2, k2.
+						// each is either the value stored in the corresponding
+						// slice, or one of our three temporary "extra" 1s.
+						// That's because (i, j, k) is -1.
+						
+						randswap(i2=[yz[j][k],myz]);
+						randswap(j2=[xz[i][k],mxz]);
+						randswap(k2=[xy[i][j],mxy]);
+					}
+			
+					proper = (xy[i2[0]][j2[0]] == k2[0]);
+					if (!proper) {
+						m[0]=i2[0];
+						m[1]=j2[0];
+						m[2]=k2[0];
+						mxy = xy[i2[0]][j2[0]];
+						myz = yz[j2[0]][k2[0]];
+						mxz = xz[i2[0]][k2[0]];
+					}
+			
+					xy[i][j]         = k2[1];
+					xy[i][j2[0]]     = k2[0];
+					xy[i2[0]][j]     = k2[0];
+					xy[i2[0]][j2[0]] = k;
+			
+					yz[j][k]      	 = i2[1];
+					yz[j][k2[0]]  	 = i2[0];
+					yz[j2[0]][k]     = i2[0];
+					yz[j2[0]][k2[0]] = i;
+			
+					xz[i][k]         = j2[1];
+					xz[i][k2[0]]     = j2[0];
+					xz[i2[0]][k]     = j2[0];
+					xz[i2[0]][k2[0]] = j;
+				}
+			}	
+			function parseArgs(){
+				cubeDim=getNumValue("squareSize");
+				rc4=new rc4Gen(cubeDim*100);
+				rc4.initArray(document.getElementById("rKey").value);
+				latin();
+				readCube();
+				return false;
+			}
+		</script>
+	</body>
+</html>
