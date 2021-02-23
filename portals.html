@@ -30,19 +30,18 @@
 					for(i=0;i<this.bufferSize;i++){
 						this.buffer[i]=i;
 					}
-					alert(this.buffer);
 				}
 				pump(){
 					var temp=this.buffer[this.x];
 					this.y+=temp;
-					this.y%=this.ArrarySize;
+					this.y%=this.bufferSize;
 					this.buffer[this.x]=this.buffer[this.y];
 					this.buffer[this.y]=temp;
 					temp+=this.buffer[this.x];
-					temp%=this.ArrarySize;
+					temp%=this.bufferSize;
 					temp=this.buffer[temp];
 					this.x++;
-					this.x%=this.ArrarySize;
+					this.x%=this.bufferSize;
 					return temp;
 				} 
 				initBuffer(p){
@@ -51,15 +50,14 @@
 					var l=pp.length;
 					this.x = 0;
 					this.y = 0;
-					this.buffer=[];
-					for(i=0;i<this.ArrarySize;i++){
+					for(i=0;i<this.bufferSize;i++){
 						this.buffer[i]=i;
 					}
-					for(i=0;i<this.ArrarySize;i++){
+					for(i=0;i<this.bufferSize;i++){
 						this.y+=pp[i%l]+256;
 						this.pump();
 					}
-					for(i=0;i<this.ArrarySize;i++){
+					for(i=0;i<this.bufferSize;i++){
 						this.pump();
 					}
 				}
