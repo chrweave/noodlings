@@ -19,47 +19,48 @@
 		</div>
 		<script type="text/javascript">
 			class rc4Gen{
-				x=0;
-				y=0;
-				Array=[];
-				ArraySize = 0;
+				x;
+				y;
+				buffer;
+				bufferSize;
 				constructor(q){
 					var i;
-					this.ArraySize=q;
-					for(i=0;i<this.ArraySize;i++){
-						this.Array[i]=i;
+					this.bufferSize=q;
+					this.buffer=[];
+					for(i=0;i<this.bufferSize;i++){
+						this.buffer[i]=i;
 					}
+					alert(this.buffer);
 				}
 				pump(){
-					var temp=this.Array[this.x];
+					var temp=this.buffer[this.x];
 					this.y+=temp;
 					this.y%=this.ArrarySize;
-					this.Array[this.x]=this.Array[this.y];
-					this.Array[this.y]=temp;
-					temp+=this.Array[this.x];
+					this.buffer[this.x]=this.buffer[this.y];
+					this.buffer[this.y]=temp;
+					temp+=this.buffer[this.x];
 					temp%=this.ArrarySize;
-					temp=this.Array[temp];
+					temp=this.buffer[temp];
 					this.x++;
 					this.x%=this.ArrarySize;
 					return temp;
 				} 
-				
-				initArray(p){
+				initBuffer(p){
 					var i;
 					var pp=p.split('').map(y => y.charCodeAt(0));
 					var l=pp.length;
 					this.x = 0;
 					this.y = 0;
-					this.Array=[];
+					this.buffer=[];
 					for(i=0;i<this.ArrarySize;i++){
-						this.Array[i]=i;
+						this.buffer[i]=i;
 					}
 					for(i=0;i<this.ArrarySize;i++){
 						this.y+=pp[i%l]+256;
-						pump();
+						this.pump();
 					}
 					for(i=0;i<this.ArrarySize;i++){
-						pump();
+						this.pump();
 					}
 				}
 			}
@@ -282,7 +283,7 @@
 			function parseArgs(){
 				cubeDim=getNumValue("squareSize");
 				rc4=new rc4Gen(cubeDim*100);
-				rc4.initArray(document.getElementById("rKey").value);
+				rc4.initBuffer(document.getElementById("rKey").value);
 				latin();
 				readCube();
 				return false;
