@@ -17,282 +17,33 @@
 		</form>
 		<div id ="target">
 		</div>
+		<script src="./rc4Gen.js">
+			/*rc4Gen(mySize)
+			**initBuffer(keyString)
+			**num=pump()*/
+		</script> 
+		<script src="./latinSquare.js">
+			/*latinSquare(squareSize,keyString)
+			**latin()
+			**depends on rc4Gen.js*/
+		</script> 
+		<script src="./squareLinkTable.js">
+		</script>
+		<script src="./squareHighlighter.js">
+		</script>
+		<script src="./squareReader.js">
+		</script>
 		<script type="text/javascript">
-			class rc4Gen{
-				x;
-				y;
-				buffer;
-				bufferSize;
-				constructor(q){
-					var i;
-					this.bufferSize=q;
-					this.buffer=[];
-					for(i=0;i<this.bufferSize;i++){
-						this.buffer[i]=i;
-					}
-				}
-				pump(){
-					var temp=this.buffer[this.x];
-					this.y+=temp;
-					this.y%=this.bufferSize;
-					this.buffer[this.x]=this.buffer[this.y];
-					this.buffer[this.y]=temp;
-					temp+=this.buffer[this.x];
-					temp%=this.bufferSize;
-					temp=this.buffer[temp];
-					this.x++;
-					this.x%=this.bufferSize;
-					return temp;
-				} 
-				initBuffer(p){
-					var i;
-					var pp=p.split('').map(y => y.charCodeAt(0));
-					var l=pp.length;
-					this.x = 0;
-					this.y = 0;
-					for(i=0;i<this.bufferSize;i++){
-						this.buffer[i]=i;
-					}
-					for(i=0;i<this.bufferSize;i++){
-						this.y+=pp[i%l]+256;
-						this.pump();
-					}
-					for(i=0;i<this.bufferSize;i++){
-						this.pump();
-					}
-				}
-			}
-			class latinSquare{
-				rc4;
-				xy = [];
-				yz = [];
-				xz = [];
-				cubeDim;
-				constructor(inNum,keyString){
-					this.cubeDim=inNum;
-					this.rc4=new rc4Gen(100*this.cubeDim);
-					this.rc4.initBuffer(keyString);
-				}
-			
-				makeSquare(x){
-					var s=[];
-					var i,j;
-					for(i=0;i<x;i++){
-					s[i]=[];
-						for(j=0;j<x;j++){
-							s[i][j]=0;
-						}
-					}
-					return s;
-				}
-				initMarginals(){
-					var i,j,k;
-				
-					this.xy = this.makeSquare(this.cubeDim);
-					this.yz = this.makeSquare(this.cubeDim);
-					this.xz = this.makeSquare(this.cubeDim);
-					for(i=0;i<this.cubeDim;i++){
-						for(j=0;j<this.cubeDim;j++){
-							k=i+j;
-							k%=this.cubeDim;
-							this.xy[i][j]=k;
-							this.yz[j][k]=i;
-							this.xz[i][k]=j;
-						}
-					}
-				}
-				randswap(x){
-					if(this.rc4.pump()%2==1){
-						var temp =x[0];
-						x[0]=x[1];
-						x[1]=temp;
-					}
-				}
-				latin() { /* Ported Via C from Paul Hankin's source */
-					var mxy, mxz, myz;
-					var m = [0,0,0];
-					var proper = true;
-					var minIter = this.cubeDim*this.cubeDim*this.cubeDim;
-					var iter;
-				
-					this.initMarginals();
-					for(iter=0;iter<minIter||!proper; iter++){
-						var i, j, k, i2=[0,0], j2=[0,0], k2=[0,0];
-				
-						if (proper) {
-							// Pick a random 0 in the array
-							do{
-								i = this.rc4.pump()%this.cubeDim;
-								j = this.rc4.pump()%this.cubeDim;
-								k = this.rc4.pump()%this.cubeDim;
-							}while( this.xy[i][j] == k);
-							// find i2 such that [i2, j, k] is 1. same for j2, k2
-							i2[0] = this.yz[j][k];
-							j2[0] = this.xz[i][k];
-							k2[0] = this.xy[i][j];
-							i2[1]=i;
-							j2[1]=j;
-							k2[1]=k;
-						} else {
-							i = m[0];
-							j = m[1];
-							k = m[2];
-							// find one such that [i2, j, k] is 1, same for j2, k2.
-							// each is either the value stored in the corresponding
-							// slice, or one of our three temporary "extra" 1s.
-							// That's because (i, j, k) is -1.
-							
-							this.randswap(i2=[this.yz[j][k],myz]);
-							this.randswap(j2=[this.xz[i][k],mxz]);
-							this.randswap(k2=[this.xy[i][j],mxy]);
-						}
-				
-						proper = (this.xy[i2[0]][j2[0]] == k2[0]);
-						if (!proper) {
-							m[0]=i2[0];
-							m[1]=j2[0];
-							m[2]=k2[0];
-							mxy = this.xy[i2[0]][j2[0]];
-							myz = this.yz[j2[0]][k2[0]];
-							mxz = this.xz[i2[0]][k2[0]];
-						}
-				
-						this.xy[i][j]         = k2[1];
-						this.xy[i][j2[0]]     = k2[0];
-						this.xy[i2[0]][j]     = k2[0];
-						this.xy[i2[0]][j2[0]] = k;
-				
-						this.yz[j][k]      	 = i2[1];
-						this.yz[j][k2[0]]  	 = i2[0];
-						this.yz[j2[0]][k]     = i2[0];
-						this.yz[j2[0]][k2[0]] = i;
-				
-						this.xz[i][k]         = j2[1];
-						this.xz[i][k2[0]]     = j2[0];
-						this.xz[i2[0]][k]     = j2[0];
-						this.xz[i2[0]][k2[0]] = j;
-					}
-					return this.xy;
-				}
-			}
-			var cubeDim;
-			var xy=[];
-			var lu = [];
-			var rlu = [];
-			var clu = [];
-			
-			function parseTid(x,y){
-				var k=x.id.split('_').map(z => parseInt(z)).map( w => isNaN(w)?-2:w);
-				y[0]=k[0];
-				y[1]=k[1];
-				if(k.length==3){
-					y[1]=k[2];
-				}
-			}
-			
-			function clearHighlight(x){
-				var y=[0,0];
-				var i;
-				parseTid(x,y);
-				if(y[0] > -1 && y[1] > -1){
-					rlu[y[0]].style.background="";
-					clu[y[1]].style.background="";
-					lu[y[0]][y[1]].style.background="";
-					for(i=0;i<y[1];i++){
-						lu[y[0]][i].style.background="";
-					}
-					for(i=0;i<y[0];i++){
-						lu[i][y[1]].style.background="";
-					}
-				} else {
-					x.style.background="";
-				}				
-			}
-			
-			function highlight(x){
-				var y=[0,0];
-				var i;
-				parseTid(x,y);
-				if((y[0] > -1) && y[1] > -1){
-					rlu[y[0]].style.background="Lime";
-					clu[y[1]].style.background="Lime";
-					lu[y[0]][y[1]].style.background="DeepPink";
-					for(i=0;i<y[1];i++){
-						lu[y[0]][i].style.background="Lime";
-					}
-					for(i=0;i<y[0];i++){
-						lu[i][y[1]].style.background="Lime";
-					}
-				} else {
-					x.style.background="DeepPink";
-				}
-				
-			}
-			
-			function setBorderBottom(x){
-				x.style.textAlign = "right";
-				x.addEventListener('mouseenter', e => {
-					highlight(x);
-				});				
-				x.addEventListener('mouseleave', e => {
-					clearHighlight(x);
-				});
-			}
-			
-			function readCube(){
-				var i = 0;
-				var j = 0;
-				var t=document.createElement("TABLE");
-				var thead=t.createTHead();
-				var tbody=t.createTBody();
-				var thr=thead.insertRow();
-				var tbr=tbody.insertRow();
-				var targ=document.getElementById("target");
-				let td = document.createElement("td");
-				t.style="font-size: 1.2em; line-height: .9em; border-collapse: collapse; cellpadding: 2px;";
-				setBorderBottom(td)
-				thr.appendChild(td);
-				targ.innerHTML="";
-				targ.appendChild(t);
-				for(i=0;i<cubeDim;i++){
-					let myst=i.toString();
-					let th = document.createElement("th");
-					let text = document.createTextNode(myst);
-					setBorderBottom(th);
-					th.appendChild(text);
-					th.id="_"+i;
-					clu[i]=th;
-					thr.appendChild(th);
-					let tr=tbody.insertRow();
-					th = document.createElement("th");
-					th.id=i+"_";
-					rlu[i]=th;
-					lu[i]=[]
-					setBorderBottom(th);
-					text = document.createTextNode(myst);
-					th.appendChild(text);
-					tr.appendChild(th);
-					for(j=0;j<cubeDim;j++){
-						let zc=xy[i][j].toString();
-						let td = tr.insertCell();
-						let thtext = document.createTextNode(zc);
-						setBorderBottom(td);
-						td.appendChild(thtext);
-						td.id=i+"_"+j;
-						lu[i][j]=td;
-						tr.appendChild(td);
-					}
-				}
-			}
-			function getNumValue(x) {
-				return parseInt(document.getElementById(x).value);
-			}
 			function parseArgs(){
-				cubeDim=getNumValue("squareSize");
+				var cubeDim=parseInt(document.getElementById("squareSize").value);
 				var keyString = document.getElementById("rKey").value;
 				var lat=new latinSquare(cubeDim,keyString);
-				xy=lat.latin();
-				readCube();
+				var targ=document.getElementById("target");
+				var xy=lat.latin();
+				var sq= new squareReader(cubeDim,xy);
+				var t=sq.readCube();
+				targ.innerHTML="";
+				targ.appendChild(t);
 				return false;
 			}
 		</script>
