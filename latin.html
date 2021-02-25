@@ -17,264 +17,33 @@
 		</form>
 		<div id ="target">
 		</div>
+		<script src="./rc4Gen.js">
+			/*rc4Gen(mySize)
+			**initBuffer(keyString)
+			**num=pump()*/
+		</script> 
+		<script src="./latinSquare.js">
+			/*latinSquare(squareSize,keyString)
+			**latin()
+			**depends on rc4Gen.js*/
+		</script> 
+		<script src="./squareLinkTable.js">
+		</script>
+		<script src="./squareHighlighter.js">
+		</script>
+		<script src="./squareReader.js">
+		</script>
 		<script type="text/javascript">
-			var cubeDim;
-			var rc4ArrarySize = 0;
-			var rc4Array = [];
-			var rc4x;
-			var rc4y;
-			var q;
-			var xy = [];
-			var yz = [];
-			var xz = [];
-			var lu = [];
-			var rlu = [];
-			var clu = [];
-			
-			function makeSquare(x){
-				var s=[];
-				var i,j;
-				for(i=0;i<x;i++){
-				s[i]=[];
-					for(j=0;j<x;j++){
-						s[i][j]=0;
-					}
-				}
-				return s;
-			}
-			
-			function parseTid(x,y){
-				var k=x.id.split('_').map(z => parseInt(z)).map( w => isNaN(w)?-2:w);
-				y[0]=k[0];
-				y[1]=k[1];
-				if(k.length==3){
-					y[1]=k[2];
-				}
-			}
-			
-			function clearHighlight(x){
-				var y=[0,0];
-				var i;
-				parseTid(x,y);
-				if(y[0] > -1 && y[1] > -1){
-					rlu[y[0]].style.background="";
-					clu[y[1]].style.background="";
-					lu[y[0]][y[1]].style.background="";
-					for(i=0;i<y[1];i++){
-						lu[y[0]][i].style.background="";
-					}
-					for(i=0;i<y[0];i++){
-						lu[i][y[1]].style.background="";
-					}
-				} else {
-					x.style.background="";
-				}				
-			}
-			
-			function highlight(x){
-				var y=[0,0];
-				var i;
-				parseTid(x,y);
-				if((y[0] > -1) && y[1] > -1){
-					rlu[y[0]].style.background="Lime";
-					clu[y[1]].style.background="Lime";
-					lu[y[0]][y[1]].style.background="DeepPink";
-					for(i=0;i<y[1];i++){
-						lu[y[0]][i].style.background="Lime";
-					}
-					for(i=0;i<y[0];i++){
-						lu[i][y[1]].style.background="Lime";
-					}
-				} else {
-					x.style.background="DeepPink";
-				}
-				
-			}
-			
-			function setBorderBottom(x){
-				x.style.textAlign = "right";
-				x.addEventListener('mouseenter', e => {
-					highlight(x);
-				});				
-				x.addEventListener('mouseleave', e => {
-					clearHighlight(x);
-				});
-			}
-			
-			function readCube(){
-				var i = 0;
-				var j = 0;
-				var t=document.createElement("TABLE");
-				var thead=t.createTHead();
-				var tbody=t.createTBody();
-				var thr=thead.insertRow();
-				var tbr=tbody.insertRow();
+			function parseArgs(){
+				var cubeDim=parseInt(document.getElementById("squareSize").value);
+				var keyString = document.getElementById("rKey").value;
+				var lat=new latinSquare(cubeDim,keyString);
 				var targ=document.getElementById("target");
-				let td = document.createElement("td");
-				t.style="font-size: 1.2em; line-height: .9em; border-collapse: collapse; cellpadding: 2px;";
-				setBorderBottom(td)
-				thr.appendChild(td);
+				var xy=lat.latin();
+				var sq= new squareReader(cubeDim,xy);
+				var t=sq.readCube();
 				targ.innerHTML="";
 				targ.appendChild(t);
-				for(i=0;i<cubeDim;i++){
-					let myst=i.toString();
-					let th = document.createElement("th");
-					let text = document.createTextNode(myst);
-					setBorderBottom(th);
-					th.appendChild(text);
-					th.id="_"+i;
-					clu[i]=th;
-					thr.appendChild(th);
-					let tr=tbody.insertRow();
-					th = document.createElement("th");
-					th.id=i+"_";
-					rlu[i]=th;
-					lu[i]=[]
-					setBorderBottom(th);
-					text = document.createTextNode(myst);
-					th.appendChild(text);
-					tr.appendChild(th);
-					for(j=0;j<cubeDim;j++){
-						let zc=xy[i][j].toString();
-						let td = tr.insertCell();
-						let thtext = document.createTextNode(zc);
-						setBorderBottom(td);
-						td.appendChild(thtext);
-						td.id=i+"_"+j;
-						lu[i][j]=td;
-						tr.appendChild(td);
-					}
-				}
-			}
-			function pump(){
-				var temp=rc4Array[rc4x];
-				rc4y+=temp;
-				rc4y%=rc4ArrarySize;
-				rc4Array[rc4x]=rc4Array[rc4y];
-				rc4Array[rc4y]=temp;
-				temp+=rc4Array[rc4x];
-				temp%=rc4ArrarySize;
-				temp=rc4Array[temp];
-				rc4x++;
-				rc4x%=rc4ArrarySize;
-				return temp;
-			} 
-			function getNumValue(x) {
-				return parseInt(document.getElementById(x).value);
-			}
-			function initRc4Array(p){
-				var i;
-				var pp=p.split('').map(y => y.charCodeAt(0));
-				var l=pp.length;
-			
-				rc4ArrarySize=cubeDim*100;
-				rc4x = 0;
-				rc4y = 0;
-				rc4Array=[];
-				for(i=0;i<rc4ArrarySize;i++){
-					rc4Array[i]=i;
-				}
-				for(i=0;i<rc4ArrarySize;i++){
-					rc4y+=pp[i%l]+256;
-					pump();
-				}
-				for(i=0;i<rc4ArrarySize;i++){
-					pump();
-				}
-			}
-			function initMarginals(){
-				var i,j,k;
-			
-				xy = makeSquare(cubeDim);
-				yz = makeSquare(cubeDim);
-				xz = makeSquare(cubeDim);
-				for(i=0;i<cubeDim;i++){
-					for(j=0;j<cubeDim;j++){
-						k=i+j;
-						k%=cubeDim;
-						xy[i][j]=k;
-						yz[j][k]=i;
-						xz[i][k]=j;
-					}
-				}
-			}
-			function randswap(x){
-				if(pump()%2==1){
-					var temp =x[0];
-					x[0]=x[1];
-					x[1]=temp;
-				}
-			}
-			function latin() { /* Ported Via C from Paul Hankin's source */
-				var mxy, mxz, myz;
-				var m = [0,0,0];
-				var proper = true;
-				var minIter = cubeDim*cubeDim*cubeDim;
-				var iter;
-			
-				initMarginals();
-				for(iter=0;iter<minIter||!proper; iter++){
-					var i, j, k, i2=[0,0], j2=[0,0], k2=[0,0];
-			
-					if (proper) {
-						// Pick a random 0 in the array
-						do{
-							i = pump()%cubeDim;
-							j = pump()%cubeDim;
-							k = pump()%cubeDim;
-						}while( xy[i][j] == k);
-						// find i2 such that [i2, j, k] is 1. same for j2, k2
-						i2[0] = yz[j][k];
-						j2[0] = xz[i][k];
-						k2[0] = xy[i][j];
-						i2[1]=i;
-						j2[1]=j;
-						k2[1]=k;
-					} else {
-						i = m[0];
-						j = m[1];
-						k = m[2];
-						// find one such that [i2, j, k] is 1, same for j2, k2.
-						// each is either the value stored in the corresponding
-						// slice, or one of our three temporary "extra" 1s.
-						// That's because (i, j, k) is -1.
-						
-						randswap(i2=[yz[j][k],myz]);
-						randswap(j2=[xz[i][k],mxz]);
-						randswap(k2=[xy[i][j],mxy]);
-					}
-			
-					proper = (xy[i2[0]][j2[0]] == k2[0]);
-					if (!proper) {
-						m[0]=i2[0];
-						m[1]=j2[0];
-						m[2]=k2[0];
-						mxy = xy[i2[0]][j2[0]];
-						myz = yz[j2[0]][k2[0]];
-						mxz = xz[i2[0]][k2[0]];
-					}
-			
-					xy[i][j]         = k2[1];
-					xy[i][j2[0]]     = k2[0];
-					xy[i2[0]][j]     = k2[0];
-					xy[i2[0]][j2[0]] = k;
-			
-					yz[j][k]      	 = i2[1];
-					yz[j][k2[0]]  	 = i2[0];
-					yz[j2[0]][k]     = i2[0];
-					yz[j2[0]][k2[0]] = i;
-			
-					xz[i][k]         = j2[1];
-					xz[i][k2[0]]     = j2[0];
-					xz[i2[0]][k]     = j2[0];
-					xz[i2[0]][k2[0]] = j;
-				}
-			}	
-			function parseArgs(){
-				cubeDim=getNumValue("squareSize");
-				initRc4Array(document.getElementById("rKey").value);
-				latin();
-				readCube();
 				return false;
 			}
 		</script>
