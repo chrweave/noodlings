@@ -17,7 +17,7 @@
 		<form id="transportform" onSubmit="return spellHop()" style="display:none">
 			Spell (text): <br/>
 			<input id="tKey" type ="text"/><br/>				
-			<button id="rButton">Generate it!</button>
+			<button id="rButton">Cast Hop Spell!</button>
 		</form>
 		<div id ="target">
 		</div>
@@ -45,29 +45,32 @@
 			var xy = [];
 			
 			function checkWin(){
-				var ret;
+				var ret = true;
 				var i;
 				for(i=0;i<43;i++){
-					ret=ret || visited[i]==1;
+					ret=ret && visited[i]==1;
 				}
 				return ret;
 			}
 			
 			function spellHop(){
 				var s=locs[currentLocation];
-				s+=document.getElementById("rKey").value;
+				s+=document.getElementById("tKey").value;
 				sixDice.initBuffer(s);
 				var i;
 				var k=0;
 				var j;
 				for(i=0;i<6;i++){
 					j=sixDice.pump()%8;
+					var q=i+1;
+					var r=j+1;
 					k+=j;
-					rollCells[i].innerHTML="die"+i+1+" = "+j+1;
+					rollCells[i].innerHTML="die"+q+" = "+r;
 				}
 				currentLocation=xy[currentLocation][k];
+				visited[currentLocation]=1;
 				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation]+"!";
-				mapCells[k].style.background="Lime";
+				mapCells[currentLocation].style.background="Lime";
 				if (checkWin()){
 					document.getElementById("location").innerHTML+=" You have won!";
 				}
@@ -102,12 +105,12 @@
 				var k=0;
 				mapCells[k]=cellSet(tr,locs[k]);
 				mapCells[0].colspan=6;
-				mapCells[0].style.background="Lime";
+				mapCells[0].style.background="DeepPink";
 				k++;
 				var j;
-				for(i=0;i<6;i++){
+				for(i=0;i<7;i++){
 					tr=tbody.insertRow();
-					for(j=0;j<7;j++){
+					for(j=0;j<6;j++){
 						mapCells[k]=cellSet(tr,locs[k]);
 						k++;
 					}
@@ -118,11 +121,17 @@
 				document.getElementById("initform").style.display="none";
 				document.getElementById("transportform").style.display="block";
 				t=document.createElement("TABLE");
-				tbody=t.createTBody();
-				tr=tbody.insertRow();
-				for(i=0;i<6;i++){
-					rollCells[i]=cellSet(tr,"die"+(i+1));
+				tbody=t.createTBody();				
+				k=0;
+				for(i=0;i<2;i++){
+					tr=tbody.insertRow();
+					for(j=0;j<3;j++){
+						var q=k+1;
+						rollCells[k]=cellSet(tr,"die"+q);
+						k++;
+					}
 				}
+				t.style.padding = "50px 10px 20px 30px";
 				document.getElementById("target").appendChild(t);
 				return false;
 			}
