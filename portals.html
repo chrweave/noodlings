@@ -8,25 +8,27 @@
 	</head>
 	<body>
 		<h1>Portal RPG</h1>
-		<form onSubmit="return parseArgs()">
-			Latin Square Size<br/>
-			<input id="squareSize" type ="number"/><br/>
+		<h2 id="location">Enter the portal</h2>
+		<form id="initform" onSubmit="return parseArgs()" style="display:block";>
 			Randomizing Key (text): <br/>
 			<input id="rKey" type ="text"/><br/>				
 			<button id="rButton">Generate it!</button>
 		</form>
+		<form id="transportform" onSubmit="return spellHop()" style="display:none">
+			Spell (text): <br/>
+			<input id="tKey" type ="text"/><br/>				
+			<button id="rButton">Generate it!</button>
+		</form>
 		<div id ="target">
 		</div>
+		<div id="realmMap">
+		</div>
 		<script src="./rc4Gen.js">
-			/*rc4Gen(mySize)
-			**initBuffer(keyString)
-			**num=pump()*/
 		</script> 
 		<script src="./latinSquare.js">
-			/*latinSquare(squareSize,keyString)
-			**latin()
-			**depends on rc4Gen.js*/
-		</script> 
+		</script>
+		<script src="wordMaker.js"> 
+		</script>
 		<script src="./squareLinkTable.js">
 		</script>
 		<script src="./squareHighlighter.js">
@@ -34,16 +36,94 @@
 		<script src="./squareReader.js">
 		</script>
 		<script type="text/javascript">
+			var sixDice=new rc4Gen(512);
+			var locs = [];
+			var visited = [];
+			var mapCells=[];
+			var currentLocation;
+			var rollCells=[];
+			var xy = [];
+			
+			function checkWin(){
+				var ret;
+				var i;
+				for(i=0;i<43;i++){
+					ret=ret || visited[i]==1;
+				}
+				return ret;
+			}
+			
+			function spellHop(){
+				var s=locs[currentLocation];
+				s+=document.getElementById("rKey").value;
+				sixDice.initBuffer(s);
+				var i;
+				var k=0;
+				var j;
+				for(i=0;i<6;i++){
+					j=sixDice.pump()%8;
+					k+=j;
+					rollCells[i].innerHTML="die"+i+1+" = "+j+1;
+				}
+				currentLocation=xy[currentLocation][k];
+				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation]+"!";
+				mapCells[k].style.background="Lime";
+				if (checkWin()){
+					document.getElementById("location").innerHTML+=" You have won!";
+				}
+				return false;
+			}
+			
+			function cellSet(row, inText){
+				var elem=row.insertCell();
+				elem.style.borderWidth = "1px";
+				elem.style.borderColor = "#000";
+				elem.style.borderStyle = "solid";
+				var text=document.createTextNode(inText);
+				elem.appendChild(text);
+				return elem;
+			}
+			
 			function parseArgs(){
-				var cubeDim=parseInt(document.getElementById("squareSize").value);
+				var cubeDim=43; 
 				var keyString = document.getElementById("rKey").value;
 				var lat=new latinSquare(cubeDim,keyString);
 				var targ=document.getElementById("target");
-				var xy=lat.latin();
-				var sq= new squareReader(cubeDim,xy);
-				var t=sq.readCube();
-				targ.innerHTML="";
-				targ.appendChild(t);
+				xy=lat.latin();
+				var wm=new wordMaker(keyString,0);
+				var i;
+				for(i=0;i<43;i++){
+					visited[i]=0;
+				}
+				locs=wm.makeWords(visited);
+				var t=document.createElement("TABLE");
+				var tbody=t.createTBody();
+				var tr=tbody.insertRow();
+				var k=0;
+				mapCells[k]=cellSet(tr,locs[k]);
+				mapCells[0].colspan=6;
+				mapCells[0].style.background="Lime";
+				k++;
+				var j;
+				for(i=0;i<6;i++){
+					tr=tbody.insertRow();
+					for(j=0;j<7;j++){
+						mapCells[k]=cellSet(tr,locs[k]);
+						k++;
+					}
+				}
+				document.getElementById("realmMap").appendChild(t);
+				currentLocation=0
+				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation]+"!";
+				document.getElementById("initform").style.display="none";
+				document.getElementById("transportform").style.display="block";
+				t=document.createElement("TABLE");
+				tbody=t.createTBody();
+				tr=tbody.insertRow();
+				for(i=0;i<6;i++){
+					rollCells[i]=cellSet(tr,"die"+(i+1));
+				}
+				document.getElementById("target").appendChild(t);
 				return false;
 			}
 		</script>
