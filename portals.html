@@ -1,7 +1,8 @@
 
 <!DOCTYPE html>
 <html xml:lang="en-us">
-	<head>
+	<head>		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
 			Portal RPG
 		</title>		
@@ -9,7 +10,7 @@
 	<body>
 		<h1>Portal RPG</h1>
 		<h2 id="location">Enter the portal</h2>
-		<form id="initform" onSubmit="return parseArgs()" style="display:block";>
+		<form id="initform" onSubmit="return parseArgs()" style="display:block">
 			Randomizing Key (text): <br/>
 			<input id="rKey" type ="text"/><br/>				
 			<button id="rButton">Generate it!</button>
@@ -77,11 +78,13 @@
 				return false;
 			}
 			
-			function cellSet(row, inText){
-				var elem=row.insertCell();
+			function wordSet(inText){
+				elem =document.createElement("DIV");
 				elem.style.borderWidth = "1px";
 				elem.style.borderColor = "#000";
 				elem.style.borderStyle = "solid";
+				elem.style.display="inline-block";
+				elem.style.padding="10px";
 				var text=document.createTextNode(inText);
 				elem.appendChild(text);
 				return elem;
@@ -93,29 +96,18 @@
 				var lat=new latinSquare(cubeDim,keyString);
 				var targ=document.getElementById("target");
 				xy=lat.latin();
-				var wm=new wordMaker(keyString,0);
+				var lgs=[1,1,1,2];
+				var wm=new wordMaker(keyString,0,lgs);
 				var i;
 				for(i=0;i<43;i++){
 					visited[i]=0;
 				}
 				locs=wm.makeWords(visited);
-				var t=document.createElement("TABLE");
-				var tbody=t.createTBody();
-				var tr=tbody.insertRow();
-				var k=0;
-				mapCells[k]=cellSet(tr,locs[k]);
-				mapCells[0].colspan=6;
-				mapCells[0].style.background="DeepPink";
-				k++;
-				var j;
-				for(i=0;i<7;i++){
-					tr=tbody.insertRow();
-					for(j=0;j<6;j++){
-						mapCells[k]=cellSet(tr,locs[k]);
-						k++;
-					}
+				for (i=0;i<43;i++){
+					mapCells[i]=wordSet(locs[i]);
+					document.getElementById("realmMap").appendChild(mapCells[i]);
 				}
-				document.getElementById("realmMap").appendChild(t);
+				mapCells[0].style.background="DeepPink";				
 				currentLocation=0
 				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation]+"!";
 				document.getElementById("initform").style.display="none";
