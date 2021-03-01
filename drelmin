@@ -1,13 +1,14 @@
 #!/bin/bash
 cd /home/cweaver/noodlings
 
-#Bolnlauljviads
+#Bolnlauljviad
 git fetch origin
 #git stash
 git merge '@{u}'
+git config --global core.autocrlf false
 #git stash pop
-gcc -O3 -o ../caw/latinjm latinjm/main.c 
-time ../caw/latinjm 500 ThisIsADangHugeSquare >drelmout
+#gcc -O3 -o ../caw/latinjm latinjm/main.c 
+../caw/latinjm 26 ThisIsADangHugeSquare >drelmout
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
 git commit -F ../caw/blep drelmout
