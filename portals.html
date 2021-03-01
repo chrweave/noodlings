@@ -56,7 +56,9 @@
 			
 			function spellHop(){
 				var s=locs[currentLocation];
-				s+=document.getElementById("tKey").value;
+				var q = document.getElementById("tKey").value;
+				s+=q;
+				q='';
 				sixDice.initBuffer(s);
 				var i;
 				var k=0;
@@ -76,6 +78,16 @@
 					document.getElementById("location").innerHTML+=" You have won!";
 				}
 				return false;
+			}
+			
+			function cellSet(row, inText){
+				var elem=row.insertCell();
+				elem.style.borderWidth = "1px";
+				elem.style.borderColor = "#000";
+				elem.style.borderStyle = "solid";
+				var text=document.createTextNode(inText);
+				elem.appendChild(text);
+				return elem;
 			}
 			
 			function wordSet(inText){
@@ -107,7 +119,9 @@
 					mapCells[i]=wordSet(locs[i]);
 					document.getElementById("realmMap").appendChild(mapCells[i]);
 				}
-				mapCells[0].style.background="DeepPink";				
+				mapCells[0].style.background="DeepPink";
+				
+				
 				currentLocation=0
 				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation]+"!";
 				document.getElementById("initform").style.display="none";
