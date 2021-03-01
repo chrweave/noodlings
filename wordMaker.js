@@ -16,14 +16,15 @@ class wordMaker {
 	lfn;
 	lvs;
 	lws;
-	complexity;
 	vowlGen;
 	finGen;
 	iniGen;
 	ternGen;
 	wssGen;
+	filter;
+	filterFlag;
 
-	constructor(inWurd, inComplexity, inWss){
+	constructor(inWurd, inFilterFlag, inWss){
 		var i;
 		this.a = [ "b", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "v"]; 
 		this.initial = [ "b", "bl", "br", "d", "dr", "f", "fl", "fr", "g", "gl", "gr", "h", "j", "k", "kl", "kr", "l", "m", "n", "p", "pl", "pr", "r", "s", "sk", "sl", "sm", "sn", "sp", "st", "t", "tr", "v"];
@@ -41,7 +42,6 @@ class wordMaker {
 		this.lfn = this.myfinal.length;
 		this.lvs = this.vowels.length;
 		this.lws = this.wss.length;
-		this.complexity=inComplexity;
 		this.vowlGen=new rc4Gen(this.getRgBound(this.lvs));
 		this.finGen=new rc4Gen(this.getRgBound(this.lfn+3));
 		this.iniGen=new rc4Gen(this.getRgBound(this.lin+1));
@@ -52,6 +52,7 @@ class wordMaker {
 		this.iniGen.initBuffer(inWurd);
 		this.ternGen.initBuffer(inWurd);
 		this.wssGen.initBuffer(inWurd);
+		this.filterFlag=inFilterFlag;
 		for(i=0;i<this.a.length;i++){
 			var j;
 			for(j=0;j<this.a.length;j++){
@@ -61,15 +62,14 @@ class wordMaker {
 				}
 			}
 		}
+		var g="azjvcxoqjkkynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdf";
+		var r=new rc4Gen(260);
+		r.initBuffer("Sanitize");		
+		this.filter=String.fromCharCode.apply(null,g.split('').map(x => (x.charCodeAt(0)-71-r.pump()%26)%26+97)).split('z').map(y => new RegExp(y));
 	}
 	
 	makeWords(e){
-		var i;
-		var x=[];
-		for(i=0;i<e.length;i++){
-			x[i]=this.makeWordFast(e[i]);
-		}
-		return x;
+		return e.map(x => this.makeSingleWord(x));
 	}
 	
 	getRgBound(e){
@@ -84,8 +84,24 @@ class wordMaker {
 		return i;
 	}
 	
+	forbidden(x){
+		var t=false;
+		var i;
+		for(i=0;i<this.filter.length;i++){
+			t=t || this.filter[i].test(x);
+		}
+		return t;
+	}
+	
+	makeSingleWord(capvar){
+		var magicWord;
+		do{
+			magicWord=this.makeWordFast();
+		} while (this.filterFlag > 0 && this.forbidden(magicWord));
+		return capvar == 0 ? magicWord.charAt(0).toUpperCase() + magicWord.slice(1) : magicWord;
+	}
 		
-	makeWordFast(capvar){
+	makeWordFast(){
 		var ws = 0;
 		var dx = 0;
 		var i = 0;
@@ -95,7 +111,6 @@ class wordMaker {
 		t=this.wssGen.pump();
 		t%=this.lws;
 		ws = this.wss[t];
-		ws += this.complexity;
 		dx=this.iniGen.pump();
 		dx%=(this.lin+1);
 		if(dx<this.lin){
@@ -116,7 +131,7 @@ class wordMaker {
 		if(dx<this.lfn){
 			magicWord += this.myfinal[dx];
 		}
-		return capvar == 0 ? magicWord.charAt(0).toUpperCase() + magicWord.slice(1) : magicWord;
+		return magicWord;
 	}
 	
 	processIndices(i,j,k){
