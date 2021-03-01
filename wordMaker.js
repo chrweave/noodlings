@@ -23,13 +23,13 @@ class wordMaker {
 	ternGen;
 	wssGen;
 
-	constructor(inWurd, inComplexity){
+	constructor(inWurd, inComplexity, inWss){
 		var i;
 		this.a = [ "b", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "v"]; 
 		this.initial = [ "b", "bl", "br", "d", "dr", "f", "fl", "fr", "g", "gl", "gr", "h", "j", "k", "kl", "kr", "l", "m", "n", "p", "pl", "pr", "r", "s", "sk", "sl", "sm", "sn", "sp", "st", "t", "tr", "v"];
 		this.myfinal = ["b", "d", "f", "ft", "g", "j", "k", "l", "lb", "ld", "lf", "lg", "lj", "lk", "lm", "lp", "lt", "lv", "m", "mp", "mt", "n", "nd", "nk", "nt", "p", "pt", "r", "rb", "rd", "rf", "rg", "rj", "rk", "rm", "rn", "rp", "rt", "rv", "sk", "st", "t", "v"];
 		this.vowels = ["a","e","i","o","u"];
-		this.wss = [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3];
+		this.wss = inWss;
 		this.intern = [];
 		this.plnmt = new Set(['p','l','n','m','t']);
 		this.bdfgkpt = new Set(['b','d','f','g','k','p','t']);
