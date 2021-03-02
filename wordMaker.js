@@ -62,7 +62,7 @@ class wordMaker {
 				}
 			}
 		}
-		var g="azjvcxoqjkkynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdf";
+		var g="azjvcxoqjkkynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdffzqbewsdifvuhxty";
 		var r=new rc4Gen(260);
 		r.initBuffer("Sanitize");		
 		this.filter=String.fromCharCode.apply(null,g.split('').map(x => (x.charCodeAt(0)-71-r.pump()%26)%26+97)).split('z').map(y => new RegExp(y));
@@ -85,19 +85,14 @@ class wordMaker {
 	}
 	
 	forbidden(x){
-		var t=false;
-		var i;
-		for(i=0;i<this.filter.length;i++){
-			t=t || this.filter[i].test(x);
-		}
-		return t;
+		return this.filterFlag > 0 && this.filter.map(x => x.test(q)).reduce((acc, li) => acc || li, false);
 	}
 	
 	makeSingleWord(capvar){
 		var magicWord;
 		do{
 			magicWord=this.makeWordFast();
-		} while (this.filterFlag > 0 && this.forbidden(magicWord));
+		} while (this.forbidden(magicWord));
 		return capvar == 0 ? magicWord.charAt(0).toUpperCase() + magicWord.slice(1) : magicWord;
 	}
 		
