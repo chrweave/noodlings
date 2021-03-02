@@ -84,7 +84,7 @@ class wordMaker {
 		return i;
 	}
 	
-	forbidden(x){
+	forbidden(q){
 		return this.filterFlag > 0 && this.filter.map(x => x.test(q)).reduce((acc, li) => acc || li, false);
 	}
 	
