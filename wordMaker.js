@@ -26,10 +26,10 @@ class wordMaker {
 
 	constructor(inWurd, inFilterFlag, inWss){
 		var i;
-		this.a = [ "b", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "v"]; 
-		this.initial = [ "b", "bl", "br", "d", "dr", "f", "fl", "fr", "g", "gl", "gr", "h", "j", "k", "kl", "kr", "l", "m", "n", "p", "pl", "pr", "r", "s", "sk", "sl", "sm", "sn", "sp", "st", "t", "tr", "v"];
-		this.myfinal = ["b", "d", "f", "ft", "g", "j", "k", "l", "lb", "ld", "lf", "lg", "lj", "lk", "lm", "lp", "lt", "lv", "m", "mp", "mt", "n", "nd", "nk", "nt", "p", "pt", "r", "rb", "rd", "rf", "rg", "rj", "rk", "rm", "rn", "rp", "rt", "rv", "sk", "st", "t", "v"];
-		this.vowels = ["a","e","i","o","u"];
+		this.a = "badafagahajakalamanaparasatav".split('a'); 
+		this.initial = "bablabradadrafaflafragaglagrahajakaklakralamanapaplaprarasaskaslasmasnaspastatatrav".split('a');
+		this.myfinal = "badafaftagajakalalbaldalfalgaljalkalmalpaltalvamampamtanandankantapaptararbardarfargarjarkarmarnarpartarvaskastatav".split('a');
+		this.vowels = "abebibobu".split('b');
 		this.wss = inWss;
 		this.intern = [];
 		this.plnmt = new Set(['p','l','n','m','t']);
@@ -199,4 +199,3 @@ class wordMaker {
 	}
 	
 }
-
