@@ -2,7 +2,7 @@
 class wordMaker {
 	constructor(inWurd, inFilterFlag, inWss){
 		var i;
-		var g="azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdfflqbewsdifvuhxtycypebvlvwreuvejoibdgqilqzejrumycdxidveit";
+		var g="azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdfflqbewsdifvuhxtycypebvlvwreuvejoibdgqilqzejrumycdxidveitcdlkim";
 		var r=new rc4Gen(260);
 		r.initBuffer("Sanitize");		
 		this.filter=String.fromCharCode.apply(null,g.split('').map(x => (x.charCodeAt(0)-71-r.pump()%26)%26+97)).replace(/y/g,'.').split('z').map(y => new RegExp(y));
@@ -12,44 +12,25 @@ class wordMaker {
 		this.vowels = "abebibobu".split('b');
 		this.wss = inWss;
 		this.intern = [
-				"babdabfabgabjabkablabmabnabrabsabtabvabdrabflabfrabglabgrabklabk",
-				"rabslabsmabsnabspabstabtradbadbladbradadfadgadjadkadladmadnadpad",
-				"radsadvadfladfradgladgradkladkradpladpradsladsmadsnadspadstafbaf",
-				"blafbrafdafdrafafgafjafkaflafmafnafpafrafsaftafglafgrafklafkrafp",
-				"lafprafslafsmafsnafspafstaftragbagblagbragdagdragfagflagfragagja",
-				"glagmagnagpagragsagtagvagplagpragslagsmagsnagspagstagtrahajbajbl",
-				"ajbrajdajdrajfajflajfrajgajglajgrajajkajlajmajnajpajrajsajtajvaj",
-				"klajkrajplajprajslajsmajsnajspajstajtrakbakblakbrakdakdrakfakfla",
-				"kfrakjakaklakmaknakpakraksaktakvakplakprakslaksmaksnakspakstaktr",
-				"albalbdalbfalbgalbjalbkalblalbmalbnalbralbsalbtalbvaldbaldaldfal",
-				"dgaldjaldkaldlaldmaldnaldpaldraldsaldvalfbalfdalfalfgalfjalfkalf",
-				"lalfmalfnalfpalfralfsalftalgbalgdalgfalgalgjalglalgmalgnalgpalgr",
-				"algsalgtalgvaljbaljdaljfaljgaljaljkaljlaljmaljnaljpaljraljsaljta",
-				"ljvalkbalkdalkfalkjalkalklalkmalknalkpalkralksalktalkvalalmalnal",
-				"palsaltalvalmbalmdalmfalmgalmjalmkalmlalmnalmpalmralmsalmtalmval",
-				"nbalndalnfalngalnjalnkalnlalnmalnpalnralnsalntalnvalpdalpfalpgal",
-				"pjalpkalplalpmalpnalpralpsalptalpvalsbalsdalsfalsgalsjalskalslal",
-				"smalsnalspalsralstalsvaltbaltfaltgaltjaltkaltlaltmaltnaltpaltral",
-				"tsaltvalvbalvdalvgalvjalvkalvlalvmalvnalvpalvralvsalvtambamblamb",
-				"ramdamdramfamflamframgamglamgramjamkamklamkramlamamnampamramsamt",
-				"amvamplampramslamsmamsnamspamstamtranbanblanbrandandranfanflanfr",
-				"anganglangranjankanklankranlanmananpanransantanvanplanpranslansm",
-				"ansnanspanstantrapdapdrapfapflapfrapgapglapgrapjapkapklapkraplap",
-				"mapnapaprapsaptapvapslapsmapsnapspapstaptrarbarbdarbfarbgarbjarb",
-				"karblarbmarbnarbrarbsarbtarbvardbardardfardgardjardkardlardmardn",
-				"ardpardrardsardvarfbarfdarfarfgarfjarfkarflarfmarfnarfparfrarfsa",
-				"rftargbargdargfargargjarglargmargnargpargrargsargtargvarjbarjdar",
-				"jfarjgarjarjkarjlarjmarjnarjparjrarjsarjtarjvarkbarkdarkfarkjark",
-				"arklarkmarknarkparkrarksarktarkvarmbarmdarmfarmgarmjarmkarmlarma",
-				"rmnarmparmrarmsarmtarmvarnbarndarnfarngarnjarnkarnlarnmarnarnpar",
-				"nrarnsarntarnvarpdarpfarpgarpjarpkarplarpmarpnarparprarpsarptarp",
-				"vararsartarvarsbarsdarsfarsgarsjarskarslarsmarsnarsparsrarstarsv",
-				"artbartfartgartjartkartlartmartnartpartrartsartvarvbarvdarvgarvj",
-				"arvkarvlarvmarvnarvparvrarvsarvtasbasblasbrasdasdrasfasflasfrasg",
-				"asglasgrasjaskasklaskraslasmasnasplaspasprasrasastasvastratbatbl",
-				"atbratfatflatfratgatglatgratjatkatklatkratlatmatnatplatpatpratra",
-				"tslatsmatsnatspatsatstatatvavbavblavbravdavdravgavglavgravjavkav",
-				"klavkravlavmavnavplavpavpravravslavsmavsnavspavsavstavtravtav"
+				"babdabfabgabjabkablabmabnabrabsabtabvabdrabflabfrabglabgrabklabkrabslabsmabsnabspabstabtradbadbladbradadfadgadjadkadladmadnadpad",
+				"radsadvadfladfradgladgradkladkradpladpradsladsmadsnadspadstafbafblafbrafdafdrafafgafjafkaflafmafnafpafrafsaftafglafgrafklafkrafp",
+				"lafprafslafsmafsnafspafstaftragbagblagbragdagdragfagflagfragagjaglagmagnagpagragsagtagvagplagpragslagsmagsnagspagstagtrahajbajbl",
+				"ajbrajdajdrajfajflajfrajgajglajgrajajkajlajmajnajpajrajsajtajvajklajkrajplajprajslajsmajsnajspajstajtrakbakblakbrakdakdrakfakfla",
+				"kfrakjakaklakmaknakpakraksaktakvakplakprakslaksmaksnakspakstaktralbalbdalbfalbgalbjalbkalblalbmalbnalbralbsalbtalbvaldbaldaldfal",
+				"dgaldjaldkaldlaldmaldnaldpaldraldsaldvalfbalfdalfalfgalfjalfkalflalfmalfnalfpalfralfsalftalgbalgdalgfalgalgjalglalgmalgnalgpalgr",
+				"algsalgtalgvaljbaljdaljfaljgaljaljkaljlaljmaljnaljpaljraljsaljtaljvalkbalkdalkfalkjalkalklalkmalknalkpalkralksalktalkvalalmalnal",
+				"palsaltalvalmbalmdalmfalmgalmjalmkalmlalmnalmpalmralmsalmtalmvalnbalndalnfalngalnjalnkalnlalnmalnpalnralnsalntalnvalpdalpfalpgal",
+				"pjalpkalplalpmalpnalpralpsalptalpvalsbalsdalsfalsgalsjalskalslalsmalsnalspalsralstalsvaltbaltfaltgaltjaltkaltlaltmaltnaltpaltral",
+				"tsaltvalvbalvdalvgalvjalvkalvlalvmalvnalvpalvralvsalvtambamblambramdamdramfamflamframgamglamgramjamkamklamkramlamamnampamramsamt",
+				"amvamplampramslamsmamsnamspamstamtranbanblanbrandandranfanflanfranganglangranjankanklankranlanmananpanransantanvanplanpranslansm",
+				"ansnanspanstantrapdapdrapfapflapfrapgapglapgrapjapkapklapkraplapmapnapaprapsaptapvapslapsmapsnapspapstaptrarbarbdarbfarbgarbjarb",
+				"karblarbmarbnarbrarbsarbtarbvardbardardfardgardjardkardlardmardnardpardrardsardvarfbarfdarfarfgarfjarfkarflarfmarfnarfparfrarfsa",
+				"rftargbargdargfargargjarglargmargnargpargrargsargtargvarjbarjdarjfarjgarjarjkarjlarjmarjnarjparjrarjsarjtarjvarkbarkdarkfarkjark",
+				"arklarkmarknarkparkrarksarktarkvarmbarmdarmfarmgarmjarmkarmlarmarmnarmparmrarmsarmtarmvarnbarndarnfarngarnjarnkarnlarnmarnarnpar",
+				"nrarnsarntarnvarpdarpfarpgarpjarpkarplarpmarpnarparprarpsarptarpvararsartarvarsbarsdarsfarsgarsjarskarslarsmarsnarsparsrarstarsv",
+				"artbartfartgartjartkartlartmartnartpartrartsartvarvbarvdarvgarvjarvkarvlarvmarvnarvparvrarvsarvtasbasblasbrasdasdrasfasflasfrasg",
+				"asglasgrasjaskasklaskraslasmasnasplaspasprasrasastasvastratbatblatbratfatflatfratgatglatgratjatkatklatkratlatmatnatplatpatpratra",
+				"tslatsmatsnatspatsatstatatvavbavblavbravdavdravgavglavgravjavkavklavkravlavmavnavplavpavpravravslavsmavsnavspavsavstavtravtav"
 				].join('').split('a');
 		this.vowlGen=this.setRg(this.vowels.length,inWurd);
 		this.finGen=this.setRg(this.myfinal.length+3,inWurd);
