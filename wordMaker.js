@@ -5,7 +5,7 @@ class wordMaker {
 		var g="azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdffkjtlpzrjgvonvpeygkyfvqmtbegnjzompxcqafrpekfhjypynvdrrlccuavfbfwwas";
 		var r=new rc4Gen(260);
 		r.initBuffer("Sanitize");		
-		this.filter=String.fromCharCode.apply(null,g.split('').map(x => (x.charCodeAt(0)-71-r.pump()%26)%26+97)).replace(/y/g,'.').split('z').map(y => new RegExp(y));
+		this.filter=String.fromCharCode.apply(null,g.split('').map(x => (x.charCodeAt(0)-71-r.pump()%26)%26+97)).replace(/y/g,'.').replace(/x/g,'[').replace(/w/g,']').split('z').map(y => new RegExp(y));
 		this.a = "badafagahajakalamanaparasatav".split('a'); 
 		this.initial = "bablabradadrafaflafragaglagrahajakaklakralamanapaplaprarasaskaslasmasnaspastatatrav".split('a');
 		this.myfinal = "badafaftagajakalalbaldalfalgaljalkalmalpaltalvamampamtanandankantapaptararbardarfargarjarkarmarnarpartarvaskastatav".split('a');
