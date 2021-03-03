@@ -1,12 +1,9 @@
 //#include <rc4Gen.js>
 class wordMaker {
 	constructor(inWurd, inFilterFlag, inWss){
-		var i;
-		var g =
-				"azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdffkjweapb"+
-		    		"ujhesafphrteyeduldtumtugcgavdekkqxkejgqalbbiszcarevtznxgocitrgdssxoxcmjwjxtdqdudowwgipkk";
-		var h=		
-				"babdabfabgabjabkablabmabnabrabsabtabvabdrabflabfrabglabgrabklabkrabslabsmabsnabspabstabtradbadbladbradadfadgadjadkadladmadnadpad"+
+		var g = "azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdffkjweapb"+
+				"ujhesafphrteyeduldtumtugcgavdekkqxkejgqalbbiszcarevtznxgocitrgdssxoxcmjwjxtdqdudowwgipkk";
+		var h= "babdabfabgabjabkablabmabnabrabsabtabvabdrabflabfrabglabgrabklabkrabslabsmabsnabspabstabtradbadbladbradadfadgadjadkadladmadnadpad"+
 				"radsadvadfladfradgladgradkladkradpladpradsladsmadsnadspadstafbafblafbrafdafdrafafgafjafkaflafmafnafpafrafsaftafglafgrafklafkrafp"+
 				"lafprafslafsmafsnafspafstaftragbagblagbragdagdragfagflagfragagjaglagmagnagpagragsagtagvagplagpragslagsmagsnagspagstagtrahajbajbl"+
 				"ajbrajdajdrajfajflajfrajgajglajgrajajkajlajmajnajpajrajsajtajvajklajkrajplajprajslajsmajsnajspajstajtrakbakblakbrakdakdrakfakfla"+
@@ -30,7 +27,6 @@ class wordMaker {
 		this.filter=String.fromCharCode.apply(null,g.split('')
 				.map(x => (x.charCodeAt(0)-71-r.pump()%26)%26+97))
 				.replace(/y/g,'.').replace(/x/g,'[').replace(/w/g,']').split('z').map(y => new RegExp(y));
-		this.a = "badafagahajakalamanaparasatav".split('a'); 
 		this.initial = "bablabradadrafaflafragaglagrahajakaklakralamanapaplaprarasaskaslasmasnaspastatatrav".split('a');
 		this.myfinal = "badafaftagajakalalbaldalfalgaljalkalmalpaltalvamampamtanandankantapaptararbardarfargarjarkarmarnarpartarvaskastatav".split('a');
 		this.vowels = "abebibobu".split('b');
@@ -42,15 +38,12 @@ class wordMaker {
 		this.ternGen=this.setRg(this.intern.length,inWurd);
 		this.wssGen=this.setRg(this.wss.length,inWurd);
 		this.filterFlag=inFilterFlag;
-	}
-	
+	}	
 	makeWords(e){
 		return e.map(x => this.makeSingleWord(x));
-	}
-	
+	}	
 	setRg(e,inWurd){
 		var l=512;
-		var rg;
 		if (e>l){
 			l=e;
 		} else {			
@@ -58,54 +51,41 @@ class wordMaker {
 				l--;
 			}
 		}
-		rg= new rc4Gen(l);
+		var rg= new rc4Gen(l);
 		rg.initBuffer(inWurd);
 		return rg;
-	}
-	
+	}	
 	forbidden(q){
 		return this.filterFlag > 0 && this.filter.map(x => x.test(q)).reduce((acc, li) => acc || li, false);
-	}
-	
+	}	
 	makeSingleWord(capvar){
-		var magicWord;
+		var m;
 		do{
-			magicWord=this.makeWordFast();
-		} while (this.forbidden(magicWord));
-		return capvar == 0 ? magicWord.charAt(0).toUpperCase() + magicWord.slice(1) : magicWord;
-	}
-		
-	makeWordFast(){
-		var ws = 0;
-		var dx = 0;
-		var i = 0;
-		var magicWord = "";
-		var t;
-		
-		t=this.wssGen.pump();
-		t%=this.wss.length;
+			m=this.getTrialWord();
+		} while (this.forbidden(m));
+		return capvar == 0 ? m.charAt(0).toUpperCase() + m.slice(1) : m;
+	}		
+	getTrialWord(){
+		var ws,t,i,m = "";		
+		t=this.wssGen.pump()%this.wss.length;
 		ws = this.wss[t];
-		dx=this.iniGen.pump();
-		dx%=(this.initial.length+1);
-		if(dx<this.initial.length){
-			magicWord += this.initial[dx];
+		t=this.iniGen.pump()%(this.initial.length+1);
+		if(t<this.initial.length){
+			m += this.initial[t];
 		}
 		for(i=0;i<ws;i++){
-			t=this.vowlGen.pump();
-			t %= this.vowels.length;
-			magicWord += this.vowels[t];
+			t=this.vowlGen.pump()%this.vowels.length;
+			m += this.vowels[t];
 			t = this.ternGen.pump();
-			magicWord += this.intern[t];
+			m += this.intern[t];
 		}
-		t=this.vowlGen.pump();
-		t %= this.vowels.length;
-		magicWord += this.vowels[t];
-		dx = this.finGen.pump();
-		dx %= (this.myfinal.length+3);
-		if(dx<this.myfinal.length){
-			magicWord += this.myfinal[dx];
+		t=this.vowlGen.pump()%this.vowels.length;
+		m += this.vowels[t];
+		t = this.finGen.pump()%(this.myfinal.length+3);
+		if(t<this.myfinal.length){
+			m += this.myfinal[t];
 		}
-		return magicWord;
+		return m;
 	}
 }
 
