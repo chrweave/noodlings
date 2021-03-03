@@ -2,7 +2,7 @@
 class wordMaker {
 	constructor(inWurd, inFilterFlag, inWss){
 		var i;
-		var g="azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdfflqbewsdifvuhxtycypebvlvwreuvejoibdgqilqzejrumycdxidveitcdlkim";
+		var g="azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdffkjtlpzrjgvonvpeygkyfvqmtbegnjzompxcqafrpekfhjypynvdrrlccuavfbfwwas";
 		var r=new rc4Gen(260);
 		r.initBuffer("Sanitize");		
 		this.filter=String.fromCharCode.apply(null,g.split('').map(x => (x.charCodeAt(0)-71-r.pump()%26)%26+97)).replace(/y/g,'.').split('z').map(y => new RegExp(y));
