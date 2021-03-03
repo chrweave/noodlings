@@ -1,24 +1,5 @@
 //#include <rc4Gen.js>
 class wordMaker {
-	a;
-	initial;
-	myfinal;
-	vowels;
-	wss;
-	intern;
-	plnmt;
-	bdfgkpt;
-	rl;
-	bfgkp;
-	seen;
-	vowlGen;
-	finGen;
-	iniGen;
-	ternGen;
-	wssGen;
-	filter;
-	filterFlag;
-
 	constructor(inWurd, inFilterFlag, inWss){
 		var i;
 		var g="azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdffzqbewsdifvuhxtycypebvlvwreuvejoibdgqilqzejrum";
