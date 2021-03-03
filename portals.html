@@ -89,18 +89,27 @@
 				return false;
 			}
 			
-			function wordSet(elem,inText){
+			function getNumfromID(e){
+				return parseInt(e.id.replace(/location/,''));
+			}
+				
+			
+			function wordSet(elem,inText,index){
 				elem.style.borderWidth = "1px";
 				elem.style.borderColor = "#000";
 				elem.style.borderStyle = "solid";
 				elem.style.display="inline-block";
 				elem.style.padding="5px";
 				elem.style.margin="2px";
+				elem.id="location"+index;
 				var text=document.createTextNode(inText);
 				elem.appendChild(text);
 				elem.addEventListener('click', e => {
-					document.getElementById("tKey").value=elem.innerHTML;
-					elem.style.background="DodgerBlue";
+					var n=getNumfromID(elem);
+					if(n==n&&visited[n] >0){
+						document.getElementById("tKey").value=elem.innerHTML;
+						elem.style.background="DodgerBlue";
+					}
 				});
 			}
 			
@@ -119,10 +128,11 @@
 				locs=wm.makeWords(visited);
 				for (i=0;i<43;i++){
 					mapCells[i]=document.createElement("DIV");
-					wordSet(mapCells[i],locs[i]);
+					wordSet(mapCells[i],locs[i],i);
 					document.getElementById("realmMap").appendChild(mapCells[i]);
 				}
 				mapCells[0].style.background="DeepPink";
+				visited[0]=1;
 				
 				
 				currentLocation=0
