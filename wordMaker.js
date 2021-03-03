@@ -4,7 +4,7 @@ class wordMaker {
 		var i;
 		var g =
 				"azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdffkjweapb"+
-				"ujhesafphrteyeduldtumtugcgavdekkqxkejgqalbbiszcarevtznxgocitrgdssxoxcmjwjxtdq";
+				"ujhesafphrteyeduldtumtugcgavdekkqxkejgqalbbiszcarevtznxgocitrgdssxoxcmjwjxtdqdudoww";
 		var h=		
 				"babdabfabgabjabkablabmabnabrabsabtabvabdrabflabfrabglabgrabklabkrabslabsmabsnabspabstabtradbadbladbradadfadgadjadkadladmadnadpad"+
 				"radsadvadfladfradgladgradkladkradpladpradsladsmadsnadspadstafbafblafbrafdafdrafafgafjafkaflafmafnafpafrafsaftafglafgrafklafkrafp"+
