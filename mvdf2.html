@@ -56,14 +56,40 @@ function fq(x) {
 
 function qf() {
     var h = document.getElementById("vv").value, 
-		a=new Array(fq("vw")).fill(0), 
+		cc=fq("vw"),
+		c=0,
+		d=[],
+		i=0,j=0,l,m,
+		diff,
 		b= [1,1,1,2], 
 		mw=new wordMaker(h,fq("complexity"),b), 
 		rg=new rc4Gen(256);
 		rg.initBuffer(h);
-		var aa=a.map(x => rg.pump()%16);
-		aa[0]=0;
-        n = "<p>" +mw.makeWords(aa).join(' ').replace(/ [A-Z]/g,x => '.'+(rg.pump()%8 ==0?"</p><p>":' ')+x)+ "</p>";
+		do{
+			d[i]=[];
+			l=rg.pump()%6+4;
+			m=rg.pump()%6+4;
+			for(j=0;c<cc&&j<l;j++){
+				d[i][j]=m;
+				diff=cc-c;
+				c+=m;
+				m=rg.pump()%6+4;
+			}
+			i++;
+		} while (c<cc);
+		d[i-1][j]=diff;
+		var n="";
+		for(i=0;i<d.length;i++){
+			n+="<p>";
+			for(j=0;j<d[i].length;j++){
+				var =a new Array(d[i][j]).fill(1);
+				a[0]=0;
+				n = +mw.makeWords(a).join(' ')+". ";
+			}
+			n+="</p>";
+		}
+		//var aa=a.map(x => rg.pump()%16);
+		//aa[0]=0;
     return document.getElementById("vx").innerHTML = n, !1
 }
 
