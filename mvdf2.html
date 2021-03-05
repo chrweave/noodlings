@@ -33,7 +33,7 @@ p {
     <div > <!--div style="max-width: 768px;margin:0 auto;" -->
     <div style="float:left;  color: White; background-color: DodgerBlue;">
         <div id="tb" style="margin-top: 10px; margin-bottom: 10px; margin-right: 10px; margin-left: 10px;">
-            <form id="stt" onSubmit="return qf()" style="font-family:Myfont;display:none;font-size:1.0em;">How many neologisms do you want?<br /><input type="number" id="vw" /><br />What is their complexity <br/> vector (space separated)?<br /><input type="text" id="complexity" /><br />What is your seed phrase?<br /><input type="text" id="vv"><br /><br /><input type="submit" value="Get neologisms!" style="font-size:1.0em;" /></form>
+            <form id="stt" onSubmit="return qf()" style="font-family:Myfont;display:none;font-size:1.0em;">How many neologisms <br/> do you want?<br /><input type="number" id="vw" /><br />What is their complexity <br/> vector (space separated <br/> number of syllables,<br/> e.g.: 2 2 2 3 )?<br /><input type="text" id="complexity" /><br />What is your seed phrase?<br /><input type="text" id="vv"><br /><br /><input type="submit" value="Get neologisms!" style="font-size:1.0em;" /></form>
             <form id="stu" onSubmit="return sr()" style="display:none;font-size:2.0em;"><button type="submit" style="text:center; font-family:Myfont;font-size:1.0em;">Get<br />Neologism<br />Form.</button></form>
         </div>
     </div>
@@ -55,7 +55,7 @@ function fq(x) {
 }
 
 function fr(x){
-	return document.getElementById(x).value.split(' ').map(x => parseInt(x)).filter(x => !isNaN(x));
+	return document.getElementById(x).value.split(' ').map(x => parseInt(x)).filter(x => !isNaN(x)).map(x => x-1);
 }
 
 function qf() {

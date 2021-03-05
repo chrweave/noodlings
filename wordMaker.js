@@ -1,40 +1,16 @@
 //#include <rc4Gen.js>
 class partMaker {
 	constructor(inWurd,inArray,delim,modPlus){
-		var p=modPlus;
-		if (delim ==0){
-			this.palette=inArray;
-			p=0;
-		} else {
-			this.palette=inArray.split(delim);
-		}
-		var l=this.palette.length;
-		this.lim=[l,l+p];
-		this.gen=this.setRg(l+p,inWurd);
+		this.palette = delim ==0?inArray:inArray.split(delim);
+		var l=this.palette.length, p=delim==0?l:l+modPlus, o= p>512?p:p*Math.floor(512/p);
+		this.lim=[l,p];
+		this.gen=new rc4Gen(o);
+		this.gen.initBuffer(inWurd);
 	}
 	getPart(){
 		var t=this.gen.pump()%this.lim[1];
-		var u;
-		if (t<this.lim[0]){
-			u=this.palette[t];
-		} else {
-			u="";
-		}
-		return u;
+		return t<this.lim[0]?this.palette[t]:"";
 	}
-	setRg(e,inWurd){
-		var l=512;
-		if (e>l){
-			l=e;
-		} else {			
-			while(l%e>0){
-				l--;
-			}
-		}
-		var rg= new rc4Gen(l);
-		rg.initBuffer(inWurd);
-		return rg;
-	}	
 }
 class wordMaker {
 	constructor(inWurd, inWss){
