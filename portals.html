@@ -11,17 +11,17 @@
 		<h1>Portal RPG</h1>
 		<h2 id="location">Enter the portal</h2>
 		<form id="initform" onSubmit="return parseArgs()" style="display:block">
-			Randomizing Key (text): <br/>
+			Select your Realm (Enter text): <br/>
 			<input id="rKey" type ="text"/><br/>				
-			<button id="rButton">Generate it!</button>
+			<button id="rButton"Enter!</button>
 		</form>
 		<form id="transportform" onSubmit="return spellHop()" style="display:none">
-			Spell (text): <br/>
+			Portal Hop Spell (text): <br/>
 			<input id="tKey" type ="text"/><br/>				
 			<button id="rButton">Cast Hop Spell!</button>
 		</form>
-		<div id ="target" style="padding 20px; font-size:2em;">Dice roll here.
-		</div>
+		<!--<div id ="target" style="padding 20px; font-size:2em;">Dice roll here.
+		</div> -->
 		<div id="realmMap">
 		</div>
 		<script src="./rc4Gen.js">
@@ -63,22 +63,10 @@
 				var i;
 				var k=0;
 				var j;
-				var tx="";
 				for(i=0;i<6;i++){
 					j=sixDice.pump()%8;
-					var q=i+1;
-					var r=j+1;
 					k+=j;
-					tx += r;
-					if(i<5){
-						tx += " + ";
-					} else {
-						tx += " = ";
-					}
 				}
-				i=k+6;
-				tx += i;
-				document.getElementById("target").innerHTML=tx;
 				currentLocation=xy[currentLocation][k];
 				visited[currentLocation]=1;
 				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation]+"!";
@@ -117,7 +105,6 @@
 				var cubeDim=43; 
 				var keyString = document.getElementById("rKey").value;
 				var lat=new latinSquare(cubeDim,keyString);
-				var targ=document.getElementById("target");
 				xy=lat.latin();
 				var lgs=[1,1,1,2];
 				var wm=new wordMaker(keyString,lgs,"");
