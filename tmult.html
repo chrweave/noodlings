@@ -1,103 +1,116 @@
 <html lang="utf-8">
-
-<body>
-    <h1 id="reward" style="color:Red;"></h1>
-    <form id="questionForm" onsubmit="return checkAnswer()">
-        <table>
-            <tr>
-                <td>
-                    <h2> Problem:</h2>
-                </td>
-                <td>
-                    <h2> Score:</h2>
-                </td>
-                <td>
-                    <h2> Seconds:</h2>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <h2 id="problem"></h2>
-                </td>
-                <td>
-                    <h2 id="score"> 0</h2>
-                </td>
-                <td>
-                    <h2 id="seconds"> 0</h2>
-                </td>
-            </tr>
-            <tr>
-                <td> <input type="text" autocomplete="off" id="answer" /></td>
-                <td> <input type="submit" /></td>
-            </tr>
-        </table>
-    </form>
-    <script src="rc4Gen.js"></script>
-    <script>
-        var d = new Date();
-        var x = 0;
-        var y = 0;
-        var p = 0;
-        var attempts = 4;
-        var guesses = [0, 0, 0, 0, 0];
-        var mySeconds = 0;
-        var mydate = new Date();
-        var abTime = mydate.getTime();
-        var myClock = setInterval(updateSeconds, 1000);
-        var z = mydate.toString();
-        var cd = 600;
-        document.getElementById("seconds").innerHTML = cd;
-        var rcg = new rc4Gen(400);
-        rcg.initBuffer(z);
-
-        function updateSeconds() {
-            var locdate = new Date();
-            var locTime = locdate.getTime();
-            mySeconds = Math.round((locTime - abTime) / 1000);
-            cd = 600 - mySeconds document.getElementById("seconds").innerHTML = cd;
-            if (cd == 0) {
-                clearInterval(myClock);
-                document.getElementById("reward").innerHTML = "Time is up. Your Final Score Is: " + myscore + "/100";
-                document.getElementById("questionForm").style.display = "none";
+    <body>
+        <h1 id="reward" style="color:Red;">
+        </h1>
+        <form id="questionForm" onsubmit="return checkAnswer()">
+            <table>
+                <tr>
+                    <td>
+                        <h2>
+                            Problem:
+                        </h2>
+                    </td>
+                    <td>
+                        <h2>
+                            Score:
+                        </h2>
+                    </td>
+                    <td>
+                        <h2>
+                            Seconds:
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h2 id="problem">
+                        </h2>
+                    </td>
+                    <td>
+                        <h2 id="score">
+                            0
+                        </h2>
+                    </td>
+                    <td>
+                        <h2 id="seconds">
+                            0
+                        </h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" autocomplete="off" id="answer"/>
+                    </td>
+                    <td>
+                        <input type="submit"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+		<script src="rc4Gen.js"></script>
+        <script>
+            var d=new Date();
+            var x=0;
+            var y=0;
+            var p=0;
+            var attempts = 4;
+            var guesses = [0,0,0,0,0];
+            var mySeconds=0;
+            var mydate= new Date();
+            var abTime=mydate.getTime();
+            var myClock=setInterval(updateSeconds,1000);
+			var z=mydate.toString();
+			var cd=600;
+			document.getElementById("seconds").innerHTML=cd;
+			var rcg =new rc4Gen(400);
+			rcg.initBuffer(z);
+            function updateSeconds(){
+                var locdate=new Date();
+                var locTime=locdate.getTime();
+                mySeconds=Math.round((locTime-abTime)/1000);
+				cd=600-mySeconds
+                document.getElementById("seconds").innerHTML=cd;
+				if(cd == 0){
+					clearInterval(myClock);
+					document.getElementById("reward").innerHTML="Time is up. Your Final Score Is: "+myscore+"/100";
+					document.getElementById("questionForm").style.display="none";
+				}
             }
-        }
-
-        function getProb() {
-            x = rcg.pump() % 8 + 2;
-            y = rcg.pump() % 8 + 2;
-            p = x * y;
-            document.getElementById("problem").innerHTML = x + " &times; " + y + " = ?";
-            document.getElementById("answer").value = "";
-        }
-        getProb();
-        var myscore = 0;
-
-        function checkAnswer() {
-            var q = parseInt(document.getElementById("answer").value);
-            if (q == p) {
-                myscore++;
-                document.getElementById("score").innerHTML = myscore;
-                if (myscore == 100) {
-                    clearInterval(myClock);
-                    document.getElementById("reward").innerHTML = "Winner! Your Final Score Is: " + myscore + "/100. The time you took was: " + mySeconds + " seconds.";
-                    document.getElementById("questionForm").style.display = "none";
-                }
-                getProb();
-                attempts = 4;
-            } else {
-                guesses[4 - attempts] = q;
-                if (attempts == 0) {
-                    alert("You answered: " + guesses.join(", ") + "nThe correct product is: " + p);
-                    myscore--;
-                    document.getElementById("score").innerHTML = myscore;
-                    attempts = 5;
-                }
-                attempts--;
-                document.getElementById("answer").value = "";
+            function getProb(){
+                x=rcg.pump()%8+2;
+                y=rcg.pump()%8+2;
+                p=x*y;
+                document.getElementById("problem").innerHTML=x+" &times; "+y+" = ?";
+                document.getElementById("answer").value="";
             }
-            return false;
-        }
-    </script>
-</body>
-
+            getProb();
+            var myscore=0;
+            function checkAnswer(){
+                var q=parseInt(document.getElementById("answer").value);
+                if(q==p){
+                    myscore++;
+                    document.getElementById("score").innerHTML=myscore;
+					if(myscore == 100){
+						clearInterval(myClock);
+						document.getElementById("reward").innerHTML="Winner! Your Final Score Is: "+myscore+"/100. The time you took was: "+mySeconds+" seconds.";
+						document.getElementById("questionForm").style.display="none";
+					}
+                    getProb();
+                    attempts=4;
+                } else {
+                    
+                    guesses[4-attempts]=q;
+                    if( attempts==0){
+                        alert("You answered: "+guesses.join(", ")+"\nThe correct product is: "+p);
+                        myscore--;
+                        document.getElementById("score").innerHTML=myscore;
+                        attempts=5;
+                    }
+                    attempts--;
+                    document.getElementById("answer").value="";
+                }
+                return false;
+            }
+        </script>
+    </body>
 </html>
