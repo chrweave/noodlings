@@ -15,7 +15,7 @@ class partMaker {
 class wordMaker {
 	constructor(inWurd, inWss, myHyphen){
 		var a =	"azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdffkjweapb"+
-		    	"ujhesafphrteyeduldtumtugcgavdekkqxkejgqalbbiszcarevtznxgocitrgdssxoxcmjwjxtdqdudowwgipkkeumjvkfxeivsikxrpbnd";
+		    	"ujhesafphrteyeduldtumtugcgavdekkqxkejgqalbbiszcarevtznxgocitrgdssxoxcmjwjxtdqdudowwgipkkeumjvkfxeivsikxrpbndjffpd";
 		var b=	
 				"babqdabqfabqgabqjabqkabqlabqmabqnabqrabqsabqtabqvabqdrabqflabqfrabqglabqgrabqklabqkrabqslabqsmabqsnabqspabqstabqtradqbadqbladqbr"+
 				"adadqfadqgadqjadqkadqladqmadqnadqpadqradqsadqvadqfladqfradqgladqgradqkladqkradqpladqpradqsladqsmadqsnadqspadqstafqbafqblafqbrafq"+
