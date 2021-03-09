@@ -57,7 +57,7 @@ class wordMaker {
 		r.initBuffer("Sanitize");		
 		this.filter=String.fromCharCode.apply(null,a.split('')
 				.map(x => (x.charCodeAt(0)-71-r.pump()%26)%26+97))
-				.replace(/y/g,'.').replace(/x/g,'[').replace(/w/g,']').replace(/q/g,myHyphen).split('z').map(y => new RegExp(y));
+				.replace(/y/g,'.').replace(/x/g,'[').replace(/w/g,']').split('z').map(y => new RegExp(y));
 	}	
 	makeWords(e){
 		return e.map(x => this.makeSingleWord(x));
