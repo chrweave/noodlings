@@ -10,17 +10,15 @@
 		<h1>Portal RPG</h1>
 		<h2 id="location">Enter the portal</h2>
 		<form id="initform" onSubmit="return parseArgs()" style="display:block">
-			Randomizing Key (text): <br/>
-			<input id="rKey" type ="text"/><br/>				
-			<button id="rButton">Generate it!</button>
+			Choose your Realm (text): <br/>
+			<input id="rKey" type ="text" oninput="tweakRealmButton()"/><br/>				
+			<button id="rButton">Enter!</button>
 		</form>
 		<form id="transportform" onSubmit="return spellHop()" style="display:none">
-			Spell (text): <br/>
+			Hop Spell (text): <br/>
 			<input id="tKey" type ="text"/><br/>				
 			<button id="rButton">Cast Hop Spell!</button>
 		</form>
-		<div id ="target" style="padding 20px; font-size:2em;">Dice roll here.
-		</div>
 		<div id="realmMap">
 		</div>
 		<script src="./rc4Gen.js">
@@ -29,20 +27,19 @@
 		</script>
 		<script src="wordMaker.js"> 
 		</script>
-		<script src="./squareLinkTable.js">
-		</script>
-		<script src="./squareHighlighter.js">
-		</script>
-		<script src="./squareReader.js">
-		</script>
 		<script type="text/javascript">
-			var sixDice=new rc4Gen(512);
+			var hopDice=new rc4Gen(512);
 			var locs = [];
 			var visited = [];
 			var mapCells=[];
 			var currentLocation;
 			var rollCells=[];
 			var xy = [];
+			
+			function tweakRealmButton(){
+				document.getElementById("rButton").innerHTML="Enter "+document.getElementById("rKey").value+"!";
+				return false;
+			}
 			
 			function checkWin(){
 				var ret = true;
@@ -58,26 +55,14 @@
 				var q = document.getElementById("tKey").value;
 				s+=q;
 				q='';
-				sixDice.initBuffer(s);
+				hopDice.initBuffer(s);
 				var i;
 				var k=0;
 				var j;
-				var tx="";
 				for(i=0;i<6;i++){
-					j=sixDice.pump()%8;
-					var q=i+1;
-					var r=j+1;
+					j=hopDice.pump()%8;
 					k+=j;
-					tx += r;
-					if(i<5){
-						tx += " + ";
-					} else {
-						tx += " = ";
-					}
 				}
-				i=k+6;
-				tx += i;
-				document.getElementById("target").innerHTML=tx;
 				currentLocation=xy[currentLocation][k];
 				visited[currentLocation]=1;
 				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation]+"!";
