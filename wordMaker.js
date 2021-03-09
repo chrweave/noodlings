@@ -14,36 +14,49 @@ class partMaker {
 }
 class wordMaker {
 	constructor(inWurd, inWss, myHyphen){
-		var a =	"azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephrrglykbgbgldepmrhjsbgqqdffkjweapb"+
-		    	"ujhesafphrteyeduldtumtugcgavdekkqxkejgqalbbiszcarevtznxgocitrgdssxoxcmjwjxtdqdudowwgipkkeumjvkfxeivsikxrpbndjffpd";
+		var a =	
+		    	"azjvcxoqjkoynrzlwpdsbdkmjhatyooqjidfcghumxlidflwfvzeotyqueivblcdypaluqoiatnxgoefhrknzeqtlkgxephr"+
+		    	"rglykbgbgldepmrhjsbgqqdffkjweapbujhesafphrteyeduldtumtugcgavdekkqxkejgqalbbiszcarevtznxgocitrgds"+
+		    	"sxoxcmjwjxtdqdudowwgipkkeumjvkfxeivsikxrpbndjffpd";
 		var b=	
-				"babqdabqfabqgabqjabqkabqlabqmabqnabqrabqsabqtabqvabqdrabqflabqfrabqglabqgrabqklabqkrabqslabqsmabqsnabqspabqstabqtradqbadqbladqbr"+
-				"adadqfadqgadqjadqkadqladqmadqnadqpadqradqsadqvadqfladqfradqgladqgradqkladqkradqpladqpradqsladqsmadqsnadqspadqstafqbafqblafqbrafq"+
-				"dafqdrafafqgafqjafqkafqlafqmafqnafqpafqrafqsafqtafqglafqgrafqklafqkrafqplafqprafqslafqsmafqsnafqspafqstafqtragqbagqblagqbragqdag"+
-				"qdragqfagqflagqfragagqjagqlagqmagqnagqpagqragqsagqtagqvagqplagqpragqslagqsmagqsnagqspagqstagqtrahajqbajqblajqbrajqdajqdrajqfajqf"+
-				"lajqfrajqgajqglajqgrajajqkajqlajqmajqnajqpajqrajqsajqtajqvajqklajqkrajqplajqprajqslajqsmajqsnajqspajqstajqtrakqbakqblakqbrakqdak"+
-				"qdrakqfakqflakqfrakqjakakqlakqmakqnakqpakqrakqsakqtakqvakqplakqprakqslakqsmakqsnakqspakqstakqtralqbalbqdalbqfalbqgalbqjalbqkalqb"+
-				"lalbqmalbqnalqbralbqsalbqtalbqvaldqbalqdaldqfaldqgaldqjaldqkaldqlaldqmaldqnaldqpalqdraldqsaldqvalfqbalfqdalqfalfqgalfqjalfqkalqf"+
-				"lalfqmalfqnalfqpalqfralfqsalfqtalgqbalgqdalgqfalqgalgqjalqglalgqmalgqnalgqpalqgralgqsalgqtalgqvaljqbaljqdaljqfaljqgalqjaljqkaljq"+
-				"laljqmaljqnaljqpaljqraljqsaljqtaljqvalkqbalkqdalkqfalkqjalqkalqklalkqmalkqnalkqpalqkralkqsalkqtalkqvalalqmalqnalqpalqsalqtalqval"+
-				"mqbalmqdalmqfalmqgalmqjalmqkalmqlalmqnalmqpalmqralmqsalmqtalmqvalnqbalnqdalnqfalnqgalnqjalnqkalnqlalnqmalnqpalnqralnqsalnqtalnqv"+
-				"alpqdalpqfalpqgalpqjalpqkalqplalpqmalpqnalqpralpqsalpqtalpqvalsqbalsqdalsqfalsqgalsqjalqskalqslalqsmalqsnalqspalsqralqstalsqvalt"+
-				"qbaltqfaltqgaltqjaltqkaltqlaltqmaltqnaltqpalqtraltqsaltqvalvqbalvqdalvqgalvqjalvqkalvqlalvqmalvqnalvqpalvqralvqsalvqtamqbamqblam"+
-				"qbramqdamqdramqfamqflamqframqgamqglamqgramqjamqkamqklamqkramqlamamqnamqpamqramqsamqtamqvamqplamqpramqslamqsmamqsnamqspamqstamqtr"+
-				"anqbanqblanqbranqdanqdranqfanqflanqfranqganqglanqgranqjanqkanqklanqkranqlanqmananqpanqranqsanqtanqvanqplanqpranqslanqsmanqsnanqs"+
-				"panqstanqtrapqdapqdrapqfapqflapqfrapqgapqglapqgrapqjapqkapqklapqkrapqlapqmapqnapapqrapqsapqtapqvapqslapqsmapqsnapqspapqstapqtrar"+
-				"qbarbqdarbqfarbqgarbqjarbqkarqblarbqmarbqnarqbrarbqsarbqtarbqvardqbarqdardqfardqgardqjardqkardqlardqmardqnardqparqdrardqsardqvar"+
-				"fqbarfqdarqfarfqgarfqjarfqkarqflarfqmarfqnarfqparqfrarfqsarfqtargqbargqdargqfarqgargqjarqglargqmargqnargqparqgrargqsargqtargqvar"+
-				"jqbarjqdarjqfarjqgarqjarjqkarjqlarjqmarjqnarjqparjqrarjqsarjqtarjqvarkqbarkqdarkqfarkqjarqkarqklarkqmarkqnarkqparqkrarkqsarkqtar"+
-				"kqvarmqbarmqdarmqfarmqgarmqjarmqkarmqlarqmarmqnarmqparmqrarmqsarmqtarmqvarnqbarnqdarnqfarnqgarnqjarnqkarnqlarnqmarqnarnqparnqrar"+
-				"nqsarnqtarnqvarpqdarpqfarpqgarpqjarpqkarqplarpqmarpqnarqparqprarpqsarpqtarpqvararqsarqtarqvarsqbarsqdarsqfarsqgarsqjarsqkarqslar"+
-				"qsmarqsnarqsparsqrarqstarsqvartqbartqfartqgartqjartqkartqlartqmartqnartqparqtrartqsartqvarvqbarvqdarvqgarvqjarvqkarvqlarvqmarvqn"+
-				"arvqparvqrarvqsarvqtasqbasqblasqbrasqdasqdrasqfasqflasqfrasqgasqglasqgrasqjasqkasqklasqkrasqlasqmasqnasqplasqpasqprasqrasasqtasq"+
-				"vasqtratqbatqblatqbratqfatqflatqfratqgatqglatqgratqjatqkatqklatqkratqlatqmatqnatqplatqpatqpratqratqslatqsmatqsnatqspatqsatqstata"+
-				"tqvavqbavqblavqbravqdavqdravqgavqglavqgravqjavqkavqklavqkravqlavqmavqnavqplavqpavqpravqravqslavqsmavqsnavqspavqsavqstavqtravqtav";
+			"babqdabqfabqgabqjabqkabqlabqmabqnabqrabqsabqtabqvabqdrabqflabqfrabqglabqgrabqklabqkrabqslabqsmab"+
+                        "qsnabqspabqstabqtradqbadqbladqbradadqfadqgadqjadqkadqladqmadqnadqpadqradqsadqvadqfladqfradqgladq"+
+                        "gradqkladqkradqpladqpradqsladqsmadqsnadqspadqstafqbafqblafqbrafqdafqdrafafqgafqjafqkafqlafqmafqn"+
+                        "afqpafqrafqsafqtafqglafqgrafqklafqkrafqplafqprafqslafqsmafqsnafqspafqstafqtragqbagqblagqbragqdag"+
+                        "qdragqfagqflagqfragagqjagqlagqmagqnagqpagqragqsagqtagqvagqplagqpragqslagqsmagqsnagqspagqstagqtra"+
+                        "hajqbajqblajqbrajqdajqdrajqfajqflajqfrajqgajqglajqgrajajqkajqlajqmajqnajqpajqrajqsajqtajqvajqkla"+
+                        "jqkrajqplajqprajqslajqsmajqsnajqspajqstajqtrakqbakqblakqbrakqdakqdrakqfakqflakqfrakqjakakqlakqma"+
+                        "kqnakqpakqrakqsakqtakqvakqplakqprakqslakqsmakqsnakqspakqstakqtralqbalbqdalbqfalbqgalbqjalbqkalqb"+
+                        "lalbqmalbqnalqbralbqsalbqtalbqvaldqbalqdaldqfaldqgaldqjaldqkaldqlaldqmaldqnaldqpalqdraldqsaldqva"+
+                        "lfqbalfqdalqfalfqgalfqjalfqkalqflalfqmalfqnalfqpalqfralfqsalfqtalgqbalgqdalgqfalqgalgqjalqglalgq"+
+                        "malgqnalgqpalqgralgqsalgqtalgqvaljqbaljqdaljqfaljqgalqjaljqkaljqlaljqmaljqnaljqpaljqraljqsaljqta"+
+                        "ljqvalkqbalkqdalkqfalkqjalqkalqklalkqmalkqnalkqpalqkralkqsalkqtalkqvalalqmalqnalqpalqsalqtalqval"+
+                        "mqbalmqdalmqfalmqgalmqjalmqkalmqlalmqnalmqpalmqralmqsalmqtalmqvalnqbalnqdalnqfalnqgalnqjalnqkaln"+
+                        "qlalnqmalnqpalnqralnqsalnqtalnqvalpqdalpqfalpqgalpqjalpqkalqplalpqmalpqnalqpralpqsalpqtalpqvalsq"+
+                        "balsqdalsqfalsqgalsqjalqskalqslalqsmalqsnalqspalsqralqstalsqvaltqbaltqfaltqgaltqjaltqkaltqlaltqm"+
+                        "altqnaltqpalqtraltqsaltqvalvqbalvqdalvqgalvqjalvqkalvqlalvqmalvqnalvqpalvqralvqsalvqtamqbamqblam"+
+                        "qbramqdamqdramqfamqflamqframqgamqglamqgramqjamqkamqklamqkramqlamamqnamqpamqramqsamqtamqvamqplamq"+
+                        "pramqslamqsmamqsnamqspamqstamqtranqbanqblanqbranqdanqdranqfanqflanqfranqganqglanqgranqjanqkanqkl"+
+                        "anqkranqlanqmananqpanqranqsanqtanqvanqplanqpranqslanqsmanqsnanqspanqstanqtrapqdapqdrapqfapqflapq"+
+                        "frapqgapqglapqgrapqjapqkapqklapqkrapqlapqmapqnapapqrapqsapqtapqvapqslapqsmapqsnapqspapqstapqtrar"+
+                        "qbarbqdarbqfarbqgarbqjarbqkarqblarbqmarbqnarqbrarbqsarbqtarbqvardqbarqdardqfardqgardqjardqkardql"+
+                        "ardqmardqnardqparqdrardqsardqvarfqbarfqdarqfarfqgarfqjarfqkarqflarfqmarfqnarfqparqfrarfqsarfqtar"+
+                        "gqbargqdargqfarqgargqjarqglargqmargqnargqparqgrargqsargqtargqvarjqbarjqdarjqfarjqgarqjarjqkarjql"+
+                        "arjqmarjqnarjqparjqrarjqsarjqtarjqvarkqbarkqdarkqfarkqjarqkarqklarkqmarkqnarkqparqkrarkqsarkqtar"+
+                        "kqvarmqbarmqdarmqfarmqgarmqjarmqkarmqlarqmarmqnarmqparmqrarmqsarmqtarmqvarnqbarnqdarnqfarnqgarnq"+
+                        "jarnqkarnqlarnqmarqnarnqparnqrarnqsarnqtarnqvarpqdarpqfarpqgarpqjarpqkarqplarpqmarpqnarqparqprar"+
+                        "pqsarpqtarpqvararqsarqtarqvarsqbarsqdarsqfarsqgarsqjarsqkarqslarqsmarqsnarqsparsqrarqstarsqvartq"+
+                        "bartqfartqgartqjartqkartqlartqmartqnartqparqtrartqsartqvarvqbarvqdarvqgarvqjarvqkarvqlarvqmarvqn"+
+                        "arvqparvqrarvqsarvqtasqbasqblasqbrasqdasqdrasqfasqflasqfrasqgasqglasqgrasqjasqkasqklasqkrasqlasq"+
+                        "masqnasqplasqpasqprasqrasasqtasqvasqtratqbatqblatqbratqfatqflatqfratqgatqglatqgratqjatqkatqklatq"+
+                        "kratqlatqmatqnatqplatqpatqpratqratqslatqsmatqsnatqspatqsatqstatatqvavqbavqblavqbravqdavqdravqgav"+
+                        "qglavqgravqjavqkavqklavqkravqlavqmavqnavqplavqpavqpravqravqslavqsmavqsnavqspavqsavqstavqtravqtav";
 
 		var c = "bablabradadrafaflafragaglagrahajakaklakralamanapaplaprarasaskaslasmasnaspastatatrav";
-		var d = "badafaftagajakalalbaldalfalgaljalkalmalpaltalvamampamtanandankantapaptararbardarfargarjarkarmarnarpartarvaskastatav";
+		var d = 
+		    	"badafaftagajakalalbaldalfalgaljalkalmalpaltalvamampamtanandankantapaptararbardarfargarjarkarmarna"+
+		    	"rpartarvaskastatav";
+		
 		var e = "abebibobu";
 		var f = "badafagajakamanapasatav";
 		var r = new rc4Gen(260);
