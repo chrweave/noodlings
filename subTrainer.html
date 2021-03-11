@@ -1,0 +1,108 @@
+<html lang="utf-8">
+    <body>
+		<h1 id="reward">Subtract</h1>
+		<h2 id="seconds"></h2>
+		<table id="problemSet">
+		</table>
+		<script src="rc4Gen.js">
+		</script>
+		<script type="text/javascript">
+			class subProb{
+				constructor (x,y,inCell, myRcg){ 
+					var a=myRcg.pump()%20;
+					var b=myRcg.pump()%20;
+					if(b>a){
+						var temp=a;
+						a=b;
+						b=temp;
+					}
+					this.difference=a-b;
+					var t=document.createElement("TABLE");
+					t.style.fontSize="1.5em";
+					t.style.textAlign="right";
+					var tbody=t.createTBody();
+					var tr=tbody.insertRow();
+					var td=tr.insertCell();
+					var text = document.createTextNode(a);
+					td.appendChild(text);
+					tr=tbody.insertRow();
+					tr.style.borderBottom="15px";
+					td=tr.insertCell();
+					text = document.createTextNode("-"+b);
+					td.appendChild(text);
+					tr=tbody.insertRow();
+					tr.style.borderBottom="solid 15px";
+					td=tr.insertCell();
+					var answer = document.createElement("FORM");
+					this.inputter = document.createElement("INPUT");
+					this.inputter.setAttribute("type", "text");
+					this.inputter.setAttribute("oninput","return checkAnswer("+x+","+y+")");
+					this.inputter.style.fontSize="1.5em";
+					this.inputter.style.textAlign="right";
+					this.inputter.size="2";					
+					this.inputter.maxlength="2";					
+					answer.appendChild(this.inputter);
+					td.appendChild(answer);
+					this.myCell=inCell;
+					this.myCell.appendChild(t);
+				}
+			}
+			
+			var myscore=0;
+			var mydate= new Date();
+            var abTime=mydate.getTime();
+            var myClock=setInterval(updateSeconds,1000);
+			var z=mydate.toString();
+			var cd=120;
+			document.getElementById("seconds").innerHTML=cd;
+			var rcg =new rc4Gen(400);
+			var myDim=5;
+			var cellTab=[];
+			rcg.initBuffer(z);
+			setTable();
+			
+			function checkAnswer(x,y){
+				var c=cellTab[x][y];
+				var theirAns=parseInt(c.inputter.value)
+				if (theirAns==c.difference){
+					c.myCell.style.background="Lime";
+					c.inputter.setAttribute("disabled","disabled");
+					myscore++;
+				}
+				if(myscore == 25){
+					clearInterval(myClock);
+					document.getElementById("reward").innerHTML="You achieved a perfect 25/25 with "+cd+" seconds remaining.<br/>Please see your parent about a reward!";
+				}
+				
+			}
+			
+			function setTable(){
+				var i = 0;
+				var j = 0;
+				var t=document.getElementById("problemSet");
+				var tbody=t.createTBody();
+				
+				for(i=0;i<myDim;i++){
+					let tr=tbody.insertRow();
+					cellTab[i]=[];
+					for(j=0;j<myDim;j++){
+						let td = tr.insertCell();
+						cellTab[i][j]= new subProb(i,j,td,rcg);
+					}
+				}
+			}
+			
+			function updateSeconds(){
+                var locdate=new Date();
+                var locTime=locdate.getTime();
+                mySeconds=Math.round((locTime-abTime)/1000);
+				cd=120-mySeconds
+                document.getElementById("seconds").innerHTML=cd;
+				if(cd == 0){
+					clearInterval(myClock);
+					document.getElementById("reward").innerHTML="Time is up. Your Final Score Is: "+myscore+"/25";
+				}
+            }
+		</script>
+    </body>
+</html>
