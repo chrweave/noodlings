@@ -9,8 +9,8 @@
 		<script type="text/javascript">
 			class subProb{
 				constructor (x,y,inCell, myRcg){ 
-					var a=myRcg.pump()%20;
-					var b=myRcg.pump()%20;
+					var a=myRcg.pump()%11;
+					var b=myRcg.pump()%11;
 					if(b>a){
 						var temp=a;
 						a=b;
@@ -55,7 +55,7 @@
 			var z=mydate.toString();
 			var cd=120;
 			document.getElementById("seconds").innerHTML=cd;
-			var rcg =new rc4Gen(400);
+			var rcg =new rc4Gen(440);
 			var myDim=5;
 			var cellTab=[];
 			rcg.initBuffer(z);
