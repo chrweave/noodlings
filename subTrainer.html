@@ -84,7 +84,7 @@
 				var j = 0;
 				var t=document.getElementById("problemSet");
 				var tbody=t.createTBody();
-				myLim=parseInt(document.getElementById("liminput").value);
+				myLim=parseInt(document.getElementById("liminput").value)+1;
 				if (isNaN(myLim)||myLim<2){	
 					return true; //error condition; reset page.
 				}
