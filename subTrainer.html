@@ -20,7 +20,7 @@
 						a=b;
 						b=temp;
 					}
-					this.difference=a-b;
+					this.result=a-b;
 					var t=document.createElement("TABLE");
 					t.style.fontSize="1.5em";
 					t.style.textAlign="right";
@@ -49,6 +49,7 @@
 					td.appendChild(answer);
 					this.myCell=inCell;
 					this.myCell.appendChild(t);
+					this.correct=false;
 				}
 			}
 			
@@ -67,9 +68,10 @@
 			function checkAnswer(x,y){
 				var c=cellTab[x][y];
 				var theirAns=parseInt(c.inputter.value)
-				if (theirAns==c.difference){
+				if (theirAns==c.result){
 					c.myCell.style.background="Lime";
 					c.inputter.setAttribute("disabled","disabled");
+					c.correct=true;
 					myscore++;
 				}
 				if(myscore == 25){
@@ -106,6 +108,21 @@
 				return false;
 			}
 			
+			function fillInBlanks(){
+				var i;
+				var j;
+				for(i=0;i<myDim;i++){
+					for(j=0;j<myDim;j++){
+						let c= cellTab[i][j]
+						if( !c.correct){
+							c.inputter.value=c.result;
+							c.myCell.style.background="HotPink";
+							c.inputter.setAttribute("disabled","disabled");
+						}
+					}
+				}
+			}
+			
 			function updateSeconds(){
                 var locdate=new Date();
                 var locTime=locdate.getTime();
@@ -115,6 +132,7 @@
 				if(cd == 0){
 					clearInterval(myClock);
 					document.getElementById("reward").innerHTML="Time is up. Your Final Score Is: "+myscore+"/25";
+					fillInBlanks();
 				}
             }
 		</script>
