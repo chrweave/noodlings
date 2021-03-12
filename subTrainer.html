@@ -2,6 +2,10 @@
     <body>
 		<h1 id="reward">Subtract</h1>
 		<h2 id="seconds"></h2>
+		<form id="setlim" onSubmit="return setTable()">
+			<input type="number" id="liminput"/>
+			<button type="submit" >Set Upper Limit</button>			
+		</form>
 		<table id="problemSet">
 		</table>
 		<script src="rc4Gen.js">
@@ -9,8 +13,8 @@
 		<script type="text/javascript">
 			class subProb{
 				constructor (x,y,inCell, myRcg){ 
-					var a=myRcg.pump()%11;
-					var b=myRcg.pump()%11;
+					var a=myRcg.pump()%myLim;
+					var b=myRcg.pump()%myLim;
 					if(b>a){
 						var temp=a;
 						a=b;
@@ -49,17 +53,16 @@
 			}
 			
 			var myscore=0;
-			var mydate= new Date();
-            var abTime=mydate.getTime();
-            var myClock=setInterval(updateSeconds,1000);
-			var z=mydate.toString();
+			var mydate;
+            var abTime;
+            var myClock;
 			var cd=120;
 			document.getElementById("seconds").innerHTML=cd;
-			var rcg =new rc4Gen(440);
+			var rcg; 
 			var myDim=5;
 			var cellTab=[];
-			rcg.initBuffer(z);
-			setTable();
+			var myLim;
+			
 			
 			function checkAnswer(x,y){
 				var c=cellTab[x][y];
@@ -81,7 +84,16 @@
 				var j = 0;
 				var t=document.getElementById("problemSet");
 				var tbody=t.createTBody();
-				
+				myLim=parseInt(document.getElementById("liminput").value);
+				if (isNaN(myLim)||myLim<2){	
+					return true; //error condition; reset page.
+				}
+				mydate= new Date();
+				abTime=mydate.getTime();
+				var z=mydate.toString();
+				myClock=setInterval(updateSeconds,1000);
+				rcg =new rc4Gen(100*myLim);
+				rcg.initBuffer(z);
 				for(i=0;i<myDim;i++){
 					let tr=tbody.insertRow();
 					cellTab[i]=[];
@@ -90,6 +102,8 @@
 						cellTab[i][j]= new subProb(i,j,td,rcg);
 					}
 				}
+				document.getElementById("setlim").style.display="none";
+				return false;
 			}
 			
 			function updateSeconds(){
