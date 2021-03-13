@@ -1,10 +1,10 @@
 <html lang="utf-8">
     <body>
-		<h1 id="reward">Add</h1>
+		<h1 id="reward">Divide</h1>
 		<h2 id="seconds"></h2>
 		<form id="setlim" onSubmit="return setTable()">
 			<input type="number" id="liminput"/>
-			<button type="submit" >Set Upper Limit</button>			
+			<button type="submit" >Set Factor Upper Limit</button>			
 		</form>
 		<table id="problemSet">
 		</table>
@@ -13,9 +13,12 @@
 		<script type="text/javascript">
 			class subProb{
 				constructor (x,y,inCell, myRcg){ 
-					var a=myRcg.pump()%myLim;
-					var b=myRcg.pump()%myLim;
-					this.result=a+b;
+					var a=myRcg.pump()%(myLim-2)+2;
+					var b=myRcg.pump()%(myLim-2)+2;
+					this.result=a*b;
+					var temp=a;
+					a=this.result;
+					this.result=temp;
 					var t=document.createElement("TABLE");
 					t.style.fontSize="1.5em";
 					t.style.textAlign="right";
@@ -27,7 +30,7 @@
 					tr=tbody.insertRow();
 					td=tr.insertCell();
 					td.style.borderBottom="solid medium";
-					text = document.createTextNode("+"+b);
+					text = document.createTextNode("\u00f7"+b);
 					td.appendChild(text);
 					tr=tbody.insertRow();
 					td=tr.insertCell();
@@ -81,14 +84,15 @@
 				var t=document.getElementById("problemSet");
 				var tbody=t.createTBody();
 				myLim=parseInt(document.getElementById("liminput").value)+1;
-				if (isNaN(myLim)||myLim<2){	
+				if (isNaN(myLim)||myLim<4){	
+					alert("Please enter an upper limit that is 4 or greater.");
 					return true; //error condition; reset page.
 				}
 				mydate= new Date();
 				abTime=mydate.getTime();
 				var z=mydate.toString();
 				myClock=setInterval(updateSeconds,1000);
-				rcg =new rc4Gen(100*myLim);
+				rcg =new rc4Gen(100*(myLim-2));
 				rcg.initBuffer(z);
 				for(i=0;i<myDim;i++){
 					let tr=tbody.insertRow();
