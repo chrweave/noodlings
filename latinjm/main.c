@@ -1,4 +1,4 @@
-/* C version of Pual Hankin's implementation of Jacobson and Matthews random latin square using an rc4 generator
+/* C version of Paul Hankin's implementation of Jacobson and Matthews random latin square using an rc4 generator
  * See his original source at: https://blog.paulhankin.net/latinsquares/ */
 #include <stdio.h>
 #include <stdlib.h>
