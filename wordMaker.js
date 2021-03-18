@@ -51,7 +51,6 @@ class wordMaker {
 "mzsqnzsqplzsqpzsqprzsqrzszsqtzsqvzsqtrztqbztqblztqbrztqfztqflztqfrztqgztqglztqgrztqjztqkztqklztq"+
 "krztqlztqmztqnztqplztqpztqprztqrztqslztqsmztqsnztqspztqsztqstztztqvzvqbzvqblzvqbrzvqdzvqdrzvqgzv"+
 "qglzvqgrzvqjzvqkzvqklzvqkrzvqlzvqmzvqnzvqplzvqpzvqprzvqrzvqslzvqsmzvqsnzvqspzvqszvqstzvqtrzvqtzv";
-
 		var c = "bablabradadrafaflafragaglagrahajakaklakralamanapaplaprarasaskaslasmasnaspastatatrav";
 		var d = 
 "badafaftagajakalalbaldalfalgaljalkalmalpaltalvamampamtanandankantapaptararbardarfargarjarkarmarna"+
@@ -75,19 +74,16 @@ class wordMaker {
 	}	
 	makeSingleWord(capvar){
 		var l;
-		var n;
 		do{
 			l=this.getTrialWord();
-			n=l.replace(/q/g,"");
+			var n=l.replace(/q/g,"");
 		} while (this.filter.map(x => x.test(n)).reduce((acc, li) => acc || li, false));
-		 var m=l.replace(/q/g,this.myHyphen);		
+		var m=l.replace(/q/g,this.myHyphen);		
 		return capvar == 0 ? m.charAt(0).toUpperCase() + m.slice(1) : m;
 	}		
 	getTrialWord(){
-		var ws = this.wss.getPart();
-		var i;
 		var m = this.initials.getPart();
-		for(i=0;i<ws;i++){
+		for(var i=0;i<this.wss.getPart();i++){
 			m += this.vowels.getPart()+this.intern.getPart();
 		}
 		m += this.vowels.getPart()+this.finals.getPart();
