@@ -15,9 +15,11 @@ class partMaker {
 class wordMaker {
 	constructor(inWurd, inWss, myHyphen){
 		var a =	
-"imyngegxsqvnpmqkwirphhimecamivzuoxoutwoqjnbppxpffifyotlhdobphlxtfmukzqfsbetyvhbaatlzbeteaahyzznl"+
-"naveotdbybetbyillhrhvnsqvrzlymlvnalhlkatufxfggouxqrjarmzxuvmjafsvxdjwfrjgcowbaktcdlomomzlvsfzwqh"+
-"faezaoypwugaxwwytcmybxddybqjdovkmfvyoegpulmofv"
+"imyngegxsqvnozzqwfwzadbbstakuwivacdwwijfdoxetlzljdaxuxngcerbeiihuwkxoawyktygbixlpbjfmpxaavwnlfdr"+
+"ygbyithknmvmfbasxzqwhllrtfhwqlsifpnmbksznqpptqwkevjqxrdxptkxoppnqbbearzkltamfzhxuydygbxywchqbupx"+
+"rwangeyixempleopfjlusbjjwixhykkgvevsefgoufwufujxcgmmcjsvmlojrhqidtngrokmzmoentfnjxxpogwvsgnksdfs"+
+"mszfooigfdpdbbexzbgoqzltuubkqxdizxskwgtwbsrlbfuiirjtcjwoeofjvaknnodazkwcttljxvmzprebmjqcxongoftt"+
+"ikzklwmmzuj";
 		var b=	
 "bzbqdzbqfzbqgzbqjzbqkzbqlzbqmzbqnzbqrzbqszbqtzbqvzbqdrzbqflzbqfrzbqglzbqgrzbqklzbqkrzbqslzbqsmzb"+
 "qsnzbqspzbqstzbqtrzdqbzdqblzdqbrzdzdqfzdqgzdqjzdqkzdqlzdqmzdqnzdqpzdqrzdqszdqvzdqflzdqfrzdqglzdq"+
@@ -57,11 +59,11 @@ class wordMaker {
 "rpartarvaskastatav";		
 		var e = "abebibobu";
 		var r = new rc4Gen(260);
-		this.wss		= new partMaker(inWurd,inWss,0,0);
-		this.intern	 = new partMaker(inWurd,b,'z',0);
+		this.wss	= new partMaker(inWurd,inWss,0,0);
+		this.intern	= new partMaker(inWurd,b,'z',0);
 		this.initials   = new partMaker(inWurd,c,'a',1);
-		this.finals	 = new partMaker(inWurd,d,'a',3);
-		this.vowels	 = new partMaker(inWurd,e,'b',0);
+		this.finals	= new partMaker(inWurd,d,'a',3);
+		this.vowels	= new partMaker(inWurd,e,'b',0);
 		this.myHyphen=myHyphen;
 		r.initBuffer("Sanitize");		
 		this.filter=String.fromCharCode.apply(null,a.split('')
@@ -77,7 +79,7 @@ class wordMaker {
 			l=this.getTrialWord();
 			var n=l.replace(/q/g,"");
 		} while (this.filter.map(x => x.test(n)).reduce((acc, li) => acc || li, false));
-		 var m=l.replace(/q/g,this.myHyphen);		
+		var m=l.replace(/q/g,this.myHyphen);		
 		return capvar == 0 ? m.charAt(0).toUpperCase() + m.slice(1) : m;
 	}		
 	getTrialWord(){
