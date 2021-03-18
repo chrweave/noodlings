@@ -111,37 +111,39 @@ function hy(){
 
 function qf() {
 	var h = document.getElementById("vv").value, 
-		cc=fq("vw"),
-		c=0,
-		d=[],
-		i=0,j=0,l,m,
-		diff=cc,
-		//b= [1,1,1,2], 
-		mw=new wordMaker(h,fr("complexity"),hy()), 
-		rg=new rc4Gen(256);
-		rg.initBuffer(h);
-		for(i=0;c<cc;i++){
-			d[i]=[];
-			l=rg.pump()%6+4;
+	cc=fq("vw"),
+	c=0,
+	d=[],
+	i=0,j=0,l,m,
+	diff=cc,
+	//b= [1,1,1,2], 
+	mw=new wordMaker(h,fr("complexity"),hy()), 
+	rg=new rc4Gen(256);
+	rg.initBuffer(h);
+	for(i=0;c<cc;i++){
+		d[i]=[];
+		l=rg.pump()%6+4;
+		m=rg.pump()%6+4;
+		for(j=0;c<cc&&j<l;j++){
+			d[i][j]=m;
+			diff=cc-c;
+			c+=m;
 			m=rg.pump()%6+4;
-			for(j=0;c<cc&&j<l;j++){
-				d[i][j]=m;
-				diff=cc-c;
-				c+=m;
-				m=rg.pump()%6+4;
-			}
-		} 
-		d[i-1][j-1]=diff;
-		var n="";
-		for(i=0;i<d.length;i++){
-			n+="<p>";
-			for(j=0;j<d[i].length;j++){
-				var a = new Array(d[i][j]).fill(1);
-				a[0]=0;
-				n +=mw.makeWords(a).join(' ')+". ";
-			}
-			n+="</p>";
 		}
+	} 
+	d[i-1][j-1]=diff;
+	var n="";
+	for(i=0;i<d.length;i++){
+		n+="<p>";
+		for(j=0;j<d[i].length;j++){
+			var a = new Array(d[i][j]).fill(1);
+			a[0]=0;
+			n +=mw.makeWords(a).join(' ')+". ";
+		}
+		n+="</p>";
+	}	
+    document.getElementById("stu").style.display = "inline";
+    document.getElementById("stt").style.display = "none";
 	return document.getElementById("vx").innerHTML = n, !1
 }
 
