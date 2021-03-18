@@ -7,7 +7,7 @@
 		</title>		
 	</head>
 	<body>
-		<h1>Portal RPG</h1>
+		<h1 id="realmheader">Portal RPG</h1>
 		<h2 id="location">Enter the portal</h2>
 		<form id="initform" onSubmit="return parseArgs()" style="display:block">
 			Choose your Realm (text): <br/>
@@ -123,6 +123,7 @@
 				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation]+"!";
 				document.getElementById("initform").style.display="none";
 				document.getElementById("transportform").style.display="block";
+				document.getElementById("realmheader").innerHTML+=" in the realm of "+keyString+".";
 				t=document.createElement("TABLE");
 				tbody=t.createTBody();
 				return false;
