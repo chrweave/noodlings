@@ -54,8 +54,7 @@ class wordMaker {
 		var c = "bablabradadrafaflafragaglagrahajakaklakralamanapaplaprarasaskaslasmasnaspastatatrav";
 		var d = 
 "badafaftagajakalalbaldalfalgaljalkalmalpaltalvamampamtanandankantapaptararbardarfargarjarkarmarna"+
-"rpartarvaskastatav";
-		
+"rpartarvaskastatav";		
 		var e = "abebibobu";
 		var r = new rc4Gen(260);
 		this.wss		= new partMaker(inWurd,inWss,0,0);
@@ -78,15 +77,17 @@ class wordMaker {
 			l=this.getTrialWord();
 			var n=l.replace(/q/g,"");
 		} while (this.filter.map(x => x.test(n)).reduce((acc, li) => acc || li, false));
-		var m=l.replace(/q/g,this.myHyphen);		
+		 var m=l.replace(/q/g,this.myHyphen);		
 		return capvar == 0 ? m.charAt(0).toUpperCase() + m.slice(1) : m;
 	}		
 	getTrialWord(){
+		var ws = this.wss.getPart();
 		var m = this.initials.getPart();
-		for(var i=0;i<this.wss.getPart();i++){
+		for(var i=0;i<ws;i++){
 			m += this.vowels.getPart()+this.intern.getPart();
 		}
 		m += this.vowels.getPart()+this.finals.getPart();
 		return m;
 	}
 }
+
