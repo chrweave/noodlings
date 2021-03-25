@@ -7,7 +7,7 @@
 		</title>		
 	</head>
 	<body>
-		<h1 id="realmheader">Portal RPG</h1>
+		<h1 id="realmheader">Choose your realm!</h1>
 		<h2 id="location">Enter the portal</h2>
 		<form id="initform" onSubmit="return parseArgs()" style="display:block">
 			Choose your Realm (text): <br/>
@@ -28,13 +28,21 @@
 		<script src="wordMaker.js"> 
 		</script>
 		<script type="text/javascript">
+			class realmLocation {
+				constructor(inName,inMcGuffin){
+					this.name=inName;
+					this.mcGuffin=inMcGuffin;
+					this.visited=0;
+				}
+			}
 			var hopDice=new rc4Gen(512);
+			var pumpdie=new rc4Gen(560);
 			var locs = [];
-			var visited = [];
 			var mapCells=[];
 			var currentLocation;
 			var rollCells=[];
 			var xy = [];
+			var nameMaker;
 			
 			function tweakRealmButton(){
 				document.getElementById("rButton").innerHTML="Enter "+document.getElementById("rKey").value+"!";
@@ -104,16 +112,21 @@
 				var targ=document.getElementById("target");
 				xy=lat.latin();
 				var lgs=[1,1,1,2];
+				var ns=[2];
 				var wm=new wordMaker(keyString,lgs,"");
+				var nameMaker=new wordMaker(keyString.split('').reverse().join(),ns,"");
 				var i;
 				for(i=0;i<43;i++){
 					visited[i]=0;
 				}
-				locs=wm.makeWords(visited);
+				pumpdie.initBuffer(keyString);
+				var locsa=wm.makeWords(visited);
 				for (i=0;i<43;i++){
 					mapCells[i]=document.createElement("DIV");
-					wordSet(mapCells[i],locs[i],i);
+					wordSet(mapCells[i],locsa[i],i);
 					document.getElementById("realmMap").appendChild(mapCells[i]);
+					
+					locs=new realmLocation(locsa,pumpdie.pump()%7==0?nameMaker.makeSingleWord(0):"nm");
 				}
 				mapCells[0].style.background="DeepPink";
 				visited[0]=1;
