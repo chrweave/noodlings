@@ -73,7 +73,7 @@
 				}
 				currentLocation=xy[currentLocation][k];
 				visited[currentLocation]=1;
-				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation]+"!";
+				document.getElementById("location").innerHTML="Welcome to "+locs.name[currentLocation]+"!";
 				mapCells[currentLocation].style.background="Lime";
 				if (checkWin()){
 					document.getElementById("location").innerHTML+=" You have won!";
