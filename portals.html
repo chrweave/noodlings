@@ -116,11 +116,12 @@
 				var wm=new wordMaker(keyString,lgs,"");
 				var nameMaker=new wordMaker(keyString.split('').reverse().join(),ns,"");
 				var i;
+				var caps;
 				for(i=0;i<43;i++){
-					visited[i]=0;
+					caps[i]=0;
 				}
 				pumpdie.initBuffer(keyString);
-				var locsa=wm.makeWords(visited);
+				var locsa=wm.makeWords(caps);
 				for (i=0;i<43;i++){
 					mapCells[i]=document.createElement("DIV");
 					wordSet(mapCells[i],locsa[i],i);
@@ -129,7 +130,7 @@
 					locs=new realmLocation(locsa,pumpdie.pump()%7==0?nameMaker.makeSingleWord(0):"nm");
 				}
 				mapCells[0].style.background="DeepPink";
-				visited[0]=1;
+				locs.visited[0]=1;
 				
 				
 				currentLocation=0
