@@ -53,7 +53,7 @@
 				var ret = true;
 				var i;
 				for(i=0;i<43;i++){
-					ret=ret && visited[i]==1;
+					ret=ret && locs[i].visited==1;
 				}
 				return ret;
 			}
@@ -72,8 +72,8 @@
 					k+=j;
 				}
 				currentLocation=xy[currentLocation][k];
-				visited[currentLocation]=1;
-				document.getElementById("location").innerHTML="Welcome to "+locs.name[currentLocation]+"!";
+				locs[currentLocation].visited=1;
+				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation].name+"!";
 				mapCells[currentLocation].style.background="Lime";
 				if (checkWin()){
 					document.getElementById("location").innerHTML+=" You have won!";
@@ -98,7 +98,7 @@
 				elem.appendChild(text);
 				elem.addEventListener('click', e => {
 					var n=getNumfromID(elem);
-					if(n==n&&visited[n] >0){
+					if(n==n&&locs[n].visited >0){
 						document.getElementById("tKey").value=elem.innerHTML;
 						elem.style.background="DodgerBlue";
 					}
@@ -116,7 +116,7 @@
 				var wm=new wordMaker(keyString,lgs,"");
 				var nameMaker=new wordMaker(keyString.split('').reverse().join(),ns,"");
 				var i;
-				var caps;
+				var caps =[];
 				for(i=0;i<43;i++){
 					caps[i]=0;
 				}
@@ -127,17 +127,17 @@
 					wordSet(mapCells[i],locsa[i],i);
 					document.getElementById("realmMap").appendChild(mapCells[i]);
 					
-					locs=new realmLocation(locsa,pumpdie.pump()%7==0?nameMaker.makeSingleWord(0):"nm");
+					locs[i]=new realmLocation(locsa[i],pumpdie.pump()%7==0?nameMaker.makeSingleWord(0):"nm");
 				}
 				mapCells[0].style.background="DeepPink";
-				locs.visited[0]=1;
+				locs[0].visited=1;
 				
 				
 				currentLocation=0
-				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation]+"!";
+				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation].name+"!";
 				document.getElementById("initform").style.display="none";
 				document.getElementById("transportform").style.display="block";
-				document.getElementById("realmheader").innerHTML+=" in the realm of "+keyString+".";
+				document.getElementById("realmheader").innerHTML="Jurney through the realm of "+keyString+".";
 				t=document.createElement("TABLE");
 				tbody=t.createTBody();
 				return false;
