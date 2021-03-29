@@ -66,11 +66,14 @@
 			}
 			
 			function validateKey(){
-				if(document.getElementById("exitKey").value == winString){
-					document.getElementById("location").innerHTML+=" You have won!";
+				var q=document.getElementById("exitKey");
+				var r=document.getElementById("location");
+				if(q.value == winString){
+					r.innerHTML+=" You have won!";
 				} else {
-					document.getElementById("location").innerHTML+=" Try a different order!";
+					r.innerHTML+=" Try a different order!";
 				}
+				q.value="";
 				return false;
 			}
 			function tweakRealmButton(){
