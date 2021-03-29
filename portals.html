@@ -20,10 +20,9 @@
 			<button >Cast Hop Spell!</button>
 		</form>
 		<form id="exit" onSubmit="return validateKey()" style="display:none">
-			Exit Key: <br/>
-			<input id="exitKey" type ="text"/><br/>	
-			<button >Turn Exit Key!</button>
 		</form>
+		<div id="keySlots" style="display:block">
+		</div>
 		<div id="McGuffinButtons">
 		</div>
 		<div id="realmMap">
@@ -41,6 +40,7 @@
 					this.mcGuffin=inMcGuffin;
 					this.visited=0;
 					this.hint="";
+					this.isKeyhole=false;
 				}
 			}
 			var hopDice=new rc4Gen(512);
@@ -53,6 +53,15 @@
 			var nameMaker;
 			var winString="";
 			
+			function setDivSlot(b){
+				b.style.borderWidth = "1px";
+				b.style.borderColor = "#000";
+				b.style.borderStyle = "solid";
+				b.style.display="inline-block";
+				b.style.padding="5px";
+				b.style.margin="2px";
+			}
+			
 			function calculateWinString(x){
 				var ga= new rc4Gen(43);
 				ga.initBuffer(x);
@@ -61,6 +70,14 @@
 					var k=locs[ga.buffer[i]].mcGuffin;
 					if(k!="nm"){
 						winString+=k;
+						var b=document.createElement("DIV");
+						b.style.width="50px";
+						setDivSlot(b);
+						b.id=x.mcGuffin;
+						b.addEventListener('click', e => {
+							document.getElementById("exitKey").value+=x.mcGuffin;
+						});
+						document.getElementById("keySlots").appendChild(b);
 					}
 				}
 			}
@@ -81,13 +98,24 @@
 				return false;
 			}
 			
-			function checkWin(){
-				var ret = true;
+			function setKeyhole(){
 				var i;
-				for(i=0;i<43;i++){
-					ret=ret && locs[i].visited==1;
+				var v=true;
+				for(i=43;v;i--){
+					var l=locd[i];
+					if (l.mcGuffin=="nm"){
+						l.isKeyhole=true;
+						v=false;
+					}
 				}
-				return ret;
+			}
+			
+			function seeKeyhole(x){
+				if(x.isKeyhole){
+					document.getElementById("keySlots").style.display="block";
+				} else {
+					document.getElementById("keySlots").style.display="none";
+				}
 			}
 			
 			function checkLocationForToken(x){
@@ -96,12 +124,7 @@
 						var b=document.createElement("DIV");
 						b.innerHTML=x.mcGuffin;
 						b.style.background="DodgerBlue";
-						b.style.borderWidth = "1px";
-						b.style.borderColor = "#f00";
-						b.style.borderStyle = "solid";
-						b.style.display="inline-block";
-						b.style.padding="5px";
-						b.style.margin="2px";
+						setDivSlot(b);
 						b.id=x.mcGuffin;
 						b.addEventListener('click', e => {
 							document.getElementById("exitKey").value+=x.mcGuffin;
@@ -109,6 +132,7 @@
 						document.getElementById("McGuffinButtons").appendChild(b);
 					}
 					x.visited=1;
+					//seeKeyhole(x);
 				}
 			}
 			
@@ -130,10 +154,6 @@
 				checkLocationForToken(locs[currentLocation]);
 				document.getElementById("location").innerHTML="Welcome to "+locs[currentLocation].name+"!";
 				mapCells[currentLocation].style.background="Lime";
-				//if (checkWin()){
-				//	document.getElementById("location").innerHTML+=" You have won!";
-				//}
-				//adding winnig by mcguffin key
 				return false;
 			}
 			
@@ -143,12 +163,7 @@
 				
 			
 			function wordSet(elem,inText,index){
-				elem.style.borderWidth = "1px";
-				elem.style.borderColor = "#000";
-				elem.style.borderStyle = "solid";
-				elem.style.display="inline-block";
-				elem.style.padding="5px";
-				elem.style.margin="2px";
+				setDivSlot(elem);
 				elem.id="location"+index;
 				var text=document.createTextNode(inText);
 				elem.appendChild(text);
