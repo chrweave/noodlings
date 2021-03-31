@@ -44,6 +44,7 @@
 				}
 			}
 			var hopDice=new rc4Gen(512);
+			var gameDice=new rc4Gen(512);
 			var pumpdie=new rc4Gen(560);
 			var locs = [];
 			var mapCells=[];
@@ -67,9 +68,10 @@
 				var ga= new rc4Gen(43);
 				ga.initBuffer(x);
 				var i;
+				var condition = true;
 				for(i=0;i<43;i++){
-					var k=locs[ga.buffer[i]].mcGuffin;
-					if(k!="nm"){
+					var k=locs[ga.buffer[i]];
+					if(k.mcGuffin!="nm"){
 						winString+=k;
 						var b=document.createElement("DIV");
 						b.style.width="50px";
@@ -79,6 +81,11 @@
 							document.getElementById("exitKey").value+=x.mcGuffin;
 						});
 						document.getElementById("keySlots").appendChild(b);
+					} else {
+						if(condition){
+							condition=false;
+							k.isKeyhole=true;
+						}
 					}
 				}
 			}
@@ -97,18 +104,6 @@
 			function tweakRealmButton(){
 				document.getElementById("rButton").innerHTML="Enter "+document.getElementById("rKey").value+"!";
 				return false;
-			}
-			
-			function setKeyhole(){
-				var i;
-				var v=true;
-				for(i=43;v;i--){
-					var l=locd[i];
-					if (l.mcGuffin=="nm"){
-						l.isKeyhole=true;
-						v=false;
-					}
-				}
 			}
 			
 			function seeKeyhole(x){
@@ -133,7 +128,7 @@
 						document.getElementById("McGuffinButtons").appendChild(b);
 					}
 					x.visited=1;
-					//seeKeyhole(x);
+					seeKeyhole(x);
 				}
 			}
 			
@@ -210,7 +205,7 @@
 				document.getElementById("initform").style.display="none";
 				document.getElementById("transportform").style.display="block";
 				document.getElementById("exit").style.display="block";
-				document.getElementById("realmheader").innerHTML="Jurney through the realm of "+keyString+"."+winString;
+				document.getElementById("realmheader").innerHTML="Journey through the realm of "+keyString+"."+winString;
 				t=document.createElement("TABLE");
 				tbody=t.createTBody();
 				return false;
