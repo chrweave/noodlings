@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xml:lang="en-us">
 	<head>		
@@ -53,6 +54,9 @@
 			var xy = [];
 			var nameMaker;
 			var winString="";
+			var keySlots=[];
+			var currentKey = 0;
+			var numKeys=0;
 			
 			function setDivSlot(b){
 				b.style.borderWidth = "1px";
@@ -68,19 +72,24 @@
 				var ga= new rc4Gen(43);
 				ga.initBuffer(x);
 				var i;
+				var j=0;
 				var condition = true;
 				for(i=0;i<43;i++){
 					var k=locs[ga.buffer[i]];
 					if(k.mcGuffin!="nm"){
-						winString+=k;
+						winString+=k.mcGuffin;
 						var b=document.createElement("DIV");
 						b.style.width="50px";
+						b.style.height="20px";
 						setDivSlot(b);
-						b.id=x.mcGuffin;
+						b.id="keyhole"+j;
 						b.addEventListener('click', e => {
-							document.getElementById("exitKey").value+=x.mcGuffin;
+							document.getElementById("exitKey").value+=k.mcGuffin;
 						});
 						document.getElementById("keySlots").appendChild(b);
+						keySlots[j]=b;
+						j++;
+						numKeys=j;
 					} else {
 						if(condition){
 							condition=false;
@@ -91,16 +100,21 @@
 			}
 			
 			function validateKey(){
-				var q=document.getElementById("exitKey");
+				var j;
+				var q="";
 				var r=document.getElementById("location");
+				for (j=0;j<numKeys;j++){	
+					q+=j.keySlots[j].innerHTML;
+				}
 				if(q.value == winString){
 					r.innerHTML+=" You have won!";
 				} else {
 					r.innerHTML+=" Try a different order!";
 				}
-				q.value="";
+				currentKey=0;
 				return false;
 			}
+			
 			function tweakRealmButton(){
 				document.getElementById("rButton").innerHTML="Enter "+document.getElementById("rKey").value+"!";
 				return false;
@@ -123,7 +137,11 @@
 						setDivSlot(b);
 						b.id=x.mcGuffin;
 						b.addEventListener('click', e => {
-							document.getElementById("exitKey").value+=x.mcGuffin;
+							keySlots[currentKey].innerHTML=b.innerHTML;
+							currentKey++;
+							if (currentKey==numKeys){
+								validateKey();
+							}
 						});
 						document.getElementById("McGuffinButtons").appendChild(b);
 					}
