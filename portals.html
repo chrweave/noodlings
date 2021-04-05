@@ -104,9 +104,10 @@
 				var q="";
 				var r=document.getElementById("location");
 				for (j=0;j<numKeys;j++){	
-					q+=j.keySlots[j].innerHTML;
+					q+=keySlots[j].innerHTML;
 				}
-				if(q.value == winString){
+				alert(q);
+				if(q == winString){
 					r.innerHTML+=" You have won!";
 				} else {
 					r.innerHTML+=" Try a different order!";
