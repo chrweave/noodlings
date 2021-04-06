@@ -103,16 +103,18 @@
 				var j;
 				var q="";
 				var r=document.getElementById("location");
-				for (j=0;j<numKeys;j++){	
-					q+=keySlots[j].innerHTML;
+				if(locs[currentLocation].isKeyhole){
+					for (j=0;j<numKeys;j++){	
+						q+=keySlots[j].innerHTML;
+					}
+					alert(q);
+					if(q == winString){
+						r.innerHTML+=" You have won!";
+					} else {
+						r.innerHTML+=" Try a different order!";
+					}
+					currentKey=0;
 				}
-				alert(q);
-				if(q == winString){
-					r.innerHTML+=" You have won!";
-				} else {
-					r.innerHTML+=" Try a different order!";
-				}
-				currentKey=0;
 				return false;
 			}
 			
@@ -129,20 +131,33 @@
 				}
 			}
 			
+			function placeKeyInHole(x){
+				keySlots[currentKey].innerHTML=x;
+				document.getElementById(x).disabled=true;
+				currentKey++;
+				if (currentKey==numKeys){
+					validateKey();
+				}
+				return false;
+			}
+			
 			function checkLocationForToken(x){
 				if (x.visited==0){ 
 					if(x.mcGuffin!="nm"){
-						var b=document.createElement("DIV");
-						b.innerHTML=x.mcGuffin;
-						b.style.background="DodgerBlue";
-						setDivSlot(b);
-						b.id=x.mcGuffin;
+						var b=document.createElement("DIV");						
+						b.style.display="inline-block";	
+						var ba=document.createElement("FORM");
+						b.appendChild(ba);
+						var bc= document.createElement("BUTTON");
+						ba.appendChild(bc);
+						var call="return placeKeyInHole(\""+x.mcGuffin+"\");"
+						ba.setAttribute("onSubmit",call);
+						bc.innerHTML=x.mcGuffin;
+						//b.style.background="DodgerBlue";
+						//setDivSlot(b);
+						ba.id=x.mcGuffin;
 						b.addEventListener('click', e => {
-							keySlots[currentKey].innerHTML=b.innerHTML;
-							currentKey++;
-							if (currentKey==numKeys){
-								validateKey();
-							}
+							
 						});
 						document.getElementById("McGuffinButtons").appendChild(b);
 					}
