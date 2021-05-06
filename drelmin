@@ -1,16 +1,15 @@
 #!/bin/bash
 cd /home/cweaver/noodlings
 
-#reword
+#waba
 git fetch origin master
 #git stash
 git reset --hard origin/master
 git config --global core.autocrlf false
 #git stash pop
 #gcc -O3 -o ../caw/latinjm latinjm/main.c 
-#../caw/latinjm 26 ThisIsADangHugeSquare >drelmout
-bash ../caw/wurdfold
+../caw/latinjm 50 doublebubble >drelmout
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
-git stage wurdz.html
-git commit -F ../caw/blep wurdz.html
+git stage drelmout
+git commit -F ../caw/blep drelmout
 git push
