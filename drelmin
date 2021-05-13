@@ -8,7 +8,8 @@ git reset --hard origin/master
 git config --global core.autocrlf false
 #git stash pop
 #gcc -O3 -o ../caw/latinjm latinjm/main.c 
-../caw/latinjm 50 doublebubble >drelmout
+../caw/latinjm 26 waba >drelmout
+bash ../caw/wurdfold
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
 git commit -F ../caw/blep drelmout
