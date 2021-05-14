@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /home/cweaver/noodlings
 
-#waba
+#wabawaba
 git fetch origin master
 #git stash
 git reset --hard origin/master
@@ -9,7 +9,7 @@ git config --global core.autocrlf false
 #git stash pop
 #gcc -O3 -o ../caw/latinjm latinjm/main.c 
 ../caw/latinjm 26 wubble >drelmout
-bash ../caw/wurdfold
+#bash ../caw/wurdfold
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
 git commit -F ../caw/blep drelmout
