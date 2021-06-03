@@ -1,53 +1,8 @@
- 22  20  10  24  18  25  13   5  12   6   3  21  17  11   0  16   9   8  15  19  14   7   4   2  23   1 
- 19  22   5  12  11  14   4  16  23   9  20   0  15   2   6   1  13  24   8  25   7  21   3  17  18  10 
-  9  15  11  21   8   3  22  13  16   2   5  12   7  23   1   0   4  18  17  24  20   6  10  19  14  25 
- 16  21  25   2  12   1   9  23   4  13   7  15  20  17  19  11  24   6   0  10  18  14   8   3   5  22 
-  0   5  21   9  16  20  10  15   1  18  11  17  24  14  23  22  19   7   6   8   4   3  25  12  13   2 
-  5  17  19   3   0   8  18   7  25  23  13   4  10  22  15  14  11  16   2  20   1   9   6  24  21  12 
-  2  23   3  10   4   0  19  24  11  12   8   1  22  21   9  20   6  14  16   5  25  13   7  18  17  15 
- 21  12   2  22   1  17  24   3  18  25   0   8   6   5  10   7  15   4  23  11  16  19  14  13  20   9 
-  3   4  13  15   2  16   8  21  14  10  24   6  25  20   7  19  12  17  11  18  22   5  23   9   1   0 
- 15  11  12  19  13  23   0  25   5   1  14  22   4   3  24   2  17  10   7  21   6  18   9   8  16  20 
-  8   1   7  17  10   9   6  20  19  15  12  13   5  24  25   4  21   2  14  22  23  11  18  16   0   3 
- 24  19  20   7   3  18  15   6  21   4  10  25   9   1  16  17  23   5  12  13   2  22   0  14   8  11 
-  1  25  22   6  14  11  23  19   8  21  18   3  12   4  13  24  20   0   9   7  15  17   5  10   2  16 
- 20   7  18  16   6  15   3  17  24   0   1  23   8  25  14  10   5  12  22   4  11   2  13  21   9  19 
- 11  14   8  18   9   2   7  12  22  20   4   5  23   6   3  13  10  25  21   0  19  24  16   1  15  17 
- 10   3   1   0  23  24  17  11  13  14  25   7  19  15  21   5  18   9  20  16  12   8   2  22   6   4 
- 17  13  15   8  21   4   1  18   7  24  22  16   3  19   5   9  14  20  10   2   0  12  11   6  25  23 
-  6   8  16  23  22   7  21  10  17   5   2  14  11  13  12   3   0  19   1   9  24  20  15  25   4  18 
-  4   9  23  20   5  13  16  14  15   8  21  24  18   0  22  12   2  11  25   3  10   1  17   7  19   6 
- 14  16  17   5  19   6  20   4   2  22  23  18   1   9  11  25   7   3  24  15  13  10  21   0  12   8 
- 13  24   4  14  20  12   5   1   9  17   6  19   0  10   2   8  25  15  18  23   3  16  22  11   7  21 
- 25   6   0   4   7   5   2   9   3  19  16  10  14  12  18  21   8  22  13   1  17  23  20  15  11  24 
- 12   2  14  13  15  10  25   8   6   7  19  11  21  16  20  18   3   1   4  17   9   0  24  23  22   5 
- 18  10  24   1  17  22  12   0  20  11  15   9   2   7   8   6  16  23   5  14  21  25  19   4   3  13 
- 23   0   6  11  25  19  14   2  10  16   9  20  13  18  17  15  22  21   3  12   8   4   1   5  24   7 
-  7  18   9  25  24  21  11  22   0   3  17   2  16   8   4  23   1  13  19   6   5  15  12  20  10  14 
-  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z    A B C D E F G H I J K L M N O P Q R S T U V W X Y Z    A B C D E F G H I J K L M N O P Q R S T U V W X Y Z  
-A W U K Y S Z N F M G D V R L A Q J I P T O H E C X B  A E M G I S F R Z K C P O W U T J D Q X B N H A Y L V  A O Z X K W H J V R Q C N I G U S P M E T B L A Y D F 
-B T W F M L O E Q X J U A P C G B N Y I Z H V D R S K  B Y K W P I E V N R S X J H Q O C T F Z L A D B G U M  B L P N W G C O U S J Z E D Q F M H X Y A K V B I R T 
-C J P L V I D W N Q C F M H X B A E S R Y U G K T O Z  C V P H G U B Y K O Z A C J I W Q R T N F L E M S X D  C P O J F Q K V M E A W C L H Y B I S R X U D G N T Z 
-D Q V Z C M B J X E N H P U R T L Y G A K S O I D F W  D P X D F V T M L Q E G Y B W U I N K O J S C H R A Z  D S F D X I Y R K W G T P E J V L A N U O M B Z H Q C 
-E A F V J Q U K P B S L R Y O X W T H G I E D Z M N C  E F H I L G S N V C O K B D J M W E X A T U Q R P Z Y  E A I Z V U B S R T D G K X Y N H E L J Q F C P O M W 
-F F R T D A I S H Z X N E K W P O L Q C U B J G Y V M  F G D O C Q V T R F K W M U S B N I H L Y E Z X J P A  F E U S D L A W H F V M Q Z K P O R B G C T Y N J X I 
-G C X D K E A T Y L M I B W V J U G O Q F Z N H S R P  G J Q V N B U K O I D E Z X A Y L S P F G T R C M H W  G F L A C E T Q W K O D I J V R Z S Y X G P N M B H U 
-H V M C W B R Y D S Z A I G F K H P E X L Q T O N U J  H X U Y H T A L F W V R P O C S E B N Q M K I Z D G J  H K E C H R N M P L Z O T B X W Q U F I V Y A D S G J 
-I D E N P C Q I V O K Y G Z U H T M R L S W F X J B A  I Z E T V D J W Q M U Y G A P I S C R H K X L O B N F  I Z Y E A B V L O G X J S Q C I D F R T P N H U W K M 
-J P L M T N X A Z F B O W E D Y C R K H V G S J I Q U  J N J C Z L R A W S B I X G D P K Y U E V O M T F Q H  J G J P N M I U S X W R B C E K A Y Q V D Z T L F O H 
-K I B H R K J G U T P M N F Y Z E V C O W X L S Q A D  K H N R A O C U D G Y L E K F J X V Z M W B S Q T I P  K Y B R Z P M G C A F E V K L S J X D W I H Q T U N O 
-L Y T U H D S P G V E K Z J B Q R X F M N C W A O I L  L B G Z M F O I P H X V W C K R D Q E T U Y A J N S L  L W N U E J R H D Y M K Z S T X G O P F B C I V Q A L 
-M B Z W G O L X T I V S D M E N Y U A J H P R F K C Q  M U T X Q J K H C N L F R M Y V B Z A S P D W G O E I  M R A Y L N W D T I S X F M O E U Z V K H Q J C G P B 
-N U H S Q G P D R Y A B X I Z O K F M W E L C N V J T  N S L B J M H O X Z T U A V R E P W D Y Q I G F C K N  N J K V G T Q E B M Y P U R W O F D H C Z A X S L I N 
-O L O I S J C H M W U E F X G D N K Z V A T Y Q B P R  O A C U O Z Q B I X G H T R M N F L Y V D W P S E J K  O T X F O K L N G C E Q A H P B Y W Z D U J S I M V R 
-P K D B A X Y R L N O Z H T P V F S J U Q M I C W G E  P C B J R K P X H U Q N D S O F Y A L W I G V E Z M T  P D C W B Z P Y L V R A H U I J N T G Q M S O X E F K 
-Q R N P I V E B S H Y W Q D T F J O U K C A M L G Z X  Q R Z S W C N G T V A O F I B Q H X J P E M K Y L D U  Q U G T M F O X I D P S W V B Q C L A H N R E K Z J Y 
-R G I Q X W H V K R F C O L N M D A T B J Y U P Z E S  R M W K T H L D E A P J S N Z G U F I C R Q Y V X B O  R Q S K P Y J A F B T H M O N L W C I Z R V G E D U X 
-S E J X U F N Q O P I V Y S A W M C L Z D K B R H T G  S D R F Y W X E J B M Q I L V K A G C U Z P O N H T S  S N V Q T A E Z X J B U R P F H I G W M Y D K O C L S 
-T O Q R F T G U E C W X S B J L Z H D Y P N K V A M I  T O V Q S N G Z M E R D H Y L X T P W I A F J K U C B  T X M I R H D F Q Z N V O Y U A T B C L E G W J K S P 
-U N Y E O U M F B J R G T A K C I Z P S X D Q W L H V  U Q F L U E Z J B Y W S N P T A M H V D O C X I K R G  U M H O U C G K Y P I N X F A D R V J S L E Z W T B Q 
-V Z G A E H F C J D T Q K O M S V I W N B R X U P L Y  V W S N E Y I C A P F T K Q G D Z U M J H R B L V O X  V C T G I D F B E Q H L Y N S M X K U O J W P R V Z A 
-W M C O N P K Z I G H T L V Q U S D B E R J A Y X W F  W L Y P B A M F G D J C Q Z N H R O S K X V T U I W E  W V R B Q S Z I J H U F L A D C E N T P K O M Y X W G 
-X S K Y B R W M A U L P J C H I G Q X F O V Z T E D N  X T O A D X Y Q S J I M U E H L V K B G C Z N P W F R  X H D M Y X S P N O L B J G Z T K Q E A W I U F R C V 
-Y X A G L Z T O C K Q J U N S R P W V D M I E B F Y H  Y K I M X R D P U L N Z V T E C O J G B S H F W A Y Q  Y B W H S V X C Z U K I D T M G P J O N F L R Q A Y E 
-Z H S J Z Y V L W A D R C Q I E X B N T G F P M U K O  Z I A E K P W S Y T H B L F X Z G M O R N J U D Q V C  Z I Q L J O U T A N C Y G W R Z V M K B S X F H P E D 
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=116 time=61.4 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=116 time=31.6 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=116 time=34.5 ms
+
+--- 8.8.8.8 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 4ms
+rtt min/avg/max/mdev = 31.448/33.380/34.470/1.378 ms
