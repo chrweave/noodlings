@@ -1,11 +1,11 @@
 #!/bin/bash
 cd /home/cweaver/noodlings
 
-#pong hopefully
+#uctive hopefully
 git fetch origin master
 git reset --hard origin/master
 #gcc -O3 -o ../caw/latinjm latinjm/main.c 
-ping -c 3 8.8.8.8 >drelmout
+which octave >drelmout
 #bash ../caw/wurdfold
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
