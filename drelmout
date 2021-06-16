@@ -1,8 +1,1 @@
-PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
-64 bytes from 8.8.8.8: icmp_seq=1 ttl=115 time=32.8 ms
-64 bytes from 8.8.8.8: icmp_seq=2 ttl=115 time=29.1 ms
-64 bytes from 8.8.8.8: icmp_seq=3 ttl=115 time=30.3 ms
-
---- 8.8.8.8 ping statistics ---
-3 packets transmitted, 3 received, 0% packet loss, time 5ms
-rtt min/avg/max/mdev = 29.138/30.769/32.833/1.539 ms
+/usr/bin/octave
