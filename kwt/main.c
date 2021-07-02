@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MEG 1048576
+
 struct _al{
     void* data;
     struct _al * next;
@@ -37,24 +39,39 @@ void readFileList(char * fname);
 long * getFilePointersForStartOfFileNames(FILE* f);
 void setTreeChild(AbstractTree * parent, AbstractTree * child, int selector);
 void flushList(AbstractList * a);
-ExpandingPool * getExpandingPool(int initialSize, int inDatumSize);
+ExpandingPool * getExpandingPool(int inDatumSize);
+void * getDatumFromExpandingPool(ExpandingPool * ep);
+void addMegToExpandingPool(ExpandingPool * ep);
 
 
-ExpandingPool * getExpandingPool(int initialSize, int inDatumSize){
+ExpandingPool * getExpandingPool(int inDatumSize){
     ExpandingPool * ep =(ExpandingPool*)malloc(sizeof(ExpandingPool));
     int i = 0;
     char * harvester = NULL;
     ep->datumSize=inDatumSize;
-    ep->poolSize=initialSize;
+    ep->poolSize=MEG;
     ep->current = 0;
-    ep->data=malloc(initialSize*inDatumSize);
-    ep->pointerPool=malloc(sizeof(void*)*initialSize);
+    ep->data=malloc(MEG*inDatumSize);
+    ep->pointerPool=malloc(sizeof(void*)*MEG);
     harvester=(char*)ep->data;
-    for(i=0;i<initialSize;i++){
+    for(i=0;i<MEG;i++){
         ep->pointerPool[i]=harvester;
         harvester+=ep->datumSize;
     }
     return ep;
+}
+
+void addMegToExpandingPool(ExpandingPool * ep){
+    ep->poolSize+=MEG;
+}
+
+void * getDatumFromExpandingPool(ExpandingPool * ep){
+    void * ret=ep->pointerPool[ep->current];
+    ep->current++;
+    if(ep->current>ep->poolSize-16){
+        addMegToExpandingPool(ep);
+    }
+    return ret;
 }
 
 
