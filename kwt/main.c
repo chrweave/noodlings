@@ -65,10 +65,12 @@ void addMegToExpandingPool(ExpandingPool * ep){
     char * harvester = NULL;
     int i = 0;
     int oldPoolSize=ep->poolSize;
+    void * ph;
     ep->poolSize+=MEG;
     ep->data=realloc(ep->data,ep->poolSize*ep->datumSize);
-    ep->pointerPool=malloc(sizeof(void*)*ep->poolSize);
-    harvester=(char*)(&(ep->data[oldPoolSize]));
+    ep->pointerPool=realloc(ep->pointerPool,sizeof(void*)*ep->poolSize);
+    ph=&(ep->data[oldPoolSize]);
+    harvester=(char*)ph;
     for(i=oldPoolSize;i<ep->poolSize;i++){
         ep->pointerPool[i]=harvester;
         harvester+=ep->datumSize;
