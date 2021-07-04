@@ -41,7 +41,7 @@ void setTreeChild(AbstractTree * parent, AbstractTree * child, int selector);
 void flushList(AbstractList * a);
 ExpandingPool * getExpandingPool(int inDatumSize);
 void * getDatumFromExpandingPool(ExpandingPool * ep);
-void addMegToExpandingPool(ExpandingPool * ep);
+void doubleExpandingPool(ExpandingPool * ep);
 
 
 ExpandingPool * getExpandingPool(int inDatumSize){
@@ -61,17 +61,14 @@ ExpandingPool * getExpandingPool(int inDatumSize){
     return ep;
 }
 
-void addMegToExpandingPool(ExpandingPool * ep){
+void doubleExpandingPool(ExpandingPool * ep){
     char * harvester = NULL;
     int i = 0;
-    int oldPoolSize=ep->poolSize;
-    void * ph;
-    ep->poolSize+=MEG;
+    ep->poolSize*=2;
     ep->data=realloc(ep->data,ep->poolSize*ep->datumSize);
     ep->pointerPool=realloc(ep->pointerPool,sizeof(void*)*ep->poolSize);
-    ph=&(ep->data[oldPoolSize]);
-    harvester=(char*)ph;
-    for(i=oldPoolSize;i<ep->poolSize;i++){
+    harvester=ep->data;
+    for(i=0;i<ep->poolSize;i++){
         ep->pointerPool[i]=harvester;
         harvester+=ep->datumSize;
     }
@@ -81,7 +78,7 @@ void * getDatumFromExpandingPool(ExpandingPool * ep){
     void * ret=ep->pointerPool[ep->current];
     ep->current++;
     if(ep->current>ep->poolSize-16){
-        addMegToExpandingPool(ep);
+        doubleExpandingPool(ep);
     }
     return ret;
 }
