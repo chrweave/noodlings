@@ -47,10 +47,30 @@ ExpandingPool * getExpandingPool(int inDatumSize);
 void * getDatumFromExpandingPool(ExpandingPool * ep);
 void doubleExpandingPool(ExpandingPool * ep);
 void initAllowed(void);
+int hashString(char * c);
 
 /* <globalVariables> */
 int allowed[256];
+unsigned int ha=0x6cb7bf89;
+unsigned int hc=0xdc06d77f;
+unsigned int hop=0x5b728877;
 /* </globalVariables> */
+
+int hashString(char *c){
+    unsigned int h=hop;
+    char cc=0;
+    int i=0;
+    while ((cc=*c++)){
+        h^=cc;
+        h*=ha;
+        h+=hc;
+    }
+    for (i=0;i<4;i++){
+        h*=ha;
+        h+=hc;
+    }
+    return (int)(h>>16);
+}
 
 void initAllowed(void){
     int i = 0;
