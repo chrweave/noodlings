@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* <macros> */
 #define MEG 1048576
+/* </macros> */
 
+/* <structureTypes> */
 struct _al{
     void* data;
     struct _al * next;
@@ -33,6 +36,7 @@ struct _ep{
 };
 
 typedef struct _ep ExpandingPool;
+/* </structureTypes> */
 
 
 void readFileList(char * fname);
@@ -42,6 +46,21 @@ void flushList(AbstractList * a);
 ExpandingPool * getExpandingPool(int inDatumSize);
 void * getDatumFromExpandingPool(ExpandingPool * ep);
 void doubleExpandingPool(ExpandingPool * ep);
+void initAllowed(void);
+
+/* <globalVariables> */
+int allowed[256];
+/* </globalVariables> */
+
+void initAllowed(void){
+    int i = 0;
+    for(i=0;i<256;i++){
+        int c = 0;
+        c = c || (i > 47 && i < 58);
+        c = c || (i > 64 && i < 91);
+        allowed[i] = c || (i > 96 && i < 123);
+    }
+}
 
 
 ExpandingPool * getExpandingPool(int inDatumSize){
