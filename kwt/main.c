@@ -181,17 +181,30 @@ void processFile(char* fname){
     FILE * f=NULL;
     int c;
     int len;
+    unsigned int h=hop;
+    int i=0;
     f=fopen(fname,"rb");
     if(f!=NULL){
         len=0;
+        h=hop;
         while((c=fgetc(f))!=EOF){
             if(allowed[c]){
                 termBuffer[len++]=c;
+                h^=c;
+                h*=ha;
+                h+=hc;
             } else {
                 if(len > 0){
-                    termBuffer[len]=0;
-                    int h=hashString(termBuffer);
-                    printf("%d %s\n",h,termBuffer);
+                    if(len >1){
+                        termBuffer[len]=0;
+                        for (i=0;i<4;i++){
+                            h*=ha;
+                            h+=hc;
+                        }
+                        h=h>>16;
+                        printf("%d %s\n",h,termBuffer);
+                    }
+                    h=hop;
                     len=0;
                 }
             }
