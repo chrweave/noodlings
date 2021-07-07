@@ -48,6 +48,7 @@ void * getDatumFromExpandingPool(ExpandingPool * ep);
 void doubleExpandingPool(ExpandingPool * ep);
 void initAllowed(void);
 int hashString(char * c);
+void init(void);
 
 /* <globalVariables> */
 int allowed[256];
@@ -55,6 +56,10 @@ unsigned int ha=0x6cb7bf89;
 unsigned int hc=0xdc06d77f;
 unsigned int hop=0x5b728877;
 /* </globalVariables> */
+
+void init(void){
+    initAllowed();
+}
 
 int hashString(char *c){
     unsigned int h=hop;
@@ -148,7 +153,9 @@ void setTreeChild(AbstractTree * parent, AbstractTree * child, int selector){
 
 
 long * getFilePointersForStartOfFileNames(FILE* f){
-    long * ret=NULL;
+    long * ret=(long*)malloc(MEG*sizeof(long));
+    int max = MEG;
+    int numFiles = 0;
     char *line = NULL;
     size_t len = 0;
     ssize_t nread;
@@ -156,9 +163,15 @@ long * getFilePointersForStartOfFileNames(FILE* f){
 
 
     while ((nread = getline(&line, &len, f)) != -1) {
-        printf("%ld\n", p);
         p = ftell(f);
-        printf("%s@@@",line);
+        ret[0]=(long)numFiles;
+        ret[1+numFiles++]=p;
+        if(numFiles>max-16){
+            max*=2;
+            ret=(long*)realloc(ret,max*sizeof (long));
+        }
+        line[nread-1]=0;
+        printf("%s ", line);
     }
     return ret;
 }
@@ -174,6 +187,7 @@ void readFileList(char * fname){
 int main(int argc, char ** argv)
 {
     if(argc>1){
+        init();
         readFileList(argv[1]);
     }
 }
