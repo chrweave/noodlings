@@ -49,12 +49,14 @@ void doubleExpandingPool(ExpandingPool * ep);
 void initAllowed(void);
 int hashString(char * c);
 void init(void);
+void processFile(char* fname);
 
 /* <globalVariables> */
 int allowed[256];
 unsigned int ha=0x6cb7bf89;
 unsigned int hc=0xdc06d77f;
 unsigned int hop=0x5b728877;
+char termBuffer[MEG];
 /* </globalVariables> */
 
 void init(void){
@@ -161,7 +163,6 @@ long * getFilePointersForStartOfFileNames(FILE* f){
     ssize_t nread;
     long p = ftell(f);
 
-
     while ((nread = getline(&line, &len, f)) != -1) {
         p = ftell(f);
         ret[0]=(long)numFiles;
@@ -171,9 +172,32 @@ long * getFilePointersForStartOfFileNames(FILE* f){
             ret=(long*)realloc(ret,max*sizeof (long));
         }
         line[nread-1]=0;
-        printf("%s ", line);
+        processFile(line);
     }
     return ret;
+}
+
+void processFile(char* fname){
+    FILE * f=NULL;
+    int c;
+    int len;
+    f=fopen(fname,"rb");
+    if(f!=NULL){
+        len=0;
+        while((c=fgetc(f))!=EOF){
+            if(allowed[c]){
+                termBuffer[len++]=c;
+            } else {
+                if(len > 0){
+                    termBuffer[len]=0;
+                    int h=hashString(termBuffer);
+                    printf("%d %s\n",h,termBuffer);
+                    len=0;
+                }
+            }
+        }
+        fclose(f);
+    }
 }
 
 void readFileList(char * fname){
@@ -181,6 +205,7 @@ void readFileList(char * fname){
     f=fopen(fname,"rb");
     if(f!=NULL){
         getFilePointersForStartOfFileNames(f);
+        fclose(f);
     }
 }
 
