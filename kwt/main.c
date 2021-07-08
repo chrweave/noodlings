@@ -50,6 +50,7 @@ void initAllowed(void);
 int hashString(char * c);
 void init(void);
 void processFile(char* fname);
+void insertDatum(AbstractTree* traget, void * sourceDatum, int (*comparator)(void* a, void* n));
 
 /* <globalVariables> */
 int allowed[256];
@@ -82,7 +83,7 @@ int hashString(char *c){
 void initAllowed(void){
     int i = 0;
     for(i=0;i<256;i++){
-        int c = 0;
+        int c = (i==95);
         c = c || (i > 47 && i < 58);
         c = c || (i > 64 && i < 91);
         allowed[i] = c || (i > 96 && i < 123);
