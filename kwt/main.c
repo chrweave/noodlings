@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /* <macros> */
 #define MEG 1048576
@@ -12,10 +13,17 @@ struct _al{
 };
 typedef struct _al AbstractList;
 
+struct _il{
+    int doc;
+    struct _il * next;
+};
+typedef struct _il IntList;
+
+
 struct _tt{
     char * term;
-    struct _tt * left;
-    struct _tt * right;
+    IntList * docs;
+    struct _tt * children[2];
 };
 typedef struct _tt TermTree;
 
@@ -41,7 +49,6 @@ typedef struct _ep ExpandingPool;
 
 void readFileList(char * fname);
 long * getFilePointersForStartOfFileNames(FILE* f);
-void setTreeChild(TermTree * parent, TermTree * child, int selector);
 void flushList(AbstractList * a);
 ExpandingPool * getExpandingPool(int inDatumSize);
 void * getDatumFromExpandingPool(ExpandingPool * ep);
@@ -147,17 +154,6 @@ void flushList(AbstractList * a){
         free(o);
     }
 }
-
-
-void setTreeChild(TermTree * parent, TermTree * child, int selector){
-    if (selector){
-        parent->left=child;
-    } else {
-        parent->right=child;
-    }
-}
-
-
 
 long * getFilePointersForStartOfFileNames(FILE* f){
     long * ret=(long*)malloc(MEG*sizeof(long));
