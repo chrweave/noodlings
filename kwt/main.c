@@ -19,9 +19,9 @@ struct _il{
 };
 typedef struct _il IntList;
 
-
 struct _tt{
     char * term;
+    int type;
     IntList * docs;
     struct _tt * children[2];
 };
