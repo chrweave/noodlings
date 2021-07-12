@@ -12,12 +12,12 @@ struct _al{
 };
 typedef struct _al AbstractList;
 
-struct _at{
-    void* data;
-    struct _at * left;
-    struct _at * right;
+struct _tt{
+    char * term;
+    struct _tt * left;
+    struct _tt * right;
 };
-typedef struct _at AbstractTree;
+typedef struct _tt TermTree;
 
 struct _av{
     void * data;
@@ -41,7 +41,7 @@ typedef struct _ep ExpandingPool;
 
 void readFileList(char * fname);
 long * getFilePointersForStartOfFileNames(FILE* f);
-void setTreeChild(AbstractTree * parent, AbstractTree * child, int selector);
+void setTreeChild(TermTree * parent, TermTree * child, int selector);
 void flushList(AbstractList * a);
 ExpandingPool * getExpandingPool(int inDatumSize);
 void * getDatumFromExpandingPool(ExpandingPool * ep);
@@ -50,7 +50,7 @@ void initAllowed(void);
 int hashString(char * c);
 void init(void);
 void processFile(char* fname);
-void insertDatum(AbstractTree* traget, void * sourceDatum, int (*comparator)(void* a, void* n));
+void insertTerm(TermTree* target, char * term);
 
 /* <globalVariables> */
 int allowed[256];
@@ -59,6 +59,10 @@ unsigned int hc=0xdc06d77f;
 unsigned int hop=0x5b728877;
 char termBuffer[MEG];
 /* </globalVariables> */
+
+void insertTerm(TermTree* target, char * term){
+
+}
 
 void init(void){
     initAllowed();
@@ -145,7 +149,7 @@ void flushList(AbstractList * a){
 }
 
 
-void setTreeChild(AbstractTree * parent, AbstractTree * child, int selector){
+void setTreeChild(TermTree * parent, TermTree * child, int selector){
     if (selector){
         parent->left=child;
     } else {
