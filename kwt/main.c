@@ -4,19 +4,19 @@
 #define MEG 1048576
 
 typedef unsigned long long V;
-typedef unsigned int U
+typedef unsigned int U;
 
 struct _bt{
     V hash;
     char* term;
     struct _bt * ch[2];
-}
+};
 typedef struct _bt T;
 
 V lo=0x768032e13e71e9fbu;
 V la=0xf38df1969a680995u;
 V lc=0x5686184f5ef9ddb9u;
-T* tree
+T* tree;
 T*stack[65536];
 int allowed[256];
 long * fileNamePointers;
@@ -37,25 +37,40 @@ void init(void){
 void processFile(char* fname){
     FILE* f=NULL;
     int l = 0;
-    int c  =0;
+    int c = 0;
+    V sp=lo;
     f=fopen(fname,"rb");
     if(f!=NULL){
         while((c=fgetc(f))!=EOF){
-            if(allowed(c)){
+            if(allowed[c]){
                 readB[l++]=(char)c;
                 sp^=c;
                 sp*=la;
                 sp+=lc;
             } else {
                 if(l>1){
+                    readB[l]=0;
+                    sp=sp*la+lc;
+                    sp=sp*la+lc;
+                    sp=sp*la+lc;
+                    sp=sp*la+lc;
+                    sp=sp*la+lc;
+                    sp=sp*la+lc;
+                    sp=sp*la+lc;
+                    sp=sp*la+lc;
+                    sp=sp>>32;
+                    printf("%08llx %s\n",sp,readB);
                 }
+                l=0;
+                sp=lo;
             }
         }
+        fclose(f);
     }
 }
 
 void processFiles(FILE* f){
-    long * fileNamePointers=(long*)malloc(MEG*sizeof(long));
+    long * ret=(long*)malloc(MEG*sizeof(long));
     int max = MEG;
     int numFiles = 0;
     char *line = NULL;
@@ -87,6 +102,7 @@ void handleFileList(char * fn){
 
 int main (int argc, char ** argv){
     if (argc>1){
+        init();
         handleFileList(argv[1]);
     }
     return 0;
