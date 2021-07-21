@@ -21,6 +21,7 @@ T*stack[65536];
 int allowed[256];
 long * fileNamePointers;
 char readB[MEG];
+unsigned char freadB[131072];
 
 void init(void){
     int i;
@@ -34,36 +35,48 @@ void init(void){
     }
 }
 
+void processBuffer(int r, int *l){
+    V sp=lo;
+    int i;
+    unsigned char c;
+    for(i=0;i<r;i++){
+        c=freadB[i];
+        if(allowed[c]){
+            readB[*l++]=(char)c;
+            sp^=(V)c;
+            sp*=la;
+            sp+=lc;
+        } else {
+            if(*l>1){
+                readB[*l]=0;
+                sp=sp*la+lc;
+                sp=sp*la+lc;
+                sp=sp*la+lc;
+                sp=sp*la+lc;
+                sp=sp*la+lc;
+                sp=sp*la+lc;
+                sp=sp*la+lc;
+                sp=sp*la+lc;
+                sp=sp>>32;
+                printf("%08llx %s\n",sp,readB);
+            }
+            *l=0;
+            sp=lo;
+        }
+    }
+}
+
 void processFile(char* fname){
     FILE* f=NULL;
-    int l = 0;
-    int c = 0;
-    V sp=lo;
+    int l =0;
+    int r = 0;
     f=fopen(fname,"rb");
     if(f!=NULL){
-        while((c=fgetc(f))!=EOF){
-            if(allowed[c]){
-                readB[l++]=(char)c;
-                sp^=c;
-                sp*=la;
-                sp+=lc;
-            } else {
-                if(l>1){
-                    readB[l]=0;
-                    sp=sp*la+lc;
-                    sp=sp*la+lc;
-                    sp=sp*la+lc;
-                    sp=sp*la+lc;
-                    sp=sp*la+lc;
-                    sp=sp*la+lc;
-                    sp=sp*la+lc;
-                    sp=sp*la+lc;
-                    sp=sp>>32;
-                    printf("%08llx %s\n",sp,readB);
-                }
-                l=0;
-                sp=lo;
+        while((r=fread(freadB,1,131072,f))>0){
+            if(r<131072){
+                freadB[r]=0;
             }
+            processBuffer(r, &l);
         }
         fclose(f);
     }
