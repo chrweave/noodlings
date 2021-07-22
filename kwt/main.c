@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define MEG 1048576
+#define RBS 8192
 
 typedef unsigned long long V;
 typedef unsigned int U;
@@ -21,7 +22,7 @@ T*stack[65536];
 int allowed[256];
 long * fileNamePointers;
 char readB[MEG];
-unsigned char freadB[131072];
+unsigned char freadB[RBS];
 
 void init(void){
     int i;
@@ -38,17 +39,18 @@ void init(void){
 void processBuffer(int r, int *l){
     V sp=lo;
     int i;
+    int ll=*l;
     unsigned char c;
     for(i=0;i<r;i++){
         c=freadB[i];
         if(allowed[c]){
-            readB[*l++]=(char)c;
-            sp^=(V)c;
+            readB[ll++]=(char)(c);
+            sp^=(V)(c);
             sp*=la;
             sp+=lc;
         } else {
-            if(*l>1){
-                readB[*l]=0;
+            if(ll>1){
+                readB[ll]=0;
                 sp=sp*la+lc;
                 sp=sp*la+lc;
                 sp=sp*la+lc;
@@ -60,26 +62,23 @@ void processBuffer(int r, int *l){
                 sp=sp>>32;
                 printf("%08llx %s\n",sp,readB);
             }
-            *l=0;
+            ll=0;
             sp=lo;
         }
     }
+    *l=ll;
 }
 
-void processFile(char* fname){
-    FILE* f=NULL;
+void processFile(FILE* f){
     int l =0;
     int r = 0;
-    f=fopen(fname,"rb");
-    if(f!=NULL){
-        while((r=fread(freadB,1,131072,f))>0){
-            if(r<131072){
-                freadB[r]=0;
-            }
-            processBuffer(r, &l);
+    do{
+        r=fread(freadB,1,RBS,f);
+        if(r<RBS){
+            freadB[r]=0;
         }
-        fclose(f);
-    }
+        processBuffer(r, &l);
+    }while(r>0);
 }
 
 void processFiles(FILE* f){
@@ -90,6 +89,7 @@ void processFiles(FILE* f){
     size_t len = 0;
     ssize_t nread;
     long p = ftell(f);
+    FILE* g=NULL;
 
     while ((nread = getline(&line, &len, f)) != -1) {
         p = ftell(f);
@@ -100,7 +100,12 @@ void processFiles(FILE* f){
             ret=(long*)realloc(ret,max*sizeof (long));
         }
         line[nread-1]=0;
-        processFile(line);
+        g=NULL;
+        g=fopen(line,"rb");
+        if(g!=NULL){
+            processFile(g);
+            fclose(g);
+        }
     }
 }
 
