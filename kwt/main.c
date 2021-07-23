@@ -35,7 +35,6 @@ void insert(T ** inbt, char * term, V hash){
         } else {
             q=hash>bt->hash?1:0;
         }
-}
 
 
     }
