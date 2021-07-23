@@ -118,6 +118,10 @@ void processBuffer(int r, int *l){
     *l=ll;
 }
 
+void dump(void){
+    int i = 0;
+}
+
 void processFile(FILE* f){
     int l =0;
     int r = 0;
