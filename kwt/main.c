@@ -3,6 +3,7 @@
 #include <string.h>
 #define MEG 1048576
 #define RBS 8192
+#define K64 65536
 
 typedef unsigned long long V;
 typedef unsigned int U;
@@ -17,12 +18,28 @@ typedef struct _bt T;
 V lo=0x768032e13e71e9fbu;
 V la=0xf38df1969a680995u;
 V lc=0x5686184f5ef9ddb9u;
-T* tree;
-T*stack[65536];
+T* tree [K64];
+T* stack [K64];
 int allowed[256];
 long * fileNamePointers;
 char readB[MEG];
 unsigned char freadB[RBS];
+
+void insert(T ** inbt, char * term, V hash){
+    T * bt=*inbt;
+    T * p =bt;
+    int q;
+    while(bt !=NULL){
+        if(hash==bt->hash){
+            q=strcmp(term,bt->term);
+        } else {
+            q=hash>bt->hash?1:0;
+        }
+}
+
+
+    }
+}
 
 void init(void){
     int i;
