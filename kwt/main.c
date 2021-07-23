@@ -13,30 +13,57 @@ struct _bt{
     char* term;
     struct _bt * ch[2];
 };
-typedef struct _bt T;
+typedef struct _bt BinarySearchTree;
 
 V lo=0x768032e13e71e9fbu;
 V la=0xf38df1969a680995u;
 V lc=0x5686184f5ef9ddb9u;
-T* tree [K64];
-T* stack [K64];
+BinarySearchTree* tree [K64];
+BinarySearchTree* stack [K64];
 int allowed[256];
 long * fileNamePointers;
 char readB[MEG];
 unsigned char freadB[RBS];
 
-void insert(T ** inbt, char * term, V hash){
-    T * bt=*inbt;
-    T * p =bt;
+BinarySearchTree* getTreeNode(void){
+    BinarySearchTree* r=(BinarySearchTree*)malloc(sizeof (BinarySearchTree));
+    r->ch[0]=r->ch[1]=NULL;
+    return r;
+}
+
+void insert(BinarySearchTree ** inbt, char * term, V hash){
+    BinarySearchTree * bt=*inbt;
+    BinarySearchTree * p =bt;
+    int newTerm = 1;
     int q;
     while(bt !=NULL){
         if(hash==bt->hash){
             q=strcmp(term,bt->term);
+            if(q==0){
+                newTerm=0;
+                break;
+            } else {
+                q=1-(q<0);
+            }
+
         } else {
-            q=hash>bt->hash?1:0;
+            if(hash > bt->hash){
+                q=1;
+            } else {
+                q=0;
+            }
         }
-
-
+        p=bt;
+        bt=bt->ch[q];
+    }
+    if(newTerm){
+        if(bt==p){
+            bt=*inbt=getTreeNode(); /* NULL root */
+        } else {
+            bt=p->ch[q]=getTreeNode();
+        }
+        bt->hash=hash;
+        bt->term=term;
     }
 }
 
@@ -50,10 +77,14 @@ void init(void){
         c|=(i>='a'&&i<='z');
         allowed[i]=c;
     }
+    for(i=0;i<K64;i++){
+        tree[i]=NULL;
+    }
 }
 
 void processBuffer(int r, int *l){
     V sp=lo;
+    BinarySearchTree**bts=NULL;
     int i;
     int ll=*l;
     unsigned char c;
@@ -76,7 +107,9 @@ void processBuffer(int r, int *l){
                 sp=sp*la+lc;
                 sp=sp*la+lc;
                 sp=sp>>32;
+                bts=&tree[(int)sp&0xffff];
                 printf("%08llx %s\n",sp,readB);
+                insert(bts,readB,sp);
             }
             ll=0;
             sp=lo;
