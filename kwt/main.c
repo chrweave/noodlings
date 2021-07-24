@@ -31,6 +31,12 @@ BinarySearchTree* getTreeNode(void){
     return r;
 }
 
+char * getTerm(char* interm){
+    char * r= (char*)malloc(strlen(interm)+1);
+    strcpy (r,interm);
+    return r;
+}
+
 void insert(BinarySearchTree ** inbt, char * term, V hash){
     BinarySearchTree * bt=*inbt;
     BinarySearchTree * p =bt;
@@ -63,7 +69,7 @@ void insert(BinarySearchTree ** inbt, char * term, V hash){
             bt=p->ch[q]=getTreeNode();
         }
         bt->hash=hash;
-        bt->term=term;
+        bt->term=getTerm(term);
     }
 }
 
@@ -108,7 +114,7 @@ void processBuffer(int r, int *l){
                 sp=sp*la+lc;
                 sp=sp>>32;
                 bts=&tree[(int)sp&0xffff];
-                printf("%08llx %s\n",sp,readB);
+                /*printf("%08llx %s\n",sp,readB);*/
                 insert(bts,readB,sp);
             }
             ll=0;
@@ -118,8 +124,31 @@ void processBuffer(int r, int *l){
     *l=ll;
 }
 
+void dumpTree(BinarySearchTree * bt){
+    int p = 0;
+    while(p>-1){
+        //printf("%d ",p);
+        while(bt!=NULL){
+            stack[p++]=bt;
+            bt=bt->ch[0]; /* visit left child */
+        }
+        p--;
+        if(p>-1){
+            bt=stack[p]; /* pop */
+            if(bt!=NULL){
+                printf("(%08llx) %s\n",bt->hash,bt->term);
+                bt=bt->ch[1]; /* visit right child */
+            }
+        }
+    }
+}
+
 void dump(void){
     int i = 0;
+
+    for(i=0;i<K64;i++){
+        dumpTree(tree[i]);
+    }
 }
 
 void processFile(FILE* f){
@@ -160,6 +189,7 @@ void processFiles(FILE* f){
             fclose(g);
         }
     }
+    dump();
 }
 
 void handleFileList(char * fn){
