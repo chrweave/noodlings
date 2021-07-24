@@ -98,23 +98,14 @@ void processBuffer(int r, int *l){
         c=freadB[i];
         if(allowed[c]){
             readB[ll++]=(char)(c);
-            sp^=(V)(c);
+            sp^=(V)c;
             sp*=la;
             sp+=lc;
         } else {
             if(ll>1){
                 readB[ll]=0;
-                sp=sp*la+lc;
-                sp=sp*la+lc;
-                sp=sp*la+lc;
-                sp=sp*la+lc;
-                sp=sp*la+lc;
-                sp=sp*la+lc;
-                sp=sp*la+lc;
-                sp=sp*la+lc;
                 sp=sp>>32;
                 bts=&tree[(int)sp&0xffff];
-                /*printf("%08llx %s\n",sp,readB);*/
                 insert(bts,readB,sp);
             }
             ll=0;
