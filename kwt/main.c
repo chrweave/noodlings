@@ -235,6 +235,19 @@ void rrot(BinarySearchTree ** x){
     *x=y;
 }
 
+void rlrot(BinarySearchTree ** x){
+    BinarySearchTree *z,*y,*p,*q;
+    z=(*x)->ch[1];
+    y=z->ch[0];
+    p=y->ch[0];
+    q=y->ch[1];
+    y->ch[0]=*x;
+    (*x)->ch[1]=p;
+    y->ch[1]=z;
+    z->ch[0]=q;
+    *x=y;
+}
+
 void rdump(BinarySearchTree * t, int d){
     int i = 0;
 
@@ -249,7 +262,7 @@ void rdump(BinarySearchTree * t, int d){
 }
 
 void test(void){
-    BinarySearchTree *t = NULL, *y = NULL, *q = NULL;
+    BinarySearchTree *t = NULL;
     BinarySearchTree **x =NULL;
 
     insert(&t,"5",5);
@@ -264,6 +277,14 @@ void test(void){
     printf("--------\n");
     rdump(t,0);
     rrot(&(t->ch[1]));
+    printf("--------\n");
+    rdump(t,0);
+    rlrot(&(t->ch[1]->ch[1]));
+
+    printf("--------\n");
+    rdump(t,0);
+
+    lrot(&t);
     printf("--------\n");
     rdump(t,0);
 }
