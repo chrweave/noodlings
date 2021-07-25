@@ -26,6 +26,7 @@ long * fileNamePointers;
 char readB[MEG];
 unsigned char freadB[RBS];
 int annotation = 0;
+static int depth = 0;
 
 BinarySearchTree* getTreeNode(void){
     BinarySearchTree* r=(BinarySearchTree*)malloc(sizeof (BinarySearchTree));
@@ -207,16 +208,20 @@ void lrot(BinarySearchTree * x){
     BinarySearchTree ** p= &x;
     BinarySearchTree *y= x->ch[1];
     BinarySearchTree *q= y->ch[0];
-    *p=y;
     y->ch[0]=x;
     x->ch[1]=q;
+    *p=y;
 }
 
 void rdump(BinarySearchTree * t){
-    if(t!=NULL){
-        printf("%s\n.",t->term);
-        rdump(t->ch[0]);
+    int i = 0;
+    for (i=0;i<depth;i++){
         printf(".");
+    }
+    if(t!=NULL){
+        printf("%s\n",t->term);
+        depth++;
+        rdump(t->ch[0]);
         rdump(t->ch[1]);
     } else {
         printf("\n");
@@ -230,12 +235,12 @@ void test(void){
     insert(&t,"4",4);
     insert(&t,"6",6);
     insert(&t,"7",7);
-    dumpTree(t);
-    //lrot(t);
-    printf("--------\n");
+    depth=0;
     rdump(t);
-    dumpTree(t);
-
+    lrot(t);
+    printf("--------\n");
+    depth=0;
+    rdump(t);
 }
 
 int main (int argc, char ** argv){
