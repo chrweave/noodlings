@@ -29,7 +29,6 @@ int allowed[256];
 long * fileNamePointers;
 char readB[MEG];
 unsigned char freadB[RBS];
-int annotation = 0;
 
 BinarySearchTree* getTreeNode(void){
     BinarySearchTree * r=&(pool[poolIndex++]);
@@ -58,6 +57,7 @@ void insert(BinarySearchTree ** inbt, char * term, V hash){
     BinarySearchTree * p =bt;
     int newTerm = 1;
     int q;
+
     while(bt !=NULL){
         if(hash==bt->hash){
             q=strcmp(term,bt->term);
@@ -67,7 +67,6 @@ void insert(BinarySearchTree ** inbt, char * term, V hash){
             } else {
                 q=1-(q<0);
             }
-
         } else {
             if(hash > bt->hash){
                 q=1;
@@ -111,6 +110,7 @@ void processBuffer(int r, int *l){
     int i;
     int ll=*l;
     unsigned char c;
+
     for(i=0;i<r;i++){
         c=freadB[i];
         if(allowed[c]){
@@ -122,8 +122,6 @@ void processBuffer(int r, int *l){
             if(ll>1){
                 readB[ll]=0;
                 sp=sp>>32;
-
-                //bts=&tree[(int)sp&0xffff];
                 bts=&tree[(int)(sp>>16)];
                 insert(bts,readB,sp);
             }
@@ -145,12 +143,6 @@ void dumpTree(BinarySearchTree * bt){
         if(p>-1){
             bt=stack[p]; /* pop */
             if(bt!=NULL){
-                if (annotation){
-                    int i = 0;
-                    for(i=0;i<p;i++){
-                        printf(".");
-                    }
-                }
                 printf("(%08llx) %s\n",bt->hash,bt->term);
                 bt=bt->ch[1]; /* visit right child */
             }
@@ -169,7 +161,6 @@ void dump(void){
 void processFile(FILE* f){
     int l =0;
     int r = 0;
-
 
     sp=lo;
     do{
@@ -280,10 +271,8 @@ void test(void){
     printf("--------\n");
     rdump(t,0);
     rlrot(&(t->ch[1]->ch[1]));
-
     printf("--------\n");
     rdump(t,0);
-
     lrot(&t);
     printf("--------\n");
     rdump(t,0);
