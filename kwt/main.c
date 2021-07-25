@@ -10,6 +10,7 @@ typedef unsigned int U;
 
 struct _bt{
     V hash;
+    int balanceFactor;
     char* term;
     struct _bt * ch[2];
 };
@@ -21,16 +22,28 @@ V lc=0x5686184f5ef9ddb9u;
 V sp;
 BinarySearchTree* tree [K64];
 BinarySearchTree* stack [K64];
+BinarySearchTree* pool;
+int poolIndex = 0;
+int poolLimit=MEG;
 int allowed[256];
 long * fileNamePointers;
 char readB[MEG];
 unsigned char freadB[RBS];
 int annotation = 0;
-static int depth = 0;
 
 BinarySearchTree* getTreeNode(void){
-    BinarySearchTree* r=(BinarySearchTree*)malloc(sizeof (BinarySearchTree));
+    BinarySearchTree * r=&(pool[poolIndex++]);
+    if(poolIndex>poolLimit-16){
+        poolLimit+=MEG;
+        pool=realloc(pool,poolLimit);
+        if(pool==NULL){
+            printf("Out of pool memory.\n");
+            exit(1);
+        }
+    }
+
     r->ch[0]=r->ch[1]=NULL;
+    r->balanceFactor=0;
     return r;
 }
 
@@ -79,6 +92,8 @@ void insert(BinarySearchTree ** inbt, char * term, V hash){
 void init(void){
     int i;
     int c;
+
+    pool=(BinarySearchTree*)malloc(sizeof(BinarySearchTree)*poolLimit);
     for (i=0;i<256;i++){
         c=(i=='_');
         c|=(i>='0'&&i<='9');
@@ -204,52 +219,63 @@ void handleFileList(char * fn){
     }
 }
 
-void lrot(BinarySearchTree * x){
-    BinarySearchTree ** p= &x;
-    BinarySearchTree *y= x->ch[1];
+void lrot(BinarySearchTree ** x){
+    BinarySearchTree *y= (*x)->ch[1];
     BinarySearchTree *q= y->ch[0];
-    y->ch[0]=x;
-    x->ch[1]=q;
-    *p=y;
+    y->ch[0]=*x;
+    (*x)->ch[1]=q;
+    *x=y;
 }
 
-void rdump(BinarySearchTree * t){
+void rrot(BinarySearchTree ** x){
+    BinarySearchTree *y= (*x)->ch[0];
+    BinarySearchTree *q= y->ch[1];
+    y->ch[1]=*x;
+    (*x)->ch[0]=q;
+    *x=y;
+}
+
+void rdump(BinarySearchTree * t, int d){
     int i = 0;
-    for (i=0;i<depth;i++){
-        printf(".");
-    }
+
     if(t!=NULL){
+        rdump(t->ch[0], d+1);
+        for (i=0;i<d;i++){
+            printf(".");
+        }
         printf("%s\n",t->term);
-        depth++;
-        rdump(t->ch[0]);
-        rdump(t->ch[1]);
-    } else {
-        printf("\n");
+        rdump(t->ch[1], d+1);
     }
 }
 
 void test(void){
-    BinarySearchTree *t =NULL;
+    BinarySearchTree *t = NULL, *y = NULL, *q = NULL;
+    BinarySearchTree **x =NULL;
 
     insert(&t,"5",5);
     insert(&t,"4",4);
     insert(&t,"6",6);
     insert(&t,"7",7);
-    depth=0;
-    rdump(t);
-    lrot(t);
+    insert(&t,"9",9);
+    insert(&t,"8",8);
+    rdump(t,0);
+    x=&(t->ch[1]);
+    lrot(&(t->ch[1]));
     printf("--------\n");
-    depth=0;
-    rdump(t);
+    rdump(t,0);
+    rrot(&(t->ch[1]));
+    printf("--------\n");
+    rdump(t,0);
 }
 
 int main (int argc, char ** argv){
-    if (argc>1){
-        init();
+    init();
+    if (argc>1){        
         //annotation=1;
         handleFileList(argv[1]);
     } else {
         test();
     }
+    free(pool);
     return 0;
 }
