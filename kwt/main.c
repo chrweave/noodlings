@@ -227,15 +227,28 @@ void rrot(BinarySearchTree ** x){
 }
 
 void rlrot(BinarySearchTree ** x){
-    BinarySearchTree *z,*y,*p,*q;
-    z=(*x)->ch[1];
-    y=z->ch[0];
-    p=y->ch[0];
-    q=y->ch[1];
+    BinarySearchTree * z=(*x)->ch[1];
+    BinarySearchTree * y=z->ch[0];
+    BinarySearchTree * p=y->ch[0];    
+    BinarySearchTree * q=y->ch[1];
+    
     y->ch[0]=*x;
     (*x)->ch[1]=p;
     y->ch[1]=z;
     z->ch[0]=q;
+    *x=y;
+}
+
+void lrrot(BinarySearchTree ** x){
+    BinarySearchTree * z=(*x)->ch[0];
+    BinarySearchTree * y=z->ch[1];
+    BinarySearchTree * p=y->ch[1];    
+    BinarySearchTree * q=y->ch[0];
+    
+    y->ch[1]=*x;
+    (*x)->ch[0]=p;
+    y->ch[0]=z;
+    z->ch[1]=q;
     *x=y;
 }
 
