@@ -57,6 +57,7 @@ void insert(BinarySearchTree ** inbt, char * term, V hash){
     BinarySearchTree * p =bt;
     int newTerm = 1;
     int q;
+    int t = 0;
 
     while(bt !=NULL){
         if(hash==bt->hash){
@@ -74,7 +75,7 @@ void insert(BinarySearchTree ** inbt, char * term, V hash){
                 q=0;
             }
         }
-        p=bt;
+        stack[t++]=p=bt;
         bt=bt->ch[q];
     }
     if(newTerm){
@@ -229,7 +230,7 @@ void rrot(BinarySearchTree ** x){
 void rlrot(BinarySearchTree ** x){
     BinarySearchTree * z=(*x)->ch[1];
     BinarySearchTree * y=z->ch[0];
-    BinarySearchTree * p=y->ch[0];    
+    BinarySearchTree * p=y->ch[0];
     BinarySearchTree * q=y->ch[1];
     
     y->ch[0]=*x;
@@ -242,7 +243,7 @@ void rlrot(BinarySearchTree ** x){
 void lrrot(BinarySearchTree ** x){
     BinarySearchTree * z=(*x)->ch[0];
     BinarySearchTree * y=z->ch[1];
-    BinarySearchTree * p=y->ch[1];    
+    BinarySearchTree * p=y->ch[1];
     BinarySearchTree * q=y->ch[0];
     
     y->ch[1]=*x;
@@ -293,7 +294,7 @@ void test(void){
 
 int main (int argc, char ** argv){
     init();
-    if (argc>1){        
+    if (argc>1){
         //annotation=1;
         handleFileList(argv[1]);
     } else {
