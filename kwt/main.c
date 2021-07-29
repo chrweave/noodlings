@@ -9,20 +9,20 @@ typedef unsigned long long V;
 typedef unsigned int U;
 
 struct _bt{
-    V hash;
-    int balanceFactor;
+    U hash;
+    int bal;
     char* term;
     struct _bt * ch[2];
 };
-typedef struct _bt BinarySearchTree;
+typedef struct _bt Bst;
 
 V lo=0x768032e13e71e9fbu;
 V la=0xf38df1969a680995u;
 V lc=0x5686184f5ef9ddb9u;
 V sp;
-BinarySearchTree* tree [K64];
-BinarySearchTree* stack [K64];
-BinarySearchTree* pool;
+Bst* tree [K64];
+Bst* stack [K64];
+Bst* pool;
 int poolIndex = 0;
 int poolLimit=MEG;
 int allowed[256];
@@ -30,8 +30,8 @@ long * fileNamePointers;
 char readB[MEG];
 unsigned char freadB[RBS];
 
-BinarySearchTree* getTreeNode(void){
-    BinarySearchTree * r=&(pool[poolIndex++]);
+Bst* getTreeNode(void){
+    Bst * r=&(pool[poolIndex++]);
     if(poolIndex>poolLimit-16){
         poolLimit+=MEG;
         pool=realloc(pool,poolLimit);
@@ -42,7 +42,7 @@ BinarySearchTree* getTreeNode(void){
     }
 
     r->ch[0]=r->ch[1]=NULL;
-    r->balanceFactor=0;
+    r->bal=0;
     return r;
 }
 
@@ -52,12 +52,14 @@ char * getTerm(char* interm){
     return r;
 }
 
-void insert(BinarySearchTree ** inbt, char * term, V hash){
-    BinarySearchTree * bt=*inbt;
-    BinarySearchTree * p =bt;
+void insert(Bst ** inbt, char * term, V hash){
+    Bst * bt=*inbt;
+    Bst * p =bt;
     int newTerm = 1;
     int q;
     int t = 0;
+    int i = 0;
+    int h = 0;
 
     while(bt !=NULL){
         if(hash==bt->hash){
@@ -86,6 +88,12 @@ void insert(BinarySearchTree ** inbt, char * term, V hash){
         }
         bt->hash=hash;
         bt->term=getTerm(term);
+        for(i=t-1;i>-1;i--){
+            if(stack[i]->bal-1<h){
+                stack[i]->bal++;
+            }
+            h++;
+        }
     }
 }
 
@@ -93,7 +101,7 @@ void init(void){
     int i;
     int c;
 
-    pool=(BinarySearchTree*)malloc(sizeof(BinarySearchTree)*poolLimit);
+    pool=(Bst*)malloc(sizeof(Bst)*poolLimit);
     for (i=0;i<256;i++){
         c=(i=='_');
         c|=(i>='0'&&i<='9');
@@ -107,7 +115,7 @@ void init(void){
 }
 
 void processBuffer(int r, int *l){
-    BinarySearchTree**bts=NULL;
+    Bst**bts=NULL;
     int i;
     int ll=*l;
     unsigned char c;
@@ -124,7 +132,7 @@ void processBuffer(int r, int *l){
                 readB[ll]=0;
                 sp=sp>>32;
                 bts=&tree[(int)(sp>>16)];
-                insert(bts,readB,sp);
+                insert(bts,readB,(U)sp);
             }
             ll=0;
             sp=lo;
@@ -133,7 +141,20 @@ void processBuffer(int r, int *l){
     *l=ll;
 }
 
-void dumpTree(BinarySearchTree * bt){
+void rdump(Bst * t, int d){
+    int i = 0;
+
+    if(t!=NULL){
+        rdump(t->ch[0], d+1);
+        for (i=0;i<d;i++){
+            printf(".");
+        }
+        printf("%s,%d\n",t->term,t->bal);
+        rdump(t->ch[1], d+1);
+    }
+}
+
+void dumpTree(Bst * bt){
     int p = 0;
     while(p>-1){
         while(bt!=NULL){
@@ -144,7 +165,7 @@ void dumpTree(BinarySearchTree * bt){
         if(p>-1){
             bt=stack[p]; /* pop */
             if(bt!=NULL){
-                printf("(%08llx) %s\n",bt->hash,bt->term);
+                printf("(%08x) %s\n",bt->hash,bt->term);
                 bt=bt->ch[1]; /* visit right child */
             }
         }
@@ -155,7 +176,7 @@ void dump(void){
     int i = 0;
 
     for(i=0;i<K64;i++){
-        dumpTree(tree[i]);
+        rdump(tree[i],0);
     }
 }
 
@@ -211,27 +232,27 @@ void handleFileList(char * fn){
     }
 }
 
-void lrot(BinarySearchTree ** x){
-    BinarySearchTree *y= (*x)->ch[1];
-    BinarySearchTree *q= y->ch[0];
+void lrot(Bst ** x){
+    Bst *y= (*x)->ch[1];
+    Bst *q= y->ch[0];
     y->ch[0]=*x;
     (*x)->ch[1]=q;
     *x=y;
 }
 
-void rrot(BinarySearchTree ** x){
-    BinarySearchTree *y= (*x)->ch[0];
-    BinarySearchTree *q= y->ch[1];
+void rrot(Bst ** x){
+    Bst *y= (*x)->ch[0];
+    Bst *q= y->ch[1];
     y->ch[1]=*x;
     (*x)->ch[0]=q;
     *x=y;
 }
 
-void rlrot(BinarySearchTree ** x){
-    BinarySearchTree * z=(*x)->ch[1];
-    BinarySearchTree * y=z->ch[0];
-    BinarySearchTree * p=y->ch[0];
-    BinarySearchTree * q=y->ch[1];
+void rlrot(Bst ** x){
+    Bst * z=(*x)->ch[1];
+    Bst * y=z->ch[0];
+    Bst * p=y->ch[0];
+    Bst * q=y->ch[1];
     
     y->ch[0]=*x;
     (*x)->ch[1]=p;
@@ -240,11 +261,11 @@ void rlrot(BinarySearchTree ** x){
     *x=y;
 }
 
-void lrrot(BinarySearchTree ** x){
-    BinarySearchTree * z=(*x)->ch[0];
-    BinarySearchTree * y=z->ch[1];
-    BinarySearchTree * p=y->ch[1];
-    BinarySearchTree * q=y->ch[0];
+void lrrot(Bst ** x){
+    Bst * z=(*x)->ch[0];
+    Bst * y=z->ch[1];
+    Bst * p=y->ch[1];
+    Bst * q=y->ch[0];
     
     y->ch[1]=*x;
     (*x)->ch[0]=p;
@@ -253,22 +274,9 @@ void lrrot(BinarySearchTree ** x){
     *x=y;
 }
 
-void rdump(BinarySearchTree * t, int d){
-    int i = 0;
-
-    if(t!=NULL){
-        rdump(t->ch[0], d+1);
-        for (i=0;i<d;i++){
-            printf(".");
-        }
-        printf("%s\n",t->term);
-        rdump(t->ch[1], d+1);
-    }
-}
-
 void test(void){
-    BinarySearchTree *t = NULL;
-    BinarySearchTree **x =NULL;
+    Bst *t = NULL;
+    Bst **x =NULL;
 
     insert(&t,"5",5);
     insert(&t,"4",4);
