@@ -52,6 +52,48 @@ char * getTerm(char* interm){
     return r;
 }
 
+void lrot(Bst ** x){
+    Bst *y= (*x)->ch[1];
+    Bst *q= y->ch[0];
+    y->ch[0]=*x;
+    (*x)->ch[1]=q;
+    *x=y;
+}
+
+void rrot(Bst ** x){
+    Bst *y= (*x)->ch[0];
+    Bst *q= y->ch[1];
+    y->ch[1]=*x;
+    (*x)->ch[0]=q;
+    *x=y;
+}
+
+void rlrot(Bst ** x){
+    Bst * z=(*x)->ch[1];
+    Bst * y=z->ch[0];
+    Bst * p=y->ch[0];
+    Bst * q=y->ch[1];
+
+    y->ch[0]=*x;
+    (*x)->ch[1]=p;
+    y->ch[1]=z;
+    z->ch[0]=q;
+    *x=y;
+}
+
+void lrrot(Bst ** x){
+    Bst * z=(*x)->ch[0];
+    Bst * y=z->ch[1];
+    Bst * p=y->ch[1];
+    Bst * q=y->ch[0];
+
+    y->ch[1]=*x;
+    (*x)->ch[0]=p;
+    y->ch[0]=z;
+    z->ch[1]=q;
+    *x=y;
+}
+
 void insert(Bst ** inbt, char * term, V hash){
     Bst * bt=*inbt;
     Bst * p =bt;
@@ -59,7 +101,6 @@ void insert(Bst ** inbt, char * term, V hash){
     int q;
     int t = 0;
     int i = 0;
-    int h = 0;
 
     while(bt !=NULL){
         if(hash==bt->hash){
@@ -89,10 +130,7 @@ void insert(Bst ** inbt, char * term, V hash){
         bt->hash=hash;
         bt->term=getTerm(term);
         for(i=t-1;i>-1;i--){
-            if(stack[i]->bal-1<h){
-                stack[i]->bal++;
-            }
-            h++;
+
         }
     }
 }
@@ -230,48 +268,6 @@ void handleFileList(char * fn){
         processFiles(f);
         fclose(f);
     }
-}
-
-void lrot(Bst ** x){
-    Bst *y= (*x)->ch[1];
-    Bst *q= y->ch[0];
-    y->ch[0]=*x;
-    (*x)->ch[1]=q;
-    *x=y;
-}
-
-void rrot(Bst ** x){
-    Bst *y= (*x)->ch[0];
-    Bst *q= y->ch[1];
-    y->ch[1]=*x;
-    (*x)->ch[0]=q;
-    *x=y;
-}
-
-void rlrot(Bst ** x){
-    Bst * z=(*x)->ch[1];
-    Bst * y=z->ch[0];
-    Bst * p=y->ch[0];
-    Bst * q=y->ch[1];
-    
-    y->ch[0]=*x;
-    (*x)->ch[1]=p;
-    y->ch[1]=z;
-    z->ch[0]=q;
-    *x=y;
-}
-
-void lrrot(Bst ** x){
-    Bst * z=(*x)->ch[0];
-    Bst * y=z->ch[1];
-    Bst * p=y->ch[1];
-    Bst * q=y->ch[0];
-    
-    y->ch[1]=*x;
-    (*x)->ch[0]=p;
-    y->ch[0]=z;
-    z->ch[1]=q;
-    *x=y;
 }
 
 void test(void){
