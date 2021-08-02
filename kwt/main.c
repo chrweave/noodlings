@@ -55,6 +55,7 @@ char * getTerm(char* interm){
 void lrot(Bst ** x){
     Bst *y= (*x)->ch[1];
     Bst *q= y->ch[0];
+    y->bal=(*x)->bal=0; /* caution another case is needed for deletion.*/
     y->ch[0]=*x;
     (*x)->ch[1]=q;
     *x=y;
@@ -63,6 +64,7 @@ void lrot(Bst ** x){
 void rrot(Bst ** x){
     Bst *y= (*x)->ch[0];
     Bst *q= y->ch[1];
+    y->bal=(*x)->bal=0; /* caution another case is needed for deletion.*/
     y->ch[1]=*x;
     (*x)->ch[0]=q;
     *x=y;
@@ -74,6 +76,14 @@ void rlrot(Bst ** x){
     Bst * p=y->ch[0];
     Bst * q=y->ch[1];
 
+    if (y->bal > 0) { /* q was higher*/
+        (*x)->bal = -1;
+        z->bal = 0;
+    } else {/* p was higher*/
+        (*x)->bal = 0;
+        z->bal = +1;
+    }
+    y->bal = 0;
     y->ch[0]=*x;
     (*x)->ch[1]=p;
     y->ch[1]=z;
@@ -87,6 +97,13 @@ void lrrot(Bst ** x){
     Bst * p=y->ch[1];
     Bst * q=y->ch[0];
 
+    if (y->bal > 0) { /* q was higher*/
+        (*x)->bal = -1;
+        z->bal = 0;
+    } else {/* p was higher*/
+        (*x)->bal = 0;
+        z->bal = +1;
+    }
     y->ch[1]=*x;
     (*x)->ch[0]=p;
     y->ch[0]=z;
@@ -130,7 +147,7 @@ void insert(Bst ** inbt, char * term, V hash){
         bt->hash=hash;
         bt->term=getTerm(term);
         for(i=t-1;i>-1;i--){
-
+            bt=stack[t];
         }
     }
 }
