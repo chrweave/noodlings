@@ -146,15 +146,14 @@ void insert(Bst ** inbt, char * term, V hash){
         }
         bt->hash=hash;
         bt->term=getTerm(term);
-
         for(i=t-1;i>-1;i--){
             p=stack[i];
             if(bt==p->ch[1]){/* The right subtree increases */
                 if(p->bal>0){
                     if(bt->bal < 0){ /*right-left case*/
-                        rlrot(&bt);
+                        rlrot(&p);
                     } else { /* left case */
-                        lrot(&bt);
+                        lrot(&p);
                     }
                 } else {
                     if(p->bal <0){
@@ -168,9 +167,9 @@ void insert(Bst ** inbt, char * term, V hash){
             } else { /* Z == left_child(X): the left subtree increases */
                 if(p->bal<0){
                     if(bt->bal > 0){ /*right-left-right case*/
-                        lrrot(&bt);
+                        lrrot(&p);
                     } else { /* left case */
-                        rrot(&bt);
+                        rrot(&p);
                     }
                 } else {
                     if(p->bal >0){
