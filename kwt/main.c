@@ -170,7 +170,7 @@ void insert(Bst ** inbt, char * term, V hash){
                     if(bt->bal > 0){ /*right-left-right case*/
                         lrrot(&bt);
                     } else { /* left case */
-                        lrot(&bt);
+                        rrot(&bt);
                     }
                 } else {
                     if(p->bal >0){
