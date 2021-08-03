@@ -81,7 +81,7 @@ void rlrot(Bst ** x){
         z->bal = 0;
     } else {/* p was higher*/
         (*x)->bal = 0;
-        z->bal = +1;
+        z->bal = 1;
     }
     y->bal = 0;
     y->ch[0]=*x;
@@ -98,11 +98,11 @@ void lrrot(Bst ** x){
     Bst * q=y->ch[0];
 
     if (y->bal > 0) { /* q was higher*/
-        (*x)->bal = -1;
+        (*x)->bal = 1;
         z->bal = 0;
     } else {/* p was higher*/
         (*x)->bal = 0;
-        z->bal = +1;
+        z->bal = -1;
     }
     y->ch[1]=*x;
     (*x)->ch[0]=p;
