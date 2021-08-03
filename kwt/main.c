@@ -148,7 +148,7 @@ void insert(Bst ** inbt, char * term, V hash){
         bt->term=getTerm(term);
 
         for(i=t-1;i>-1;i--){
-            p=stack[t];
+            p=stack[i];
             if(bt==p->ch[1]){/* The right subtree increases */
                 if(p->bal>0){
                     if(bt->bal < 0){ /*right-left case*/
