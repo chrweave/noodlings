@@ -146,8 +146,42 @@ void insert(Bst ** inbt, char * term, V hash){
         }
         bt->hash=hash;
         bt->term=getTerm(term);
+
         for(i=t-1;i>-1;i--){
-            bt=stack[t];
+            p=stack[t];
+            if(bt==p->ch[1]){/* The right subtree increases */
+                if(p->bal>0){
+                    if(bt->bal < 0){ /*right-left case*/
+                        rlrot(&bt);
+                    } else { /* left case */
+                        lrot(&bt);
+                    }
+                } else {
+                    if(p->bal <0){
+                        p->bal=0;
+                        break;
+                    }
+                    p->bal=1;
+                    bt=p;
+                    continue;
+                }
+            } else { /* Z == left_child(X): the left subtree increases */
+                if(p->bal<0){
+                    if(bt->bal > 0){ /*right-left-right case*/
+                        lrrot(&bt);
+                    } else { /* left case */
+                        lrot(&bt);
+                    }
+                } else {
+                    if(p->bal >0){
+                        p->bal=0;
+                        break;
+                    }
+                    p->bal=-1;
+                    bt=p;
+                    continue;
+                }
+            }
         }
     }
 }
@@ -289,8 +323,13 @@ void handleFileList(char * fn){
 
 void test(void){
     Bst *t = NULL;
-    Bst **x =NULL;
+    char digits[128];
+    int i=0;
+    int c;
+    int r=1;
+    int k;
 
+    /*
     insert(&t,"5",5);
     insert(&t,"4",4);
     insert(&t,"6",6);
@@ -298,7 +337,6 @@ void test(void){
     insert(&t,"9",9);
     insert(&t,"8",8);
     rdump(t,0);
-    x=&(t->ch[1]);
     lrot(&(t->ch[1]));
     printf("--------\n");
     rdump(t,0);
@@ -309,8 +347,30 @@ void test(void){
     printf("--------\n");
     rdump(t,0);
     lrot(&t);
-    printf("--------\n");
-    rdump(t,0);
+    */
+    while(r){
+        while(1){
+            if(feof(stdin)){
+                r=0;
+                break;
+            }
+            c=fgetc(stdin);
+            if(c==10){
+                digits[i]=0;
+                k=atoi(digits);
+                i=0;
+                break;
+            } else {
+                digits[i++]=(char)c;
+            }
+        }
+        if(k<0){
+            break;
+        }
+        insert(&t,digits,k);
+        printf("--------\n");
+        rdump(t,0);
+    }
 }
 
 int main (int argc, char ** argv){
