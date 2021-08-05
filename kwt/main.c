@@ -22,6 +22,7 @@ V lc=0x5686184f5ef9ddb9u;
 V sp;
 Bst* tree [K64];
 Bst* stack [K64];
+Bst** parentPointers [256];
 Bst* pool;
 int poolIndex = 0;
 int poolLimit=MEG;
@@ -64,10 +65,15 @@ void lrot(Bst ** x){
 void rrot(Bst ** x){
     Bst *y= (*x)->ch[0];
     Bst *q= y->ch[1];
+    printf("%llu %llu %llu\n",(V)(*x),(V)y,(V)q);
+    fflush(NULL);
     y->bal=(*x)->bal=0; /* caution another case is needed for deletion.*/
     y->ch[1]=*x;
     (*x)->ch[0]=q;
     *x=y;
+
+    printf("%llu %llu %llu\n",(V)(*x),(V)y,(V)q);
+    fflush(NULL);
 }
 
 void rlrot(Bst ** x){
@@ -119,6 +125,7 @@ void insert(Bst ** inbt, char * term, V hash){
     int t = 0;
     int i = 0;
 
+    parentPointers[0]=inbt;
     while(bt !=NULL){
         if(hash==bt->hash){
             q=strcmp(term,bt->term);
@@ -136,6 +143,7 @@ void insert(Bst ** inbt, char * term, V hash){
             }
         }
         stack[t++]=p=bt;
+        parentPointers[t]=&(bt->ch[q]);
         bt=bt->ch[q];
     }
     if(newTerm){
@@ -151,9 +159,9 @@ void insert(Bst ** inbt, char * term, V hash){
             if(bt==p->ch[1]){/* The right subtree increases */
                 if(p->bal>0){
                     if(bt->bal < 0){ /*right-left case*/
-                        rlrot(&p);
+                        rlrot(parentPointers[i]);
                     } else { /* left case */
-                        lrot(&p);
+                        lrot(parentPointers[i]);
                     }
                 } else {
                     if(p->bal <0){
@@ -167,9 +175,9 @@ void insert(Bst ** inbt, char * term, V hash){
             } else { /* Z == left_child(X): the left subtree increases */
                 if(p->bal<0){
                     if(bt->bal > 0){ /*right-left-right case*/
-                        lrrot(&p);
+                        lrrot(parentPointers[i]);
                     } else { /* left case */
-                        rrot(&p);
+                        rrot(parentPointers[i]);
                     }
                 } else {
                     if(p->bal >0){
@@ -328,25 +336,27 @@ void test(void){
     int r=1;
     int k;
 
-    /*
-    insert(&t,"5",5);
-    insert(&t,"4",4);
-    insert(&t,"6",6);
-    insert(&t,"7",7);
-    insert(&t,"9",9);
-    insert(&t,"8",8);
-    rdump(t,0);
-    lrot(&(t->ch[1]));
-    printf("--------\n");
-    rdump(t,0);
-    rrot(&(t->ch[1]));
-    printf("--------\n");
-    rdump(t,0);
-    rlrot(&(t->ch[1]->ch[1]));
-    printf("--------\n");
-    rdump(t,0);
-    lrot(&t);
-    */
+
+    //    insert(&t,"5",5);
+    //    insert(&t,"4",4);
+    //    insert(&t,"6",6);
+    //    insert(&t,"7",7);
+    //    insert(&t,"9",9);
+    //    insert(&t,"8",8);
+    //    rdump(t,0);
+    //    lrot(&(t->ch[1]));
+    //    printf("--------\n");
+    //    rdump(t,0);
+    //    rrot(&(t->ch[1]));
+    //    printf("--------\n");
+    //    rdump(t,0);
+    //    rlrot(&(t->ch[1]->ch[1]));
+    //    printf("--------\n");
+    //    rdump(t,0);
+    //    lrot(&t);
+    //    printf("--------\n");
+    //    rdump(t,0);
+
     while(r){
         while(1){
             if(feof(stdin)){
