@@ -65,15 +65,10 @@ void lrot(Bst ** x){
 void rrot(Bst ** x){
     Bst *y= (*x)->ch[0];
     Bst *q= y->ch[1];
-    printf("%llu %llu %llu\n",(V)(*x),(V)y,(V)q);
-    fflush(NULL);
     y->bal=(*x)->bal=0; /* caution another case is needed for deletion.*/
     y->ch[1]=*x;
     (*x)->ch[0]=q;
     *x=y;
-
-    printf("%llu %llu %llu\n",(V)(*x),(V)y,(V)q);
-    fflush(NULL);
 }
 
 void rlrot(Bst ** x){
@@ -82,12 +77,16 @@ void rlrot(Bst ** x){
     Bst * p=y->ch[0];
     Bst * q=y->ch[1];
 
-    if (y->bal > 0) { /* q was higher*/
-        (*x)->bal = -1;
-        z->bal = 0;
-    } else {/* p was higher*/
-        (*x)->bal = 0;
-        z->bal = 1;
+    if(y->bal==0){
+        (*x)->bal=z->bal=0;
+    } else {
+        if (y->bal > 0) { /* q was higher*/
+            (*x)->bal = -1;
+            z->bal = 0;
+        } else {/* p was higher*/
+            (*x)->bal = 0;
+            z->bal = 1;
+        }
     }
     y->bal = 0;
     y->ch[0]=*x;
@@ -103,12 +102,16 @@ void lrrot(Bst ** x){
     Bst * p=y->ch[1];
     Bst * q=y->ch[0];
 
-    if (y->bal > 0) { /* q was higher*/
-        (*x)->bal = 1;
-        z->bal = 0;
-    } else {/* p was higher*/
-        (*x)->bal = 0;
-        z->bal = -1;
+    if(y->bal==0){
+        (*x)->bal=z->bal=0;
+    } else {
+        if (y->bal < 0) { /* q was higher*/
+            (*x)->bal = 1;
+            z->bal = 0;
+        } else {/* p was higher*/
+            (*x)->bal = 0;
+            z->bal = -1;
+        }
     }
     y->ch[1]=*x;
     (*x)->ch[0]=p;
@@ -189,6 +192,7 @@ void insert(Bst ** inbt, char * term, V hash){
                     continue;
                 }
             }
+            break;
         }
     }
 }
@@ -272,6 +276,7 @@ void dump(void){
     int i = 0;
 
     for(i=0;i<K64;i++){
+        printf("__%d__\n",i);
         rdump(tree[i],0);
     }
 }
