@@ -128,6 +128,7 @@ void insert(Bst ** inbt, char * term, V hash){
     int t = 0;
     int i = 0;
 
+    //printf("%llu",hash);
     parentPointers[0]=inbt;
     while(bt !=NULL){
         if(hash==bt->hash){
@@ -249,10 +250,6 @@ void processBuffer(int r, int *l){
 void rdump(Bst * t, int d){
     int i = 0;
 
-    if(d==0){
-        printf("--------\n");
-    }
-
     if(t!=NULL){
         rdump(t->ch[0], d+1);
         for (i=0;i<d;i++){
@@ -342,14 +339,25 @@ void handleFileList(char * fn){
     }
 }
 
+void intinsert(int x, Bst** t){
+    char q[16];
+    sprintf(q,"%d",x);
+    printf("---------%d",x);
+    insert(t,q,x);
+    rdump(*t,0);
+}
+
 void test(void){
     Bst *t = NULL;
+    int k[]={3,24,21,20,2,19,18,14,12,11,1,16,15,6,5,17,7,25,8,4,13,10,23,26,22,9};
 //    char digits[128];
-//    int i=0;
+    int i=0;
 //    int c;
 //    int r=1;
 //    int k;
-
+    for(i=0;i<26;i++){
+        intinsert(k[i],&t);
+    }
 
     //    insert(&t,"5",5);
     //    insert(&t,"4",4);
@@ -371,58 +379,7 @@ void test(void){
     //    printf("--------\n");
     //    rdump(t,0);
 
-    insert(&t,"10940",10940);
-    rdump(t,0);
-    insert(&t,"58071",58071);
-    rdump(t,0);
-    insert(&t,"48984",48984);
-    rdump(t,0);
-    insert(&t,"48644",48644);
-    rdump(t,0);
-    insert(&t,"9177",9177);
-    rdump(t,0);
-    insert(&t,"46938",46938);
-    rdump(t,0);
-    insert(&t,"42816",42816);
-    rdump(t,0);
-    insert(&t,"33587",33587);
-    rdump(t,0);
-    insert(&t,"32727",32727);
-    rdump(t,0);
-    insert(&t,"30491",30491);
-    rdump(t,0);
-    insert(&t,"0",0);
-    rdump(t,0);
-    insert(&t,"34730",34730);
-    rdump(t,0);
-    insert(&t,"33598",33598);
-    rdump(t,0);
-    insert(&t,"18633",18633);
-    rdump(t,0);
-    insert(&t,"16721",16721);
-    rdump(t,0);
-    insert(&t,"41207",41207);
-    rdump(t,0);
-    insert(&t,"18766",18766);
-    rdump(t,0);
-    insert(&t,"59869",59869);
-    rdump(t,0);
-    insert(&t,"21476",21476);
-    rdump(t,0);
-    insert(&t,"14221",14221);
-    rdump(t,0);
-    insert(&t,"32879",32879);
-    rdump(t,0);
-    insert(&t,"25155",25155);
-    rdump(t,0);
-    insert(&t,"51475",51475);
-    rdump(t,0);
-    insert(&t,"60065",60065);
-    rdump(t,0);
-    insert(&t,"49692",49692);
-    rdump(t,0);
-    insert(&t,"24422",24422);
-    rdump(t,0);
+
 
 //    while(r){
 //        while(1){
