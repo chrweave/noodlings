@@ -53,9 +53,15 @@ char * getTerm(char* interm){
     return r;
 }
 
+void prr(Bst * t,char * u){
+    printf("%s%d\n",u,t->hash);
+    fflush(NULL);
+}
+
 void lrot(Bst ** x){
     Bst *y= (*x)->ch[1];
     Bst *q= y->ch[0];
+    prr(*x,"l");
     y->bal=(*x)->bal=0; /* caution another case is needed for deletion.*/
     y->ch[0]=*x;
     (*x)->ch[1]=q;
@@ -65,6 +71,7 @@ void lrot(Bst ** x){
 void rrot(Bst ** x){
     Bst *y= (*x)->ch[0];
     Bst *q= y->ch[1];
+    prr(*x,"r");
     y->bal=(*x)->bal=0; /* caution another case is needed for deletion.*/
     y->ch[1]=*x;
     (*x)->ch[0]=q;
@@ -77,6 +84,8 @@ void rlrot(Bst ** x){
     Bst * p=y->ch[0];
     Bst * q=y->ch[1];
 
+
+    prr(*x,"rl");
     if(y->bal==0){
         (*x)->bal=z->bal=0;
     } else {
@@ -102,6 +111,8 @@ void lrrot(Bst ** x){
     Bst * p=y->ch[1];
     Bst * q=y->ch[0];
 
+
+    prr(*x,"lr");
     if(y->bal==0){
         (*x)->bal=z->bal=0;
     } else {
@@ -342,7 +353,7 @@ void handleFileList(char * fn){
 void intinsert(int x, Bst** t){
     char q[16];
     sprintf(q,"%d",x);
-    printf("---------%d",x);
+    printf("\n---------%d\n",x);
     insert(t,q,x);
     rdump(*t,0);
 }
