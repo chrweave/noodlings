@@ -229,9 +229,14 @@ void processBuffer(int r, int *l){
             sp+=lc;
         } else {
             if(ll>1){
+                int k;
                 readB[ll]=0;
                 sp=sp>>32;
-                bts=&tree[(int)(sp>>16)];
+                k=(int)(sp>>16);
+                bts=&tree[k];
+                if (k==8652){
+                    printf("%llu\n",sp-567020188);
+                }
                 insert(bts,readB,(U)sp);
             }
             ll=0;
@@ -244,12 +249,16 @@ void processBuffer(int r, int *l){
 void rdump(Bst * t, int d){
     int i = 0;
 
+    if(d==0){
+        printf("--------\n");
+    }
+
     if(t!=NULL){
         rdump(t->ch[0], d+1);
         for (i=0;i<d;i++){
             printf(".");
         }
-        printf("%s,%d\n",t->term,t->bal);
+        printf("%s,%d,%08x,%d\n",t->term,t->bal, t->hash,t->hash);
         rdump(t->ch[1], d+1);
     }
 }
@@ -321,7 +330,7 @@ void processFiles(FILE* f){
             fclose(g);
         }
     }
-    dump();
+    //dump();
 }
 
 void handleFileList(char * fn){
@@ -335,11 +344,11 @@ void handleFileList(char * fn){
 
 void test(void){
     Bst *t = NULL;
-    char digits[128];
-    int i=0;
-    int c;
-    int r=1;
-    int k;
+//    char digits[128];
+//    int i=0;
+//    int c;
+//    int r=1;
+//    int k;
 
 
     //    insert(&t,"5",5);
@@ -362,29 +371,82 @@ void test(void){
     //    printf("--------\n");
     //    rdump(t,0);
 
-    while(r){
-        while(1){
-            if(feof(stdin)){
-                r=0;
-                break;
-            }
-            c=fgetc(stdin);
-            if(c==10){
-                digits[i]=0;
-                k=atoi(digits);
-                i=0;
-                break;
-            } else {
-                digits[i++]=(char)c;
-            }
-        }
-        if(k<0){
-            break;
-        }
-        insert(&t,digits,k);
-        printf("--------\n");
-        rdump(t,0);
-    }
+    insert(&t,"10940",10940);
+    rdump(t,0);
+    insert(&t,"58071",58071);
+    rdump(t,0);
+    insert(&t,"48984",48984);
+    rdump(t,0);
+    insert(&t,"48644",48644);
+    rdump(t,0);
+    insert(&t,"9177",9177);
+    rdump(t,0);
+    insert(&t,"46938",46938);
+    rdump(t,0);
+    insert(&t,"42816",42816);
+    rdump(t,0);
+    insert(&t,"33587",33587);
+    rdump(t,0);
+    insert(&t,"32727",32727);
+    rdump(t,0);
+    insert(&t,"30491",30491);
+    rdump(t,0);
+    insert(&t,"0",0);
+    rdump(t,0);
+    insert(&t,"34730",34730);
+    rdump(t,0);
+    insert(&t,"33598",33598);
+    rdump(t,0);
+    insert(&t,"18633",18633);
+    rdump(t,0);
+    insert(&t,"16721",16721);
+    rdump(t,0);
+    insert(&t,"41207",41207);
+    rdump(t,0);
+    insert(&t,"18766",18766);
+    rdump(t,0);
+    insert(&t,"59869",59869);
+    rdump(t,0);
+    insert(&t,"21476",21476);
+    rdump(t,0);
+    insert(&t,"14221",14221);
+    rdump(t,0);
+    insert(&t,"32879",32879);
+    rdump(t,0);
+    insert(&t,"25155",25155);
+    rdump(t,0);
+    insert(&t,"51475",51475);
+    rdump(t,0);
+    insert(&t,"60065",60065);
+    rdump(t,0);
+    insert(&t,"49692",49692);
+    rdump(t,0);
+    insert(&t,"24422",24422);
+    rdump(t,0);
+
+//    while(r){
+//        while(1){
+//            if(feof(stdin)){
+//                r=0;
+//                break;
+//            }
+//            c=fgetc(stdin);
+//            if(c==10){
+//                digits[i]=0;
+//                k=atoi(digits);
+//                i=0;
+//                break;
+//            } else {
+//                digits[i++]=(char)c;
+//            }
+//        }
+//        if(k<0){
+//            break;
+//        }
+//        insert(&t,digits,k);
+//        printf("--------\n");
+//        rdump(t,0);
+//    }
 }
 
 int main (int argc, char ** argv){
