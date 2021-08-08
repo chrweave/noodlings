@@ -22,7 +22,7 @@ V lc=0x5686184f5ef9ddb9u;
 V sp;
 Bst* tree [K64];
 Bst* stack [K64];
-Bst** parentPointers [256];
+Bst** pp [256];
 Bst* pool;
 int poolIndex = 0;
 int poolLimit=MEG;
@@ -141,7 +141,7 @@ void insert(Bst ** inbt, char * term, V hash){
     int i = 0;
 
     //printf("%llu",hash);
-    parentPointers[0]=inbt;
+    pp[0]=inbt;
     while(bt !=NULL){
         if(hash==bt->hash){
             q=strcmp(term,bt->term);
@@ -159,7 +159,7 @@ void insert(Bst ** inbt, char * term, V hash){
             }
         }
         stack[t++]=p=bt;
-        parentPointers[t]=&(bt->ch[q]);
+        pp[t]=&(bt->ch[q]);
         bt=bt->ch[q];
     }
     if(newTerm){
@@ -175,9 +175,9 @@ void insert(Bst ** inbt, char * term, V hash){
             if(bt==p->ch[1]){/* The right subtree increases */
                 if(p->bal>0){
                     if(bt->bal < 0){ /*right-left case*/
-                        rlrot(parentPointers[i]);
+                        rlrot(pp[i]);
                     } else { /* left case */
-                        lrot(parentPointers[i]);
+                        lrot(pp[i]);
                     }
                 } else {
                     if(p->bal <0){
@@ -191,9 +191,9 @@ void insert(Bst ** inbt, char * term, V hash){
             } else { /* Z == left_child(X): the left subtree increases */
                 if(p->bal<0){
                     if(bt->bal > 0){ /*right-left-right case*/
-                        lrrot(parentPointers[i]);
+                        lrrot(pp[i]);
                     } else { /* left case */
-                        rrot(parentPointers[i]);
+                        rrot(pp[i]);
                     }
                 } else {
                     if(p->bal >0){
@@ -299,7 +299,7 @@ void dump(void){
 
     for(i=0;i<K64;i++){
         printf("__%d__\n",i);
-        rdump(tree[i],0);
+        rdump(tree[i],0,'\0');
     }
 }
 
@@ -360,7 +360,7 @@ void intinsert(int x, Bst** t){
     sprintf(q,"%d",x);
     printf("\n---------%d\n",x);
     insert(t,q,x);
-    rdump(*t,0);
+    rdump(*t,0,'\0');
 }
 
 void test(void){
