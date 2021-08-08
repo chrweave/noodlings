@@ -30,6 +30,7 @@ int allowed[256];
 long * fileNamePointers;
 char readB[MEG];
 unsigned char freadB[RBS];
+char trail[256];
 
 Bst* getTreeNode(void){
     Bst * r=&(pool[poolIndex++]);
@@ -258,16 +259,20 @@ void processBuffer(int r, int *l){
     *l=ll;
 }
 
-void rdump(Bst * t, int d){
+void rdump(Bst * t, int d, char a){
     int i = 0;
 
     if(t!=NULL){
-        rdump(t->ch[0], d+1);
-        for (i=0;i<d;i++){
-            printf(".");
+        if (d>0){
+            trail[d-1]=a;
         }
-        printf("%s,%d,%08x,%d\n",t->term,t->bal, t->hash,t->hash);
-        rdump(t->ch[1], d+1);
+        rdump(t->ch[0], d+1, '<');
+        for (i=0;i<d;i++){
+            printf("%c",trail[i]);
+        }
+        //printf("%s,%d,%08x,%d\n",t->term,t->bal, t->hash,t->hash);
+        printf("%s,%d\n",t->term,t->bal);
+        rdump(t->ch[1], d+1, '>');
     }
 }
 
