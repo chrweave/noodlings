@@ -125,6 +125,7 @@ void lrrot(Bst ** x){
             z->bal = -1;
         }
     }
+    y->bal=0;
     y->ch[1]=*x;
     (*x)->ch[0]=p;
     y->ch[0]=z;
