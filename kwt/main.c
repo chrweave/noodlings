@@ -244,9 +244,9 @@ void processBuffer(int r, int *l){
                 sp=sp>>32;
                 k=(int)(sp>>16);
                 bts=&tree[k];
-                if (k==8652){
+                /*if (k==8652){
                     printf("%llu\n",sp-567020188);
-                }
+                }*/
                 insert(bts,readB,(U)sp);
             }
             ll=0;
@@ -340,7 +340,7 @@ void processFiles(FILE* f){
             fclose(g);
         }
     }
-    //dump();
+    dump();
 }
 
 void handleFileList(char * fn){
