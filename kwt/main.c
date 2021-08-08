@@ -62,7 +62,6 @@ void prr(Bst * t,char * u){
 void lrot(Bst ** x){
     Bst *y= (*x)->ch[1];
     Bst *q= y->ch[0];
-    prr(*x,"l");
     y->bal=(*x)->bal=0; /* caution another case is needed for deletion.*/
     y->ch[0]=*x;
     (*x)->ch[1]=q;
@@ -72,7 +71,6 @@ void lrot(Bst ** x){
 void rrot(Bst ** x){
     Bst *y= (*x)->ch[0];
     Bst *q= y->ch[1];
-    prr(*x,"r");
     y->bal=(*x)->bal=0; /* caution another case is needed for deletion.*/
     y->ch[1]=*x;
     (*x)->ch[0]=q;
@@ -86,7 +84,6 @@ void rlrot(Bst ** x){
     Bst * q=y->ch[1];
 
 
-    prr(*x,"rl");
     if(y->bal==0){
         (*x)->bal=z->bal=0;
     } else {
@@ -113,7 +110,6 @@ void lrrot(Bst ** x){
     Bst * q=y->ch[0];
 
 
-    prr(*x,"lr");
     if(y->bal==0){
         (*x)->bal=z->bal=0;
     } else {
