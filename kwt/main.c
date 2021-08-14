@@ -4,6 +4,7 @@
 #define MEG 1048576
 #define RBS 8192
 #define K64 65536
+#define M16 16777216
 
 typedef unsigned long long V;
 typedef unsigned int U;
@@ -20,7 +21,7 @@ V lo=0x768032e13e71e9fbu;
 V la=0xf38df1969a680995u;
 V lc=0x5686184f5ef9ddb9u;
 V sp;
-Bst* tree [K64];
+Bst* tree [M16];
 Bst* stack [K64];
 Bst** pp [256];
 Bst* pool;
@@ -137,7 +138,6 @@ void insert(Bst ** inbt, char * term, V hash){
     int t = 0;
     int i = 0;
 
-    //printf("%llu",hash);
     pp[0]=inbt;
     while(bt !=NULL){
         if(hash==bt->hash){
@@ -219,7 +219,7 @@ void init(void){
         c|=(i>='a'&&i<='z');
         allowed[i]=c;
     }
-    for(i=0;i<K64;i++){
+    for(i=0;i<M16;i++){
         tree[i]=NULL;
     }
 }
@@ -242,7 +242,7 @@ void processBuffer(int r, int *l){
                 int k;
                 readB[ll]=0;
                 sp=sp>>32;
-                k=(int)(sp>>16);
+                k=(int)(sp>>8);
                 bts=&tree[k];
                 /*if (k==8652){
                     printf("%llu\n",sp-567020188);
@@ -267,7 +267,6 @@ void rdump(Bst * t, int d, char a){
         for (i=0;i<d;i++){
             printf("%c",trail[i]);
         }
-        //printf("%s,%d,%08x,%d\n",t->term,t->bal, t->hash,t->hash);
         printf("%s,%d\n",t->term,t->bal);
         rdump(t->ch[1], d+1, '>');
     }
@@ -294,8 +293,7 @@ void dumpTree(Bst * bt){
 void dump(void){
     int i = 0;
 
-    for(i=0;i<K64;i++){
-        printf("__%d__\n",i);
+    for(i=0;i<M16;i++){
         rdump(tree[i],0,'\0');
     }
 }
@@ -363,66 +361,15 @@ void intinsert(int x, Bst** t){
 void test(void){
     Bst *t = NULL;
     int k[]={3,24,21,20,2,19,18,14,12,11,1,16,15,6,5,17,7,25,8,4,13,10,23,26,22,9};
-//    char digits[128];
     int i=0;
-//    int c;
-//    int r=1;
-//    int k;
     for(i=0;i<26;i++){
         intinsert(k[i],&t);
     }
-
-    //    insert(&t,"5",5);
-    //    insert(&t,"4",4);
-    //    insert(&t,"6",6);
-    //    insert(&t,"7",7);
-    //    insert(&t,"9",9);
-    //    insert(&t,"8",8);
-    //    rdump(t,0);
-    //    lrot(&(t->ch[1]));
-    //    printf("--------\n");
-    //    rdump(t,0);
-    //    rrot(&(t->ch[1]));
-    //    printf("--------\n");
-    //    rdump(t,0);
-    //    rlrot(&(t->ch[1]->ch[1]));
-    //    printf("--------\n");
-    //    rdump(t,0);
-    //    lrot(&t);
-    //    printf("--------\n");
-    //    rdump(t,0);
-
-
-
-//    while(r){
-//        while(1){
-//            if(feof(stdin)){
-//                r=0;
-//                break;
-//            }
-//            c=fgetc(stdin);
-//            if(c==10){
-//                digits[i]=0;
-//                k=atoi(digits);
-//                i=0;
-//                break;
-//            } else {
-//                digits[i++]=(char)c;
-//            }
-//        }
-//        if(k<0){
-//            break;
-//        }
-//        insert(&t,digits,k);
-//        printf("--------\n");
-//        rdump(t,0);
-//    }
 }
 
 int main (int argc, char ** argv){
     init();
     if (argc>1){
-        //annotation=1;
         handleFileList(argv[1]);
     } else {
         test();
