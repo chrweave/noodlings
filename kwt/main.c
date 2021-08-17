@@ -17,6 +17,14 @@ struct _bt{
 };
 typedef struct _bt Bst;
 
+typedef struct {
+    void* p[RBS];
+    size_t s;
+    int rp;
+    int cp;
+    char id[16];
+} MemPool;
+
 V lo=0x768032e13e71e9fbu;
 V la=0xf38df1969a680995u;
 V lc=0x5686184f5ef9ddb9u;
@@ -32,6 +40,35 @@ long * fileNamePointers;
 char readB[MEG];
 unsigned char freadB[RBS];
 char trail[256];
+
+void getMemPoolRow(MemPool * mp){
+    mp->p[mp->rp]=malloc(MEG*mp->s);
+    if(mp->p[mp->rp]==NULL){
+        printf("Failed to allocate %s row %d.\n",mp->id,mp->rp);
+        exit(1);
+    }
+}
+
+MemPool * newMemPool(size_t size, char* name){
+    MemPool * mp = NULL;
+    int i = 0;
+    mp = (MemPool *)malloc(sizeof(MemPool));
+    if(mp != NULL){
+        for(i=0;i<RBS;i++){
+            mp->p[i]=NULL;
+        }
+        mp->s=size;
+        mp->rp=0;
+        mp->cp=0;
+        strncpy(mp->id,name,15);
+        mp->id[15]='\0';
+        getMemPoolRow(mp);
+        return mp;
+    } else {
+        printf("Failed to allocate %s.\n",name);
+        exit(1);
+    }
+}
 
 Bst* getTreeNode(void){
     Bst * r=&(pool[poolIndex++]);
