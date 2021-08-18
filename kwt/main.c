@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+#include <unistd.h>
+
 #define MEG 1048576
 #define RBS 8192
 #define K64 65536
@@ -9,10 +12,18 @@
 typedef unsigned long long V;
 typedef unsigned int U;
 
+struct _il{
+    int x;
+    struct _il * n;
+};
+
+typedef struct _il Il;
+
 struct _bt{
     U hash;
     int bal;
     char* term;
+    Il * d;
     struct _bt * ch[2];
 };
 typedef struct _bt Bst;
@@ -20,8 +31,10 @@ typedef struct _bt Bst;
 typedef struct {
     void* p[RBS];
     size_t s;
+    size_t l;
     int rp;
     int cp;
+    void * ptr;
     char id[16];
 } MemPool;
 
@@ -29,6 +42,9 @@ V lo=0x768032e13e71e9fbu;
 V la=0xf38df1969a680995u;
 V lc=0x5686184f5ef9ddb9u;
 V sp;
+MemPool * treePool = NULL;
+MemPool * stringPool = NULL;
+MemPool * docPool = NULL;
 Bst* tree [M16];
 Bst* stack [K64];
 Bst** pp [256];
@@ -40,10 +56,15 @@ long * fileNamePointers;
 char readB[MEG];
 unsigned char freadB[RBS];
 char trail[256];
+int docNumber;
 
 void getMemPoolRow(MemPool * mp){
-    mp->p[mp->rp]=malloc(MEG*mp->s);
-    if(mp->p[mp->rp]==NULL){
+    if(mp->rp==RBS){
+        printf("Row Buffer exceeded; %s row %d.\n",mp->id,mp->rp);
+        exit(1);
+    }
+    mp->p[mp->rp]=mp->ptr=malloc(mp->l);
+    if(mp->ptr==NULL){
         printf("Failed to allocate %s row %d.\n",mp->id,mp->rp);
         exit(1);
     }
@@ -53,22 +74,45 @@ MemPool * newMemPool(size_t size, char* name){
     MemPool * mp = NULL;
     int i = 0;
     mp = (MemPool *)malloc(sizeof(MemPool));
-    if(mp != NULL){
-        for(i=0;i<RBS;i++){
-            mp->p[i]=NULL;
-        }
-        mp->s=size;
-        mp->rp=0;
-        mp->cp=0;
-        strncpy(mp->id,name,15);
-        mp->id[15]='\0';
-        getMemPoolRow(mp);
-        return mp;
-    } else {
+    if(mp == NULL){
         printf("Failed to allocate %s.\n",name);
-        exit(1);
+        exit(1); /* allocate or die */
     }
+    for(i=0;i<RBS;i++){
+        mp->p[i]=NULL;
+    }
+    mp->s=size;
+    mp->l=size*MEG;
+    mp->rp=0;
+    mp->cp=0;
+    strncpy(mp->id,name,15);
+    mp->id[15]='\0';
+    getMemPoolRow(mp);
+    return mp;
 }
+
+void * getMemory(MemPool * mp, size_t numUnits){
+    void * ret = NULL;
+    if(mp != NULL){
+        size_t add = numUnits*mp->s;
+        if(mp->cp+mp->s*numUnits > mp->l){
+            mp->rp ++;
+            getMemPoolRow(mp);
+        }
+        ret=mp->ptr;
+        mp->ptr+=add;
+        mp->cp+=add;
+    }
+    return ret;
+}
+
+Il* addDocNumberToHead(Il* il){
+    Il * ret = (Il*)getMemory(stringPool,1);
+    ret->n=il;
+    ret->x=docNumber;
+    return ret;
+}
+
 
 Bst* getTreeNode(void){
     Bst * r=&(pool[poolIndex++]);
@@ -247,8 +291,10 @@ void insert(Bst ** inbt, char * term, V hash){
 void init(void){
     int i;
     int c;
-
-    pool=(Bst*)malloc(sizeof(Bst)*poolLimit);
+    treePool = newMemPool(sizeof(Bst), "treePool");
+    stringPool = newMemPool(1, "stringPool");
+    docPool = newMemPool(sizeof(Il), "docPool");
+    
     for (i=0;i<256;i++){
         c=(i=='_');
         c|=(i>='0'&&i<='9');
