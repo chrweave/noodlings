@@ -64,6 +64,7 @@ void getMemPoolRow(MemPool * mp){
         exit(1);
     }
     mp->p[mp->rp]=mp->ptr=malloc(mp->l);
+    mp->cp=0;
     if(mp->ptr==NULL){
         printf("Failed to allocate %s row %d.\n",mp->id,mp->rp);
         exit(1);
@@ -84,7 +85,6 @@ MemPool * newMemPool(size_t size, char* name){
     mp->s=size;
     mp->l=size*MEG;
     mp->rp=0;
-    mp->cp=0;
     strncpy(mp->id,name,15);
     mp->id[15]='\0';
     getMemPoolRow(mp);
@@ -95,7 +95,7 @@ void * getMemory(MemPool * mp, size_t numUnits){
     void * ret = NULL;
     if(mp != NULL){
         size_t add = numUnits*mp->s;
-        if(mp->cp+mp->s*numUnits > mp->l){
+        if(mp->cp+add > mp->l){
             mp->rp ++;
             getMemPoolRow(mp);
         }
@@ -107,7 +107,7 @@ void * getMemory(MemPool * mp, size_t numUnits){
 }
 
 Il* addDocNumberToHead(Il* il){
-    Il * ret = (Il*)getMemory(stringPool,1);
+    Il * ret = (Il*)getMemory(docPool,1);
     ret->n=il;
     ret->x=docNumber;
     return ret;
@@ -115,23 +115,14 @@ Il* addDocNumberToHead(Il* il){
 
 
 Bst* getTreeNode(void){
-    Bst * r=&(pool[poolIndex++]);
-    if(poolIndex>poolLimit-16){
-        poolLimit+=MEG;
-        pool=realloc(pool,poolLimit);
-        if(pool==NULL){
-            printf("Out of pool memory.\n");
-            exit(1);
-        }
-    }
-
+    Bst * r=(Bst*)getMemory(treePool,1);
     r->ch[0]=r->ch[1]=NULL;
     r->bal=0;
     return r;
 }
 
 char * getTerm(char* interm){
-    char * r= (char*)malloc(strlen(interm)+1);
+    char * r= (char*)getMemory(stringPool,strlen(interm)+1);
     strcpy (r,interm);
     return r;
 }
