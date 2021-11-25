@@ -2,13 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="74.083336mm"
-   height="74.083336mm"
-   viewBox="0 0 74.083336 74.083336"
+   width="500"
+   height="500"
+   viewBox="0 0 132.29167 132.29167"
    version="1.1"
    id="svg2611"
    inkscape:version="1.1 (c68e22c387, 2021-05-23)"
-   sodipodi:docname="cfnk2.svg"
+   sodipodi:docname="cfkn3.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -28,24 +28,25 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:zoom="0.72337262"
-     inkscape:cx="-202.52356"
+     inkscape:cx="-201.14115"
      inkscape:cy="8.9856871"
      inkscape:window-width="1920"
      inkscape:window-height="1001"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="layer1"
+     units="px" />
   <defs
      id="defs2608" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-42.694786,-146.20587)">
+     transform="translate(-42.694798,-146.20586)">
     <g
        id="g2592"
-       transform="translate(416.66663,-126.48766)">
+       transform="matrix(1.7857142,0,0,1.7857142,710.50163,-340.74685)">
       <circle
          cy="309.7352"
          cx="-336.93018"
