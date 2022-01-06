@@ -1,0 +1,142 @@
+<html>
+    <body id="foo">
+        <form onsubmit="return drawh()">
+			<table>
+				<tr>
+					<td style="text-align:right">Big Radius R=</td>
+					<td style="text-align:left">
+						<input type="number" id="bigr"/>
+					</td>				
+					<td style="text-align:right">Little Radius r=</td>
+					<td style="text-align:left">
+						<input type="number" id="littler"/>
+					</td>
+					<td style="text-align:right">External Radius d=</td>
+					<td style="text-align:left">
+						<input type="number" id="dee"/>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align:right">Scale Control s=</td>
+					<td style="text-align:left">
+						<input type="number" id="ess"/>
+					</td>
+					<td style="text-align:right">Precision Control p=</td>
+					<td style="text-align:left">
+						<input type="number" id="pre" value="32"/>
+					</td>
+				</tr>
+			</table>
+            <input type="submit"/>
+        </form>
+        <svg version="1.1"
+                baseProfile="full"
+                width="500" height="500"
+                xmlns="http://www.w3.org/2000/svg"
+                id="clompme" >       
+        </svg>
+        <script>
+            class point{
+                constructor(inx,iny){
+                    this.x=inx;
+                    this.y=iny;
+                }
+            }
+            //var mypoints=[];
+            function rgun(){
+                var x=Math.random();
+                x*=256;
+                return Math.floor(x);
+            }
+            function getHandles(ps){
+                var i,ax,ay,bx,by,cx,cy,abx,aby,bcx,bcy,dx,dy,q=[];
+                if(ps.length>2){
+                    for(i=-1;i < ps.length; i++){
+                        ax=ps[(i+ps.length)%ps.length].x;
+                        ay=ps[(i+ps.length)%ps.length].y;
+                        bx=ps[(i+1)%ps.length].x;
+                        by=ps[(i+1)%ps.length].y;
+                        cx=ps[(i+2)%ps.length].x;
+                        cy=ps[(i+2)%ps.length].y;
+                        abx=ax+2*(bx-ax)/3;
+                        aby=ay+2*(by-ay)/3;
+                        bcx=cx+2*(bx-cx)/3;
+                        bcy=cy+2*(by-cy)/3;
+                        dx=bx-(abx+bcx)/2;
+                        dy=by-(aby+bcy)/2;
+                        
+                        if(i==-1){ //initial
+                        
+                            q.push("<path d=\"M");
+                            q.push(bx);
+                            q.push(by);
+                            q.push("C");
+                            q.push(bcx+dx);
+                            q.push((bcy+dy)+",");
+                            
+                        }
+                        else {
+                            if(i==ps.length-1){//final
+                                var r=rgun();
+                                var g=rgun();
+                                var b=rgun();
+                                q.push(abx+dx);
+                                q.push((aby+dy)+",");
+                                q.push(bx);
+                                q.push(by);
+                                q.push("\" stroke=\"black\" fill=\"none\" stroke-width=\".5\" />");
+                            } else { //inner
+                                q.push(abx+dx);
+                                q.push((aby+dy)+",");
+                                q.push(bx);
+                                q.push(by);
+                                q.push("C");
+                                q.push(bcx+dx);
+                                q.push((bcy+dy)+",");
+                            }
+                        }
+                    }
+                }
+                return q.join(' ');
+            } 
+            
+            function gcd(x, y) {
+                while(y > 0) {
+                    var t = y;
+                    y = x % y;
+                    x = t;
+                }
+                return x;
+            }
+			
+			            
+            function drawh(){
+                var bigR=document.getElementById("bigr").value;
+                var littleR=document.getElementById("littler").value;
+                var dee=document.getElementById("dee").value;
+                var ess=document.getElementById("ess").value;
+                var pre=document.getElementById("pre").value;
+                var wrap=2*littleR/gcd(bigR,littleR);				
+				var rdiff=bigR-littleR;
+				var rrat=rdiff/littleR;
+                var k=pre;
+                var l=k*wrap,x,y,q,s,t,u,px,py,n=[];
+                
+                for(q=0; q < l; q++){
+                    t=q/k;
+                    s=Math.PI*t;
+                    u=rrat*s;
+                    px=rdiff*Math.cos(s)+dee*Math.cos(u);
+                    py=rdiff*Math.sin(s)-dee*Math.sin(u);
+                    x=px*ess+250;
+                    y=py*ess+250;
+                    n.push(new point(x,y));
+                }
+                
+                var star=getHandles(n);
+                document.getElementById("clompme").innerHTML=star;
+                return false;
+            }            
+        </script>
+    </body>
+</html>
