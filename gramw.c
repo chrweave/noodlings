@@ -54,7 +54,7 @@ int main (int argc, char ** argv){
   char t[4]={0,0,0,0};
   char *s=argv[1];
   setLookup();
-  getRates("eel");
+  getRates(argv[1]);
   for(i=0;i<20400;i++){
     printf("%d ",rates[i]);
     if(i%40==39){
