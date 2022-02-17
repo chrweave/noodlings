@@ -49,17 +49,40 @@ void getRates(char * fname){
   }
 }
 
-int main (int argc, char ** argv){
-  int i = 0;
+void rateTerms(void){
   char t[4]={0,0,0,0};
-  char *s=argv[1];
-  setLookup();
-  getRates(argv[1]);
-  for(i=0;i<20400;i++){
-    printf("%d ",rates[i]);
-    if(i%80==79){
-      printf("\n");
+  char s[8];
+  char top[6]={0,0,0,0,0,0};
+  int topScore = -1;
+  int x;
+  int i;
+  s[0]=s[6]='.';
+  s[8]=0;
+  for(s[1]='A';s[1]<='Z';s[1]++){
+    for(s[2]='A';s[2]<='Z';s[2]++){
+      for(s[3]='A';s[3]<='Z';s[3]++){
+        for(s[4]='A';s[4]<='Z';s[4]++){
+          for(s[5]='A';s[5]<='Z';s[5]++){
+            x=0;
+            for(i=0;i<5;i++){
+              memcpy(t,&s[i],3);
+              x+=threeHash(t);
+            }
+            if(x>topscore){
+              topscore=x;
+              memcpy(top,&s[1],5);
+            }
+          }
+        }
+      }
     }
   }
+  printf("%d %s\n",topScore,top);
+}
+
+int main (int argc, char ** argv){
+  setLookup();
+  getRates(argv[1]);
+  rateTerm();
   return 0;
 }
