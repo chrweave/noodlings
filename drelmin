@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /home/cweaver/noodlings
 
-#recompile violently
+#Salute my ever loving shorts
 git fetch origin master
 git reset --hard origin/master
 gcc -O3 -o ../caw/gramw gramw.c >drelmout 2>&1
