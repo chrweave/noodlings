@@ -5,8 +5,8 @@ cd /home/cweaver/noodlings
 git fetch origin master
 git reset --hard origin/master
 gcc -O3 -o ../caw/gramw gramw.c 
-../caw/gramw STOIK >drelmout
-head ../caw/eel >drelmout
+../caw/gramw  >drelmout
+head ../caw/eel >>drelmout
 #bash ../caw/wurdfold
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
