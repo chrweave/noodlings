@@ -1,3 +1,8 @@
+gramw.c: In function ‘getRates’:
+gramw.c:47:16: error: ‘d’ undeclared (first use in this function)
+       rates[h]=d;
+                ^
+gramw.c:47:16: note: each undeclared identifier is reported only once for each function it appears in
       7 .AA
     209 .AB
     356 .AC
