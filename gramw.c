@@ -4,7 +4,7 @@
 #include<memory.h>
 
 int charLook[256];
-int rates[20440]
+int rates[20440];
 
 void setLookup(void){
   int i = 0;
@@ -31,14 +31,35 @@ int threeHash(char * s){
   return ret;
 }
 
+void getRates(char * fname){
+  FILE * f = NULL;
+  int i = 0;
+  char s[4] ={0,0,0,0};
+  int r = 0;
+  int h = 0;
+  for(i=0;i<20440;i++){
+    rates[i]=0;
+  }
+  f = fopen(fname,"r");
+  if(f!=NULL){
+    while((fscanf(f,"%d %s",&r,s))!=EOF){
+      h=threeHash(s);
+      rates[h]=d;
+    }
+  }
+}
+
 int main (int argc, char ** argv){
   int i = 0;
   char t[4]={0,0,0,0};
   char *s=argv[1];
   setLookup();
-  for(i=0;i<strlen(argv[1])-2; i++){
-    memcpy(t,s++,3);
-    printf("%s %d\n",t,threeHash(t));
+  getRates("eel");
+  for(i=0;i<20400;i++){
+    printf("%d ",rates[i]);
+    if(i%40==39){
+      printf("\n");
+    }
   }
   return 0;
 }
