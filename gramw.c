@@ -44,7 +44,7 @@ void getRates(char * fname){
   if(f!=NULL){
     while((fscanf(f,"%d %s",&r,s))!=EOF){
       h=threeHash(s);
-      rates[h]=d;
+      rates[h]=r;
     }
   }
 }
