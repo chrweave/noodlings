@@ -68,8 +68,8 @@ void rateTerms(void){
               memcpy(t,&s[i],3);
               x+=threeHash(t);
             }
-            if(x>topscore){
-              topscore=x;
+            if(x>topScore){
+              topScore=x;
               memcpy(top,&s[1],5);
             }
           }
@@ -83,6 +83,6 @@ void rateTerms(void){
 int main (int argc, char ** argv){
   setLookup();
   getRates(argv[1]);
-  rateTerm();
+  rateTerms();
   return 0;
 }
