@@ -57,7 +57,7 @@ int main (int argc, char ** argv){
   getRates(argv[1]);
   for(i=0;i<20400;i++){
     printf("%d ",rates[i]);
-    if(i%40==39){
+    if(i%80==79){
       printf("\n");
     }
   }
