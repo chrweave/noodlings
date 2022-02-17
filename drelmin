@@ -4,7 +4,7 @@ cd /home/cweaver/noodlings
 #uctive hopefully
 git fetch origin master
 git reset --hard origin/master
-#gcc -O3 -o ../caw/gramw gramw.c 
+gcc -O3 -o ../caw/gramw gramw.c 
 ../caw/gramw STOIK >drelmout
 head ../caw/eel >drelmout
 #bash ../caw/wurdfold
