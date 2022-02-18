@@ -71,6 +71,7 @@ void rateTerms(void){
             if(x>topScore){
               topScore=x;
               memcpy(top,&s[1],5);
+              printf("%d %s\n",topScore,top);
             }
           }
         }
