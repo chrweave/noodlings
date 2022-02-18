@@ -85,6 +85,7 @@ void rateTerms(void){
   for(i=0;i<35000;i++){
     if(stats[i]>0){
       printf("%d %d\n",stats[i],i);
+    }
   }
 }
 
