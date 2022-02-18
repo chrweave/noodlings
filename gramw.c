@@ -78,7 +78,7 @@ void rateTerms(void){
               x+=rates[r];
             }
             if(x>5200){
-              memcpy(cand,s[1],5);
+              memcpy(cand,&s[1],5);
               printf("%d %s\n",x,cand);
             }
           }
