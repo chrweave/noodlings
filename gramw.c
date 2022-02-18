@@ -59,6 +59,7 @@ void getRates(char * fname){
 
 void rateTerms(void){
   char t[4]={0,0,0,0};
+  char cand[6] ={0,0,0,0,0,0};
   char s[8];
   int x;
   int r;
@@ -76,15 +77,13 @@ void rateTerms(void){
               r=threeHash(t);
               x+=rates[r];
             }
-            stats[x]++;
+            if(x>5200){
+              memcpy(cand,s[1],5);
+              printf("%d %s\n",x,cand);
+            }
           }
         }
       }
-    }
-  }
-  for(i=0;i<35000;i++){
-    if(stats[i]>0){
-      printf("%d %d\n",stats[i],i);
     }
   }
 }
