@@ -5,6 +5,7 @@
 
 int charLook[256];
 int rates[20440];
+int stats[35000];
 
 void setLookup(void){
   int i = 0;
@@ -30,6 +31,15 @@ int threeHash(char * s){
   }
   return ret;
 }
+void initArrays(void){
+  int i = 0;
+  for(i=0;i<35000;i++){
+    stats[i] = 0;
+  }
+  for(i=0;i<20440;i++){
+    rates[i]=0;
+  }
+}
 
 void getRates(char * fname){
   FILE * f = NULL;
@@ -37,9 +47,7 @@ void getRates(char * fname){
   char s[4] ={0,0,0,0};
   int r = 0;
   int h = 0;
-  for(i=0;i<20440;i++){
-    rates[i]=0;
-  }
+  initArrays();
   f = fopen(fname,"r");
   if(f!=NULL){
     while((fscanf(f,"%d %s",&r,s))!=EOF){
@@ -52,8 +60,6 @@ void getRates(char * fname){
 void rateTerms(void){
   char t[4]={0,0,0,0};
   char s[8];
-  char top[6]={0,0,0,0,0,0};
-  int topScore = -1;
   int x;
   int r;
   int i;
@@ -70,17 +76,16 @@ void rateTerms(void){
               r=threeHash(t);
               x+=rates[r];
             }
-            if(x>topScore){
-              topScore=x;
-              memcpy(top,&s[1],5);
-              printf("%d %s\n",topScore,top);
-            }
+            stats[x]++;
           }
         }
       }
     }
   }
-  printf("%d %s\n",topScore,top);
+  for(i=0;i<35000;i++){
+    if(stats[i]>0){
+      printf("%d %d\n",stats[i],i);
+  }
 }
 
 int main (int argc, char ** argv){
