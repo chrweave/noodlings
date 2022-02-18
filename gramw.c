@@ -55,6 +55,7 @@ void rateTerms(void){
   char top[6]={0,0,0,0,0,0};
   int topScore = -1;
   int x;
+  int r;
   int i;
   s[0]=s[6]='.';
   s[8]=0;
@@ -66,7 +67,8 @@ void rateTerms(void){
             x=0;
             for(i=0;i<5;i++){
               memcpy(t,&s[i],3);
-              x+=threeHash(t);
+              r=threeHash(t);
+              x+=rates[r];
             }
             if(x>topScore){
               topScore=x;
