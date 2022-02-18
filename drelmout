@@ -1,3 +1,7 @@
+gramw.c: In function ‘rateTerms’:
+gramw.c:96:1: error: expected declaration or statement at end of input
+ }
+ ^
 11 AAAAA
 14 AAAAB
 26 AAAAC
