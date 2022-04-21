@@ -2,7 +2,7 @@
 <body id="bod">
 <form action="" onsubmit="getPass();">
 <table>
-<tr><td style="text-align:right">Secret seed   </td><td><input id="seed" type="password" /></td></tr>
+<tr><td style="text-align:right">Secret seed   </td><td><input id="seed" type="password" />(Input field with type=&quot;password&quot; used to prevent disclosure of secret seed.)</td></tr>
 <tr><td style="text-align:right">Website or key</td><td><input id="site" type="text" />    </td></tr>
 <tr><td style="text-align:right">              </td><td><input type="submit" />            </td></tr>
 </table>
@@ -77,7 +77,6 @@ function getPass(){
 	var v=mySite.value;
 	if (pp !=""){
 		p=getCode("$"+pp+"#"+pp+"!");
-		//PainfulGhostMidnightIncapableHatsManifoldHollow7217
 	}
 	var w="$"+v+"#"+p+v+"!"
 	var n=getCode(w);	
