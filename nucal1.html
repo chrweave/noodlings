@@ -1,0 +1,124 @@
+<html>
+<head>
+    <title>Cub Scout Pack 201, Madison Alabama</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+:root {--my-height: 300px;}
+* {box-sizing: border-box;}
+body {margin: 0;}
+li{  margin: 10px 0;}
+@font-face {font-family: Myfont;src: url("PublicSans-Regular.woff");}
+@font-face {font-family: ShowcardGothic;src: url("SHOWG.TTF");}
+.topnav {overflow: hidden;background-color: #74afef;}
+.topnav a {float: left;font-family:myFont;font-size: 1.0em;display: block;color:#fdd31d;background-color: #00599A;text-align: center;padding: 14px 16px;text-decoration: none;}
+.topnav a:nth-child(odd) {float: left;font-family:myFont;font-size: 1.0em;display: block;color: #00599A;background-color: #fdd31d;text-align: center;padding: 14px 16px;text-decoration: none;}
+.topnav a:hover{background-color: #c0c0c0; color Black;}
+.topnav a:focus{background-color: #c0c0c0; color Black;}
+.myhead {width:100%;background-size 300px:background-repeat:no-repeat;background-position: top left;position: fixed;color: #fdd31d;background-color: #74afef;font-family: ShowcardGothic;font-size: 16px;}
+.mf{font-family:myFont;padding: 20px;}
+.headpad {height: --my-height;}
+.past{background-color:Gainsboro;}
+.district {background-color:LightGreen;font-weight:bold;}
+.legend {background-color:Black;color:White;font-weight:bold;}
+.pack{background-color:Yellow;font-weight:bold;}
+.den{background-color:White;font-weight:bold;}
+.myhidden {position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
+.vidembed{position: relative;     top: 0; left: 0; width: 100%; height: auto;}
+    </style>
+</head>
+
+<body>
+  <script>
+    function setPast(){
+      var thetab=document.getElementById("mycalendar").children;
+      var test=new Date(Date.parse(document.getElementById("testDate").value+"T23:59:59.999Z"));
+      var thresh=test.getTime();
+      var i;
+      alert(thetab.length);
+      for(i=0;i<thetab.length;i++){
+        if(thetab[i].hasAttribute("exptime")){
+          var ssd=thetab[i].getAttribute("exptime");
+          var sse=parseint(ssd);
+          alert(sse+" "+thresh);
+          if(sse<thresh){
+            thetab[i].setAttribute("class","past");
+          }
+        }
+      }
+      return false;
+    }
+  </script>
+  <table id="mycalendar" border="3">
+<caption>
+                <h1>
+                    <center> Cub Scout Pack 201
+                    </center>
+                </h1>
+                <h2>
+                    <center>Good Shepherd United Methodist Church<br/>2022-2023 Pack Calendar </center>
+                </h2>
+            </caption>
+<tr exptime="1660539599000" class="pack"><td class="myhidden">pack</td><td>08/14/22</td><td>Sunday</td><td>Back to the Pack Party at Creekwood Park</td><td>3:00 PM</td></tr>
+<tr exptime="1661144399000" class="pack"><td class="myhidden">pack</td><td>08/21/22</td><td>Sunday</td><td>Pack Meeting and Popcorn Kickoff at Good Shepherd UMC</td><td>3:00 PM</td></tr>
+<tr exptime="1661749199000" class="den"><td class="myhidden">den</td><td>08/28/22</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1662958799000" class="den"><td class="myhidden">den</td><td>09/11/22</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1663563599000" class="den"><td class="myhidden">den</td><td>09/18/22</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1664168399000" class="pack"><td class="myhidden">pack</td><td>09/25/22</td><td>Sunday</td><td>Pack Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1664600399000" class="pack"><td class="myhidden">pack</td><td>09/30/22</td><td>Friday</td><td>Fall Campout, Talladega Motor Speedway</td><td>5:00 PM</td></tr>
+<tr exptime="1664686799000" class="pack"><td class="myhidden">pack</td><td>10/01/22</td><td>Saturday</td><td>Fall Campout, Talladega Motor Speedway</td><td>12:00 PM</td></tr>
+<tr exptime="1664686799000" class="district"><td class="myhidden">den</td><td>10/01/22</td><td>Saturday</td><td>Cub Scout Fishing Derby, Camp Jackson</td><td>TBD</td></tr>
+<tr exptime="1664686799000" class="district"><td class="myhidden">den</td><td>10/01/22</td><td>Saturday</td><td>Cub Scout Fishing Derby, Joe Wheeler State Park</td><td>TBD</td></tr>
+<tr exptime="1664686799000" class="district"><td class="myhidden">den</td><td>10/01/22</td><td>Saturday</td><td>Cub Scout Fishing Derby, Joe Tucker Park</td><td>TBD</td></tr>
+<tr exptime="1664773199000" class="pack"><td class="myhidden">pack</td><td>10/02/22</td><td>Sunday</td><td>Fall Camp at Talledega Concludes</td><td>12:00 PM</td></tr>
+<tr exptime="1665205199000" class="district"><td class="myhidden">den</td><td>10/07/22</td><td>Friday</td><td>Cub Haunted, Camp Comer</td><td>5:00 PM</td></tr>
+<tr exptime="1665291599000" class="district"><td class="myhidden">den</td><td>10/08/22</td><td>Saturday</td><td>Cub Haunted, Camp Comer</td><td>5:00 PM</td></tr>
+<tr exptime="1665291599000" class="district"><td class="myhidden">den</td><td>10/08/22</td><td>Saturday</td><td>Cub Scout Fishing Derby, Thornton Lakes</td><td>TBD</td></tr>
+<tr exptime="1665291599000" class="district"><td class="myhidden">den</td><td>10/08/22</td><td>Saturday</td><td>Cub Scout Fishing Derby, Camp Sequoyah</td><td>TBD</td></tr>
+<tr exptime="1665809999000" class="district"><td class="myhidden">den</td><td>10/14/22</td><td>Friday</td><td>Cub Haunted, Camp Comer</td><td>5:00 PM</td></tr>
+<tr exptime="1665809999000" class="district"><td class="myhidden">den</td><td>10/14/22</td><td>Friday</td><td>Cub Haunted, Camp Westmoreland</td><td>5:00 PM</td></tr>
+<tr exptime="1665896399000" class="district"><td class="myhidden">den</td><td>10/15/22</td><td>Saturday</td><td>Cub Scout Fishing Derby, Aldridge Gardens</td><td>TBD</td></tr>
+<tr exptime="1665982799000" class="den"><td class="myhidden">den</td><td>10/16/22</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1666414799000" class="district"><td class="myhidden">den</td><td>10/21/22</td><td>Friday</td><td>Cub Haunted, Camp Comer</td><td>7:00 PM</td></tr>
+<tr exptime="1666501199000" class="district"><td class="myhidden">den</td><td>10/22/22</td><td>Saturday</td><td>Cub Haunted, Camp Comer</td><td>7:00 PM</td></tr>
+<tr exptime="1666587599000" class="den"><td class="myhidden">den</td><td>10/23/22</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1667192399000" class="pack"><td class="myhidden">pack</td><td>10/30/22</td><td>Sunday</td><td>Pack Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1667800799000" class="pack"><td class="myhidden">pack</td><td>11/06/22</td><td>Sunday</td><td>Scouting for Food Drop Off (Meet at GSUMC)</td><td>3:00 PM</td></tr>
+<tr exptime="1668319199000" class="pack"><td class="myhidden">pack</td><td>11/12/22</td><td>Saturday</td><td>Scouting for Food Pickup (Deliver to GSUMC Food Pantry)</td><td>12:00 PM</td></tr>
+<tr exptime="1670219999000" class="den"><td class="myhidden">den</td><td>12/04/22</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1670824799000" class="pack"><td class="myhidden">pack</td><td>12/11/22</td><td>Sunday</td><td>Pack Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1673243999000" class="den"><td class="myhidden">den</td><td>01/08/23</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1674280799000" class="pack"><td class="myhidden">pack</td><td>01/20/23</td><td>Friday</td><td>Camp In, McWane Science Center</td><td>7:00 PM (Eastern)</td></tr>
+<tr exptime="1675058399000" class="pack"><td class="myhidden">pack</td><td>01/29/23</td><td>Sunday</td><td>Pack Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1675663199000" class="den"><td class="myhidden">den</td><td>02/05/23</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1676008799000" class="pack"><td class="myhidden">pack</td><td>02/09/23</td><td>Thursday</td><td>Setup for Pinewood Derby at GSUMC</td><td>7:00 PM</td></tr>
+<tr exptime="1676095199000" class="pack"><td class="myhidden">pack</td><td>02/10/23</td><td>Friday</td><td>Check In for Pinewood Derby at GSUMC</td><td>6:00 PM</td></tr>
+<tr exptime="1676181599000" class="pack"><td class="myhidden">pack</td><td>02/11/23</td><td>Saturday</td><td>Pinewood Derby at GSUMC</td><td>1:00 PM</td></tr>
+<tr exptime="1677477599000" class="den"><td class="myhidden">den</td><td>02/26/23</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1678082399000" class="den"><td class="myhidden">den</td><td>03/05/23</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1679893199000" class="pack"><td class="myhidden">pack</td><td>03/26/23</td><td>Sunday</td><td>Blue and Gold Banquet &frasl; Arrow of Light Crossover</td><td>2:00 PM</td></tr>
+<tr exptime="1680325199000" class="pack"><td class="myhidden">pack</td><td>03/31/23</td><td>Friday</td><td>Spring Camp Out, Joe Wheeler State Park</td><td>7:00 PM</td></tr>
+<tr exptime="1680411599000" class="pack"><td class="myhidden">pack</td><td>04/01/23</td><td>Saturday</td><td>Spring Camp Out, Joe Wheeler State Park</td><td>12:00 PM</td></tr>
+<tr exptime="1680497999000" class="pack"><td class="myhidden">pack</td><td>04/02/23</td><td>Sunday</td><td>Conclusion of Spring Camp Out</td><td>10:00 AM</td></tr>
+<tr exptime="1681707599000" class="den"><td class="myhidden">den</td><td>04/16/23</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1682312399000" class="den"><td class="myhidden">den</td><td>04/23/23</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1682917199000" class="pack"><td class="myhidden">pack</td><td>04/30/23</td><td>Sunday</td><td>Pack Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1683521999000" class="den"><td class="myhidden">den</td><td>05/07/23</td><td>Sunday</td><td>Den Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1684126799000" class="pack"><td class="myhidden">pack</td><td>05/14/23</td><td>Sunday</td><td>Pack Meeting at GSUMC</td><td>3:00 PM</td></tr>
+<tr exptime="1684645199000" class="pack"><td class="myhidden">pack</td><td>05/20/23</td><td>Saturday</td><td>Night Hike, Dismal's Canyon</td><td>7:00 PM</td></tr>
+<tr exptime="1687064399000" class="pack"><td class="myhidden">pack</td><td>06/17/23</td><td>Saturday</td><td>Day Hike, Green Mountian State Park</td><td>3:00 PM</td></tr>
+<tr exptime="1687237199000" class="district"><td class="myhidden">den</td><td>06/19/23</td><td>Monday</td><td>Cub Day Camp at National Speleological Society Park</td><td>3:00 PM</td></tr>
+<tr exptime="1687323599000" class="district"><td class="myhidden">den</td><td>06/20/23</td><td>Tuesday</td><td>Cub Day Camp at National Speleological Society Park</td><td>3:00 PM</td></tr>
+<tr exptime="1687409999000" class="district"><td class="myhidden">den</td><td>06/21/23</td><td>Wednesday</td><td>Cub Day Camp at National Speleological Society Park</td><td>3:00 PM</td></tr>
+<tr exptime="1687496399000" class="district"><td class="myhidden">den</td><td>06/22/23</td><td>Thursday</td><td>Cub Day Camp at National Speleological Society Park</td><td>3:00 PM</td></tr>
+<tr exptime="1687582799000" class="district"><td class="myhidden">den</td><td>06/23/23</td><td>Friday</td><td>Cub Day Camp at National Speleological Society Park</td><td>3:00 PM</td></tr>
+<tr exptime="1689483599000" class="pack"><td class="myhidden">pack</td><td>07/15/23</td><td>Saturday</td><td>Day Hike, Rickwood Caverns</td><td>2:00 PM</td></tr>
+</table><br/>
+        <table>
+            <tr>
+                <td style="background-color:White; font-weight:bold;">Den Meeting</td>
+                <td style="background-color:Yellow; font-weight:bold;">Pack Event</td>
+                <td style="background-color:LightGreen; font-weight:bold;">District/Council Event</td>
+                <td style="background-color:Gainsboro; font-weight:bold;">Past Event</td>
+            </tr>
+        </table></body></html>
