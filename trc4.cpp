@@ -4,7 +4,7 @@
 
 int main (int argc,char ** argv){
   if(argc>3){
-    int v= atoi (argv[1])
+    int v= atoi (argv[1]);
     Rc4gen * rc = new Rc4gen(v,argv[2]);
     int i = 0;
     int l=atoi(argv[3]);
