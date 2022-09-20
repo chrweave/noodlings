@@ -1,5 +1,5 @@
 #include<cstdio>
-#include<ctdlib>
+#include<cstdlib>
 #include "Rc4gen.h"
 
 int main (int argc,char ** argv){
