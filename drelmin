@@ -4,7 +4,7 @@ cd /home/cweaver/noodlings
 # Jag, Antonius Block, spelar schack med Döden.
 git fetch origin master
 git reset --hard origin/master
-g++ -o ../caw/trc4 rc4gen.cpp trc4.cppl >drelmout 2>&1
+g++ -o ../caw/trc4 rc4gen.cpp trc4.cpp >drelmout 2>&1
 ../caw/trc4 256 'Jag, Antonius Block, spelar schack med Döden.' 13 >>drelmout 2>&1
 #echo 'Jag, Antonius Block, spelar schack med Döden.' >drelmout
 #bash ../caw/wurdfold
