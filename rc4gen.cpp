@@ -26,7 +26,7 @@ Rc4gen::Rc4gen(int size, char * seed) {
 }
 
 Rc4gen::~Rc4gen() {
-  if (a != NUL) {
+  if (a != NULL) {
     delete[] a;
   }
 }
