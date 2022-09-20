@@ -1,7 +1,6 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
-#include <cmemory>
 #include "rc4gen.h"
 
 Rc4gen::Rc4gen(int size, char * seed) {
@@ -45,7 +44,7 @@ int * Rc4gen::getPerm() {
   if (ret != NULL) {
     int i = 0;
     for (i = 0; i < l; i++) {
-      re[i] = a[i];
+      ret[i] = a[i];
     }
   }
   return ret;
