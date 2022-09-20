@@ -1,9 +1,14 @@
-rc4gen.cpp:4:10: fatal error: cmemory: No such file or directory
- #include <cmemory>
-          ^~~~~~~~~
+rc4gen.cpp: In destructor ‘Rc4gen::~Rc4gen()’:
+rc4gen.cpp:29:12: error: ‘NUL’ was not declared in this scope
+   if (a != NUL) {
+            ^~~
+rc4gen.cpp:29:12: note: suggested alternative: ‘NULL’
+   if (a != NUL) {
+            ^~~
+            NULL
+trc4.cpp:3:10: fatal error: Rc4gen.h: No such file or directory
+ #include "Rc4gen.h"
+          ^~~~~~~~~~
 compilation terminated.
-trc4.cpp:2:9: fatal error: ctdlib: No such file or directory
- #include<ctdlib>
-         ^~~~~~~~
-compilation terminated.
+/home/cweaver/caw/drelmin: line 8: ../caw/trc4: No such file or directory
 /home/cweaver/caw/drelmin: line 8: ../caw/trc4: No such file or directory
