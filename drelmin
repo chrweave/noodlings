@@ -6,7 +6,7 @@ git fetch origin master
 git reset --hard origin/master
 #gcc -O3 -o ../caw/gramw gramw.c >drelmout 2>&1
 #../caw/gramw ../caw/eel >>drelmout
-ping -c4 8.8.8.8 >drelmout
+echo 'Jag, Antonius Block, spelar schack med Döden.' >drelmout
 #bash ../caw/wurdfold
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
