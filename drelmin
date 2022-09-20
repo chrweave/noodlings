@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /home/cweaver/noodlings
 
-# Jag, Antonius Block, spelar schack med Döden.
+# panick
 git fetch origin master
 git reset --hard origin/master
 g++ -o ../caw/trc4 rc4gen.cpp trc4.cpp >drelmout 2>&1
