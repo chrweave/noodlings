@@ -1,6 +1,6 @@
 #include<cstdio>
 #include<cstdlib>
-#include "Rc4gen.h"
+#include "rc4gen.h"
 
 int main (int argc,char ** argv){
   if(argc>3){
