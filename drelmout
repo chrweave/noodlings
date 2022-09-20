@@ -1,2 +1,9 @@
-g++: error: trc4.cppl: No such file or directory
+rc4gen.cpp:4:10: fatal error: cmemory: No such file or directory
+ #include <cmemory>
+          ^~~~~~~~~
+compilation terminated.
+trc4.cpp:2:9: fatal error: ctdlib: No such file or directory
+ #include<ctdlib>
+         ^~~~~~~~
+compilation terminated.
 /home/cweaver/caw/drelmin: line 8: ../caw/trc4: No such file or directory
