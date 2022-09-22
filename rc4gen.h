@@ -4,6 +4,7 @@ class Rc4gen
 {
 public:
   Rc4gen ();
+  Rc4gen (int size, char *seed);
    ~Rc4gen ();
   int getNext ();
   int *getPerm ();
