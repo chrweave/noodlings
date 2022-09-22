@@ -4,8 +4,14 @@
 #include "rc4gen.h"
 
 Rc4gen::Rc4gen(){
+  x=0;
+  y=0;
+  a=NULL;
 }
 Rc4gen::Rc4gen(int size, char *seed){
+  x=0;
+  y=0;
+  a=NULL;
   setState(size,seed);
 }
 Rc4gen::void setState(int size, char *seed){
@@ -14,7 +20,10 @@ Rc4gen::void setState(int size, char *seed){
   x = 0;
   y = 0;
   l = size;
-  a = NULL;
+  if (a != NULL){
+    delete [] a;
+    a=NULL;    
+  }
   a = new int[l];
   if (a != NULL) {
     for (i = 0; i < l; i++) {
