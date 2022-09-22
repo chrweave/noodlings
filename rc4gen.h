@@ -3,10 +3,11 @@
 class Rc4gen
 {
 public:
-  Rc4gen (int size, char *seed);
+  Rc4gen ();
    ~Rc4gen ();
   int getNext ();
   int *getPerm ();
+  void setState(int size, char *seed);
 private:
   int l;
   int x;
