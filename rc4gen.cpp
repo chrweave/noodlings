@@ -3,7 +3,12 @@
 #include <cstring>
 #include "rc4gen.h"
 
-Rc4gen::Rc4gen(int size, char * seed) {
+Rc4gen::Rc4gen(){
+}
+Rc4gen::Rc4gen(int size, char *seed){
+  setState(size,seed);
+}
+Rc4gen::void setState(int size, char *seed){
   int i = 0;
   int pl = strlen(seed);
   x = 0;
