@@ -4,6 +4,15 @@
 
 #include "rc4gen.h"
 
+class BraceResult {
+    public:
+        BraceResult() {};
+    ~BraceResult() {};
+    int initial;
+    int terminal;
+    int defective;
+}
+
 class RandTree {
     public:
         RandTree();
@@ -13,7 +22,9 @@ class RandTree {
         void flip(int * in , int * out, int size);
     void setVecsFromRc4gen();
     void clearVecs();
+    BraceResult * getBraces();
     int vecSize;
+    int curentVector;
     int * vecs[2];
     Rc4gen * rc;
 };
@@ -21,6 +32,7 @@ class RandTree {
 RandTree::RandTree() {
     rc = vecs[0] = vecs[1] = NULL;
     vecSize = 0;
+    curentVector = 0;
 }
 void RandTree::clearVecs() {
     int i = 0;
@@ -56,6 +68,7 @@ int RandTree::setVecsFromRc4gen() {
     delete[] p;
     return ret;
 }
+BraceResult * RandTree::getBraces() {}
 
 void RandTree::getTree(int size, char * seed) {
     int i;
