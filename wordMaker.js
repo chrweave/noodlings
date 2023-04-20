@@ -91,9 +91,9 @@ class wordMaker {
 			m += this.vowels.getPart()+this.intern.getPart();
 		}
 		m += this.vowels.getPart()+this.finals.getPart();
-		return m.replace(/[lr][aeiou][lr][bdfgjkmnpstv]/g, 
+		return m;/*.replace(/[lr][aeiou][lr][bdfgjkmnpstv]/g, 
 				x => x[0]+x[1]+"q"+this.liquid.getPart()+this.vowels.getPart()+x[2]+x[3]
-				);
+				);*/
 	}
 }
 
