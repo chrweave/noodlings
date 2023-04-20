@@ -58,12 +58,14 @@ class wordMaker {
 "badafaftagajakalalbaldalfalgaljalkalmalpaltalvamampamtanandankantapaptararbardarfargarjarkarmarna"+
 "rpartarvaskastatav";		
 		var e = "abebibobu";
+		var f = "badafagajakamanapasatav";
 		var r = new rc4Gen(260);
 		this.wss	= new partMaker(inWurd,inWss,0,0);
 		this.intern	= new partMaker(inWurd,b,'z',0);
 		this.initials   = new partMaker(inWurd,c,'a',1);
 		this.finals	= new partMaker(inWurd,d,'a',3);
 		this.vowels	= new partMaker(inWurd,e,'b',0);
+		this.liquid	= new partMaker(inWurd,f,'a',0);
 		this.myHyphen=myHyphen;
 		r.initBuffer("Sanitize");		
 		this.filter=String.fromCharCode.apply(null,a.split('')
@@ -89,7 +91,9 @@ class wordMaker {
 			m += this.vowels.getPart()+this.intern.getPart();
 		}
 		m += this.vowels.getPart()+this.finals.getPart();
-		return m;
+		return m.replace(/[lr][aeiou][lr][bdfgjkmnpstv]/g, 
+				x => x[0]+x[1]+"q"+this.liquid.getPart()+this.vowels.getPart()+x[2]+x[3]
+				);
 	}
 }
 
