@@ -8,15 +8,7 @@ body{
 li{
 	margin: 5px 0;
 }
-/*
-.multi-column-list {
-    column-count: 3; /* set the number of columns */
-    column-gap: 20px; /* set the gap between columns */
-}
-.multi-column-list li {
-    display: inline-block; /* set the list items to display as inline blocks */
-}
-*/
+
 .multi-column-list {
   columns: 3; /* set the number of columns */
   column-gap: 20px; /* set the gap between columns */
