@@ -8,3 +8,7 @@ body{
 li{
 	margin: 5px 0;
 }
+.multi-column-list {
+    column-count: 3; /* set the number of columns */
+    column-gap: 20px; /* set the gap between columns */
+}
