@@ -9,20 +9,3 @@ li{
 	margin: 5px 0;
 }
 
-.multi-column-list {
-  columns: 3; /* set the number of columns */
-  column-gap: 20px; /* set the gap between columns */
-}
-
-.multi-column-list li {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.multi-column-list li:before {
-  content: counter(item) ". "; /* set the numbering style */
-  counter-increment: item; /* increment the counter for each item */
-  margin-right: 5px; /* add space between the numbering and the text */
-}
