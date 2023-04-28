@@ -25,3 +25,4 @@ li{
   content: counter(item) ". "; /* set the numbering style */
   counter-increment: item; /* increment the counter for each item */
   margin-right: 5px; /* add space between the numbering and the text */
+}
