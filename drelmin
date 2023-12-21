@@ -4,9 +4,7 @@ cd /home/cweaver/noodlings
 # manoon
 git fetch origin master
 git reset --hard origin/master
-g++ -o ../caw/trc4 rc4gen.cpp trc4.cpp >>drelmout 2>&1
-../caw/trc4 256 'Jag, Antonius Block, spelar schack med Döden.' 13 >>drelmout 2>&1
-#echo 'Jag, Antonius Block, spelar schack med Döden.' >drelmout
+echo "Why are we here? because we"\'"re here." >drelmout
 #bash ../caw/wurdfold
 echo drok$(date +%Y%m%d%H%M) > ../caw/blep
 git stage drelmout
