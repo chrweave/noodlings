@@ -21,7 +21,26 @@ double chiSquaredStatistic(double * observed, double * expected, int length){
 
 U64 hash(U64 * data, U64 multiplier, U64, addend, int rotation, int length){
     int i = 0;
-    int r=rotation%64;
+    U64 return_value = 0u;
+    int r=rotation%64;   
+    int l=0;
+    /* ensure 0 <= r < 64 */  
+    if (r<0){
+        r+=64;
+    }
+    l=64-r;
+    for(i=0;i<length;i++){
+        return_value ^= data[i];
+        return_value += addend;
+        return_value *= multiplier;
+        return_value = (return_value >> r)|(return_value << l); /*rorq r in Gnu assembly*/
+    }
+    for(i=0;i<16;i++){ /*finalize*/
+        return_value += addend;
+        return_value *= multiplier;
+        return_value = (return_value >> r)|(return_value << l); /*rorq r in Gnu assembly*/
+    }
+    return return_value;
 }
 
 /* Computes the binomial probabilities for 64 events with probability 1/2 times a number of experiments*/
