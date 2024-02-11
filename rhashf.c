@@ -9,9 +9,14 @@ typedef struct {
     U64 addend;
     U64 muliplier;
     int rightRotation;
+    int words;
+    int* runPlan;
     double bitFlips[64];
     double flipCounts[65];
 } PassData;
+
+int runMax;
+
 
 /* Computes the Chi Squared Statistic for arrays of expected and observed values*/
 double chiSquaredStatistic(double * observed, double * expected, int length){
