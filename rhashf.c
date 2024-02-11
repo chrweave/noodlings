@@ -4,6 +4,14 @@
 #include<stdint.h>
 
 typedef uint64_t U64;
+/*Data structure for pasing parameters to threads*/
+typedef struct {
+    U64 addend;
+    U64 muliplier;
+    int rightRotation;
+    double bitFlips[64];
+    double flipCounts[65];
+} PassData;
 
 /* Computes the Chi Squared Statistic for arrays of expected and observed values*/
 double chiSquaredStatistic(double * observed, double * expected, int length){
@@ -19,10 +27,10 @@ double chiSquaredStatistic(double * observed, double * expected, int length){
     return return_value;
 }
 
-U64 hash(U64 * data, U64 multiplier, U64, addend, int rotation, int length){
+U64 hash(U64 * data, U64 multiplier, U64, addend, int rightRotation, int length){
     int i = 0;
     U64 return_value = 0u;
-    int r=rotation%64;   
+    int r=rightRotation%64;   
     int l=0;
     /* ensure 0 <= r < 64 */  
     if (r<0){
@@ -57,6 +65,10 @@ void binom64(double * dist, double x){
         d -= lgamma((double)(65-i));
         dist[i]=exp(d);
     }
+}
+
+void strictAvalancheCriterionRun(PassData * pd){
+
 }
 
 int main(int argc, char ** argv){
