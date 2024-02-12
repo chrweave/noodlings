@@ -17,6 +17,10 @@ typedef struct {
 
 int runMax;
 
+void setRunMax(int argc, char ** argv){
+    runMax=atoi(argv[1]);
+}
+
 
 /* Computes the Chi Squared Statistic for arrays of expected and observed values*/
 double chiSquaredStatistic(double * observed, double * expected, int length){
@@ -78,5 +82,8 @@ void strictAvalancheCriterionRun(PassData * pd){
 }
 
 int main(int argc, char ** argv){
+    if(argc > 1){
+        setRunMax(argc,argv);
+    }
     return 0;
 }
