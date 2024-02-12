@@ -32,12 +32,8 @@ double chiSquaredStatistic(double * observed, double * expected, int length){
     return return_value;
 }
 
-<<<<<<< HEAD
 /*Main Hash Function*/
-U64 hash(U64 * data, U64 multiplier, U64, addend, int rotation, int length){
-=======
 U64 hash(U64 * data, U64 multiplier, U64, addend, int rightRotation, int length){
->>>>>>> 4342c1ba77d44bd3028ba2b4dfe0c3fa3c14a1ef
     int i = 0;
     U64 return_value = 0u;
     int r=rightRotation%64;   
