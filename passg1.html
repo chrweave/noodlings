@@ -16,66 +16,46 @@
     <p id="resultParagraph"></p>
 
     <script>
-    let x = 0;
-let y = 0;
-const l = 1820;
-var b = Array.from({ length: l }, (_, i) => i);
-const cs = [
-  [7, '!', '@', '#', '$', '.', '_', '+'],
-  [26, ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i))],
-  [26, ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))],
-  [10, ...Array.from({ length: 10 }, (_, i) => String.fromCharCode(48 + i))]
-];
-
-function pp() {
-  x = (x + 1) % l;
-  const t = b[x];
-  y = (y + t) % l;
-  [b[x], b[y]] = [b[y], b[x]];
-  const result = b[(t + b[x]) % l];
-  return result;
-}
-
-function st(p) {
-  x=0;
-  y=0;
-  b = Array.from({ length: l }, (_, i) => i);
-  for (const char of p) {
-    y += char.charCodeAt(0);
-    pp();
-  }
-  for (let i = 0; i < 8 * l; i++) {
-    pp();
-  }
-}
-
-function gc(v) {
-  const b = cs[v];
-  const c = pp() % b[0] + 1;
-  return b[c];
-}
-
-function gp(q) {
-  const g = [pp() % 4, pp() % 4];
-  while (g.length < q) {
-    const a = pp() % 4;
-    if (a !== g[g.length - 1] || a !== g[g.length - 2]) {
-      g.push(a);
-    }
-  }
-  const out = g.map(v => gc(v)).join('');
-  document.getElementById('resultParagraph').textContent = out;
-}
-
-
-document.getElementById('calculationForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const textInput = document.getElementById('textInput').value;
-    const numberInput = document.getElementById('numberInput').value;
-    st(textInput);
-    gp(numberInput);
-});
+        function p() {
+            x = (x + 1) % l;
+            let t = b[x];
+            y = (y + t) % l;
+            b[x] = b[y];
+            b[y] = t;
+            return b[(t + b[x]) % l];
+        }        
+        function m(u) {
+            return [u.length, ...u];
+        }
+        var x = 0;
+        var y = 0;
+        let l = 1820;
+        var b = [];
+        let n = 'abcdefghijklmnopqrstuvwxyz';
+        let k = [m('!@#$._+'), m(n), m(n.toUpperCase()), m('0123456789')];        
+        document.getElementById('calculationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const textInput = document.getElementById('textInput').value;
+            const numberInput = document.getElementById('numberInput').value;
+            x = 0;
+            y = 0;
+            b = Array.from({ length: l }, (_, i) => i);
+            for (let i of [...textInput].map(v => v.charCodeAt(0))) {
+                y += i;
+                p();
+            }        
+            for (let i = 0; i < 8 * l; i++) {
+                p();
+            }        
+            let g = [p() % 4, p() % 4];
+            while (g.length < numberInput) {
+                let a = p() % 4;
+                if (a !== g[g.length - 1] || a !== g[g.length - 2]) {
+                    g.push(a);
+                }
+            }        
+            document.getElementById('resultParagraph').textContent = g.map(v => k[v][p() % k[v][0] + 1]).join('');
+        });        
     </script>
 </body>
 </html>
-
