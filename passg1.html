@@ -59,7 +59,7 @@ function gp(q) {
   const g = [pp() % 4, pp() % 4];
   while (g.length < q) {
     const a = pp() % 4;
-    if (a !== g[g.length - 1] && a !== g[g.length - 2]) {
+    if (a !== g[g.length - 1] || a !== g[g.length - 2]) {
       g.push(a);
     }
   }
