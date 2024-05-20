@@ -71,7 +71,7 @@
                 selectedOptions.push(3);
                 checkedCount++;
             }
-            if(checkedCount >1){
+            if(checkedCount >0){
                 const textInput = document.getElementById('textInput').value;
                 const numberInput = document.getElementById('numberInput').value;
                 const checkbox = document.getElementById('copyCheckbox');
@@ -88,7 +88,7 @@
                 let g = [getInClass(selectedOptions), getInClass(selectedOptions)];
                 while (g.length < numberInput) {
                     let a = getInClass(selectedOptions);
-                    (a !== g[g.length - 1] | a !== g[g.length - 2]) && g.push(a);
+                    (checkedCount < 2 ||(a !== g[g.length - 1] | a !== g[g.length - 2])) && g.push(a);
                 }   
                 result=g.map(v => k[v][p() % k[v][0] + 1]).join('');
                 if(checkbox.checked){
@@ -105,7 +105,7 @@
                     document.getElementById('resultParagraph').textContent = result;
                 }
             } else {
-                alert("Please select at least two options.");
+                alert("Please select at least one character class option.");
             }
         });        
     </script>
