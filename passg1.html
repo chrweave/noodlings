@@ -50,7 +50,17 @@
         var result='';
         let l = 1820;
         let n = 'abcdefghijklmnopqrstuvwxyz';
-        let k = [m('!@#$._+'), m(n), m(n.toUpperCase()), m('0123456789')];        
+        let k = [m('!@#$._+'), m(n), m(n.toUpperCase()), m('0123456789')];  
+        const togglePasswordCheckbox = document.getElementById('copyCheckbox');
+        const passwordField = document.getElementById('textInput');
+        togglePasswordCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                passwordField.type = 'password'; 
+            } else {
+                document.getElementById('textInput').value=''
+                passwordField.type = 'text'; 
+            }
+        });
         document.getElementById('calculationForm').addEventListener('submit', function(event) {
             event.preventDefault();
             var selectedOptions = [];
