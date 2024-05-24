@@ -71,9 +71,9 @@
                 const textInput = document.getElementById('textInput').value;
                 const numberInput = document.getElementById('numberInput').value;
                 const checkbox = document.getElementById('copyCheckbox');
-                let x = 0;
-                let y = 0;
-                let b = Array.from({ length: l }, (_, i) => i);
+                x = 0;
+                y = 0;
+                b = Array.from({ length: l }, (_, i) => i);
                 for (let i of [...textInput].map(v => v.charCodeAt(0))) {
                     y += i;
                     p();
