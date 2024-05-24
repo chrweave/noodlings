@@ -62,24 +62,6 @@
             event.preventDefault();
             var selectedOptions = [];
             var checkedCount = 0; 
-            /*
-            if(document.getElementById('specialPunctuation').checked) {
-                selectedOptions.push(0);
-                checkedCount++;
-            }
-            if(document.getElementById('lowercaseLetters').checked) {
-                selectedOptions.push(1);
-                checkedCount++;
-            }
-            if(document.getElementById('uppercaseLetters').checked) {
-                selectedOptions.push(2);
-                checkedCount++;
-            }
-            if(document.getElementById('numbers').checked) {
-                selectedOptions.push(3);
-                checkedCount++;
-            }
-            */
             ['specialPunctuation', 'lowercaseLetters', 'uppercaseLetters', 'numbers'].map((u,v)=>{
 	            if(document.getElementById(u).checked) {
                 selectedOptions.push(v);
