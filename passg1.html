@@ -34,9 +34,6 @@
             b[y] = t;
             return b[(t + b[x]) % l];
         }        
-        function m(u) {
-            return [u.length, ...u];
-        }
         function getInClass(s){
             a=p()%4;
             while(!s.includes(a)){
@@ -50,7 +47,7 @@
         var result='';
         let l = 1820;
         let n = 'abcdefghijklmnopqrstuvwxyz';
-        let k = [m('!@#$._+'), m(n), m(n.toUpperCase()), m('0123456789')];  
+        let k = ['!@#$._+', n, n.toUpperCase(), '0123456789'];  
         const togglePasswordCheckbox = document.getElementById('copyCheckbox');
         const passwordField = document.getElementById('textInput');
         togglePasswordCheckbox.addEventListener('change', function() {
@@ -100,7 +97,7 @@
                     let a = getInClass(selectedOptions);
                     (checkedCount < 2 ||(a !== g[g.length - 1] | a !== g[g.length - 2])) && g.push(a);
                 }   
-                result=g.map(v => k[v][p() % k[v][0] + 1]).join('');
+                result=g.map(v => k[v][p() % k[v].length]).join('');
                 if(checkbox.checked){
                     navigator.clipboard.writeText(result).then(function() {
                         document.getElementById('resultParagraph').textContent = 'Result copied to clipboard!';
