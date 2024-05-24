@@ -40,7 +40,14 @@
                 a=p()%4;
             }
             return a;
-        }  
+        }
+        var x = 0;
+        var y = 0;
+        var b = [];
+        var result='';
+        let l = 1820;
+        let n = 'abcdefghijklmnopqrstuvwxyz';
+        let k = ['!@#$._+', n, n.toUpperCase(), '0123456789'];  
         const togglePasswordCheckbox = document.getElementById('copyCheckbox');
         const passwordField = document.getElementById('textInput');
         togglePasswordCheckbox.addEventListener('change', function() {
@@ -66,10 +73,7 @@
                 const checkbox = document.getElementById('copyCheckbox');
                 let x = 0;
                 let y = 0;
-                let l = 1820;
                 let b = Array.from({ length: l }, (_, i) => i);
-                let n = 'abcdefghijklmnopqrstuvwxyz';
-                let k = ['!@#$._+', n, n.toUpperCase(), '0123456789'];
                 for (let i of [...textInput].map(v => v.charCodeAt(0))) {
                     y += i;
                     p();
