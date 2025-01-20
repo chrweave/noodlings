@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Processor</title>
+    <script>
+        class O {
+            constructor(n, S) {
+                this.s = Array.from({ length: n }, (_, i) => i);
+                this.x = this.y = 0;
+                this.n = n;
+                for (let i of S) {
+                    this.y += i.charCodeAt(0);
+                    this.Q();
+                }
+                for (let _ = 0; _ < 8 * this.n; _++) {
+                    this.Q();
+                }
+            }
+        
+            Q() {
+                this.x = (this.x + 1) % this.n;
+                let t = this.s[this.x];
+                this.y = (this.y + t) % this.n;
+                this.s[this.x] = this.s[this.y];
+                this.s[this.y] = t;
+                t = (t + this.s[this.x]) % this.n;
+                return this.s[t];
+            }
+        }
+        
+        
+        
+        function I(x) {
+            let m = ['bcdfgjklmnprstvwxz', 'aeiou'];
+            return Array.from({ length: 5 }, (_, v) => m[v & 1][x.Q() % m[v & 1].length]).join('');
+        }
+        function processStrings() {
+            var string1 = document.getElementById("string1").value;
+            var string2 = document.getElementById("string2").value;
+            let l = (parseInt(string2) - 1) * 2;
+            let b = 0, c = 0;
+            let e = l - 1;
+            let z = l + 1;
+            let V = new O(l, string1);
+            let r = V.s.map(v => -2 * (v & 1) + 1).concat(0);
+            let p = Array.from({ length: z }, (_, v) => (l + v) % z);
+            let n = p.map(v => (v + 2) % z);
+            
+            while (c !== e) {
+                let t = r[b];
+                c = b;
+                while (t !== 0) {
+                    c = n[c];
+                    t = t + r[c];
+                }
+                if (r[b] === -1) {
+                    let a = p[b];
+                    t = n[b];
+                    let d = p[c];
+                    let f = n[e];
+                    n[a] = c;
+                    p[c] = a;
+                    n[e] = b;
+                    p[b] = e;
+                    n[d] = f;
+                    p[f] = d;
+                    if (b !== d) {
+                        while (t !== f) {
+                            r[t] *= -1;
+                            t = n[t];
+                        }
+                    }
+                }
+                b = n[c];
+            }
+            
+            let k = [];
+            t = n[n.length - 1];
+            while (r[t] !== 0) {
+                k.push(r[t]);
+                t = n[t];
+            }
+            
+            let P = new O(360, string1);
+            let u = [];
+            let y = [];
+            let R = 0;
+            u.push(document.getElementById("string3").value+'/');
+            for (let q of k) {
+                if (q === 1) {
+                    u.push(I(P)+'/');
+                    R = 1;
+                } else {
+                    if (R === 1) {
+                        y.push(u.join('')+I(P)+'.txt --> '+I(P)+'<br/>');
+                    }
+                    u.pop();
+                    R = 0;
+                }
+            }
+            document.getElementById("targetdiv").innerHTML+=y.sort().join('')
+            return false;
+        }
+    </script>
+</head>
+<body>
+
+    <h1>String Processor</h1>
+
+    <table border="1">
+        <tr>
+            <th>Seed</th>
+            <th>#Entities</th>
+            <th>1st Entity</th>
+        </tr>
+        <tr>
+            <td><input type="text" id="string1" placeholder="Enter Seed"></td>
+            <td><input type="text" id="string2" placeholder="Enter #Directories"></td>
+            <td><input type="text" id="string3" placeholder="Enter Root Directory"></td>
+        </tr>
+    </table>
+
+    <br>
+    <button onclick="processStrings()">Process Strings</button>
+    <div id="targetdiv"></div>
+</body>
+</html>
