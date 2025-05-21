@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pragmatic Neologism Generator</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 20px;
+            }
+            h1 {
+                color: #2686f5;
+            }   
+            .my-div {
+                width: 40%;
+                margin: 0 auto; /* Centers the div */
+                font-size: 1.2rem;
+                /* Add other styles as needed */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="my-div">
+            <h1>Pragmatic Neologism Generator</h1>
+            <form id="getseed">
+                <label for="seed">Enter a seed phrase:</label><br>
+                <input type="text" id="seed" name="seed"><br><br>
+                <input type="submit" value="Generate Neologisms">
+            </form>
+        </div>
+        <div id="target" class="my-div"></div>
+        <script>
+            var RC4Drop256=function(s){this.S=new Uint8Array(256);this.seed(s)};RC4Drop256.prototype.seed=function(key){var keyBytes=(new TextEncoder).encode(key);var S=this.S;for(var i=0;i<256;i++)S[i]=i;this.i=0;this.j=0;for(var k=0;k<keyBytes.length;k++){this.j+=keyBytes[k];this._nextByte()}for(var k$0=0;k$0<2048;k$0++)this._nextByte()};
+            RC4Drop256.prototype._nextByte=function(){this.i=this.i+1&255;var t=this.S[this.i];this.j=this.j+this.S[this.i]&255;this.S[this.i]=this.S[this.j];this.S[this.j]=t;t=t+this.S[this.i]&255;var K=this.S[t];return K};RC4Drop256.prototype._nextUInt32=function(){var r=0;for(var k=0;k<4;k++)r=r<<8|this._nextByte();return r>>>0};RC4Drop256.prototype.gen=function(max){var limit=4294967295-4294967295%max;while(true){var r=this._nextUInt32();if(r<limit)return r%max}};
+            var WeightedStringSampler=function(rng,countString){this.strings=[];this.cumulative=[];var total=0;var counts=countString.split("_");for(var i=0;i<counts.length;i+=2){this.strings.push(counts[i]);total+=parseInt(counts[i+1],10);this.cumulative.push(total);this.total=total}this.rng=rng};WeightedStringSampler.prototype.sample=function(){var r=this.rng.gen(this.total);var low=0;var high=this.cumulative.length-1;while(low<high){var mid=low+high>>1;if(r<this.cumulative[mid])high=mid;else low=mid+1}return this.strings[low]};
+            var NeologismMaker=function(seed){this.generator=new RC4Drop256(seed);this.initialConsonantClusterSampler=new WeightedStringSampler(this.generator,"t_566893_g_199406_p_317039_v_113160_m_488377_sm_13414_s_496859_r_445282_b_431103_f_409243_fl_15740_n_284292_fr_90039_pl_42871_tr_69913_d_436330_k_45450_bl_16423_l_325091_pr_202923_gr_46598_str_26964_st_125066_sl_12152_j_85160_br_35018_nt_63_dr_22876_sn_2694_sp_43328_spl_2183_gl_8526_sk_5132_spr_3081_kr_1090_kl_727_sf_31_skr_4_skl_10");this.internalConsonantClusterSampler=
+            new WeightedStringSampler(this.generator,"r_792082_rt_76549_st_126426_t_829575_rv_40581_pt_27166_v_491779_s_447229_nd_127552_rst_5313_ts_5709_l_411250_n_555011_d_310304_ntl_1012_ndl_2627_sp_34624_nt_213189_m_427777_gn_27244_f_108693_rg_43400_tst_319_g_203267_ns_72175_rs_41164_dv_7770_dr_2580_rd_29779_gr_31604_k_120468_lt_25237_lm_6813_nst_11319_p_150783_b_142753_rm_58440_mpl_39173_mf_1241_bl_81967_mb_34122_mp_54852_pm_5405_ntr_36566_rnm_8034_nl_5486_ng_45792_rn_37453_rp_8250_lv_13036_ltr_887_nsp_4721_ls_26432_nm_5059_nstr_8918_rsp_1051_nv_25708_ld_12078_rf_16370_pl_36346_lpt_564_j_13349_ndr_5067_ms_4856_mpr_7543_rl_9252_ndst_121_dj_2593_pr_14634_tr_16449_sl_5698_dg_10940_rk_19518_kst_163_mbl_3220_sm_5539_lk_4972_lp_2158_lgr_362_ngl_6335_mps_673_ft_19249_tm_6531_rtf_269_nk_8230_ngs_236_ngr_4847_ndf_635_ldr_6387_sk_4910_tb_1443_rb_10373_ndm_1574_bj_7074_nj_6712_br_9700_rkl_203_mbr_3236_rfr_188_ps_3043_str_19147_nds_672_stl_1624_pst_425_bs_14418_dm_5864_nfr_1110_ndb_217_db_503_nkl_786_rkm_69_rsm_28_tl_4856_kf_290_spr_636_dl_4125_rtl_660_nb_1994_lr_3183_td_494_lkl_213_tpl_150_spl_2125_tn_2590_dn_2793_sd_2932_ds_429_ngst_538_gm_4068_nf_26665_gl_1853_lf_3547_mt_61_mpb_120_lb_1868_tf_886_bt_3985_mpt_3580_rsl_173_ngd_627_nfl_5442_rpr_4237_pb_178_nsf_4466_nr_2766_rpl_1260_rdn_144_fl_3431_fr_1378_rbl_434_rtr_1542_kd_244_rtm_4174_tbr_243_ln_801_rml_205_ldl_184_rgr_444_nsb_173_mn_1572_tp_1102_rdl_676_ftsm_104_bm_1505_lg_2805_pgr_148_nbl_57_ml_585_rkn_143_tfl_22_bv_1719_ngt_4867_tstr_350_sb_3128_psb_29_vr_252_sn_1646_lpf_406_mbst_23_npr_697_dspr_13_ndtr_57_sr_966_lst_429_rsd_942_nbr_224_pstr_417_stn_292_sg_419_pd_501_stm_3044_btr_492_tsk_89_ldfl_22_nsl_2254_mv_151_pk_205_rfl_163_rdf_14_kn_410_nkr_210_rsk_98_nsk_118_dk_69_mk_33_ks_100_pn_106_jd_15_tsp_135_kt_89_sf_940_ntb_15_lsk_27_ndbr_36_bd_526_dsk_34_nkf_142_nkn_756_ntm_485_ldsm_38_gnp_43_ntp_28_np_2222_ftb_77_nsm_1186_rgl_151_gst_43_nts_83_tsm_26_tg_215_ldf_112_gp_35_bst_3487_rj_374_ngk_163_vn_13_ngm_105_nspl_476_mpk_52_dsp_21_jr_11_bstr_1517_ndsl_29_ngf_482_rstr_163_ngb_101_mpgr_28_npl_282_kl_249_rtn_1343_md_121_lkm_30_nskr_34_rdm_70_lfr_37_dst_140_rmf_109_rlb_27_dgm_841_mst_841_rmb_8_dgl_34_ndk_29_sgr_119_rkr_14_gt_44_rtsm_38_lstr_28_ntf_36_ngp_28_btl_446_spb_19_dp_85_df_335_sfr_5_bp_410_lsp_8_rkp_34_rks_26_sv_257_stf_401_bk_9_ftsp_7_dstr_34_bsb_16_ngj_22_rlp_4_nkm_35_mr_164_ndn_163_rps_116_gd_65_rtb_77_psk_9_nsv_64_ndpr_7_ldb_164_km_66_rnf_50_bsp_44_ndj_7_ndbl_29_rlt_62_lj_31_rkv_5_vl_61_ndsp_5_fd_20_mbm_4_rpm_4_ngsm_4_kb_89_ntg_50_fb_22_nksg_110_gnm_1738_rbr_118_sj_93_ldm_116_lks_15_skr_20_rts_141_tk_87_ntn_43_stb_136_bsl_4_ngn_277_mpf_25_sts_69_rkd_37_ngsl_12_rfb_10_rdsm_21_kp_107_kv_4_ptr_13_rdb_87_lts_410_nkt_29_rds_245_rnp_7_rdr_154_rtbr_52_tsd_24_rgstr_6_bn_708_rgpl_4_ltk_6_lbr_132_pf_69_tsb_4_lpl_91_lsd_5_rmst_6_bkn_7_stg_17_stp_165_rns_12_ststr_4_ngsg_15_lds_77_lsb_7_ndsb_68_mstr_20_ndstr_5_gsb_6_rgn_15_lfg_29_rnb_71_rpt_420_ntj_24_tj_36_rkpl_219_btf_50_dsl_18_kr_64_ktr_5_rksm_6_rsgr_8_jksm_9_sbr_11_ndtspl_4_pv_10_tv_38_rtg_184_nsgr_45_gb_14_ftl_12_tpr_90_dt_115_ltm_10_gf_16_rdkn_9_rkst_37_rlm_18_dbl_22_ntsm_7_nkst_9_nkg_14_mpm_10_ltp_25_std_43_dbr_22_fn_82_jp_49_mg_9_rsv_22_jg_5_ngpl_4_fk_43_dfr_24_rsb_132_lpr_143_fs_16_ngfr_5_pfr_20_rnl_7_gj_4_rdstr_16_gfr_46_dsb_4_nsgl_13_mpst_38_lkb_6_ftm_12_fst_19_lsm_5_rbs_44_rdst_22_nsd_634_mptr_128_rkf_171_rkt_9_lfm_5_tsf_5_tgr_122_ndt_23_skt_73_bgr_233_dtr_8_pbr_51_rlsb_82_rls_132_nsg_742_nsbr_6_dsm_17_stgr_19_rnd_42_stpr_18_ntd_9_gs_12_ldn_52_fm_131_lft_22_ngsp_9_rldv_39_jn_4_ldpr_11_rmpl_6_ldst_45_sdr_35_bf_285_kstr_5_rdt_7_rnst_120_rmn_16_dgk_14_rkb_15_rgm_52_msb_50_stst_6_rdk_39_ngv_16_bpr_20_ltn_5_rtsl_4_nsn_40_pg_11_rnt_50_vs_5_rdv_6_rkgr_21_rksp_13_rkfl_10_rsf_5_gnb_16_fp_6_msd_15_rdsf_4_ntv_15_rnk_4_mfl_9_dpr_5_nsr_19_dgs_8_bg_33_ndg_147_ntsv_21_ndpl_13_rgd_19_mtr_7_mbd_16_fgr_8_rspr_6_stv_4_ftr_24_vd_19_lfl_34_rmp_20_bfr_5_rlfr_269_ngstr_5_mj_5_rstb_16_bsd_4_ndv_5_mdr_13_mbn_24_ndgr_15_nsbl_4_vsk_13_rms_6_rng_10_ngsr_4_ntbr_9_lkn_60_rpn_9_msf_75_msp_17_rnstr_64_vk_6_rksd_15_ltl_15_lkt_14_rdpl_24_ndsm_14_vg_25_gnt_5_rtv_10_lbl_4_lmg_4_lgl_4_rsn_8_nks_4_ptn_6_mbs_6_ftn_20_rld_21_bpl_9_ltd_26_ldbl_9_djm_66_rtst_9_mbf_8_lfb_4_skm_5_rsg_13_ndsk_6_mpn_5_dgr_31_lpd_7_gfl_4_nfm_26_lmsl_6_lfstr_6_ntst_6_rstn_5_gng_5_dspl_5_jk_4_lnt_19");
+            this.finalConsonantClusterSampler=new WeightedStringSampler(this.generator,"f_486908_rm_15029_nd_536059_d_718338_s_1098561_ms_27338_ts_62303_rs_154629_t_923920_st_170101_rn_20063_rt_51539_n_1486231_lf_16507_rd_41392_l_401195_fs_1897_ng_453814_nts_73073_r_882221_nt_227441_ft_10051_m_237134_ns_212651_ls_49401_ngs_23158_rds_12503_nds_25879_ps_20186_ds_29775_lps_648_ld_142410_k_34612_p_79842_rk_26228_rts_14802_rks_4319_ks_8956_rl_2047_fts_1012_nk_30612_rms_6602_lk_5793_lt_16803_sts_20670_rb_1326_lms_1048_rns_4354_rst_15711_bs_2663_nks_3708_g_24969_rld_8039_lm_3208_rf_741_b_14058_mpt_1352_nst_12359_gs_5673_sks_1827_mps_870_sk_6816_bt_2336_pt_9490_v_5557_rnt_72_lks_1237_rls_1074_rlds_107_rbs_765_mpts_559_j_604_rfs_272_mp_3175_lds_3714_lts_8925_lp_4431_rp_917_rg_2688_dst_108_lv_19_rgs_35_rv_107_rsts_76_lb_176_lg_22_sp_625_nsk_28_vs_67_mpf_79_ln_455_lns_9_ngst_116_mt_75_lbs_72_nv_33_rps_305_rkt_24_rnst_46_gt_70_bst_21_rpts_81_lfs_15_lft_16_rj_4_fd_11_nj_17_kt_64_pd_304_pf_175_sps_175_sd_51_md_696_mf_152_rpt_111_js_4__1048576");
+            this.syllableSampler=new WeightedStringSampler(this.generator,"2_15930_3_10944_1_6312_4_6059_5_2161_6_666_7_156_8_42_9_21");this.vowelSampler=new WeightedStringSampler(this.generator,"e_7518961_o_4426789_a_5370524_i_4413165_u_1875494_ea_410576_ie_186925_ei_88349_ia_149015_io_387483_ai_158523_eo_40577_au_68796_ui_47564_ua_62609")};
+            NeologismMaker.prototype.makeWord=function(){var word=[];var syllableCount=this.syllableSampler.sample()-1;word.push(this.initialConsonantClusterSampler.sample());word.push(this.vowelSampler.sample());for(var i=0;i<syllableCount;i++){word.push(this.internalConsonantClusterSampler.sample());word.push(this.vowelSampler.sample())}word.push(this.finalConsonantClusterSampler.sample());return word.join("")};
+            NeologismMaker.prototype.makeSentence=function(){var sentenceLength=this.generator.gen(11)+3;var sentence=[];for(var i=0;i<sentenceLength;i++)sentence.push(this.makeWord());sentence[0]=sentence[0].charAt(0).toUpperCase()+sentence[0].slice(1);return sentence.join(" ")+". "};NeologismMaker.prototype.makeParagraph=function(){var paragraphLength=this.generator.gen(6)+3;var paragraph=[];for(var i=0;i<paragraphLength;i++)paragraph.push(this.makeSentence());return paragraph.join(" ")};
+            NeologismMaker.prototype.reseed=function(seed){this.generator.seed(seed)};
+            
+            let neologismInstance = null; // Keep track of instance
+            var oldInput = ""
+            document.getElementById("getseed").addEventListener("submit",(event) => makePage(event));
+            
+            function makePage(event){
+                event.preventDefault();
+                const neologisms = [];
+                input=document.getElementById("seed").value;
+                if(!neologismInstance){
+                    neologismInstance=new NeologismMaker(input);
+                    oldInput=input;
+                }
+                if(oldInput!==input){
+                    neologismInstance.reseed(input);
+                    oldInput=input;
+                }
+
+                for (let i = 0; i < 5; i++) {
+                    let paragraph = neologismInstance.makeParagraph();
+                    neologisms.push(paragraph);
+                }
+                document.getElementById('target').innerHTML = `${neologisms.map(word => `<p>${word}</p>`).join('')}`;
+            }
+            
+        </script>
+    </body>
+</html>
