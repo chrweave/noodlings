@@ -34,14 +34,18 @@
     <div id="seeder" class="my-div">
         <h1>Word Form</h1>
         <form id="getseed">
-                <h2>Enter your initial word</h2>
-                <input type="text" id="seed" name="seed">
-                <!--<input type="submit" >-->
-            </form>
+            <h2>Enter your initial text</h2>
+            <input type="text" id="seed" name="seed">
+            <input type="submit" style="font-family: 'Warsuck';">
+        </form>
+
     </div>
     <div id="event-listener-test" class="my-div">
 
     </div>
+    <form id="goback">
+        <input type="submit" value="Restart" style="font-family: 'Warsuck';">
+    </form>
     <script>
         var RC4Drop256=function(s){this.S=new Uint8Array(256);this.seed(s)};RC4Drop256.prototype.seed=function(key){var keyBytes=(new TextEncoder).encode(key);var S=this.S;for(var i=0;i<256;i++)S[i]=i;this.i=0;this.j=0;for(var k=0;k<keyBytes.length;k++){this.j+=keyBytes[k];this._nextByte()}for(var k$0=0;k$0<2048;k$0++)this._nextByte()};
         RC4Drop256.prototype._nextByte=function(){this.i=this.i+1&255;var t=this.S[this.i];this.j=this.j+this.S[this.i]&255;this.S[this.i]=this.S[this.j];this.S[this.j]=t;t=t+this.S[this.i]&255;var K=this.S[t];return K};RC4Drop256.prototype._nextUInt32=function(){var r=0;for(var k=0;k<4;k++)r=r<<8|this._nextByte();return r>>>0};RC4Drop256.prototype.gen=function(max){var limit=4294967295-4294967295%max;while(true){var r=this._nextUInt32();if(r<limit)return r%max}};
