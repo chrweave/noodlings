@@ -92,8 +92,10 @@
         document.getElementById("goback").addEventListener("submit", function(e){
             e.preventDefault();
             const elt=document.getElementById("event-listener-test")
-            for (toBeCleaned in elt.children){
-                elt.removeChild(toBeCleaned);
+            let child = elt.lastElementChild;
+            while (child) {
+            elt.removeChild(child);
+                child = elt.lastElementChild;
             }
             document.getElementById("seeder").style="display:block;";
         })
