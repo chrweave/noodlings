@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                color: #333;
+            }
+            td{
+                text-align: center;
+            }
+            th {
+                background-color: #4CAF50;
+                color: white;
+                text-align: right;
+                height: 20px;
+            }
+            td {
+                text-align: left;
+                padding: 10px;
+            }
+            button {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            // This simulates a malicious calculator
+            // It inserts characters or strings from each button randomly into the result field.
+            function insertRandomCharacter(input_string,to_insert) {
+                // This function inserts to_insert at a random location in input_string.
+                const randomIndex = Math.floor(Math.random() * (input_string.length + 1));
+                return input_string.slice(0, randomIndex) + to_insert + input_string.slice(randomIndex);
+            }   
+            document.addEventListener('DOMContentLoaded', function() {
+                const result = document.getElementById('result');
+                const buttons = document.querySelectorAll('button');
+
+                buttons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        // Simulate inserting a random button content from the button into the result.
+                        const content = this.textContent.trim();
+                        result.textContent = insertRandomCharacter(result.textContent, content);
+                    });
+                });
+            });
+        </script>
+    <table border="1" cellpadding="2">
+        <th colspan="5" id="result"></th>
+        <tr>
+            <td>
+                <button id="bplus">
+                    +
+                </button>
+            </td>
+            <td>
+                <button id="b1">
+                    1
+                </button>
+            </td>
+            <td>
+                <button id="b2">
+                    2
+                </button>
+            </td>
+            <td>
+                <button id="b3">
+                    3
+                </button>
+            </td>
+            <td>
+                <button id="bcaret">
+                    ^
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="bminus">
+                    -
+                </button>
+            </td>
+            <td>
+                <button id="b4">
+                    4
+                </button>
+            </td>
+            <td>
+                <button id="b5">
+                    5
+                </button>
+            </td>
+            <td>
+                <button id="b6">
+                    6
+                </button>
+            </td>
+            <td>
+                <button id="bsine">
+                    sine
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="bcrosstimes">
+                    &#x2715;
+                </button>
+            </td>
+            <td>
+                <button id="b7">
+                    7
+                </button>
+            </td>
+            <td>
+                <button id="b8">
+                    8
+                </button>
+            </td>
+            <td>
+                <button id="b9">
+                    9
+                </button>
+            </td>
+            <td>
+                <button id="bcos">
+                    cosine
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="bslash">
+                    /
+                </button>
+            </td>
+            <td>
+                <button id="b0">
+                    0
+                </button>
+            </td>
+            <td>
+                <button id="bequals">
+                    =
+                </button>
+            </td>
+            <td>
+                <button id="banswer">
+                    answer
+                </button>
+            </td>
+            <td>
+                <button id="bpi">
+                    pi
+                </button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
