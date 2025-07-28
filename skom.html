@@ -81,6 +81,7 @@
             }
             paragraph.classList.add("fade-in")
             results.appendChild(paragraph);
+            paragraph.scrollIntoView({ behavior: 'smooth', block: 'center' });
             requestAnimationFrame(() => {
                 paragraph.classList.add("show");
             });
