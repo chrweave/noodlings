@@ -216,9 +216,13 @@
             }
             var scale=1/(max-min);
             var tweak=0;
-            if(document.getElementbyID("lightness").checked){
-                scale=191.5;
+            const lightness=document.getElementById("lightness");
+            if(lightness.checked){
+                scale=scale*191.5;
                 tweak=64;
+            } 
+            else {
+                scale=scale*255.5
             }
             const y=new Uint8Array(x.length);  
             for (let i=0;i<x.length;i++){
