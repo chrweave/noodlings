@@ -291,10 +291,16 @@
                 coarse_R=coarse_top_heavy();
                 coarse_G=coarse_top_heavy();
                 coarse_B=coarse_top_heavy();
-                
+                color_by_levels(levelArray);
             });
-            // Update the image source to include the phrase as a query parameter
-            //img.src = `vard.png?phrase=${encodeURIComponent(phrase)}&t=${new Date().getTime()}`;
+            
+        });
+        document.getElementById("lightness").addEventListener('change',function(event){
+            levels.then(levelArray => {
+                if (coarse_R.length >= 0){
+                    color_by_levels(levelArray);
+                }
+            })
         });
 
         
