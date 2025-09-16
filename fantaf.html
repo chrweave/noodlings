@@ -40,7 +40,9 @@
         <h2>Input a pharase to color the Labyrinth.</h2>
         <form >
             <input type="text" name="phrase" >
-            <input type="submit">
+            <input type="submit"><br/>
+            Lightness? 
+            <input type=checkbox id="lightness">            
         </form>
         <img src="fantaf_nc.png" alt="uncolored Fantaf Labyrinth" id="labyrinth">
     </div>
@@ -212,74 +214,98 @@
                 if(x[i]<min) min=x[i];
                 if(x[i]>max) max=x[i];  
             }
-            const scale=255.5/(max-min);
+            var scale=1/(max-min);
+            var tweak=0;
+            const lightness=document.getElementById("lightness");
+            if(lightness.checked){
+                scale=scale*191.5;
+                tweak=64;
+            } 
+            else {
+                scale=scale*255.5
+            }
             const y=new Uint8Array(x.length);  
             for (let i=0;i<x.length;i++){
-                let v=(x[i]-min)*scale;
+                let v=(x[i]-min)*scale+tweak;
                 y[i]=Math.floor(v)|0;
             }
             y[0]=0; // ensure 0 is mapped to 0
             return y;
         }
 
-        function smooth_top_heavy(){
+        function coarse_top_heavy(){
             const inv=new Float64Array(16384);
             for(let i=0;i<16384;i++){
                 let v=rc4g.pseudo_random_float();
                 inv[i] = 1-v*v*v;
             }
+            return inv;
+        }
+
+        function smooth_top_heavy(inv){            
             const convolved= circularGaussianConvolve(inv, 400);// smooth with sigma=400
             return ivize(convolved);
+        }
+
+        function color_by_levels(inlev){
+            smooth_R=smooth_top_heavy(coarse_R);
+            smooth_G=smooth_top_heavy(coarse_G);
+            smooth_B=smooth_top_heavy(coarse_B);
+            const canvas = document.createElement('canvas');
+            canvas.width = width;   
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            const imageData = ctx.createImageData(width, height);
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                     const idx = y * width + x;
+                    const cell = inlev[idx];
+                    const pixelIndex = idx * 4;
+                    imageData.data[pixelIndex] = smooth_R[cell]; // Red channel
+                    imageData.data[pixelIndex + 1] = smooth_G[cell]; // Green channel
+                    imageData.data[pixelIndex + 2] = smooth_B[cell];
+                    imageData.data[pixelIndex + 3] = 255; // Alpha channel
+                }
+            }
+            ctx.putImageData(imageData, 0, 0);
+            smallCanvas = document.createElement('canvas');
+            smallCanvas.width = 512;    
+            smallCanvas.height = 512;
+            const smallCtx = smallCanvas.getContext('2d');                
+            smallCtx.imageSmoothingEnabled = true;  // enable interpolation
+            smallCtx.imageSmoothingQuality = 'high'; // high quality if supported
+            smallCtx.drawImage(canvas, 0, 0, 512, 512);
+            document.getElementById('labyrinth').src = smallCanvas.toDataURL();
         }
 
         const form = document.querySelector('form');
         const img = document.getElementById('labyrinth');
         const rc4g = new RC4Generator();
-        const levels=loadFileContent("fantaf.b64");
+        const levels=loadFileContent("vard.b64");
         // Reshape into 2D view 2048×2048
         const width = 2048, height = 2048;
         // JS arrays are flat; you can access pixel (y,x) as levelArray[y*width + x]
-
+        var coarse_R=[]
+        var coarse_G=[]
+        var coarse_B=[]
         form.addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the form from submitting normally
             const phrase = form.phrase.value; // Get the value of the input field
             rc4g.seed(phrase);
             levels.then(levelArray => {
-                const smooth_R=smooth_top_heavy();
-                const smooth_G=smooth_top_heavy();
-                const smooth_B=smooth_top_heavy();
-                const canvas = document.createElement('canvas');
-                canvas.width = width;   
-                canvas.height = height;
-                const ctx = canvas.getContext('2d');
-                const imageData = ctx.createImageData(width, height);
-                for (let y = 0; y < height; y++) {
-                    for (let x = 0; x < width; x++) {
-                        const idx = y * width + x;
-                        const cell = levelArray[idx];
-                        const pixelIndex = idx * 4;
-                        imageData.data[pixelIndex] = smooth_R[cell]; // Red channel
-                        imageData.data[pixelIndex + 1] = smooth_G[cell]; // Green channel
-                        imageData.data[pixelIndex + 2] = smooth_B[cell];
-                        imageData.data[pixelIndex + 3] = 255; // Alpha channel
-                    }
-                }
-                ctx.putImageData(imageData, 0, 0);
-               
-
-                smallCanvas = document.createElement('canvas');
-                smallCanvas.width = 512;    
-                smallCanvas.height = 512;
-                const smallCtx = smallCanvas.getContext('2d');                
-                smallCtx.imageSmoothingEnabled = true;  // enable interpolation
-                smallCtx.imageSmoothingQuality = 'high'; // high quality if supported
-                smallCtx.drawImage(canvas, 0, 0, 512, 512);
-
-
-                document.getElementById('labyrinth').src = smallCanvas.toDataURL();
+                coarse_R=coarse_top_heavy();
+                coarse_G=coarse_top_heavy();
+                coarse_B=coarse_top_heavy();
+                color_by_levels(levelArray);
             });
-            // Update the image source to include the phrase as a query parameter
-            //img.src = `fantaf.png?phrase=${encodeURIComponent(phrase)}&t=${new Date().getTime()}`;
+            
+        });
+        document.getElementById("lightness").addEventListener('change',function(event){
+            levels.then(levelArray => {
+                if (coarse_R.length >= 0){
+                    color_by_levels(levelArray);
+                }
+            })
         });
 
     </script>
