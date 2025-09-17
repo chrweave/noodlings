@@ -233,18 +233,35 @@
             return y;
         }
 
+        function make_top_heavy(x){
+            let min=1e30;
+            let max=-1e30;
+            for (let i=0;i<x.length;i++){
+                if(x[i]<min) min=x[i];
+                if(x[i]>max) max=x[i];  
+            }
+            var scale=1/(max-min);
+            for (let i = 0; i< x.length;i++){
+                let a=(x[i]-min)*scale;
+                y[i]=1-a*a*a;
+            }
+            return y
+        }
+
         function coarse_top_heavy(){
             const inv=new Float64Array(16384);
             for(let i=0;i<16384;i++){
                 let v=rc4g.pseudo_random_float();
-                inv[i] = 1-v*v*v;
+                //inv[i] = 1-v*v*v;
+                inv[i]=v;
             }
             return inv;
         }
 
         function smooth_top_heavy(inv){            
             const convolved= circularGaussianConvolve(inv, 400);// smooth with sigma=400
-            return ivize(convolved);
+            const heavy_convolved=make_top_heavy(convolved);
+            return ivize(heavy_convolved);
         }
 
         function color_by_levels(inlev){
