@@ -244,7 +244,7 @@
             const y=new Float64Array(x.length);
             for (let i = 0; i< x.length;i++){
                 let a=(x[i]-min)*scale;
-                y[i]=1-a*a*a;
+                y[i]=1-a*a;
             }
             return y
         }
@@ -328,4 +328,5 @@
 
     </script>
 </body>
+
 </html>
