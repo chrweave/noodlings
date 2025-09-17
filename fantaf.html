@@ -241,6 +241,7 @@
                 if(x[i]>max) max=x[i];  
             }
             var scale=1/(max-min);
+            const y=new Float64Array(x.length);
             for (let i = 0; i< x.length;i++){
                 let a=(x[i]-min)*scale;
                 y[i]=1-a*a*a;
