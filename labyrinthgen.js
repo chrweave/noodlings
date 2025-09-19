@@ -356,7 +356,7 @@ const img = document.createElement("img");
 const img_label=document.createElement('label');
 img.setAttribute("src",uncolored_labyrinth);
 mydiv.appendChild(img);
-img_label.innerHTML='Wikimedia/Thurmanukyalur, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>';
+img_label.innerHTML=cc_label;
 mydiv.appendChild(img_label);
 mybody.appendChild(mydiv);
 
