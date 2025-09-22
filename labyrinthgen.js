@@ -1,5 +1,3 @@
-import pako from './pako.min.js'
-
 class RC4Generator {
     constructor() {
         this.S = new Uint8Array(256);   
