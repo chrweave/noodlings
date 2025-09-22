@@ -1,4 +1,4 @@
-import pako from 'https://chrweave.github.io/noodlings/pako.min.js'
+import pako from './pako.min.js'
 
 class RC4Generator {
     constructor() {
