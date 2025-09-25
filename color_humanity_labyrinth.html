@@ -42,9 +42,11 @@
 <body>
   <div id="canvasContainer">
     <canvas id="view" width="768" height="768"></canvas>
-    <div id="finalized">
+    <div id="outputArea">
       <h3>Finalized Image:</h3>
-      <canvas id="finalCanvas" width="768" height="768"></canvas>
+      <img id="finalImg" style="border:1px solid #ccc;max-width:768px;">
+      <br>
+      <a id="downloadLink" download>Download</a>
     </div>
   </div>
   <div id="controls">
@@ -61,7 +63,7 @@
     const colorPicker = document.getElementById('colorPicker');
     const finalizeBtn = document.getElementById('finalizeBtn');
     const finalCanvas = document.getElementById('finalCanvas');
-    const finalCtx = finalCanvas.getContext('2d');
+    //const finalCtx=finalCanvas.getContext('2d');
 
     let u16Data = null;
     let controlPoints = []; // {x,y,level,color:[r,g,b,a]}
@@ -208,14 +210,17 @@
 
     finalizeBtn.addEventListener('click', () => {
 
+      // Ask for name
+      const fileName = prompt("Enter file name (without extension):", "my_image");
+      if (!fileName) return;
+
       // 1D Gaussian kernel (5-tap)
       const kernel1D = [1, 4, 6, 4, 1];
       const kSum = 16;
 
-      // Get u32 buffer of current palette applied to 2048x2048
-      let u32 = window.u32; // offImg.data.buffer interpreted as Uint32Array
+      const WIDTH = 2048, HEIGHT = 2048, DISPLAY = 768;
+      let u32 = window.u32;
 
-      // Horizontal blur
       const blurHorizontal = (u32, width, height, kernel, kSum) => {
         const out = new Uint32Array(u32.length);
         const kHalf = Math.floor(kernel.length / 2);
@@ -237,7 +242,6 @@
         return out;
       };
 
-      // Vertical blur
       const blurVertical = (u32, width, height, kernel, kSum) => {
         const out = new Uint32Array(u32.length);
         const kHalf = Math.floor(kernel.length / 2);
@@ -259,22 +263,38 @@
         return out;
       };
 
-      // Apply separable blur
+      // Apply blur
       u32 = blurHorizontal(u32, WIDTH, HEIGHT, kernel1D, kSum);
       u32 = blurVertical(u32, WIDTH, HEIGHT, kernel1D, kSum);
 
-      // Draw to offscreen canvas
-      const tmpCanvas = finalCanvas;
-      const tctx = finalCtx;
-      const tmpImageData = new ImageData(new Uint8ClampedArray(u32.buffer), WIDTH, HEIGHT);
-      const offTmp = document.createElement('canvas');
-      offTmp.width = WIDTH; offTmp.height = HEIGHT;
-      offTmp.getContext('2d').putImageData(tmpImageData, 0, 0);
+      // Convert to ImageData
+      const imgData = new ImageData(new Uint8ClampedArray(u32.buffer), WIDTH, HEIGHT);
 
-      // Downsample to 768x768
-      tctx.clearRect(0, 0, DISPLAY, DISPLAY);
-      tctx.drawImage(offTmp, 0, 0, WIDTH, HEIGHT, 0, 0, DISPLAY, DISPLAY);
+      // Draw to temp canvas
+      const tmpCanvas = document.createElement('canvas');
+      tmpCanvas.width = WIDTH; tmpCanvas.height = HEIGHT;
+      const tctx = tmpCanvas.getContext('2d');
+      tctx.putImageData(imgData, 0, 0);
+
+      // Downsample to 768×768
+      const displayCanvas = document.createElement('canvas');
+      displayCanvas.width = DISPLAY; displayCanvas.height = DISPLAY;
+      displayCanvas.getContext('2d').drawImage(tmpCanvas, 0, 0, WIDTH, HEIGHT, 0, 0, DISPLAY, DISPLAY);
+
+      // Generate PNG data URL
+      const dataURL = displayCanvas.toDataURL('image/png');
+
+      // Show it
+      document.getElementById('finalImg').src = dataURL;
+
+      // Set up download link
+      const link = document.getElementById('downloadLink');
+      link.href = dataURL;
+      link.download = fileName + ".png";
+      link.textContent = "Download " + fileName + ".png";
+
     });
+
 
 
     // load data
