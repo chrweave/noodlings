@@ -204,6 +204,13 @@
       draw();
     }
   });
+  document.addEventListener('mousedown', (e) => {
+  // if click target is NOT the canvas:
+  if (e.target !== canvas) {
+    selected = null; // clear selection
+    draw();          // redraw without highlight
+  }
+});
   colorPicker.addEventListener('input', () => {
     if (selected) {
       selected.color = unpackHex(colorPicker.value);
