@@ -206,7 +206,7 @@
   });
   document.addEventListener('mousedown', (e) => {
   // if click target is NOT the canvas:
-  if (e.target !== canvas || e.target !== controls && !controls.contains(e.target)) {
+  if (e.target !== canvas || !controls.contains(e.target)){
     selected = null; // clear selection
     draw();          // redraw without highlight
   }
