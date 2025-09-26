@@ -1,0 +1,315 @@
+// colorlevels.js
+(() => {
+  // URL_b64 is already set globally by your HTML
+  const WIDTH = 2048, HEIGHT = 2048, DISPLAY = 768;
+
+  // === Build DOM dynamically ===
+  const container = document.createElement('div');
+  container.style.fontFamily = 'sans-serif';
+  container.style.display = 'flex';
+  container.style.flexDirection = 'row';
+  container.style.alignItems = 'flex-start';
+  container.style.gap = '20px';
+  document.body.appendChild(container);
+  document.body.style.margin = '20px';
+  document.body.style.backgroundColor = '#f4f4f4';
+  const title = document.createElement('h2');
+  title.textContent = 'Labyrinth Colorizer';
+  document.body.insertBefore(title, container);
+
+  // Left side (canvas + finalized image)
+  const left = document.createElement('div');
+  container.appendChild(left);
+
+  const canvas = document.createElement('canvas');
+  canvas.width = DISPLAY;
+  canvas.height = DISPLAY;
+  canvas.style.border = '1px solid #ccc';
+  canvas.style.imageRendering = 'pixelated';
+  left.appendChild(canvas);
+  const ctx=canvas.getContext('2d');
+
+  const finalizedDiv = document.createElement('div');
+  finalizedDiv.style.marginTop = '20px';
+  left.appendChild(finalizedDiv);
+
+  const finalHeader = document.createElement('h3');
+  finalHeader.textContent = 'Finalized Image:';
+  finalizedDiv.appendChild(finalHeader);
+
+  const finalImg = document.createElement('img');
+  finalImg.style.border = '1px solid #ccc';
+  finalImg.style.maxWidth = DISPLAY + 'px';
+  finalizedDiv.appendChild(finalImg);
+
+  const downloadLink = document.createElement('a');
+  downloadLink.style.display = 'block';
+  downloadLink.style.marginTop = '10px';
+  finalizedDiv.appendChild(downloadLink);
+
+  // Right side (controls)
+  const controls = document.createElement('div');
+  controls.style.display = 'flex';
+  controls.style.flexDirection = 'column';
+  controls.style.gap = '10px';
+  container.appendChild(controls);
+
+  const colorLabel = document.createElement('label');
+  colorLabel.textContent = 'Selected Colour: ';
+  controls.appendChild(colorLabel);
+
+  const colorPicker = document.createElement('input');
+  colorPicker.type = 'color';
+  colorPicker.value = '#00ff00';
+  colorLabel.appendChild(colorPicker);
+
+  const finalizeBtn = document.createElement('button');
+  finalizeBtn.textContent = 'Finalize Image';
+  controls.appendChild(finalizeBtn);
+
+
+let u16Data=null;
+let controlPoints=[]; // {x,y,level,color:[r,g,b,a]}
+let paletteRGBA=null;
+let dragging=null;
+let selected=null;
+
+// helpers
+function packRGBA(r,g,b,a){return(a<<24)|(b<<16)|(g<<8)|r;}
+function unpackHex(h){
+  h=h.replace('#','');
+  if(h.length===3)h=h.split('').map(c=>c+c).join('');
+  return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16),255];
+}
+function toHex(color){return"#"+[0,1,2].map(i=>color[i].toString(16).padStart(2,'0')).join('');}
+function sineInterp(a,b,t){return a+(b-a)*(0.5-0.5*Math.cos(t*Math.PI));}
+
+// build palette
+function makePalette(knots,maxLevel){
+  const out=new Uint32Array(maxLevel+1);
+  out.fill(packRGBA(244,244,244,255)); // default gray for non-zero
+  out[0]=packRGBA(0,0,0,255);          // level 0 black
+  if(knots.length===0)return out;
+  knots.sort((a,b)=>a.level-b.level);
+  const first=knots[0].level>0?knots[0]:{level:0,color:[0,0,0,255]};
+  for(let i=1;i<first.level;i++)out[i]=packRGBA(...first.color);
+  const cL=knots[knots.length-1].color;
+  for(let i=knots[knots.length-1].level;i<=maxLevel;i++)out[i]=packRGBA(...cL);
+  for(let k=0;k<knots.length-1;k++){
+    const a=knots[k],b=knots[k+1];
+    const len=b.level-a.level;
+    for(let i=0;i<=len;i++){
+      const t=i/len;
+      const r=Math.round(sineInterp(a.color[0],b.color[0],t));
+      const g=Math.round(sineInterp(a.color[1],b.color[1],t));
+      const bb=Math.round(sineInterp(a.color[2],b.color[2],t));
+      const aa=Math.round(sineInterp(a.color[3],b.color[3],t));
+      out[a.level+i]=packRGBA(r,g,bb,aa);
+    }
+  }
+  out[0]=packRGBA(0,0,0,255);
+  return out;
+}
+
+function buildImageFast(u16,paletteRGBA){
+  if(!window.offCanvas){
+    window.offCanvas=document.createElement('canvas');
+    offCanvas.width=WIDTH;offCanvas.height=HEIGHT;
+    window.offCtx=offCanvas.getContext('2d');
+    window.offImg=offCtx.createImageData(WIDTH,HEIGHT);
+    window.u32=new Uint32Array(offImg.data.buffer);
+  }
+  const u32buf=window.u32;
+  for(let i=0;i<u16.length;i++)u32buf[i]=paletteRGBA[u16[i]];
+  offCtx.putImageData(offImg,0,0);
+  return offCanvas;
+}
+
+function draw(withCircles=true){
+  if(!u16Data || !paletteRGBA)return;
+  const off=buildImageFast(u16Data,paletteRGBA);
+  ctx.drawImage(off,0,0,WIDTH,HEIGHT,0,0,DISPLAY,DISPLAY);
+  if(withCircles){
+    ctx.save();
+    ctx.scale(DISPLAY/WIDTH,DISPLAY/HEIGHT);
+    controlPoints.forEach(pt=>{
+      ctx.beginPath();
+      ctx.arc(pt.x,pt.y,30,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${pt.color[0]},${pt.color[1]},${pt.color[2]},0.8)`;
+      ctx.fill();
+      ctx.lineWidth=(pt===selected)?8:4;
+      ctx.strokeStyle=(pt===selected)?'#fff':'#000';
+      ctx.stroke();
+    });
+    ctx.restore();
+  }
+}
+
+function recomputePalette(){
+  paletteRGBA=makePalette(controlPoints,65535);
+  draw();
+}
+
+// interaction
+canvas.addEventListener('mousedown',e=>{
+  const rect=canvas.getBoundingClientRect();
+  const mx=e.clientX-rect.left,my=e.clientY-rect.top;
+  const scaleX=WIDTH/DISPLAY,scaleY=HEIGHT/DISPLAY;
+  selected=null;
+  for(let pt of controlPoints){
+    const cx=pt.x/scaleX,cy=pt.y/scaleY;
+    if(Math.hypot(mx-cx,my-cy)<15){dragging=pt;selected=pt;break;}
+  }
+  draw();
+  if(selected){
+    colorPicker.value=toHex(selected.color);
+  }
+});
+canvas.addEventListener('mousemove',e=>{
+  if(!dragging)return;
+  const rect=canvas.getBoundingClientRect();
+  const x=(e.clientX-rect.left)*(WIDTH/DISPLAY);
+  const y=(e.clientY-rect.top)*(HEIGHT/DISPLAY);
+  dragging.x=x;dragging.y=y;
+  dragging.level=u16Data[Math.floor(y)*WIDTH+Math.floor(x)];
+  recomputePalette();
+});
+canvas.addEventListener('mouseup',()=>{dragging=null;});
+canvas.addEventListener('click',e=>{
+  if(dragging)return;
+  const rect=canvas.getBoundingClientRect();
+  const mx=(e.clientX-rect.left)*(WIDTH/DISPLAY);
+  const my=(e.clientY-rect.top)*(HEIGHT/DISPLAY);
+
+  // check hover: don't add if near existing circle
+  for(let pt of controlPoints){
+    if(Math.hypot(mx-pt.x,my-pt.y)<30)return;
+  }
+
+  const level=u16Data[Math.floor(my)*WIDTH+Math.floor(mx)];
+  const color=unpackHex(colorPicker.value);
+  const pt={x:mx,y:my,level,color};
+  controlPoints.push(pt);
+  //selected=pt;
+  recomputePalette();
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Delete' && selected){
+    controlPoints=controlPoints.filter(p=>p!==selected);
+    selected=null;
+    recomputePalette();
+  }
+  if(e.key === 'Escape') {
+        selected = null;
+        draw();
+    }
+});
+colorPicker.addEventListener('input',()=>{
+  if(selected){
+    selected.color=unpackHex(colorPicker.value);
+    recomputePalette();
+  }
+});
+
+finalizeBtn.addEventListener('click', () => {
+
+  // Ask for name
+  const fileName = prompt("Enter file name (without extension):","my_image");
+  if (!fileName) return;
+
+  // 1D Gaussian kernel (5-tap)
+  const kernel1D = [1,4,6,4,1];
+  const kSum = 16;
+
+  const WIDTH=2048, HEIGHT=2048, DISPLAY=768;
+  let u32 = window.u32;
+
+  const blurHorizontal = (u32, width, height, kernel, kSum) => {
+    const out = new Uint32Array(u32.length);
+    const kHalf = Math.floor(kernel.length / 2);
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        let r=0,g=0,b=0,a=0;
+        for (let k = -kHalf; k <= kHalf; k++) {
+          const ix = Math.min(width-1, Math.max(0, x+k));
+          const c = u32[y*width + ix];
+          r += (c & 0xff) * kernel[k+kHalf];
+          g += ((c>>8)&0xff) * kernel[k+kHalf];
+          b += ((c>>16)&0xff) * kernel[k+kHalf];
+          a += ((c>>24)&0xff) * kernel[k+kHalf];
+        }
+        const idx = y*width + x;
+        out[idx] = ((a/kSum)<<24)|((b/kSum)<<16)|((g/kSum)<<8)|(r/kSum);
+      }
+    }
+    return out;
+  };
+
+  const blurVertical = (u32, width, height, kernel, kSum) => {
+    const out = new Uint32Array(u32.length);
+    const kHalf = Math.floor(kernel.length / 2);
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        let r=0,g=0,b=0,a=0;
+        for (let k = -kHalf; k <= kHalf; k++) {
+          const iy = Math.min(height-1, Math.max(0, y+k));
+          const c = u32[iy*width + x];
+          r += (c & 0xff) * kernel[k+kHalf];
+          g += ((c>>8)&0xff) * kernel[k+kHalf];
+          b += ((c>>16)&0xff) * kernel[k+kHalf];
+          a += ((c>>24)&0xff) * kernel[k+kHalf];
+        }
+        const idx = y*width + x;
+        out[idx] = ((a/kSum)<<24)|((b/kSum)<<16)|((g/kSum)<<8)|(r/kSum);
+      }
+    }
+    return out;
+  };
+
+  // Apply blur
+  u32 = blurHorizontal(u32, WIDTH, HEIGHT, kernel1D, kSum);
+  u32 = blurVertical(u32, WIDTH, HEIGHT, kernel1D, kSum);
+
+  // Convert to ImageData
+  const imgData = new ImageData(new Uint8ClampedArray(u32.buffer), WIDTH, HEIGHT);
+
+  // Draw to temp canvas
+  const tmpCanvas = document.createElement('canvas');
+  tmpCanvas.width = WIDTH; tmpCanvas.height = HEIGHT;
+  const tctx = tmpCanvas.getContext('2d');
+  tctx.putImageData(imgData,0,0);
+
+  // Downsample to 768×768
+  const displayCanvas = document.createElement('canvas');
+  displayCanvas.width = DISPLAY; displayCanvas.height = DISPLAY;
+  displayCanvas.getContext('2d').drawImage(tmpCanvas,0,0,WIDTH,HEIGHT,0,0,DISPLAY,DISPLAY);
+
+  // Generate PNG data URL
+  const dataURL = displayCanvas.toDataURL('image/png');
+
+  // Show it
+  finalImg.src = dataURL;//document.getElementById('finalImg').src = dataURL;
+
+  // Set up download link
+  //const link = document.getElementById('downloadLink');
+  downloadLink.href = dataURL;
+  downloadLink.download = fileName + ".png";
+  downloadLink.textContent = "Download " + fileName + ".png";
+
+});
+
+
+
+// load data
+(async()=>{
+  const resp=await fetch(URL_B64);
+  const b64=await resp.text();
+  const zipped=Uint8Array.from(atob(b64.trim()),c=>c.charCodeAt(0));
+  const inflated=pako.inflate(zipped);
+  const dv=new DataView(inflated.buffer);
+  u16Data=new Uint16Array(WIDTH*HEIGHT);
+  for(let i=0;i<u16Data.length;i++)u16Data[i]=dv.getUint16(i*2,true);
+  paletteRGBA=makePalette([],65535);
+  draw();
+})();
+})();
