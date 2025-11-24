@@ -35,9 +35,7 @@ body{
   font-size: 1.3em;
   font-family:Roboto;
   line-height:1.2;
-	/*
   text-align: justify;
   text-justify: inter-word;
-	*/
   hyphens: auto;
 }
