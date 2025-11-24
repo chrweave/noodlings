@@ -30,9 +30,8 @@ button{
 body{
   color:White;
   background-color:Black;
-  margin-left: auto; 
-  margin-right: auto; 
-  width: 90%; 
+  max-width: 600px;
+  margin: 0 auto; /* Centers the div */
   font-size: 1.3em;
   font-family:Roboto;
   line-height:1.2;
