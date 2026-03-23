@@ -1,0 +1,15 @@
+{
+  "name": "labcol",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "labcol_bg.wasm",
+    "labcol.js",
+    "labcol.d.ts"
+  ],
+  "main": "labcol.js",
+  "types": "labcol.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
