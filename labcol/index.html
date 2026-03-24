@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gilwell Gazette Labyrinth Colorizer</title>
+    <title>Labyrinth Colorizer</title>
     <style>
         :root { --bg: #f4f6f8; --sidebar: #ffffff; --accent: #2c3e50; --border: #cbd5e1; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
@@ -47,8 +47,8 @@
 <body>
 
     <div class="header">
-        <h1>Gazette Colorizer</h1>
-        <p>Rust FMM Engine • 18th-Century Woodcut Output</p>
+        <h1>Labyrinth Colorizer</h1>
+        <p>Rust FMM Engine • Interactive Gradient Mapping</p>
     </div>
 
     <div id="workspace">
@@ -58,7 +58,7 @@
             </div>
             
             <div id="finalizedDiv" style="display: none;">
-                <h3 style="color: var(--accent);">Tracing Master Generated (768x768):</h3>
+                <h3 style="color: var(--accent);">Render Generated (768x768):</h3>
                 <img id="finalImg">
                 <a id="downloadLink" class="download-btn">Download PNG</a>
             </div>
@@ -89,14 +89,13 @@
                 </ul>
             </div>
 
-            <button id="finalizeBtn" class="primary" style="opacity: 0.5; pointer-events: none;">3. Finalize for Tracing</button>
+            <button id="finalizeBtn" class="primary" style="opacity: 0.5; pointer-events: none;">3. Finalize & Export</button>
         </div>
     </div>
 
 <script type="module">
     import init, { compute_fmm } from './pkg/labcol.js';
 
-    // Added the new Chartres-style labyrinth
     const LABYRINTHS = ['wlab.svg', 'hl.svg', 'ModernChartresStyleLabyrinth.svg'];
     const WIDTH = 2048, HEIGHT = 2048, DISPLAY = 768;
     
@@ -112,7 +111,7 @@
     const filePicker = document.getElementById('filePicker');
 
     let u16Data = null, paletteRGBA = null, controlPoints = [], selected = null, dragging = null;
-    let currentFileName = "woodcut";
+    let currentFileName = "labyrinth";
 
     // --- Boot Sequence ---
     async function start() {
@@ -169,15 +168,12 @@
             // Call the Rust Eikonal Solver
             u16Data = compute_fmm(WIDTH, HEIGHT, walls, 1024, 1024);
             
-            // Clean 18th-century woodcut default settings
-            controlPoints = [
-                { x: DISPLAY/2, y: DISPLAY/2, level: 0, color: [0,0,0,255] },
-                { x: DISPLAY/2 + 40, y: DISPLAY/2 + 40, level: 2500, color: [255,255,255,255] }
-            ];
+            // Start with a clean slate
+            controlPoints = [];
             
             recomputePalette();
             
-            statusOutput.textContent = `Solved in ${(performance.now()-t0).toFixed(0)}ms`;
+            statusOutput.textContent = `Solved in ${(performance.now()-t0).toFixed(0)}ms. Click canvas to add colors.`;
             colorPanel.style.opacity = 1; colorPanel.style.pointerEvents = 'auto';
             finalizeBtn.style.opacity = 1; finalizeBtn.style.pointerEvents = 'auto';
         }, 50);
@@ -299,11 +295,10 @@
     finalizeBtn.addEventListener('click', () => {
         if (!u16Data) return;
         
-        // Grab filename from gallery selection if not uploaded
         const activeThumb = document.querySelector('.thumb.selected');
         if (activeThumb) currentFileName = activeThumb.title.replace('.svg', '');
         
-        let exportName = prompt("Filename:", currentFileName + "_render");
+        let exportName = prompt("Filename:", currentFileName + "_colored");
         if(!exportName) return;
 
         draw(false);
